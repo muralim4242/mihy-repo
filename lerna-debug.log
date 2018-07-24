@@ -1,0 +1,130 @@
+0 silly input []
+1 silly flags { _: [ 'bootstrap' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   args: [] }
+2 verbose rootPath /Users/GoodWork/Documents/GitHub/mihy-repo
+3 info version 2.11.0
+4 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/VERSION
+5 silly initialize attempt
+6 silly npmConfig { registry: undefined,
+6 silly npmConfig   npmClient: undefined,
+6 silly npmConfig   npmClientArgs: undefined,
+6 silly npmConfig   mutex: undefined }
+7 silly initialize success
+8 silly execute attempt
+9 info Bootstrapping 3 packages
+10 info lifecycle preinstall
+11 silly runScript preinstall ui-atoms
+12 silly ui-atoms
+13 silly runScript preinstall ui-molecules
+14 silly ui-molecules
+15 silly runScript preinstall ui-client-app
+16 silly ui-client-app
+17 silly hasMatchingDependency ui-client-app ui-molecules
+18 silly hasDependencyInstalled ui-client-app lodash
+19 silly dependencyIsSatisfied [ 'lodash',
+19 silly dependencyIsSatisfied   '^4.17.10',
+19 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+20 verbose dependencyIsSatisfied lodash true
+21 silly hasDependencyInstalled ui-client-app react
+22 silly dependencyIsSatisfied [ 'react',
+22 silly dependencyIsSatisfied   '^16.4.1',
+22 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+23 verbose dependencyIsSatisfied react true
+24 silly hasDependencyInstalled ui-client-app react-dom
+25 silly dependencyIsSatisfied [ 'react-dom',
+25 silly dependencyIsSatisfied   '^16.4.1',
+25 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+26 verbose dependencyIsSatisfied react-dom true
+27 silly hasDependencyInstalled ui-client-app react-router-dom
+28 silly dependencyIsSatisfied [ 'react-router-dom',
+28 silly dependencyIsSatisfied   '^4.3.1',
+28 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+29 verbose dependencyIsSatisfied react-router-dom true
+30 silly hasDependencyInstalled ui-client-app react-scripts
+31 silly dependencyIsSatisfied [ 'react-scripts',
+31 silly dependencyIsSatisfied   '1.1.4',
+31 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+32 verbose dependencyIsSatisfied react-scripts true
+33 silly hasDependencyInstalled ui-client-app react-text-mask
+34 silly dependencyIsSatisfied [ 'react-text-mask',
+34 silly dependencyIsSatisfied   '^5.4.2',
+34 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+35 verbose dependencyIsSatisfied react-text-mask true
+36 silly hasDependencyInstalled ui-client-app ui-atom
+37 silly dependencyIsSatisfied [ 'ui-atom',
+37 silly dependencyIsSatisfied   '1.0.0',
+37 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
+38 verbose dependencyIsSatisfied ui-atom false
+39 silly root dependencies []
+40 silly leaf dependencies {
+40 silly leaf dependencies   "ui-client-app": [
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "lodash@^4.17.10",
+40 silly leaf dependencies       "isSatisfied": true
+40 silly leaf dependencies     },
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "react@^16.4.1",
+40 silly leaf dependencies       "isSatisfied": true
+40 silly leaf dependencies     },
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "react-dom@^16.4.1",
+40 silly leaf dependencies       "isSatisfied": true
+40 silly leaf dependencies     },
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "react-router-dom@^4.3.1",
+40 silly leaf dependencies       "isSatisfied": true
+40 silly leaf dependencies     },
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "react-scripts@1.1.4",
+40 silly leaf dependencies       "isSatisfied": true
+40 silly leaf dependencies     },
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "react-text-mask@^5.4.2",
+40 silly leaf dependencies       "isSatisfied": true
+40 silly leaf dependencies     },
+40 silly leaf dependencies     {
+40 silly leaf dependencies       "dependency": "ui-atom@1.0.0",
+40 silly leaf dependencies       "isSatisfied": false
+40 silly leaf dependencies     }
+40 silly leaf dependencies   ]
+40 silly leaf dependencies }
+41 info Installing external dependencies
+42 verbose actions 1 actions, concurrency 4
+43 silly installInDir ui-client-app [ 'lodash@^4.17.10',
+43 silly installInDir   'react@^16.4.1',
+43 silly installInDir   'react-dom@^16.4.1',
+43 silly installInDir   'react-router-dom@^4.3.1',
+43 silly installInDir   'react-scripts@1.1.4',
+43 silly installInDir   'react-text-mask@^5.4.2',
+43 silly installInDir   'ui-atom@1.0.0' ]
+44 silly installInDir backup /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json
+45 silly rename [ '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json',
+45 silly rename   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json.lerna_backup' ]
+46 silly installInDir writing tempJson { dependencies:
+46 silly installInDir    { lodash: '^4.17.10',
+46 silly installInDir      react: '^16.4.1',
+46 silly installInDir      'react-dom': '^16.4.1',
+46 silly installInDir      'react-router-dom': '^4.3.1',
+46 silly installInDir      'react-scripts': '1.1.4',
+46 silly installInDir      'react-text-mask': '^5.4.2',
+46 silly installInDir      'ui-atom': '1.0.0' } }
+47 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app' }
+48 silly installInDir [ 'npm', [ 'install' ] ]
+49 silly installInDir cleanup /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json
+50 silly renameSync [ '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json.lerna_backup',
+50 silly renameSync   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json' ]
+51 verbose installed leaf ui-client-app
+52 error execute callback with error
+53 error Error: Command failed: npm install
+53 error npm WARN notice Due to a recent security incident, all user tokens have been invalidated. Please see https://status.npmjs.org/incidents/dn7c1fgrr7ng for more details. To generate a new token, visit https://www.npmjs.com/settings/~/tokens or run "npm login".
+53 error npm WARN notice Due to a recent security incident, all user tokens have been invalidated. Please see https://status.npmjs.org/incidents/dn7c1fgrr7ng for more details. To generate a new token, visit https://www.npmjs.com/settings/~/tokens or run "npm login".
+53 error npm ERR! code E404
+53 error npm ERR! 404 Not Found: ui-atom@1.0.0
+53 error
+53 error npm ERR! A complete log of this run can be found in:
+53 error npm ERR!     /Users/GoodWork/.npm/_logs/2018-07-24T17_16_29_147Z-debug.log
+53 error
+53 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
+53 error     at <anonymous>
