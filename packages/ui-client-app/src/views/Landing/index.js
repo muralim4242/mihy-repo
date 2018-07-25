@@ -12,8 +12,12 @@ import {
   ListItemText,
   Typegraphy,
   Icon,
-  Main
+  Main,
+  Button,
+  Container,
+  Item
 } from "ui-atoms";
+import Avatar from '@material-ui/core/Avatar';
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Divider from "@material-ui/core/Divider";
@@ -103,8 +107,29 @@ class Landing extends React.Component {
           </Drawer>
         </Hidden>
         <Main className={classes.content} style={{marginTop:"50px"}}>
-          <Route exact path="/mihy/home" component={()=><div>home</div>} />
-          <Route exact path="/mihy/blood" component={()=><div>blood</div>} />
+          <Route  path="/" component={()=><Div>
+            <Container>
+              <Item xs={6}>
+              <Button fullWidth={true} variant="extendedFab" aria-label="Search Donar" style={{background:"#fff",color:"#BDBDBD",border:"2px solid #26A69A",borderShadow:"none"}} >
+                {/*<Button variant="fab" color="primary" aria-label="S" >
+                  S
+                </Button>*/}
+                <Avatar style={{background:"#fff",color:"#BDBDBD",border:"1px solid #EC407A"}}><Icon iconName="search"/></Avatar>
+                Search donar
+              </Button>
+              </Item>
+              <Item xs={6}>
+              <Button fullWidth={true} variant="extendedFab" aria-label="Registration">
+                {/*<Button variant="fab" color="primary" aria-label="S" >
+                  S
+                </Button>*/}
+                <Avatar>R</Avatar>
+                Registration
+              </Button>
+              </Item>
+            </Container>
+            </Div>} />
+          <Route  path="/blood" component={()=><Div>blood</Div>} />
           {/*<RenderRoutes basePath={match.path} routes={appRoutes} />*/}
         </Main>
       </Div>

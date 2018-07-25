@@ -30,21 +30,21 @@ const mainRoutes = [
     component: Landing,
     isExact:true
   },
-  // {
-  //   path: mainRouteConstants.LOGIN,
-  //   component: Login,
-  //   // isExact:true
-  // },
-  // {
-  //   path: mainRouteConstants.REGISTER,
-  //   component: Register,
-  //   // isExact:true
-  // },
-  // {
-  //   path: mainRouteConstants.OTP,
-  //   component: OTP,
-  //   // isExact:true
-  // }
+  {
+    path: mainRouteConstants.LOGIN,
+    component: Login,
+    // isExact:true
+  },
+  {
+    path: mainRouteConstants.REGISTER,
+    component: Register,
+    // isExact:true
+  },
+  {
+    path: mainRouteConstants.OTP,
+    component: OTP,
+    // isExact:true
+  }
 ];
 
 export default mainRoutes;
