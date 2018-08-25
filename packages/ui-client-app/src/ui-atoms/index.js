@@ -6,6 +6,7 @@ import Container from "./Layout/Container";
 import Item from "./Layout/Item";
 import Card from "./Card";
 import CardContent from "./CardContent";
+import CardMedia from "./CardMedia";
 import Phonenumber from "./TextFields/Phonenumber";
 import Text from "./TextFields/Text";
 import Button from "./Button";
@@ -18,6 +19,7 @@ import List from "./Lists/List";
 import ListItem from "./Lists/ListItem";
 import ListItemIcon from "./Lists/ListItemIcon";
 import ListItemText from "./Lists/ListItemText";
+import Label from "./UtilityElement/Label";
 
 
 export {
@@ -29,6 +31,7 @@ export {
   Item,
   Card,
   CardContent,
+  CardMedia,
   Phonenumber,
   Text,
   Button,
@@ -40,5 +43,6 @@ export {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Label
 };

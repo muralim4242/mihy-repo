@@ -24,13 +24,15 @@ TextMaskCustom.propTypes = {
 };
 
 
+
 const Phonenumber=(props)=> {
-    const {id,textmask,label,...rest} = props;
+    const {id,textmask,label,fullWidth,...rest} = props;
     return (
         <TextField
           label={label}
           value={textmask}
           id={id}
+          fullWidth={fullWidth}
           InputProps={{
             inputComponent: TextMaskCustom,
             startAdornment: (
@@ -50,5 +52,10 @@ Phonenumber.propTypes = {
   label:PropTypes.string.isRequired,
   textmask:PropTypes.string.isRequired
 };
+
+Phonenumber.defaultProps= {
+  fullWidth:true
+}
+
 
 export default Phonenumber;

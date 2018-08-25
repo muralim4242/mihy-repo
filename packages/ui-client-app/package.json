@@ -3,19 +3,50 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.1",
+    "@material-ui/icons": "^2.0.0",
+    "aws-amplify": "^1.0.5",
+    "axios": "^0.18.0",
+    "carbon-components": "^9.7.2",
+    "carbon-components-react": "^6.20.0",
+    "carbon-icons": "^7.0.7",
+    "highcharts": "^6.1.1",
+    "install": "^0.12.1",
+    "jsonpath": "^1.0.0",
     "lodash": "^4.17.10",
+    "marker-animate-unobtrusive": "^0.2.8",
+    "mobx": "^5.0.3",
+    "mobx-react": "^5.2.3",
+    "mobx-state-tree": "^3.2.1",
+    "npm": "^6.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-google-maps": "^9.4.5",
+    "react-json-tree": "^0.11.0",
+    "react-loadable": "^5.4.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.4",
     "react-text-mask": "^5.4.2",
-    "ui-atoms": "1.0.0",
-    "ui-molecules": "1.0.0"
+    "recompose": "^0.27.1",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.4.8",
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8",
+    "@storybook/addons": "^3.4.8",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0"
   }
 }
