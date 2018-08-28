@@ -49,6 +49,6 @@ function CardWithMadia(props) {
   );
 }
 
-CardWithMadia.propTypes = {};
+// CardWithMadia.propTypes = {};
 
 export default withStyles(styles, { withTheme: true })(CardWithMadia);

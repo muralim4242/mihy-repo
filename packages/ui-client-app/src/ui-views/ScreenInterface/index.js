@@ -1,19 +1,18 @@
 import React from "react";
-import {screen} from "ui-hocs";
+import {screenHoc} from "ui-hocs";
 import {Div} from "ui-atoms";
-import {renderScreen} from "ui-molecules";
+import {RenderScreen} from "ui-molecules";
 
 class ScreenInterface extends React.Component {
   render()
   {
-    const {screenConfig}=this.props;
-    const {renderScreen}=this;
+    const {components,uiFramework,onFieldChange,onComponentClick}=this.props;
     return (
       <Div>
-          {renderScreen(screenConfig.components)}
+          <RenderScreen components={components} uiFramework={uiFramework} onFieldChange={onFieldChange} onComponentClick={onComponentClick}/>
       </Div>
     )
   }
 }
 
-export default screen({screenKey:"registrationScreen",path:"blood/registration"})(ScreenInterface);
+export default screenHoc({path:"core",screenKey:"login"})(ScreenInterface);

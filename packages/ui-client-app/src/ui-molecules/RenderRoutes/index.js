@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Redirect, Switch } from "react-router-dom";
+import AppliedRoute from "../AppliedRoute";
 
-const RenderRoutes = ({ basePath="", routes = [] }) => {
+const RenderRoutes = ({ basePath="", routes = [],childProps }) => {
   return (
     <div>
       {routes.map((route, index) => {
@@ -11,7 +12,7 @@ const RenderRoutes = ({ basePath="", routes = [] }) => {
         } else {
           let { component: Component, path, isExact } = route;
           return (
-            <Route
+            <AppliedRoute
               key={index}
               exact={isExact ? true : false}
               path={
@@ -19,9 +20,8 @@ const RenderRoutes = ({ basePath="", routes = [] }) => {
                   ? path
                   : basePath==="/"?path:`${basePath}${path}`
               }
-              render={props => {
-                return <Component {...props} />;
-              }}
+              component={Component}
+              props={childProps}
             />
           );
         }

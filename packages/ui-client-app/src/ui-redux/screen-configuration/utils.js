@@ -1,8 +1,12 @@
+import { prepareFinalObject as prepareFO,handleScreenConfigurationFieldChange as handleField} from "./actions";
 import set from "lodash/set";
-export const validateField = (field) => {
-  const { required, pattern, minLength, maxLength, minValue, maxValue,hideField } = field;
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 
-  if (hideField) {
+export const validateField = (field) => {
+  const { required, pattern, minLength, maxLength, minValue, maxValue,visible } = field;
+
+  if (visible) {
     return { isFieldValid:true, errorText:"" };
   }
 
@@ -13,7 +17,7 @@ export const validateField = (field) => {
 
   if (required && !value) {
     isFieldValid = false;
-    errorText = field.requiredmessage;
+    errorText = field.requiredmessage || "Required";
   }
 
   if (value) {
@@ -30,32 +34,55 @@ export const validateField = (field) => {
     isFieldValid = false;
   }
 
-  errorText = !isFieldValid ? (errorText.length ? errorText : field.errorMessage) : "";
+  errorText = !isFieldValid ? (errorText.length ? errorText : field.errorMessage || "Invalid field") : "";
 
   return { isFieldValid, errorText };
 };
 
-export const validateForm = (form) => {
-  let isFormValid = true;
-  const formFields = getFormFields(form);
-  for (let key in formFields) {
-    const field = formFields[key];
-    if (!validateField(field, field.value).isFieldValid) {
-      isFormValid = false;
-      break;
+export const validateForm = (screenKey,components,dispatch) => {
+  let isFormValid=true;
+  const travelComponents=(components)=>
+  {
+    for (var variable in components) {
+      if (components.hasOwnProperty(variable)) {
+        if (components[variable].children && !isEmpty(components[variable].children)) {
+          travelComponents(components[variable].children);
+        } else {
+          if (components[variable].jsonPath && !validate(screenKey,components[variable],dispatch)) {
+            isFormValid=false;
+          }
+        }
+      }
     }
   }
+  travelComponents(components);
   return isFormValid;
 };
 
-export const getFormFields = (form) => {
-  return form.fields || {};
-};
 
-export const getFormField = (form, fieldKey) => {
-  const fields = getFormFields(form);
-  return fields[fieldKey];
-};
+export const validate=(screenKey,componentObject,dispatch)=>{
+  const validatedObject=validateField(componentObject);
+  let isFormValid=true;
+  if (componentObject.jsonPath && validatedObject.isFieldValid) {
+    dispatch(prepareFO(componentObject.jsonPath,componentObject.value));
+    if (!componentObject.isFieldValid) {
+      isFormValid=true;
+      dispatch(handleField(screenKey,`${componentObject.componentJsonpath}.props`, "error", false));
+      dispatch(handleField(screenKey,`${componentObject.componentJsonpath}.props`, "helperText", validatedObject.errorText));
+      dispatch(handleField(screenKey,`${componentObject.componentJsonpath}`, "isFieldValid", true));
+    }
+  }
+  else {
+    isFormValid=false;
+    dispatch(handleField(screenKey,`${componentObject.componentJsonpath}.props`, "error", true));
+    dispatch(handleField(screenKey,`${componentObject.componentJsonpath}.props`, "helperText", validatedObject.errorText));
+    dispatch(handleField(screenKey,`${componentObject.componentJsonpath}`, "isFieldValid", false));
+  }
+  return isFormValid;
+}
+
+
+
 
 export const updateObjectWithComponentJsonPath = (
   screenConfig,
@@ -71,3 +98,41 @@ export const prepareFinalObject = (preparedFinalOject,jsonPath, value) => {
   set(preparedFinalOject, jsonPath, value);
   return preparedFinalOject;
 };
+
+export const prepareFinalBodyData=(body,bodyObjectsJsonPaths)=>
+{
+  let screenConfigBodyData={};
+  if (bodyObjectsJsonPaths.length>0) {
+    for (var i = 0; i < bodyObjectsJsonPaths.length; i++) {
+      let object=get(body,bodyObjectsJsonPaths[i]);
+      screenConfigBodyData={
+        ...screenConfigBodyData,
+        object
+      }
+    }
+  } else {
+    screenConfigBodyData={
+      ...body
+    }
+  }
+  return screenConfigBodyData;
+}
+
+export const prepareFinalQueryData=(query,queryObjectJsonPath)=>
+{
+  let screenConfigQueryData=[];
+  if (queryObjectJsonPath.length>0) {
+    for (var i = 0; i < queryObjectJsonPath.length; i++) {
+      let object=get(query,queryObjectJsonPath[i]);
+      screenConfigQueryData=[
+        ...screenConfigQueryData,
+        object
+      ]
+    }
+  } else {
+    screenConfigQueryData={
+      ...query
+    }
+  }
+  return screenConfigQueryData;
+}

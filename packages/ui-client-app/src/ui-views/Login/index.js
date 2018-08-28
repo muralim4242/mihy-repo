@@ -6,10 +6,10 @@ import {RenderScreen} from "ui-molecules";
 class Login extends React.Component {
   render()
   {
-    const {components,uiFramework,onFieldChange}=this.props;
+    const {components,uiFramework,onFieldChange,onComponentClick}=this.props;
     return (
       <Div>
-          <RenderScreen components={components} uiFramework={uiFramework} onFieldChange={onFieldChange}/>
+          <RenderScreen components={components} uiFramework={uiFramework} onFieldChange={onFieldChange} onComponentClick={onComponentClick}/>
       </Div>
     )
   }

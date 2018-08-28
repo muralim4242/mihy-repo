@@ -58,8 +58,9 @@ const screenConfig = {
                             autoFocus: true,
                             required: true
                           },
+                          required:true,
                           jsonPath: "body.mihy.username",
-                          pattern: "^([a-zA-Z0-9@])+$"
+                          pattern: "^([a-zA-Z0-9@.])+$"
                         },
                         mihyLoginPassword: {
                           componentPath: "TextField",
@@ -72,7 +73,7 @@ const screenConfig = {
                           },
                           jsonPath: "body.mihy.password",
                           required: true,
-                          pattern: "^([a-zA-Z0-9@])+$"
+                          pattern: "^([a-zA-Z0-9!])+$"
                         },
                         mihyBreakOne: {
                           uiFramework: "custom-atoms",
@@ -97,6 +98,12 @@ const screenConfig = {
                                 label: "Login"
                               }
                             }
+                          },
+                          onClickDefination:{
+                            action:"submit",
+                            method:"get",
+                            endPoint:"afbc.com",
+                            purpose:"authLogin"
                           }
                         }
                       }

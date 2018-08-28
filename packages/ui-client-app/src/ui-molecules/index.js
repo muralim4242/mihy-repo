@@ -4,6 +4,7 @@ import ComponentInterface from "./ComponentInterface";
 import StepperNonLinearWithoutAction from "./StepperNonLinearWithoutAction";
 import CardWithMedia from "./CardWithMedia";
 import RenderScreen from "./RenderScreen";
+import AppliedRoute from "./AppliedRoute";
 
 export {
   RenderRoutes,
@@ -11,5 +12,6 @@ export {
   ComponentInterface,
   StepperNonLinearWithoutAction,
   CardWithMedia,
-  RenderScreen
+  RenderScreen,
+  AppliedRoute
 }

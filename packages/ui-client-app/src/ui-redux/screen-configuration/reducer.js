@@ -3,7 +3,7 @@ import {updateObjectWithComponentJsonPath,prepareFinalObject} from "./utils";
 
 const intialState = {
   screenConfig: {},
-  preparedFinalOject: {}
+  preparedFinalObject: {}
 };
 
 
@@ -38,13 +38,13 @@ const screenConfiguration = (state = intialState, action) => {
 
       case screenActionTypes.PREPARE_FINAL_OBJECT:
         const updatedPreparedFinalObject = prepareFinalObject(
-          state.preparedFinalOject,
+          state.preparedFinalObject,
           action.jsonPath,
           action.value
         );
         return {
           ...state,
-          preparedFinalOject: updatedPreparedFinalObject
+          preparedFinalObject: updatedPreparedFinalObject
         };
 
     default:

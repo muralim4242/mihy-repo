@@ -1,10 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { initScreen ,handleScreenConfigurationFieldChange} from "ui-redux/screen-configuration/actions";
+import {
+  initScreen,
+  handleScreenConfigurationFieldChange,
+  submitForm
+} from "ui-redux/screen-configuration/actions";
 import isEmpty from "lodash/isEmpty";
 import { addComponentJsonpath } from "ui-utils";
 
-const screenHoc = ({ path = "", screenKey,  ...rest }) => Screen => {
+const screenHoc = ({ path = "", screenKey, ...rest }) => Screen => {
   class ScreenWrapper extends React.Component {
     constructor(props) {
       super(props);
@@ -28,30 +32,46 @@ const screenHoc = ({ path = "", screenKey,  ...rest }) => Screen => {
       value
     ) => {
       const { handleScreenConfigurationFieldChange } = this.props;
-      handleScreenConfigurationFieldChange(screenKey,componentJsonpath, "value", value);
+      handleScreenConfigurationFieldChange(
+        screenKey,
+        componentJsonpath,
+        "value",
+        value
+      );
     };
+
+    onClick=(onClickDefination)=>{
+      switch (onClickDefination.action) {
+        case "submit":
+          const {submitForm}=this.props;
+          const {method,endPoint,purpose,bodyObjectsJsonPaths,queryObjectJsonPath}=onClickDefination;
+          submitForm(screenKey,method,endPoint,purpose,bodyObjectsJsonPaths||{},queryObjectJsonPath||[]);
+          break;
+        default:
+
+      }
+    }
 
     render() {
       const { screenConfig } = this.props;
-      const {[screenKey]:currentScreenConfig} =screenConfig;
-      console.log(this);
-      console.log(currentScreenConfig);
+      const { [screenKey]: currentScreenConfig } = screenConfig;
+      // console.log(this);
+      // console.log(currentScreenConfig);
       if (currentScreenConfig) {
-        const { handleScreenConfigurationFieldChange } = this;
-        const {uiFramework,components,name}=currentScreenConfig;
+        const { handleScreenConfigurationFieldChange,onClick } = this;
+        const { uiFramework, components, name } = currentScreenConfig;
         return (
           <Screen
             uiFramework={uiFramework}
             components={components}
             screenKey={name}
             onFieldChange={handleScreenConfigurationFieldChange}
+            onComponentClick={onClick}
           />
         );
-      }
-      else {
+      } else {
         return null;
       }
-
     }
   }
 
@@ -76,7 +96,24 @@ const screenHoc = ({ path = "", screenKey,  ...rest }) => Screen => {
             value
           )
         ),
-      // submitForm: (formKey, saveUrl) => dispatch(submitForm(formKey, saveUrl)),
+      submitForm: (
+        screenKey,
+        method,
+        endpoint,
+        action,
+        bodyObjectsJsonPaths = [],
+        queryObjectJsonPath = []
+      ) =>
+        dispatch(
+          submitForm(
+            screenKey,
+            method,
+            endpoint,
+            action,
+            bodyObjectsJsonPaths,
+            queryObjectJsonPath
+          )
+        ),
       initScreen: (screenKey, screenConfig) =>
         dispatch(initScreen(screenKey, screenConfig))
       // deleteForm: () => dispatch(deleteForm(formKey)),

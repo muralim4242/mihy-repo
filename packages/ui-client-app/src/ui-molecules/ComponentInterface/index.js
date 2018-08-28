@@ -8,7 +8,6 @@ class ComponentInterface extends React.Component {
   }
   componentDidMount() {
     const { componentPath, uiFramework } = this.props;
-    console.log(uiFramework);
     let LoadableComponent;
     switch (uiFramework) {
       case "carbon":

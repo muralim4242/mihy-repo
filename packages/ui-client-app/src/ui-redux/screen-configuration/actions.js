@@ -1,27 +1,90 @@
 import * as screenActionTypes from "./actionTypes";
+import { prepareFinalBodyData, prepareFinalQueryData,validateForm } from "./utils";
+import { httpRequest, loginRequest } from "ui-utils";
+import get from "lodash/get";
 
-export const initScreen = (screenKey,screenConfig) =>{
+export const initScreen = (screenKey, screenConfig) => {
   return {
-    type:screenActionTypes.INIT_SCREEN,
+    type: screenActionTypes.INIT_SCREEN,
     screenKey,
     screenConfig
-  }
-}
+  };
+};
 
-export const handleScreenConfigurationFieldChange = (screenKey,componentJsonpath,property,value) =>{
+export const handleScreenConfigurationFieldChange = (
+  screenKey,
+  componentJsonpath,
+  property,
+  value
+) => {
   return {
-    type:screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE,
+    type: screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE,
     screenKey,
     componentJsonpath,
     property,
     value
-  }
-}
+  };
+};
 
-export const prepareFinalObject = (jsonPath,value)=>{
+export const prepareFinalObject = (jsonPath, value) => {
   return {
-    type:screenActionTypes.PREPARE_FINAL_OBJECT,
+    type: screenActionTypes.PREPARE_FINAL_OBJECT,
     jsonPath,
     value
-  }
-}
+  };
+};
+
+export const submitForm = (
+  screenKey,
+  method,
+  endpoint,
+  action,
+  bodyObjectsJsonPaths = [],
+  queryObjectJsonPath = []
+) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const { screenConfiguration } = state;
+    const {
+      screenConfig,
+      preparedFinalObject
+    } = screenConfiguration;
+    const {[screenKey]:currentScreenConfig}=screenConfig;
+    if (validateForm(screenKey,currentScreenConfig.components,dispatch)) {
+      try {
+        let screenConfigResponse = {};
+        // this will eventually moved out to the auth action; bit messy
+        if (screenKey === "login") {
+          const { body } = preparedFinalObject;
+          const { mihy } = body;
+          screenConfigResponse = await loginRequest(
+            mihy.username,
+            mihy.password
+          );
+        } else {
+          let { body, query } = preparedFinalObject;
+          let screenConfigBodyData = prepareFinalBodyData(
+            body,
+            bodyObjectsJsonPaths
+          );
+          let screenConfigQueryData = prepareFinalQueryData(
+            query,
+            queryObjectJsonPath
+          );
+          //preparing body data
+          screenConfigResponse = await httpRequest(
+            method,
+            endpoint,
+            action,
+            [],
+            screenConfigBodyData
+          );
+        }
+      } catch (error) {
+        // const { message } = error;
+        console.log(error);
+        // throw new Error(error);
+      }
+    }
+  };
+};

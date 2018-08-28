@@ -2,7 +2,7 @@ import React from "react";
 import isEmpty from "lodash/isEmpty";
 import { ComponentInterface } from "ui-molecules";
 
-const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange }) => {
+const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onComponentClick }) => {
   return components
     ? Object.keys(components).map(componentKey => {
         const {
@@ -10,15 +10,24 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange }) =>
           componentPath,
           componentJsonpath,
           jsonPath,
-          props
+          props,
+          onClickDefination
         } = components[componentKey];
-        const extraProps = jsonPath
+        let extraProps = jsonPath
           ? {
               onChange: e => {
                 onFieldChange("", componentJsonpath, jsonPath, e.target.value);
               }
             }
           : {};
+        if (onClickDefination) {
+          extraProps={
+            ...extraProps,
+            onClick:e =>{
+              onComponentClick(onClickDefination);
+            }
+          }
+        }
         if (!isEmpty(components[componentKey].children)) {
           return (
             <ComponentInterface
@@ -28,7 +37,7 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange }) =>
               componentPath={componentPath}
               props={{ ...props, ...extraProps }}
             >
-              <RenderScreen components={components[componentKey].children} onFieldChange={onFieldChange} uiFramework={rootFramework}/>
+              <RenderScreen components={components[componentKey].children} onFieldChange={onFieldChange} onComponentClick={onComponentClick} uiFramework={rootFramework}/>
             </ComponentInterface>
           );
         } else {
