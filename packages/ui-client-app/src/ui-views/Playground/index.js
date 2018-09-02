@@ -28,8 +28,133 @@ import {connect} from "react-redux";
 import {logout} from "ui-redux/auth/actions";
 import ReactJson from 'react-json-view'
 
+const screenConfig = {
+  uiFramework: "material-ui",
+  name: "mihyLoginScreen",
+  components: {
+    mihyLoginGrid: {
+      componentPath: "Grid",
+      children: {
+        mihyEmptyRow: {
+          componentPath: "Grid",
+          props: {
+            item: true,
+            sm: 4
+          }
+        },
+        mihyLoginItem: {
+          componentPath: "Grid",
+          props: {
+            item: true,
+            sm: 4,
+            xs: 12
+          },
+          children: {
+            mihyLoginCard: {
+              componentPath: "Card",
+              children: {
+                mihyLoginCardContent: {
+                  componentPath: "CardContent",
+                  children: {
+                    mihyLoginHeader: {
+                      componentPath: "Typography",
+                      children: {
+                        "mihy-login-header-text": {
+                          uiFramework: "custom-atoms",
+                          componentPath: "Label",
+                          props: {
+                            label: "Login"
+                          }
+                        }
+                      },
+                      props: {
+                        align: "center",
+                        variant: "title"
+                      }
+                    },
+                    mihyloginDiv: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Div",
+                      props: {
+                        className: "text-center"
+                      },
+                      children: {
+                        mihyLoginUsername: {
+                          componentPath: "TextField",
+                          props: {
+                            label: "Email",
+                            margin: "normal",
+                            fullWidth: true,
+                            autoFocus: true,
+                            required: true
+                          },
+                          required:true,
+                          jsonPath: "body.mihy.username",
+                          pattern: "^([a-zA-Z0-9@.])+$"
+                        },
+                        mihyLoginPassword: {
+                          componentPath: "TextField",
+                          props: {
+                            label: "Password",
+                            type: "password",
+                            margin: "normal",
+                            fullWidth: true,
+                            required: true
+                          },
+                          jsonPath: "body.mihy.password",
+                          required: true,
+                          pattern: "^([a-zA-Z0-9!])+$"
+                        },
+                        mihyBreakOne: {
+                          uiFramework: "custom-atoms",
+                          componentPath: "Break"
+                        },
+                        mihyBreakTwo: {
+                          uiFramework: "custom-atoms",
+                          componentPath: "Break"
+                        },
+                        mihyLoginButton: {
+                          componentPath: "Button",
+                          props: {
+                            variant: "contained",
+                            color: "primary",
+                            fullWidth: true
+                          },
+                          children: {
+                            mihyLoginButtonText: {
+                              uiFramework: "custom-atoms",
+                              componentPath: "Label",
+                              props: {
+                                label: "Login"
+                              }
+                            }
+                          },
+                          onClickDefination:{
+                            action:"submit",
+                            method:"get",
+                            endPoint:"afbc.com",
+                            purpose:"authLogin",
+                            redirectionUrl:"/"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              props: { classes: { root: "container-margin" } }
+            }
+          }
+        }
+      },
+      props: { container: true }
+    }
+  }
+};
 
-class Landing extends React.Component {
+
+
+class Playground extends React.Component {
   state = {
     mobileOpen: false
   };
@@ -38,18 +163,31 @@ class Landing extends React.Component {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
-  logout=async ()=>{
 
-  }
 
   render() {
-    const { classes, theme, match ,logout} = this.props;
+    const { classes, theme, match } = this.props;
 
     const drawer = (
       <Div>
         <Div className={classes.toolbar} />
         <Divider />
-        <ReactJson src={my_json_object} />
+        Screen configuration
+        <br/>
+        <br/>
+        <ReactJson src={screenConfig} collapsed={true} displayDataTypes={false} onEdit={(edit)=>{
+          console.log(edit);
+        }}
+        onAdd={(add)=>{
+          console.log(add);
+        }}
+        onDelete={(del)=>{
+          console.log(del);
+        }}
+        onSelect={(select)=>{
+          console.log(select);
+        }}
+        />
       </Div>
     );
     return (
@@ -104,7 +242,7 @@ class Landing extends React.Component {
   }
 }
 
-Landing.propTypes = {
+Playground.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
 };
@@ -119,4 +257,4 @@ const mapDispatchToProps=(dispatch)=>{
   }
 }
 
-export default compose(connect(null,mapDispatchToProps),withStyles(styles, { withTheme: true }))(Landing);
+export default compose(connect(null,mapDispatchToProps),withStyles(styles, { withTheme: true }))(Playground);
