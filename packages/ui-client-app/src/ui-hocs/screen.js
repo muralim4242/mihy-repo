@@ -44,8 +44,8 @@ const screenHoc = ({ path = "", screenKey, ...rest }) => Screen => {
       switch (onClickDefination.action) {
         case "submit":
           const {submitForm}=this.props;
-          const {method,endPoint,purpose,bodyObjectsJsonPaths,queryObjectJsonPath}=onClickDefination;
-          submitForm(screenKey,method,endPoint,purpose,bodyObjectsJsonPaths||{},queryObjectJsonPath||[]);
+          const {method,endPoint,purpose,redirectionUrl,bodyObjectsJsonPaths,queryObjectJsonPath}=onClickDefination;
+          submitForm(screenKey,method,endPoint,purpose,redirectionUrl,bodyObjectsJsonPaths||{},queryObjectJsonPath||[]);
           break;
         default:
 
@@ -54,7 +54,7 @@ const screenHoc = ({ path = "", screenKey, ...rest }) => Screen => {
 
     render() {
       const { screenConfig } = this.props;
-      const { [screenKey]: currentScreenConfig } = screenConfig;
+      const { [screenKey]: currentScreenConfig ,preparedFinalObject} = screenConfig;
       // console.log(this);
       // console.log(currentScreenConfig);
       if (currentScreenConfig) {
@@ -67,6 +67,7 @@ const screenHoc = ({ path = "", screenKey, ...rest }) => Screen => {
             screenKey={name}
             onFieldChange={handleScreenConfigurationFieldChange}
             onComponentClick={onClick}
+            preparedFinalObject={preparedFinalObject}
           />
         );
       } else {
@@ -76,8 +77,8 @@ const screenHoc = ({ path = "", screenKey, ...rest }) => Screen => {
   }
 
   const mapStateToProps = ({ screenConfiguration }) => {
-    const { screenConfig } = screenConfiguration;
-    return { screenConfig };
+    const { screenConfig,preparedFinalObject } = screenConfiguration;
+    return { screenConfig,preparedFinalObject };
   };
 
   const mapDispatchToProps = dispatch => {

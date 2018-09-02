@@ -8,7 +8,8 @@ const initialState = {
     message: "",
     open: false,
     error: true
-  }
+  },
+  spinner:false
 };
 
 const appReducer = (state = initialState, action) => {
@@ -30,6 +31,11 @@ const appReducer = (state = initialState, action) => {
           error: action.error
         }
       };
+    case actionTypes.TOGGLE_SPINNER:
+      return {
+        ...state,
+        spinner:!state.spinner
+      }
     default:
       return state;
   }

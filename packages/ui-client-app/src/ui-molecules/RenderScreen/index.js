@@ -1,6 +1,6 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
-import { ComponentInterface } from "ui-molecules";
+import ComponentInterface  from "../ComponentInterface";
 
 const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onComponentClick }) => {
   return components

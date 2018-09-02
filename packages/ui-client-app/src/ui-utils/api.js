@@ -88,8 +88,10 @@ export const httpRequest = async (
 export const loginRequest = async (username = null, password = null) => {
   let apiError = "Api Error";
   try {
-    await Auth.signIn(username, password);
-    alert("Logged in");
+    const response=await Auth.signIn(username, password);
+    console.log(response);
+    // alert("Logged in");
+    return response;
   } catch (e) {
     apiError = e.message;
     // alert(e.message);
@@ -97,3 +99,17 @@ export const loginRequest = async (username = null, password = null) => {
 
   throw new Error(apiError);
 };
+
+export const logoutRequest=async ()=>{
+  let apiError = "Api Error";
+  try {
+    const response=await Auth.signOut();
+    // alert("Logged out");
+    return response;
+  } catch (e) {
+    apiError = e.message;
+    // alert(e.message);
+  }
+
+  throw new Error(apiError);
+}

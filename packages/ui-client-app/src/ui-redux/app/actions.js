@@ -13,3 +13,9 @@ export const toggleSnackbarAndSetText = (open, message, error) => {
     error,
   };
 };
+
+export const toggleSpinner = ()=>{
+  return {
+    type: actionTypes.TOGGLE_SPINNER
+  }
+}

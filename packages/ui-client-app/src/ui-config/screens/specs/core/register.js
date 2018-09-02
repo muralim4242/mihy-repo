@@ -1,8 +1,8 @@
 const screenConfig = {
   uiFramework: "material-ui",
-  name: "mihyLoginScreen",
+  name: "mihyRegisterScreen",
   components: {
-    mihyLoginGrid: {
+    mihyRegisterGrid: {
       componentPath: "Grid",
       children: {
         mihyEmptyRow: {
@@ -12,7 +12,7 @@ const screenConfig = {
             sm: 4
           }
         },
-        mihyLoginItem: {
+        mihyRegisterItem: {
           componentPath: "Grid",
           props: {
             item: true,
@@ -20,20 +20,20 @@ const screenConfig = {
             xs: 12
           },
           children: {
-            mihyLoginCard: {
+            mihyRegisterCard: {
               componentPath: "Card",
               children: {
-                mihyLoginCardContent: {
+                mihyRegisterCardContent: {
                   componentPath: "CardContent",
                   children: {
-                    mihyLoginHeader: {
+                    mihyRegisterHeader: {
                       componentPath: "Typography",
                       children: {
                         "mihy-login-header-text": {
                           uiFramework: "custom-atoms",
                           componentPath: "Label",
                           props: {
-                            label: "Login"
+                            label: "Register"
                           }
                         }
                       },
@@ -49,7 +49,7 @@ const screenConfig = {
                         className: "text-center"
                       },
                       children: {
-                        mihyLoginUsername: {
+                        mihyRegisterUsername: {
                           componentPath: "TextField",
                           props: {
                             label: "Email",
@@ -62,7 +62,7 @@ const screenConfig = {
                           jsonPath: "body.mihy.username",
                           pattern: "^([a-zA-Z0-9@.])+$"
                         },
-                        mihyLoginPassword: {
+                        mihyRegisterPassword: {
                           componentPath: "TextField",
                           props: {
                             label: "Password",
@@ -75,6 +75,19 @@ const screenConfig = {
                           required: true,
                           pattern: "^([a-zA-Z0-9!])+$"
                         },
+                        mihyRegisterConfirmPassword: {
+                          componentPath: "TextField",
+                          props: {
+                            label: "Confirm Password",
+                            type: "password",
+                            margin: "normal",
+                            fullWidth: true,
+                            required: true
+                          },
+                          jsonPath: "body.mihy.confirm",
+                          required: true,
+                          pattern: "^([a-zA-Z0-9!])+$"
+                        },
                         mihyBreakOne: {
                           uiFramework: "custom-atoms",
                           componentPath: "Break"
@@ -83,7 +96,7 @@ const screenConfig = {
                           uiFramework: "custom-atoms",
                           componentPath: "Break"
                         },
-                        mihyLoginButton: {
+                        mihyRegisterButton: {
                           componentPath: "Button",
                           props: {
                             variant: "contained",
@@ -91,11 +104,11 @@ const screenConfig = {
                             fullWidth: true
                           },
                           children: {
-                            mihyLoginButtonText: {
+                            mihyRegisterButtonText: {
                               uiFramework: "custom-atoms",
                               componentPath: "Label",
                               props: {
-                                label: "Login"
+                                label: "Register"
                               }
                             }
                           },

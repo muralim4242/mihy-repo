@@ -1,6 +1,4 @@
-export const LANDING="/";
-export const LOGIN="/login";
-export const REGISTER="/register";
-export const OTP="/otp";
-export const HOME="/home"
-export const BLOOD="/blood";
+export const LANDING="/landing";
+export const SCREEN_INTERFACE="/mihy-ui-framework/:path/:screenKey";
+export const PLAYGROUND="/mihy-ui-framework/Playground";
+export const REDIRECT="/landing/mihy-ui-framework/core/login";

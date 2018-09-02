@@ -1,9 +1,8 @@
 import * as actionTypes from "./actionTypes";
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("CognitoIdentityServiceProvider.34l3gjbtidmeo10omi969ftoi5.07f4204e-c40e-438a-964e-a0442048e626.accessToken");
 
 const intialState = {
-  authenticating: false,
   authenticated:false,
   authenticationFailed: false,
   token
@@ -14,23 +13,21 @@ const auth = (state = intialState, action) => {
 
   switch (type) {
     case actionTypes.AUTHENTICATING:
-      return { ...state, authenticated: false, authenticationFailed: true, authenticating: true };
+      return { ...state, authenticated: false, authenticationFailed: true};
     case actionTypes.AUTHENTICATED:
       return {
         ...state,
         authenticated: true,
         authenticationFailed: false,
-        authenticating: false,
         token: action.accessToken,
       };
     case actionTypes.AUTHENTICATION_FAILED:
-      return { ...state, authenticated: false, authenticationFailed: true, authenticating: false };
+      return { ...state, authenticated: false, authenticationFailed: true };
     case actionTypes.LOGOUT:
       return {
         ...state,
         authenticated: false,
         authenticationFailed: false,
-        authenticating: false,
         token: "",
       };
     default:

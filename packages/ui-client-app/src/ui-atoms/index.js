@@ -1,26 +1,93 @@
-import Div from "./HtmlElements/Div";
-import Main from "./HtmlElements/Main";
+import React from "react";
+import Loadable from "react-loadable";
+import LinearProgress from "./LinearSpinner";
 import AppBar from "./Appbar";
-import Typegraphy from "./Typegraphy";
-import Container from "./Layout/Container";
-import Item from "./Layout/Item";
-import Card from "./Card";
-import CardContent from "./CardContent";
-import CardMedia from "./CardMedia";
-import Phonenumber from "./TextFields/Phonenumber";
-import Text from "./TextFields/Text";
-import Button from "./Button";
-import Break from "./UtilityElement/Break";
-import Icon from "./Icon";
-import InputAdornment from "./InputAdornment";
-import Drawer from "./Drawer";
-import Toolbar from "./ToolBar";
-import List from "./Lists/List";
-import ListItem from "./Lists/ListItem";
-import ListItemIcon from "./Lists/ListItemIcon";
-import ListItemText from "./Lists/ListItemText";
-import Label from "./UtilityElement/Label";
+const Loading = () => <LinearProgress />;
 
+const Div = Loadable({
+  loader: () => import("./HtmlElements/Div"),
+  loading: () => <Loading />
+});
+const Main = Loadable({
+  loader: () => import("./HtmlElements/Main"),
+  loading: () => <Loading />
+});
+const Typegraphy = Loadable({
+  loader: () => import("./Typegraphy"),
+  loading: () => <Loading />
+});
+const Container = Loadable({
+  loader: () => import("./Layout/Container"),
+  loading: () => <Loading />
+});
+const Item = Loadable({
+  loader: () => import("./Layout/Item"),
+  loading: () => <Loading />
+});
+const Card = Loadable({
+  loader: () => import("./Card"),
+  loading: () => <Loading />
+});
+const CardContent = Loadable({
+  loader: () => import("./CardContent"),
+  loading: () => <Loading />
+});
+const CardMedia = Loadable({
+  loader: () => import("./CardMedia"),
+  loading: () => <Loading />
+});
+const Phonenumber = Loadable({
+  loader: () => import("./TextFields/Phonenumber"),
+  loading: () => <Loading />
+});
+const Text = Loadable({
+  loader: () => import("./TextFields/Text"),
+  loading: () => <Loading />
+});
+const Button = Loadable({
+  loader: () => import("./Button"),
+  loading: () => <Loading />
+});
+const Break = Loadable({
+  loader: () => import("./UtilityElement/Break"),
+  loading: () => <Loading />
+});
+const Icon = Loadable({
+  loader: () => import("./Icon"),
+  loading: () => <Loading />
+});
+const InputAdornment = Loadable({
+  loader: () => import("./InputAdornment"),
+  loading: () => <Loading />
+});
+const Drawer = Loadable({
+  loader: () => import("./Drawer"),
+  loading: () => <Loading />
+});
+const Toolbar = Loadable({
+  loader: () => import("./ToolBar"),
+  loading: () => <Loading />
+});
+const List = Loadable({
+  loader: () => import("./Lists/List"),
+  loading: () => <Loading />
+});
+const ListItem = Loadable({
+  loader: () => import("./Lists/ListItem"),
+  loading: () => <Loading />
+});
+const ListItemIcon = Loadable({
+  loader: () => import("./Lists/ListItemIcon"),
+  loading: () => <Loading />
+});
+const ListItemText = Loadable({
+  loader: () => import("./Lists/ListItemText"),
+  loading: () => <Loading />
+});
+const Label = Loadable({
+  loader: () => import("./UtilityElement/Label"),
+  loading: () => <Loading />
+});
 
 export {
   Div,
@@ -44,5 +111,6 @@ export {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Label
+  Label,
+  LinearProgress
 };

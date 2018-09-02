@@ -26,6 +26,7 @@ import styles from "./css";
 import {compose} from "recompose";
 import {connect} from "react-redux";
 import {logout} from "ui-redux/auth/actions";
+import ReactJson from 'react-json-view'
 
 
 class Landing extends React.Component {
@@ -48,22 +49,7 @@ class Landing extends React.Component {
       <Div>
         <Div className={classes.toolbar} />
         <Divider />
-        <List>
-          <ListItem button>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button component="a" href="#simple-list">
-            <ListItemText primary="Edit Profile" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Contact Us" />
-          </ListItem>
-          <ListItem button onClick={()=>{
-            logout()
-          }}>
-            <ListItemText primary="Logout" />
-          </ListItem>
-        </List>
+        <ReactJson src={my_json_object} />
       </Div>
     );
     return (
@@ -79,7 +65,7 @@ class Landing extends React.Component {
               <Icon iconName="menu" />
             </IconButton>
             <Typegraphy variant="title" color="inherit" noWrap>
-              Mihy
+              Mihy Playground
             </Typegraphy>
           </Toolbar>
         </AppBar>

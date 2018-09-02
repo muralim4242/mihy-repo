@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import CardMedia from '@material-ui/core/CardMedia';
 
 
@@ -10,8 +10,8 @@ const SimpleCardMedia=(props)=> {
   );
 }
 
-SimpleCardMedia.propTypes = {
-
-};
+// SimpleCardMedia.propTypes = {
+//
+// };
 
 export default SimpleCardMedia;
