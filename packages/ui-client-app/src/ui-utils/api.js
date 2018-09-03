@@ -65,7 +65,7 @@ export const httpRequest = async (
     }
   } catch (error) {
     const { data, status } = error.response;
-    if (status == 400 && data == "") {
+    if (status === 400 && data === "") {
       apiError = "INVALID_TOKEN";
     } else {
       apiError =

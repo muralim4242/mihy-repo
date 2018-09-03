@@ -1,6 +1,5 @@
 import * as authActionTypes from "../actionTypes";
 import {setRoute} from "../../app/actions";
-import get from "lodash/get";
 import {logoutRequest} from "ui-utils";
 
 const logout = (store) => (next) => async (action) => {

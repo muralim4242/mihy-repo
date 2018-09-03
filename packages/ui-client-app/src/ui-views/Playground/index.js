@@ -1,192 +1,136 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Drawer,
-  Div,
-  Toolbar,
-  List,
-  ListItem,
-  ListItemText,
-  Typegraphy,
-  Icon,
-  Main
-} from "ui-atoms";
+import { AppBar, Drawer, Div, Toolbar, Typegraphy, Icon } from "ui-atoms";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
-import Divider from "@material-ui/core/Divider";
-import { RenderRoutes } from "ui-molecules";
-import appRoutes from "ui-config/routes/mihy";
 import styles from "./css";
-// import BloodDashboard from "apps/ui-blood/views/Dashboard";
-// import SearchDonor from "apps/ui-blood/views/SearchDonor";
-// import Registration from "apps/ui-blood/views/Registration";
-// import DonorProcess from "apps/ui-blood/views/DonorProcess";
-import {compose} from "recompose";
-import {connect} from "react-redux";
-import {logout} from "ui-redux/auth/actions";
-import ReactJson from 'react-json-view'
+import { compose } from "recompose";
+import ReactJson from "react-json-view";
+import { screenHoc } from "ui-hocs";
+import CommonView from "ui-molecules/CommonView";
 
-const screenConfig = {
+const initScreenConfig = {
   uiFramework: "material-ui",
   name: "mihyLoginScreen",
   components: {
-    mihyLoginGrid: {
-      componentPath: "Grid",
+    mihyLoginUsername: {
+      componentPath: "TextField",
+      props: {
+        label: "Email",
+        margin: "normal",
+        fullWidth: true,
+        autoFocus: true,
+        required: true
+      },
+      required: true,
+      jsonPath: "body.mihy.username",
+      pattern: "^([a-zA-Z0-9@.])+$"
+    },
+    mihyLoginPassword: {
+      componentPath: "TextField",
+      props: {
+        label: "Password",
+        type: "password",
+        margin: "normal",
+        fullWidth: true,
+        required: true
+      },
+      jsonPath: "body.mihy.password",
+      required: true,
+      pattern: "^([a-zA-Z0-9!])+$"
+    },
+    mihyBreakOne: {
+      uiFramework: "custom-atoms",
+      componentPath: "Break"
+    },
+    mihyBreakTwo: {
+      uiFramework: "custom-atoms",
+      componentPath: "Break"
+    },
+    mihyLoginButton: {
+      componentPath: "Button",
+      props: {
+        variant: "contained",
+        color: "primary",
+        fullWidth: true
+      },
       children: {
-        mihyEmptyRow: {
-          componentPath: "Grid",
+        mihyLoginButtonText: {
+          uiFramework: "custom-atoms",
+          componentPath: "Label",
           props: {
-            item: true,
-            sm: 4
-          }
-        },
-        mihyLoginItem: {
-          componentPath: "Grid",
-          props: {
-            item: true,
-            sm: 4,
-            xs: 12
-          },
-          children: {
-            mihyLoginCard: {
-              componentPath: "Card",
-              children: {
-                mihyLoginCardContent: {
-                  componentPath: "CardContent",
-                  children: {
-                    mihyLoginHeader: {
-                      componentPath: "Typography",
-                      children: {
-                        "mihy-login-header-text": {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Label",
-                          props: {
-                            label: "Login"
-                          }
-                        }
-                      },
-                      props: {
-                        align: "center",
-                        variant: "title"
-                      }
-                    },
-                    mihyloginDiv: {
-                      uiFramework: "custom-atoms",
-                      componentPath: "Div",
-                      props: {
-                        className: "text-center"
-                      },
-                      children: {
-                        mihyLoginUsername: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Email",
-                            margin: "normal",
-                            fullWidth: true,
-                            autoFocus: true,
-                            required: true
-                          },
-                          required:true,
-                          jsonPath: "body.mihy.username",
-                          pattern: "^([a-zA-Z0-9@.])+$"
-                        },
-                        mihyLoginPassword: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Password",
-                            type: "password",
-                            margin: "normal",
-                            fullWidth: true,
-                            required: true
-                          },
-                          jsonPath: "body.mihy.password",
-                          required: true,
-                          pattern: "^([a-zA-Z0-9!])+$"
-                        },
-                        mihyBreakOne: {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Break"
-                        },
-                        mihyBreakTwo: {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Break"
-                        },
-                        mihyLoginButton: {
-                          componentPath: "Button",
-                          props: {
-                            variant: "contained",
-                            color: "primary",
-                            fullWidth: true
-                          },
-                          children: {
-                            mihyLoginButtonText: {
-                              uiFramework: "custom-atoms",
-                              componentPath: "Label",
-                              props: {
-                                label: "Login"
-                              }
-                            }
-                          },
-                          onClickDefination:{
-                            action:"submit",
-                            method:"get",
-                            endPoint:"afbc.com",
-                            purpose:"authLogin",
-                            redirectionUrl:"/"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              props: { classes: { root: "container-margin" } }
-            }
+            label: "Login"
           }
         }
       },
-      props: { container: true }
+      onClickDefination: {
+        action: "submit",
+        method: "get",
+        endPoint: "afbc.com",
+        purpose: "authLogin",
+        redirectionUrl: "/"
+      }
     }
   }
 };
 
-
-
 class Playground extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
+    screenConfig: initScreenConfig,
+    view: null
   };
 
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
+  componentDidMount() {
+    const { screenConfig } = this.state;
+    this.initScreen(screenConfig);
+  }
 
+  initScreen=(screenConfig)=> {
+    const hasOwnConfig = true;
+    this.setState({
+      view: screenHoc({ hasOwnConfig, screenConfig })(CommonView)
+    });
+  }
+
+  updateScreen=(jsonStatus, action)=> {
+    console.log(action);
+    console.log(jsonStatus);
+    this.initScreen(jsonStatus.updated_src);
+  }
 
   render() {
-    const { classes, theme, match } = this.props;
+    const { updateScreen } = this;
+    const { classes, theme} = this.props;
+    const { view: View, screenConfig } = this.state;
 
     const drawer = (
       <Div>
-        <Div className={classes.toolbar} />
-        <Divider />
+        <br />
         Screen configuration
-        <br/>
-        <br/>
-        <ReactJson src={screenConfig} collapsed={true} displayDataTypes={false} onEdit={(edit)=>{
-          console.log(edit);
-        }}
-        onAdd={(add)=>{
-          console.log(add);
-        }}
-        onDelete={(del)=>{
-          console.log(del);
-        }}
-        onSelect={(select)=>{
-          console.log(select);
-        }}
+        <br />
+        <br />
+        <ReactJson
+          src={screenConfig}
+          collapsed={true}
+          displayDataTypes={false}
+          onAdd={add => {
+            updateScreen(add, "add");
+          }}
+          onDelete={del => {
+            updateScreen(del, "del");
+          }}
+          onEdit={edit => {
+            updateScreen(edit, "edit");
+          }}
+          onSelect={select => {
+            console.log(select);
+          }}
         />
       </Div>
     );
@@ -234,9 +178,9 @@ class Playground extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
-        <Div className={classes.content}>
-          <RenderRoutes basePath={match.url} routes={appRoutes} />
-        </Div>
+        <main className={classes.content}>
+        <div className={classes.toolbar} />
+        {View && <View />}</main>
       </Div>
     );
   }
@@ -247,14 +191,4 @@ Playground.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-// const mapStateToProps=(state)=>{
-//   return null
-// }
-
-const mapDispatchToProps=(dispatch)=>{
-  return {
-    logout:()=>dispatch(logout())
-  }
-}
-
-export default compose(connect(null,mapDispatchToProps),withStyles(styles, { withTheme: true }))(Playground);
+export default compose(withStyles(styles, { withTheme: true }))(Playground);

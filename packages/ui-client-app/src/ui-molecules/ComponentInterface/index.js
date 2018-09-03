@@ -1,6 +1,8 @@
 import React from "react";
 import LinearProgress from "ui-atoms/LinearSpinner";
 import Loadable from "react-loadable";
+import Item from "ui-atoms/Layout/Item";
+
 
 class ComponentInterface extends React.Component {
   constructor(props) {
@@ -50,14 +52,25 @@ class ComponentInterface extends React.Component {
 
   render() {
     const { module: Component } = this.state; // Assigning to new variable names @see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-    const { id, uiFramework, props, children } = this.props;
-    return (
-      Component && (
-        <Component id={`${uiFramework}-${id}`} {...props}>
-          {children && children}
-        </Component>
-      )
-    );
+    const { id, uiFramework, props, children,gridDefination } = this.props;
+    if (gridDefination) {
+      return (Component &&
+        <Item {...gridDefination}>
+            <Component id={`${uiFramework}-${id}`} {...props}>
+              {children && children}
+            </Component>
+        </Item>
+      );
+    }
+    else {
+      return (
+        Component && (
+          <Component id={`${uiFramework}-${id}`} {...props}>
+            {children && children}
+          </Component>
+        )
+      );
+    }
   }
 }
 

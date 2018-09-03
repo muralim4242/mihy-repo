@@ -1,4 +1,4 @@
-const drawerWidth = "30%";
+const drawerWidth = 350;
 
 const styles = theme => ({
   root: {
@@ -12,8 +12,8 @@ const styles = theme => ({
   },
   appBar: {
     position: 'absolute',
-    marginLeft: drawerWidth,
     [theme.breakpoints.up('md')]: {
+      marginLeft:drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
     },
   },
@@ -32,8 +32,10 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    marginTop:"64px"
-    // padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit,
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: drawerWidth+10,
+    }
   },
 });
 

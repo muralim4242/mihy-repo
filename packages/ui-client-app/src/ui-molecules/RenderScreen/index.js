@@ -11,7 +11,8 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
           componentJsonpath,
           jsonPath,
           props,
-          onClickDefination
+          onClickDefination,
+          gridDefination
         } = components[componentKey];
         let extraProps = jsonPath
           ? {
@@ -36,6 +37,7 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
               uiFramework={uiFramework || rootFramework}
               componentPath={componentPath}
               props={{ ...props, ...extraProps }}
+              gridDefination={gridDefination}
             >
               <RenderScreen components={components[componentKey].children} onFieldChange={onFieldChange} onComponentClick={onComponentClick} uiFramework={rootFramework}/>
             </ComponentInterface>
@@ -48,6 +50,7 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
               uiFramework={uiFramework|| rootFramework}
               componentPath={componentPath}
               props={{ ...props, ...extraProps }}
+              gridDefination={gridDefination}
             />
           );
         }

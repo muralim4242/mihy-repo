@@ -110,9 +110,10 @@ class Landing extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
-        <Div className={classes.content}>
+        <Main className={classes.content}>
+          <div className={classes.toolbar} />
           <RenderRoutes basePath={match.url} routes={appRoutes} />
-        </Div>
+        </Main>
       </Div>
     );
   }

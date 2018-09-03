@@ -60,7 +60,11 @@ const screenConfig = {
                           },
                           required:true,
                           jsonPath: "body.mihy.username",
-                          pattern: "^([a-zA-Z0-9@.])+$"
+                          pattern: "^([a-zA-Z0-9@.])+$",
+                          // gridDefination:{
+                          //   xs:12,
+                          //   sm:6
+                          // }
                         },
                         mihyLoginPassword: {
                           componentPath: "TextField",

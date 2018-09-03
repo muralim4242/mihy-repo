@@ -7,22 +7,41 @@ import {
 } from "ui-redux/screen-configuration/actions";
 import isEmpty from "lodash/isEmpty";
 import { addComponentJsonpath } from "ui-utils";
+// import $ from "jquery";
 
-const screenHoc = ({ path = "", screenKey, ...rest }) => Screen => {
+const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConfig:defaultScreenConfig,hasRemoteConfig=false}) => Screen => {
   class ScreenWrapper extends React.Component {
     constructor(props) {
       super(props);
       const { initScreen } = props;
+      this.screenConfig={};
       try {
-        this.screenConfig = require(`ui-config/screens/specs/${path}/${screenKey}`).default;
+        const getConfig=(path,screenKey)=>{
+          return require(`ui-config/screens/specs/${path}/${screenKey}`).default;
+        }
+        if (hasOwnConfig) {
+          this.screenConfig=defaultScreenConfig ||{};
+        } else if (hasRemoteConfig) {
+          // const url=`http://rawgit.com/muralim4242/mihy-repo/master/packages/ui-client-app/src/ui-config/screens/specs/${path}/${screenKey}.js`;
+          // $.getScript(url, function( data, textStatus, jqxhr ) {
+          //     console.log( data ); // Data returned
+          //     console.log( textStatus ); // Success
+          //     console.log( jqxhr.status ); // 200
+          //     console.log( "Load was performed." );
+          // });
+          this.screenConfig = getConfig(path,screenKey);
+        }
+        else {
+          this.screenConfig = getConfig(path,screenKey);
+        }
         if (!isEmpty(this.screenConfig)) {
           addComponentJsonpath(this.screenConfig.components);
         }
+        initScreen(screenKey, JSON.parse(JSON.stringify(this.screenConfig)));
       } catch (error) {
         // the error is assumed to have occured due to absence of config; so ignore it!
         console.log(error);
       }
-      initScreen(screenKey, JSON.parse(JSON.stringify(this.screenConfig)));
     }
 
     handleScreenConfigurationFieldChange = (

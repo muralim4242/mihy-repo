@@ -1,5 +1,7 @@
 import React from "react";
 import RenderScreen from "../RenderScreen";
+import Container from "ui-atoms/Layout/Container";
+import "./index.css";
 
 class CommonView extends React.Component {
   render() {
@@ -11,13 +13,15 @@ class CommonView extends React.Component {
       preparedFinalObject
     } = this.props;
     return (
-      <RenderScreen
-        components={components}
-        uiFramework={uiFramework}
-        onFieldChange={onFieldChange}
-        onComponentClick={onComponentClick}
-        preparedFinalObject={preparedFinalObject}
-      />
+      <Container className="main-route">
+        <RenderScreen
+          components={components}
+          uiFramework={uiFramework}
+          onFieldChange={onFieldChange}
+          onComponentClick={onComponentClick}
+          preparedFinalObject={preparedFinalObject}
+        />
+      </Container>
     );
   }
 }

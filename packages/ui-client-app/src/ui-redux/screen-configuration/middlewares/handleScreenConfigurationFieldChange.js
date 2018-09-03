@@ -4,7 +4,7 @@ import {validate} from "../utils";
 
 const handleScreenConfigurationFieldChange = (store) => (next) => (action) => {
   const { type} = action;
-  if (type == screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property==="value") {
+  if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property==="value") {
       const { screenKey,componentJsonpath,value } = action;
       const dispatch = store.dispatch;
       const state = store.getState();

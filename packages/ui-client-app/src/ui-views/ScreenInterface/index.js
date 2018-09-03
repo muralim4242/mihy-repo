@@ -10,9 +10,9 @@ class ScreenInterface extends React.Component {
   componentDidMount() {
     const { match } = this.props;
     const { params } = match;
-    const {path,screenKey} = params;
+    const {path,screenKey,hasRemoteConfig} = params;
     if (path && screenKey) {
-      this.setState({ view: screenHoc({ path, screenKey })(CommonView) });
+      this.setState({ view: screenHoc({ path, screenKey,hasRemoteConfig })(CommonView) });
     }
   }
 

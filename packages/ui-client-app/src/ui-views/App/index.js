@@ -6,7 +6,7 @@ import MainRoutes from "ui-routes";
 import LoadingIndicator from "ui-molecules/LoadingIndicator";
 import { Auth } from "aws-amplify";
 import Div from "ui-atoms/HtmlElements/Div";
-import { logout } from "ui-redux/auth/actions";
+// import { logout } from "ui-redux/auth/actions";
 import { setRoute } from "ui-redux/app/actions";
 import {authenticated} from "ui-redux/auth/actions"
 import "./index.css";
@@ -22,16 +22,15 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const {authenticated,logout}=this.props;
+    const {authenticated}=this.props;
     try {
-      if (await Auth.currentSession()) {
-        authenticated();
-      }
+      // if (await Auth.currentSession()) {
+      //   authenticated();
+      // }
     } catch (e) {
       if (e !== "No current user") {
         console.log(e);
       }
-      // logout();
     }
   };
 
@@ -64,7 +63,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setRoute: route => dispatch(setRoute(route)),
     authenticated:()=>dispatch(authenticated()),
-    logout:()=>dispatch(logout())
+    // logout:()=>dispatch(logout())
   };
 };
 

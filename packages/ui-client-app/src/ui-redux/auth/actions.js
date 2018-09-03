@@ -1,5 +1,4 @@
 import * as authType from "./actionTypes";
-import get from "lodash/get";
 
 
 export const authenticating = () => {

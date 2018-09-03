@@ -2,7 +2,6 @@ import * as screenActionTypes from "./actionTypes";
 import { prepareFinalBodyData, prepareFinalQueryData,validateForm } from "./utils";
 import { httpRequest, loginRequest } from "ui-utils";
 import {toggleSpinner,setRoute} from "ui-redux/app/actions";
-import get from "lodash/get";
 
 export const initScreen = (screenKey, screenConfig) => {
   return {
@@ -75,6 +74,7 @@ export const submitForm = (
             query,
             queryObjectJsonPath
           );
+          console.log(screenConfigQueryData);
           //preparing body data
           screenConfigResponse = await httpRequest(
             method,
@@ -83,6 +83,7 @@ export const submitForm = (
             [],
             screenConfigBodyData
           );
+          console.log(screenConfigResponse);
         }
         dispatch(toggleSpinner());
         if (redirectionUrl) {

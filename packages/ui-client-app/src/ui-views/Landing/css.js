@@ -12,10 +12,13 @@ const styles = theme => ({
   },
   appBar: {
     position: 'absolute',
-    marginLeft: drawerWidth,
     [theme.breakpoints.up('md')]: {
+      marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
     },
+    borderBottomLeftRadius: "50%",
+    borderBottomRightRadius: "50%",
+    height: "200px"
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -32,8 +35,10 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    marginTop:"64px"
-    // padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit,
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: drawerWidth+10,
+    },
   },
 });
 
