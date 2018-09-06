@@ -1,130 +1,196 @@
-0 silly input []
-1 silly flags { _: [ 'bootstrap' ],
-1 silly flags   'reject-cycles': false,
-1 silly flags   rejectCycles: false,
-1 silly flags   args: [] }
+0 silly input [ 'publish' ]
+1 silly flags { _: [ 'publish' ], 'reject-cycles': false, rejectCycles: false }
 2 verbose rootPath /Users/GoodWork/Documents/GitHub/mihy-repo
 3 info version 2.11.0
-4 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/VERSION
-5 silly initialize attempt
-6 silly npmConfig { registry: undefined,
-6 silly npmConfig   npmClient: undefined,
-6 silly npmConfig   npmClientArgs: undefined,
-6 silly npmConfig   mutex: undefined }
-7 silly initialize success
-8 silly execute attempt
-9 info Bootstrapping 3 packages
-10 info lifecycle preinstall
-11 silly runScript preinstall ui-atoms
-12 silly ui-atoms
-13 silly runScript preinstall ui-molecules
-14 silly ui-molecules
-15 silly runScript preinstall ui-client-app
-16 silly ui-client-app
-17 silly hasMatchingDependency ui-client-app ui-molecules
-18 silly hasDependencyInstalled ui-client-app lodash
-19 silly dependencyIsSatisfied [ 'lodash',
-19 silly dependencyIsSatisfied   '^4.17.10',
-19 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-20 verbose dependencyIsSatisfied lodash true
-21 silly hasDependencyInstalled ui-client-app react
-22 silly dependencyIsSatisfied [ 'react',
-22 silly dependencyIsSatisfied   '^16.4.1',
-22 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-23 verbose dependencyIsSatisfied react true
-24 silly hasDependencyInstalled ui-client-app react-dom
-25 silly dependencyIsSatisfied [ 'react-dom',
-25 silly dependencyIsSatisfied   '^16.4.1',
-25 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-26 verbose dependencyIsSatisfied react-dom true
-27 silly hasDependencyInstalled ui-client-app react-router-dom
-28 silly dependencyIsSatisfied [ 'react-router-dom',
-28 silly dependencyIsSatisfied   '^4.3.1',
-28 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-29 verbose dependencyIsSatisfied react-router-dom true
-30 silly hasDependencyInstalled ui-client-app react-scripts
-31 silly dependencyIsSatisfied [ 'react-scripts',
-31 silly dependencyIsSatisfied   '1.1.4',
-31 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-32 verbose dependencyIsSatisfied react-scripts true
-33 silly hasDependencyInstalled ui-client-app react-text-mask
-34 silly dependencyIsSatisfied [ 'react-text-mask',
-34 silly dependencyIsSatisfied   '^5.4.2',
-34 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-35 verbose dependencyIsSatisfied react-text-mask true
-36 silly hasDependencyInstalled ui-client-app ui-atom
-37 silly dependencyIsSatisfied [ 'ui-atom',
-37 silly dependencyIsSatisfied   '1.0.0',
-37 silly dependencyIsSatisfied   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/node_modules' ]
-38 verbose dependencyIsSatisfied ui-atom false
-39 silly root dependencies []
-40 silly leaf dependencies {
-40 silly leaf dependencies   "ui-client-app": [
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "lodash@^4.17.10",
-40 silly leaf dependencies       "isSatisfied": true
-40 silly leaf dependencies     },
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "react@^16.4.1",
-40 silly leaf dependencies       "isSatisfied": true
-40 silly leaf dependencies     },
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "react-dom@^16.4.1",
-40 silly leaf dependencies       "isSatisfied": true
-40 silly leaf dependencies     },
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "react-router-dom@^4.3.1",
-40 silly leaf dependencies       "isSatisfied": true
-40 silly leaf dependencies     },
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "react-scripts@1.1.4",
-40 silly leaf dependencies       "isSatisfied": true
-40 silly leaf dependencies     },
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "react-text-mask@^5.4.2",
-40 silly leaf dependencies       "isSatisfied": true
-40 silly leaf dependencies     },
-40 silly leaf dependencies     {
-40 silly leaf dependencies       "dependency": "ui-atom@1.0.0",
-40 silly leaf dependencies       "isSatisfied": false
-40 silly leaf dependencies     }
-40 silly leaf dependencies   ]
-40 silly leaf dependencies }
-41 info Installing external dependencies
-42 verbose actions 1 actions, concurrency 4
-43 silly installInDir ui-client-app [ 'lodash@^4.17.10',
-43 silly installInDir   'react@^16.4.1',
-43 silly installInDir   'react-dom@^16.4.1',
-43 silly installInDir   'react-router-dom@^4.3.1',
-43 silly installInDir   'react-scripts@1.1.4',
-43 silly installInDir   'react-text-mask@^5.4.2',
-43 silly installInDir   'ui-atom@1.0.0' ]
-44 silly installInDir backup /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json
-45 silly rename [ '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json',
-45 silly rename   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json.lerna_backup' ]
-46 silly installInDir writing tempJson { dependencies:
-46 silly installInDir    { lodash: '^4.17.10',
-46 silly installInDir      react: '^16.4.1',
-46 silly installInDir      'react-dom': '^16.4.1',
-46 silly installInDir      'react-router-dom': '^4.3.1',
-46 silly installInDir      'react-scripts': '1.1.4',
-46 silly installInDir      'react-text-mask': '^5.4.2',
-46 silly installInDir      'ui-atom': '1.0.0' } }
-47 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app' }
-48 silly installInDir [ 'npm', [ 'install' ] ]
-49 silly installInDir cleanup /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json
-50 silly renameSync [ '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json.lerna_backup',
-50 silly renameSync   '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json' ]
-51 verbose installed leaf ui-client-app
-52 error execute callback with error
-53 error Error: Command failed: npm install
-53 error npm WARN notice Due to a recent security incident, all user tokens have been invalidated. Please see https://status.npmjs.org/incidents/dn7c1fgrr7ng for more details. To generate a new token, visit https://www.npmjs.com/settings/~/tokens or run "npm login".
-53 error npm WARN notice Due to a recent security incident, all user tokens have been invalidated. Please see https://status.npmjs.org/incidents/dn7c1fgrr7ng for more details. To generate a new token, visit https://www.npmjs.com/settings/~/tokens or run "npm login".
-53 error npm ERR! code E404
-53 error npm ERR! 404 Not Found: ui-atom@1.0.0
-53 error
-53 error npm ERR! A complete log of this run can be found in:
-53 error npm ERR!     /Users/GoodWork/.npm/_logs/2018-07-24T17_16_29_147Z-debug.log
-53 error
-53 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
-53 error     at <anonymous>
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/VERSION
+7 silly initialize attempt
+8 info current version 0.0.0
+9 silly isDetachedHead
+10 silly getCurrentBranch
+11 verbose getCurrentBranch master
+12 verbose isDetachedHead false
+13 silly getCurrentBranch
+14 verbose getCurrentBranch master
+15 silly getUpdates
+16 info Checking for updated packages...
+17 silly hasTags
+18 verbose hasTags false
+19 info Comparing with initial commit.
+20 verbose updated mihy-ui-framework-biolerplate
+21 verbose updated mihy-ui-framework
+22 verbose updated notes-app-api
+23 verbose updated ui-client-app
+24 info Checking for prereleased packages...
+25 silly collectDependents
+26 silly isPackageDependentOf mihy-ui-framework-biolerplate mihy-ui-framework-biolerplate
+27 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework-biolerplate
+28 silly isPackageDependentOf mihy-ui-framework-biolerplate mihy-ui-framework
+29 verbose dependent mihy-ui-framework-biolerplate depends on mihy-ui-framework
+30 silly isPackageDependentOf mihy-ui-framework-biolerplate notes-app-api
+31 silly isPackageDependentOf mihy-ui-framework notes-app-api
+32 silly isPackageDependentOf mihy-ui-framework-biolerplate ui-client-app
+33 silly isPackageDependentOf mihy-ui-framework ui-client-app
+34 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework-biolerplate
+35 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework
+36 silly isPackageDependentOf mihy-ui-framework notes-app-api
+37 silly isPackageDependentOf mihy-ui-framework ui-client-app
+38 silly isPackageDependentOf notes-app-api mihy-ui-framework-biolerplate
+39 silly isPackageDependentOf notes-app-api mihy-ui-framework
+40 silly isPackageDependentOf notes-app-api notes-app-api
+41 silly isPackageDependentOf notes-app-api ui-client-app
+42 silly isPackageDependentOf ui-client-app mihy-ui-framework-biolerplate
+43 silly isPackageDependentOf ui-client-app mihy-ui-framework
+44 silly isPackageDependentOf ui-client-app notes-app-api
+45 silly isPackageDependentOf ui-client-app ui-client-app
+46 silly collectUpdates
+47 verbose has filtered update mihy-ui-framework-biolerplate
+48 verbose has filtered update mihy-ui-framework
+49 verbose has filtered update notes-app-api
+50 verbose has filtered update ui-client-app
+51 silly initialize success
+52 silly execute attempt
+53 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/lerna.json
+54 silly runScriptSync preversion undefined
+55 silly runScriptSync preversion mihy-ui-framework-biolerplate
+56 silly runScriptSync version mihy-ui-framework-biolerplate
+57 silly runScriptSync preversion mihy-ui-framework
+58 silly runScriptSync version mihy-ui-framework
+59 silly runScriptSync preversion notes-app-api
+60 silly runScriptSync version notes-app-api
+61 silly runScriptSync preversion ui-client-app
+62 silly runScriptSync version ui-client-app
+63 silly runScriptSync version undefined
+64 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/package.json
+65 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/package.json
+66 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api/package.json
+67 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json
+68 silly commit v0.0.1
+69 verbose commit [ 'commit', '--no-verify', '-m', 'v0.0.1' ]
+70 silly addTag v0.0.1
+71 silly runScriptSync postversion mihy-ui-framework-biolerplate
+72 silly runScriptSync postversion mihy-ui-framework
+73 silly runScriptSync postversion notes-app-api
+74 silly runScriptSync postversion ui-client-app
+75 silly runScriptSync postversion undefined
+76 info publish Publishing packages to npm...
+77 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/scripts/prepublish.js
+78 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/scripts/prepublish.js
+79 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/scripts/prepublish.js
+80 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/scripts/prepublish.js
+81 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api/scripts/prepublish.js
+82 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api/scripts/prepublish.js
+83 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/scripts/prepublish.js
+84 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/scripts/prepublish.js
+85 verbose publishing notes-app-api
+86 silly publishTaggedInDir latest notes-app-api
+87 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
+88 error publish Retrying failed publish: notes-app-api
+89 verbose publish error undefined
+90 verbose publishing notes-app-api
+91 silly publishTaggedInDir latest notes-app-api
+92 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
+93 error publish Retrying failed publish: notes-app-api
+94 verbose publish error undefined
+95 verbose publishing notes-app-api
+96 silly publishTaggedInDir latest notes-app-api
+97 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
+98 error publish Retrying failed publish: notes-app-api
+99 verbose publish error undefined
+100 verbose publishing notes-app-api
+101 silly publishTaggedInDir latest notes-app-api
+102 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
+103 error publish Retrying failed publish: notes-app-api
+104 verbose publish error undefined
+105 verbose publishing notes-app-api
+106 silly publishTaggedInDir latest notes-app-api
+107 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
+108 error publish Ran out of retries while publishing notes-app-api Error: Command failed: npm publish --tag latest
+108 error publish npm notice
+108 error publish npm notice 📦  notes-app-api@0.0.1
+108 error publish npm notice === Tarball Contents ===
+108 error publish npm notice 941B  package.json
+108 error publish npm notice 129B  .babelrc
+108 error publish npm notice 1.1kB create.js
+108 error publish npm notice 700B  delete.js
+108 error publish npm notice 278B  env.example
+108 error publish npm notice 849B  get.js
+108 error publish npm notice 448B  handler.js
+108 error publish npm notice 1.1kB LICENSE
+108 error publish npm notice 939B  list.js
+108 error publish npm notice 4.0kB README.md
+108 error publish npm notice 2.5kB serverless.yml
+108 error publish npm notice 1.1kB update.js
+108 error publish npm notice 836B  webpack.config.js
+108 error publish npm notice 214B  libs/dynamodb-lib.js
+108 error publish npm notice 371B  libs/response-lib.js
+108 error publish npm notice 192B  mocks/create-event.json
+108 error publish npm notice 196B  mocks/delete-event.json
+108 error publish npm notice 196B  mocks/get-event.json
+108 error publish npm notice 120B  mocks/list-event.json
+108 error publish npm notice 264B  mocks/update-event.json
+108 error publish npm notice 318B  tests/handler.test.js
+108 error publish npm notice === Tarball Details ===
+108 error publish npm notice name:          notes-app-api
+108 error publish npm notice version:       0.0.1
+108 error publish npm notice package size:  5.9 kB
+108 error publish npm notice unpacked size: 16.9 kB
+108 error publish npm notice shasum:        0e4bba4b4da109c3b86cc092a262a05e837a64b5
+108 error publish npm notice integrity:     sha512-ZgsKcdNwFqrMj[...]ww/P4Qphdsy/Q==
+108 error publish npm notice total files:   21
+108 error publish npm notice
+108 error publish npm ERR! publish Failed PUT 401
+108 error publish npm ERR! code E401
+108 error publish npm ERR! You must be logged in to publish packages. : notes-app-api
+108 error publish
+108 error publish npm ERR! A complete log of this run can be found in:
+108 error publish npm ERR!     /Users/GoodWork/.npm/_logs/2018-09-06T05_56_22_246Z-debug.log
+108 error publish
+108 error publish     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
+108 error publish     at <anonymous>
+108 error publish     at process._tickCallback (internal/process/next_tick.js:188:7)
+109 error execute callback with error
+110 error Error: Command failed: npm publish --tag latest
+110 error npm notice
+110 error npm notice 📦  notes-app-api@0.0.1
+110 error npm notice === Tarball Contents ===
+110 error npm notice 941B  package.json
+110 error npm notice 129B  .babelrc
+110 error npm notice 1.1kB create.js
+110 error npm notice 700B  delete.js
+110 error npm notice 278B  env.example
+110 error npm notice 849B  get.js
+110 error npm notice 448B  handler.js
+110 error npm notice 1.1kB LICENSE
+110 error npm notice 939B  list.js
+110 error npm notice 4.0kB README.md
+110 error npm notice 2.5kB serverless.yml
+110 error npm notice 1.1kB update.js
+110 error npm notice 836B  webpack.config.js
+110 error npm notice 214B  libs/dynamodb-lib.js
+110 error npm notice 371B  libs/response-lib.js
+110 error npm notice 192B  mocks/create-event.json
+110 error npm notice 196B  mocks/delete-event.json
+110 error npm notice 196B  mocks/get-event.json
+110 error npm notice 120B  mocks/list-event.json
+110 error npm notice 264B  mocks/update-event.json
+110 error npm notice 318B  tests/handler.test.js
+110 error npm notice === Tarball Details ===
+110 error npm notice name:          notes-app-api
+110 error npm notice version:       0.0.1
+110 error npm notice package size:  5.9 kB
+110 error npm notice unpacked size: 16.9 kB
+110 error npm notice shasum:        0e4bba4b4da109c3b86cc092a262a05e837a64b5
+110 error npm notice integrity:     sha512-ZgsKcdNwFqrMj[...]ww/P4Qphdsy/Q==
+110 error npm notice total files:   21
+110 error npm notice
+110 error npm ERR! publish Failed PUT 401
+110 error npm ERR! code E401
+110 error npm ERR! You must be logged in to publish packages. : notes-app-api
+110 error
+110 error npm ERR! A complete log of this run can be found in:
+110 error npm ERR!     /Users/GoodWork/.npm/_logs/2018-09-06T05_56_22_246Z-debug.log
+110 error
+110 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
+110 error     at <anonymous>
