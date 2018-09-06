@@ -1,8 +1,8 @@
 {
   "name": "mihy-ui-framework-core",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "main": "./lib",
-  "private":true,
+  "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
