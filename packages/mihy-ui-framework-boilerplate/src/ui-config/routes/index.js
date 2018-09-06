@@ -1,6 +1,6 @@
 import React from "react";
 import Loadable from 'react-loadable';
-import LinearProgress from 'mihy-ui-framework/lib/ui-atoms/LinearSpinner';
+import LinearProgress from 'mihy-ui-framework/ui-atoms/LinearSpinner';
 import * as mainRouteConstants from "./route-names";
 
 const Loading = () => <LinearProgress/>;

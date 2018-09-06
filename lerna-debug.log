@@ -6,7 +6,7 @@
 5 silly isInitialized true
 6 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/VERSION
 7 silly initialize attempt
-8 info current version 0.0.0
+8 info current version 0.0.3
 9 silly isDetachedHead
 10 silly getCurrentBranch
 11 verbose getCurrentBranch master
@@ -16,181 +16,594 @@
 15 silly getUpdates
 16 info Checking for updated packages...
 17 silly hasTags
-18 verbose hasTags false
-19 info Comparing with initial commit.
-20 verbose updated mihy-ui-framework-biolerplate
-21 verbose updated mihy-ui-framework
-22 verbose updated notes-app-api
-23 verbose updated ui-client-app
-24 info Checking for prereleased packages...
-25 silly collectDependents
-26 silly isPackageDependentOf mihy-ui-framework-biolerplate mihy-ui-framework-biolerplate
-27 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework-biolerplate
-28 silly isPackageDependentOf mihy-ui-framework-biolerplate mihy-ui-framework
-29 verbose dependent mihy-ui-framework-biolerplate depends on mihy-ui-framework
-30 silly isPackageDependentOf mihy-ui-framework-biolerplate notes-app-api
-31 silly isPackageDependentOf mihy-ui-framework notes-app-api
-32 silly isPackageDependentOf mihy-ui-framework-biolerplate ui-client-app
-33 silly isPackageDependentOf mihy-ui-framework ui-client-app
-34 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework-biolerplate
-35 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework
-36 silly isPackageDependentOf mihy-ui-framework notes-app-api
-37 silly isPackageDependentOf mihy-ui-framework ui-client-app
-38 silly isPackageDependentOf notes-app-api mihy-ui-framework-biolerplate
-39 silly isPackageDependentOf notes-app-api mihy-ui-framework
-40 silly isPackageDependentOf notes-app-api notes-app-api
-41 silly isPackageDependentOf notes-app-api ui-client-app
-42 silly isPackageDependentOf ui-client-app mihy-ui-framework-biolerplate
-43 silly isPackageDependentOf ui-client-app mihy-ui-framework
-44 silly isPackageDependentOf ui-client-app notes-app-api
-45 silly isPackageDependentOf ui-client-app ui-client-app
+18 verbose hasTags true
+19 silly getLastTag
+20 verbose getLastTag v0.0.3
+21 info Comparing with v0.0.3.
+22 silly diffSinceIn v0.0.3 packages/mihy-ui-framework-boilerplate
+23 silly diff packages/mihy-ui-framework-boilerplate/package.json
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-config/routes/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-config/routes/mihy/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-redux/store/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-redux/store/reducer.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-routes/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-views/App/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-views/Landing/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-views/Playground/index.js
+23 silly diff packages/mihy-ui-framework-boilerplate/src/ui-views/ScreenInterface/index.js
+24 silly diffSinceIn v0.0.3 packages/mihy-ui-framework-core
+25 silly diff
+26 silly diffSinceIn v0.0.3 packages/mihy-ui-framework
+27 silly diff packages/mihy-ui-framework/.babelrc
+27 silly diff packages/mihy-ui-framework/.storybook/addons.js
+27 silly diff packages/mihy-ui-framework/.storybook/config.js
+27 silly diff packages/mihy-ui-framework/README.md
+27 silly diff packages/mihy-ui-framework/package-lock.json
+27 silly diff packages/mihy-ui-framework/public/favicon.ico
+27 silly diff packages/mihy-ui-framework/public/index.html
+27 silly diff packages/mihy-ui-framework/public/manifest.json
+27 silly diff packages/mihy-ui-framework/public/material-icons.css
+27 silly diff packages/mihy-ui-framework/public/materialicons.woff2
+27 silly diff packages/mihy-ui-framework/public/roboto-fontfamily.css
+27 silly diff packages/mihy-ui-framework/src/awsConfig.js
+27 silly diff packages/mihy-ui-framework/src/index.css
+27 silly diff packages/mihy-ui-framework/src/index.js
+27 silly diff packages/mihy-ui-framework/src/registerServiceWorker.js
+27 silly diff packages/mihy-ui-framework/src/stories/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Appbar/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Button/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Card/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Card/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/CardContent/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/CardMedia/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Drawer/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/HtmlElements/Div/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/HtmlElements/Iframe/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/HtmlElements/Main/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Icon/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/InputAdornment/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Layout/Container/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Layout/Item/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/LinearSpinner/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Lists/List/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Lists/ListItem/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Lists/ListItemIcon/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Lists/ListItemText/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/TextFields/Phonenumber/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/TextFields/Text/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/ToolBar/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/Typegraphy/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/UtilityElement/Break/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/UtilityElement/Label/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-atoms/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/routes/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/routes/mihy/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/routes/mihy/route-names.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/routes/route-names.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/screens/specs/blood/dashboard-utils/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/screens/specs/blood/dashboard.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/screens/specs/core/login.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/screens/specs/core/register.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/screens/specs/tradelicence/apply.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/screens/specs/tradelicence/wizard.js
+27 silly diff packages/mihy-ui-framework/src/ui-config/themes/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-hocs/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-hocs/screen.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppCard/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppCard/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppCards/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppCarosel/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppCarosel/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppOptionCard/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/AppliedRoute/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/CardWithMedia/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/CommonView/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/CommonView/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/ComponentInterface/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/LoadingIndicator/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/Map/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/Map/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/RenderRoutes/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/RenderScreen/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/StepperNonLinearWithoutAction/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-molecules/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/app/actionTypes.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/app/actions.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/app/middleware.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/app/reducer.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/app/utils.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/auth/actionTypes.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/auth/actions.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/auth/middlewares/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/auth/middlewares/logout.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/auth/reducer.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/form/utils.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/screen-configuration/actionTypes.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/screen-configuration/actions.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/screen-configuration/middlewares/handleScreenConfigurationFieldChange.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/screen-configuration/middlewares/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/screen-configuration/reducer.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/screen-configuration/utils.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/store/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-redux/store/reducer.js
+27 silly diff packages/mihy-ui-framework/src/ui-routes/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-routes/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-utils/api.js
+27 silly diff packages/mihy-ui-framework/src/ui-utils/commons.js
+27 silly diff packages/mihy-ui-framework/src/ui-utils/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/App/index.css
+27 silly diff packages/mihy-ui-framework/src/ui-views/App/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/App/index.test.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/Landing/css.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/Landing/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/Playground/css.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/Playground/index.js
+27 silly diff packages/mihy-ui-framework/src/ui-views/ScreenInterface/index.js
+27 silly diff packages/mihy-ui-framework/stories/Buttons/index.js
+28 silly diffSinceIn v0.0.3 packages/notes-app-api
+29 silly diff
+30 silly diffSinceIn v0.0.3 packages/ui-client-app
+31 silly diff
+32 verbose updated mihy-ui-framework-biolerplate
+33 verbose updated mihy-ui-framework
+34 info Checking for prereleased packages...
+35 silly collectDependents
+36 silly isPackageDependentOf mihy-ui-framework-biolerplate mihy-ui-framework-biolerplate
+37 silly isPackageDependentOf mihy-ui-framework-biolerplate mihy-ui-framework
+38 silly isPackageDependentOf mihy-ui-framework-core mihy-ui-framework-biolerplate
+39 silly isPackageDependentOf mihy-ui-framework-core mihy-ui-framework
+40 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework-biolerplate
+41 silly isPackageDependentOf mihy-ui-framework mihy-ui-framework
+42 silly isPackageDependentOf notes-app-api mihy-ui-framework-biolerplate
+43 silly isPackageDependentOf notes-app-api mihy-ui-framework
+44 silly isPackageDependentOf ui-client-app mihy-ui-framework-biolerplate
+45 silly isPackageDependentOf ui-client-app mihy-ui-framework
 46 silly collectUpdates
 47 verbose has filtered update mihy-ui-framework-biolerplate
 48 verbose has filtered update mihy-ui-framework
-49 verbose has filtered update notes-app-api
-50 verbose has filtered update ui-client-app
-51 silly initialize success
-52 silly execute attempt
-53 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/lerna.json
-54 silly runScriptSync preversion undefined
-55 silly runScriptSync preversion mihy-ui-framework-biolerplate
-56 silly runScriptSync version mihy-ui-framework-biolerplate
-57 silly runScriptSync preversion mihy-ui-framework
-58 silly runScriptSync version mihy-ui-framework
-59 silly runScriptSync preversion notes-app-api
-60 silly runScriptSync version notes-app-api
-61 silly runScriptSync preversion ui-client-app
-62 silly runScriptSync version ui-client-app
-63 silly runScriptSync version undefined
-64 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/package.json
-65 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/package.json
-66 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api/package.json
-67 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/package.json
-68 silly commit v0.0.1
-69 verbose commit [ 'commit', '--no-verify', '-m', 'v0.0.1' ]
-70 silly addTag v0.0.1
-71 silly runScriptSync postversion mihy-ui-framework-biolerplate
-72 silly runScriptSync postversion mihy-ui-framework
-73 silly runScriptSync postversion notes-app-api
-74 silly runScriptSync postversion ui-client-app
-75 silly runScriptSync postversion undefined
-76 info publish Publishing packages to npm...
-77 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/scripts/prepublish.js
-78 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/scripts/prepublish.js
-79 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/scripts/prepublish.js
-80 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/scripts/prepublish.js
-81 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api/scripts/prepublish.js
-82 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api/scripts/prepublish.js
-83 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/scripts/prepublish.js
-84 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/ui-client-app/scripts/prepublish.js
-85 verbose publishing notes-app-api
-86 silly publishTaggedInDir latest notes-app-api
-87 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
-88 error publish Retrying failed publish: notes-app-api
-89 verbose publish error undefined
-90 verbose publishing notes-app-api
-91 silly publishTaggedInDir latest notes-app-api
-92 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
-93 error publish Retrying failed publish: notes-app-api
-94 verbose publish error undefined
-95 verbose publishing notes-app-api
-96 silly publishTaggedInDir latest notes-app-api
-97 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
-98 error publish Retrying failed publish: notes-app-api
-99 verbose publish error undefined
-100 verbose publishing notes-app-api
-101 silly publishTaggedInDir latest notes-app-api
-102 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
-103 error publish Retrying failed publish: notes-app-api
-104 verbose publish error undefined
-105 verbose publishing notes-app-api
-106 silly publishTaggedInDir latest notes-app-api
-107 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/notes-app-api' }
-108 error publish Ran out of retries while publishing notes-app-api Error: Command failed: npm publish --tag latest
-108 error publish npm notice
-108 error publish npm notice 📦  notes-app-api@0.0.1
-108 error publish npm notice === Tarball Contents ===
-108 error publish npm notice 941B  package.json
-108 error publish npm notice 129B  .babelrc
-108 error publish npm notice 1.1kB create.js
-108 error publish npm notice 700B  delete.js
-108 error publish npm notice 278B  env.example
-108 error publish npm notice 849B  get.js
-108 error publish npm notice 448B  handler.js
-108 error publish npm notice 1.1kB LICENSE
-108 error publish npm notice 939B  list.js
-108 error publish npm notice 4.0kB README.md
-108 error publish npm notice 2.5kB serverless.yml
-108 error publish npm notice 1.1kB update.js
-108 error publish npm notice 836B  webpack.config.js
-108 error publish npm notice 214B  libs/dynamodb-lib.js
-108 error publish npm notice 371B  libs/response-lib.js
-108 error publish npm notice 192B  mocks/create-event.json
-108 error publish npm notice 196B  mocks/delete-event.json
-108 error publish npm notice 196B  mocks/get-event.json
-108 error publish npm notice 120B  mocks/list-event.json
-108 error publish npm notice 264B  mocks/update-event.json
-108 error publish npm notice 318B  tests/handler.test.js
-108 error publish npm notice === Tarball Details ===
-108 error publish npm notice name:          notes-app-api
-108 error publish npm notice version:       0.0.1
-108 error publish npm notice package size:  5.9 kB
-108 error publish npm notice unpacked size: 16.9 kB
-108 error publish npm notice shasum:        0e4bba4b4da109c3b86cc092a262a05e837a64b5
-108 error publish npm notice integrity:     sha512-ZgsKcdNwFqrMj[...]ww/P4Qphdsy/Q==
-108 error publish npm notice total files:   21
-108 error publish npm notice
-108 error publish npm ERR! publish Failed PUT 401
-108 error publish npm ERR! code E401
-108 error publish npm ERR! You must be logged in to publish packages. : notes-app-api
-108 error publish
-108 error publish npm ERR! A complete log of this run can be found in:
-108 error publish npm ERR!     /Users/GoodWork/.npm/_logs/2018-09-06T05_56_22_246Z-debug.log
-108 error publish
-108 error publish     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
-108 error publish     at <anonymous>
-108 error publish     at process._tickCallback (internal/process/next_tick.js:188:7)
-109 error execute callback with error
-110 error Error: Command failed: npm publish --tag latest
-110 error npm notice
-110 error npm notice 📦  notes-app-api@0.0.1
-110 error npm notice === Tarball Contents ===
-110 error npm notice 941B  package.json
-110 error npm notice 129B  .babelrc
-110 error npm notice 1.1kB create.js
-110 error npm notice 700B  delete.js
-110 error npm notice 278B  env.example
-110 error npm notice 849B  get.js
-110 error npm notice 448B  handler.js
-110 error npm notice 1.1kB LICENSE
-110 error npm notice 939B  list.js
-110 error npm notice 4.0kB README.md
-110 error npm notice 2.5kB serverless.yml
-110 error npm notice 1.1kB update.js
-110 error npm notice 836B  webpack.config.js
-110 error npm notice 214B  libs/dynamodb-lib.js
-110 error npm notice 371B  libs/response-lib.js
-110 error npm notice 192B  mocks/create-event.json
-110 error npm notice 196B  mocks/delete-event.json
-110 error npm notice 196B  mocks/get-event.json
-110 error npm notice 120B  mocks/list-event.json
-110 error npm notice 264B  mocks/update-event.json
-110 error npm notice 318B  tests/handler.test.js
-110 error npm notice === Tarball Details ===
-110 error npm notice name:          notes-app-api
-110 error npm notice version:       0.0.1
-110 error npm notice package size:  5.9 kB
-110 error npm notice unpacked size: 16.9 kB
-110 error npm notice shasum:        0e4bba4b4da109c3b86cc092a262a05e837a64b5
-110 error npm notice integrity:     sha512-ZgsKcdNwFqrMj[...]ww/P4Qphdsy/Q==
-110 error npm notice total files:   21
-110 error npm notice
-110 error npm ERR! publish Failed PUT 401
-110 error npm ERR! code E401
-110 error npm ERR! You must be logged in to publish packages. : notes-app-api
-110 error
-110 error npm ERR! A complete log of this run can be found in:
-110 error npm ERR!     /Users/GoodWork/.npm/_logs/2018-09-06T05_56_22_246Z-debug.log
-110 error
-110 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
-110 error     at <anonymous>
+49 silly initialize success
+50 silly execute attempt
+51 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/lerna.json
+52 silly runScriptSync preversion undefined
+53 silly runScriptSync preversion mihy-ui-framework-biolerplate
+54 silly runScriptSync version mihy-ui-framework-biolerplate
+55 silly runScriptSync preversion mihy-ui-framework
+56 silly runScriptSync version mihy-ui-framework
+57 silly runScriptSync version undefined
+58 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/package.json
+59 silly addFile /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/package.json
+60 silly commit v0.0.4
+61 verbose commit [ 'commit', '--no-verify', '-m', 'v0.0.4' ]
+62 silly addTag v0.0.4
+63 silly runScriptSync postversion mihy-ui-framework-biolerplate
+64 silly runScriptSync postversion mihy-ui-framework
+65 silly runScriptSync postversion undefined
+66 info publish Publishing packages to npm...
+67 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/scripts/prepublish.js
+68 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework-boilerplate/scripts/prepublish.js
+69 silly existsSync /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/scripts/prepublish.js
+70 verbose execScript No prepublish script found at /Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework/scripts/prepublish.js
+71 verbose publishing mihy-ui-framework
+72 silly publishTaggedInDir latest mihy-ui-framework
+73 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework' }
+74 error publish Retrying failed publish: mihy-ui-framework
+75 verbose publish error undefined
+76 verbose publishing mihy-ui-framework
+77 silly publishTaggedInDir latest mihy-ui-framework
+78 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework' }
+79 error publish Retrying failed publish: mihy-ui-framework
+80 verbose publish error undefined
+81 verbose publishing mihy-ui-framework
+82 silly publishTaggedInDir latest mihy-ui-framework
+83 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework' }
+84 error publish Retrying failed publish: mihy-ui-framework
+85 verbose publish error undefined
+86 verbose publishing mihy-ui-framework
+87 silly publishTaggedInDir latest mihy-ui-framework
+88 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework' }
+89 error publish Retrying failed publish: mihy-ui-framework
+90 verbose publish error undefined
+91 verbose publishing mihy-ui-framework
+92 silly publishTaggedInDir latest mihy-ui-framework
+93 silly getExecOpts { cwd: '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-framework' }
+94 error publish Ran out of retries while publishing mihy-ui-framework Error: Command failed: npm publish --tag latest
+94 error publish npm notice
+94 error publish npm notice 📦  mihy-ui-framework@0.0.4
+94 error publish npm notice === Tarball Contents ===
+94 error publish npm notice 219B  package.json
+94 error publish npm notice 0     index.js
+94 error publish npm notice 1.2kB lib/apps/ui-blood/views/Dashboard/index.js
+94 error publish npm notice 1.9kB lib/apps/ui-blood/views/Dashboard/spec.js
+94 error publish npm notice 1.2kB lib/apps/ui-blood/views/DonorProcess/Dashboard/index.js
+94 error publish npm notice 1.2kB lib/apps/ui-blood/views/DonorProcess/Dashboard/spec.js
+94 error publish npm notice 1.6kB lib/apps/ui-blood/views/DonorProcess/index.js
+94 error publish npm notice 4.2kB lib/apps/ui-blood/views/DonorProcess/ProcessOverview/index.js
+94 error publish npm notice 1.4kB lib/apps/ui-blood/views/DonorProcess/spec.js
+94 error publish npm notice 5.2kB lib/apps/ui-blood/views/DonorProcess/WhatHappens/index.js
+94 error publish npm notice 3.6kB lib/apps/ui-blood/views/DonorProcess/WhatToDoBefore/index.js
+94 error publish npm notice 4.3kB lib/apps/ui-blood/views/Registration/index.js
+94 error publish npm notice 1.8kB lib/apps/ui-blood/views/SearchDonor/index.js
+94 error publish npm notice 584B  lib/awsConfig.js
+94 error publish npm notice 296B  lib/index.css
+94 error publish npm notice 2.1kB lib/index.js
+94 error publish npm notice 219B  lib/package.json
+94 error publish npm notice 4.4kB lib/registerServiceWorker.js
+94 error publish npm notice 1.1kB lib/stories/index.js
+94 error publish npm notice 1.3kB lib/ui-atoms/Appbar/index.js
+94 error publish npm notice 971B  lib/ui-atoms/Button/index.js
+94 error publish npm notice 31B   lib/ui-atoms/Card/index.css
+94 error publish npm notice 1.2kB lib/ui-atoms/Card/index.js
+94 error publish npm notice 1.0kB lib/ui-atoms/CardContent/index.js
+94 error publish npm notice 853B  lib/ui-atoms/CardMedia/index.js
+94 error publish npm notice 971B  lib/ui-atoms/Drawer/index.js
+94 error publish npm notice 677B  lib/ui-atoms/HtmlElements/Div/index.js
+94 error publish npm notice 843B  lib/ui-atoms/HtmlElements/Iframe/index.js
+94 error publish npm notice 681B  lib/ui-atoms/HtmlElements/Main/index.js
+94 error publish npm notice 746B  lib/ui-atoms/Icon/index.js
+94 error publish npm notice 6.6kB lib/ui-atoms/index.js
+94 error publish npm notice 1.0kB lib/ui-atoms/InputAdornment/index.js
+94 error publish npm notice 1.3kB lib/ui-atoms/Layout/Container/index.js
+94 error publish npm notice 1.1kB lib/ui-atoms/Layout/Item/index.js
+94 error publish npm notice 687B  lib/ui-atoms/LinearSpinner/index.js
+94 error publish npm notice 953B  lib/ui-atoms/Lists/List/index.js
+94 error publish npm notice 989B  lib/ui-atoms/Lists/ListItem/index.js
+94 error publish npm notice 1.0kB lib/ui-atoms/Lists/ListItemIcon/index.js
+94 error publish npm notice 789B  lib/ui-atoms/Lists/ListItemText/index.js
+94 error publish npm notice 2.6kB lib/ui-atoms/TextFields/Phonenumber/index.js
+94 error publish npm notice 1.4kB lib/ui-atoms/TextFields/Text/index.js
+94 error publish npm notice 980B  lib/ui-atoms/ToolBar/index.js
+94 error publish npm notice 1.4kB lib/ui-atoms/Typegraphy/index.js
+94 error publish npm notice 368B  lib/ui-atoms/UtilityElement/Break/index.js
+94 error publish npm notice 423B  lib/ui-atoms/UtilityElement/Label/index.js
+94 error publish npm notice 331B  lib/ui-config/index.js
+94 error publish npm notice 1.8kB lib/ui-config/routes/index.js
+94 error publish npm notice 1.3kB lib/ui-config/routes/mihy/index.js
+94 error publish npm notice 188B  lib/ui-config/routes/mihy/route-names.js
+94 error publish npm notice 378B  lib/ui-config/routes/route-names.js
+94 error publish npm notice 2.2kB lib/ui-config/screens/specs/blood/dashboard-utils/index.js
+94 error publish npm notice 757B  lib/ui-config/screens/specs/blood/dashboard.js
+94 error publish npm notice 4.6kB lib/ui-config/screens/specs/core/login.js
+94 error publish npm notice 5.0kB lib/ui-config/screens/specs/core/register.js
+94 error publish npm notice 2.9kB lib/ui-config/screens/specs/tradelicence/apply.js
+94 error publish npm notice 2.1kB lib/ui-config/screens/specs/tradelicence/wizard.js
+94 error publish npm notice 148B  lib/ui-config/themes/index.js
+94 error publish npm notice 331B  lib/ui-hocs/index.js
+94 error publish npm notice 7.7kB lib/ui-hocs/screen.js
+94 error publish npm notice 130B  lib/ui-molecules/AppCard/index.css
+94 error publish npm notice 927B  lib/ui-molecules/AppCard/index.js
+94 error publish npm notice 1.0kB lib/ui-molecules/AppCards/index.js
+94 error publish npm notice 194B  lib/ui-molecules/AppCarosel/index.css
+94 error publish npm notice 1.0kB lib/ui-molecules/AppCarosel/index.js
+94 error publish npm notice 1.0kB lib/ui-molecules/AppliedRoute/index.js
+94 error publish npm notice 1.3kB lib/ui-molecules/AppOptionCard/index.js
+94 error publish npm notice 2.2kB lib/ui-molecules/CardWithMedia/index.js
+94 error publish npm notice 56B   lib/ui-molecules/CommonView/index.css
+94 error publish npm notice 2.3kB lib/ui-molecules/CommonView/index.js
+94 error publish npm notice 5.1kB lib/ui-molecules/ComponentInterface/index.js
+94 error publish npm notice 4.0kB lib/ui-molecules/index.js
+94 error publish npm notice 1.6kB lib/ui-molecules/LoadingIndicator/index.js
+94 error publish npm notice 1.4kB lib/ui-molecules/Map/index.css
+94 error publish npm notice 7.8kB lib/ui-molecules/Map/index.js
+94 error publish npm notice 1.6kB lib/ui-molecules/RenderRoutes/index.js
+94 error publish npm notice 2.8kB lib/ui-molecules/RenderScreen/index.js
+94 error publish npm notice 5.5kB lib/ui-molecules/StepperNonLinearWithoutAction/index.js
+94 error publish npm notice 1.0kB lib/ui-redux/app/actions.js
+94 error publish npm notice 244B  lib/ui-redux/app/actionTypes.js
+94 error publish npm notice 728B  lib/ui-redux/app/middleware.js
+94 error publish npm notice 1.6kB lib/ui-redux/app/reducer.js
+94 error publish npm notice 13B   lib/ui-redux/app/utils.js
+94 error publish npm notice 1.3kB lib/ui-redux/auth/actions.js
+94 error publish npm notice 329B  lib/ui-redux/auth/actionTypes.js
+94 error publish npm notice 345B  lib/ui-redux/auth/middlewares/index.js
+94 error publish npm notice 2.4kB lib/ui-redux/auth/middlewares/logout.js
+94 error publish npm notice 1.8kB lib/ui-redux/auth/reducer.js
+94 error publish npm notice 1.9kB lib/ui-redux/form/utils.js
+94 error publish npm notice 5.4kB lib/ui-redux/screen-configuration/actions.js
+94 error publish npm notice 413B  lib/ui-redux/screen-configuration/actionTypes.js
+94 error publish npm notice 1.7kB lib/ui-redux/screen-configuration/middlewares/handleScreenConfigurationFieldChange.js
+94 error publish npm notice 495B  lib/ui-redux/screen-configuration/middlewares/index.js
+94 error publish npm notice 2.2kB lib/ui-redux/screen-configuration/reducer.js
+94 error publish npm notice 5.9kB lib/ui-redux/screen-configuration/utils.js
+94 error publish npm notice 1.6kB lib/ui-redux/store/index.js
+94 error publish npm notice 670B  lib/ui-redux/store/reducer.js
+94 error publish npm notice 56B   lib/ui-routes/index.css
+94 error publish npm notice 616B  lib/ui-routes/index.js
+94 error publish npm notice 6.3kB lib/ui-utils/api.js
+94 error publish npm notice 3.6kB lib/ui-utils/commons.js
+94 error publish npm notice 447B  lib/ui-utils/index.js
+94 error publish npm notice 0     lib/ui-views/App/index.css
+94 error publish npm notice 4.9kB lib/ui-views/App/index.js
+94 error publish npm notice 593B  lib/ui-views/App/index.test.js
+94 error publish npm notice 1.6kB lib/ui-views/Landing/css.js
+94 error publish npm notice 7.8kB lib/ui-views/Landing/index.js
+94 error publish npm notice 1.4kB lib/ui-views/Playground/css.js
+94 error publish npm notice 7.5kB lib/ui-views/Playground/index.js
+94 error publish npm notice 2.3kB lib/ui-views/ScreenInterface/index.js
+94 error publish npm notice 1.3kB ui-atoms/Appbar/index.js
+94 error publish npm notice 971B  ui-atoms/Button/index.js
+94 error publish npm notice 31B   ui-atoms/Card/index.css
+94 error publish npm notice 1.2kB ui-atoms/Card/index.js
+94 error publish npm notice 1.0kB ui-atoms/CardContent/index.js
+94 error publish npm notice 853B  ui-atoms/CardMedia/index.js
+94 error publish npm notice 971B  ui-atoms/Drawer/index.js
+94 error publish npm notice 677B  ui-atoms/HtmlElements/Div/index.js
+94 error publish npm notice 843B  ui-atoms/HtmlElements/Iframe/index.js
+94 error publish npm notice 681B  ui-atoms/HtmlElements/Main/index.js
+94 error publish npm notice 746B  ui-atoms/Icon/index.js
+94 error publish npm notice 6.6kB ui-atoms/index.js
+94 error publish npm notice 1.0kB ui-atoms/InputAdornment/index.js
+94 error publish npm notice 1.3kB ui-atoms/Layout/Container/index.js
+94 error publish npm notice 1.1kB ui-atoms/Layout/Item/index.js
+94 error publish npm notice 687B  ui-atoms/LinearSpinner/index.js
+94 error publish npm notice 953B  ui-atoms/Lists/List/index.js
+94 error publish npm notice 989B  ui-atoms/Lists/ListItem/index.js
+94 error publish npm notice 1.0kB ui-atoms/Lists/ListItemIcon/index.js
+94 error publish npm notice 789B  ui-atoms/Lists/ListItemText/index.js
+94 error publish npm notice 2.6kB ui-atoms/TextFields/Phonenumber/index.js
+94 error publish npm notice 1.4kB ui-atoms/TextFields/Text/index.js
+94 error publish npm notice 980B  ui-atoms/ToolBar/index.js
+94 error publish npm notice 1.4kB ui-atoms/Typegraphy/index.js
+94 error publish npm notice 368B  ui-atoms/UtilityElement/Break/index.js
+94 error publish npm notice 423B  ui-atoms/UtilityElement/Label/index.js
+94 error publish npm notice 331B  ui-hocs/index.js
+94 error publish npm notice 7.7kB ui-hocs/screen.js
+94 error publish npm notice 130B  ui-molecules/AppCard/index.css
+94 error publish npm notice 927B  ui-molecules/AppCard/index.js
+94 error publish npm notice 1.0kB ui-molecules/AppCards/index.js
+94 error publish npm notice 194B  ui-molecules/AppCarosel/index.css
+94 error publish npm notice 1.0kB ui-molecules/AppCarosel/index.js
+94 error publish npm notice 1.0kB ui-molecules/AppliedRoute/index.js
+94 error publish npm notice 1.3kB ui-molecules/AppOptionCard/index.js
+94 error publish npm notice 2.2kB ui-molecules/CardWithMedia/index.js
+94 error publish npm notice 56B   ui-molecules/CommonView/index.css
+94 error publish npm notice 2.3kB ui-molecules/CommonView/index.js
+94 error publish npm notice 5.1kB ui-molecules/ComponentInterface/index.js
+94 error publish npm notice 4.0kB ui-molecules/index.js
+94 error publish npm notice 1.6kB ui-molecules/LoadingIndicator/index.js
+94 error publish npm notice 1.4kB ui-molecules/Map/index.css
+94 error publish npm notice 7.8kB ui-molecules/Map/index.js
+94 error publish npm notice 1.6kB ui-molecules/RenderRoutes/index.js
+94 error publish npm notice 2.8kB ui-molecules/RenderScreen/index.js
+94 error publish npm notice 5.5kB ui-molecules/StepperNonLinearWithoutAction/index.js
+94 error publish npm notice 1.0kB ui-redux/app/actions.js
+94 error publish npm notice 244B  ui-redux/app/actionTypes.js
+94 error publish npm notice 728B  ui-redux/app/middleware.js
+94 error publish npm notice 1.6kB ui-redux/app/reducer.js
+94 error publish npm notice 13B   ui-redux/app/utils.js
+94 error publish npm notice 1.3kB ui-redux/auth/actions.js
+94 error publish npm notice 329B  ui-redux/auth/actionTypes.js
+94 error publish npm notice 345B  ui-redux/auth/middlewares/index.js
+94 error publish npm notice 2.4kB ui-redux/auth/middlewares/logout.js
+94 error publish npm notice 1.8kB ui-redux/auth/reducer.js
+94 error publish npm notice 1.9kB ui-redux/form/utils.js
+94 error publish npm notice 5.4kB ui-redux/screen-configuration/actions.js
+94 error publish npm notice 413B  ui-redux/screen-configuration/actionTypes.js
+94 error publish npm notice 1.7kB ui-redux/screen-configuration/middlewares/handleScreenConfigurationFieldChange.js
+94 error publish npm notice 495B  ui-redux/screen-configuration/middlewares/index.js
+94 error publish npm notice 2.2kB ui-redux/screen-configuration/reducer.js
+94 error publish npm notice 5.9kB ui-redux/screen-configuration/utils.js
+94 error publish npm notice 1.6kB ui-redux/store/index.js
+94 error publish npm notice 670B  ui-redux/store/reducer.js
+94 error publish npm notice 6.3kB ui-utils/api.js
+94 error publish npm notice 3.6kB ui-utils/commons.js
+94 error publish npm notice 447B  ui-utils/index.js
+94 error publish npm notice === Tarball Details ===
+94 error publish npm notice name:          mihy-ui-framework
+94 error publish npm notice version:       0.0.4
+94 error publish npm notice package size:  52.8 kB
+94 error publish npm notice unpacked size: 323.1 kB
+94 error publish npm notice shasum:        0868ab559d1e1b7ad2e0b670be5c30975858e2d2
+94 error publish npm notice integrity:     sha512-0ndgowTIMmNEX[...]e1Q51bVbtjZnQ==
+94 error publish npm notice total files:   177
+94 error publish npm notice
+94 error publish npm ERR! publish Failed PUT 401
+94 error publish npm ERR! code E401
+94 error publish npm ERR! You must be logged in to publish packages. : mihy-ui-framework
+94 error publish
+94 error publish npm ERR! A complete log of this run can be found in:
+94 error publish npm ERR!     /Users/GoodWork/.npm/_logs/2018-09-06T06_55_34_502Z-debug.log
+94 error publish
+94 error publish     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
+94 error publish     at <anonymous>
+94 error publish     at process._tickCallback (internal/process/next_tick.js:188:7)
+95 error execute callback with error
+96 error Error: Command failed: npm publish --tag latest
+96 error npm notice
+96 error npm notice 📦  mihy-ui-framework@0.0.4
+96 error npm notice === Tarball Contents ===
+96 error npm notice 219B  package.json
+96 error npm notice 0     index.js
+96 error npm notice 1.2kB lib/apps/ui-blood/views/Dashboard/index.js
+96 error npm notice 1.9kB lib/apps/ui-blood/views/Dashboard/spec.js
+96 error npm notice 1.2kB lib/apps/ui-blood/views/DonorProcess/Dashboard/index.js
+96 error npm notice 1.2kB lib/apps/ui-blood/views/DonorProcess/Dashboard/spec.js
+96 error npm notice 1.6kB lib/apps/ui-blood/views/DonorProcess/index.js
+96 error npm notice 4.2kB lib/apps/ui-blood/views/DonorProcess/ProcessOverview/index.js
+96 error npm notice 1.4kB lib/apps/ui-blood/views/DonorProcess/spec.js
+96 error npm notice 5.2kB lib/apps/ui-blood/views/DonorProcess/WhatHappens/index.js
+96 error npm notice 3.6kB lib/apps/ui-blood/views/DonorProcess/WhatToDoBefore/index.js
+96 error npm notice 4.3kB lib/apps/ui-blood/views/Registration/index.js
+96 error npm notice 1.8kB lib/apps/ui-blood/views/SearchDonor/index.js
+96 error npm notice 584B  lib/awsConfig.js
+96 error npm notice 296B  lib/index.css
+96 error npm notice 2.1kB lib/index.js
+96 error npm notice 219B  lib/package.json
+96 error npm notice 4.4kB lib/registerServiceWorker.js
+96 error npm notice 1.1kB lib/stories/index.js
+96 error npm notice 1.3kB lib/ui-atoms/Appbar/index.js
+96 error npm notice 971B  lib/ui-atoms/Button/index.js
+96 error npm notice 31B   lib/ui-atoms/Card/index.css
+96 error npm notice 1.2kB lib/ui-atoms/Card/index.js
+96 error npm notice 1.0kB lib/ui-atoms/CardContent/index.js
+96 error npm notice 853B  lib/ui-atoms/CardMedia/index.js
+96 error npm notice 971B  lib/ui-atoms/Drawer/index.js
+96 error npm notice 677B  lib/ui-atoms/HtmlElements/Div/index.js
+96 error npm notice 843B  lib/ui-atoms/HtmlElements/Iframe/index.js
+96 error npm notice 681B  lib/ui-atoms/HtmlElements/Main/index.js
+96 error npm notice 746B  lib/ui-atoms/Icon/index.js
+96 error npm notice 6.6kB lib/ui-atoms/index.js
+96 error npm notice 1.0kB lib/ui-atoms/InputAdornment/index.js
+96 error npm notice 1.3kB lib/ui-atoms/Layout/Container/index.js
+96 error npm notice 1.1kB lib/ui-atoms/Layout/Item/index.js
+96 error npm notice 687B  lib/ui-atoms/LinearSpinner/index.js
+96 error npm notice 953B  lib/ui-atoms/Lists/List/index.js
+96 error npm notice 989B  lib/ui-atoms/Lists/ListItem/index.js
+96 error npm notice 1.0kB lib/ui-atoms/Lists/ListItemIcon/index.js
+96 error npm notice 789B  lib/ui-atoms/Lists/ListItemText/index.js
+96 error npm notice 2.6kB lib/ui-atoms/TextFields/Phonenumber/index.js
+96 error npm notice 1.4kB lib/ui-atoms/TextFields/Text/index.js
+96 error npm notice 980B  lib/ui-atoms/ToolBar/index.js
+96 error npm notice 1.4kB lib/ui-atoms/Typegraphy/index.js
+96 error npm notice 368B  lib/ui-atoms/UtilityElement/Break/index.js
+96 error npm notice 423B  lib/ui-atoms/UtilityElement/Label/index.js
+96 error npm notice 331B  lib/ui-config/index.js
+96 error npm notice 1.8kB lib/ui-config/routes/index.js
+96 error npm notice 1.3kB lib/ui-config/routes/mihy/index.js
+96 error npm notice 188B  lib/ui-config/routes/mihy/route-names.js
+96 error npm notice 378B  lib/ui-config/routes/route-names.js
+96 error npm notice 2.2kB lib/ui-config/screens/specs/blood/dashboard-utils/index.js
+96 error npm notice 757B  lib/ui-config/screens/specs/blood/dashboard.js
+96 error npm notice 4.6kB lib/ui-config/screens/specs/core/login.js
+96 error npm notice 5.0kB lib/ui-config/screens/specs/core/register.js
+96 error npm notice 2.9kB lib/ui-config/screens/specs/tradelicence/apply.js
+96 error npm notice 2.1kB lib/ui-config/screens/specs/tradelicence/wizard.js
+96 error npm notice 148B  lib/ui-config/themes/index.js
+96 error npm notice 331B  lib/ui-hocs/index.js
+96 error npm notice 7.7kB lib/ui-hocs/screen.js
+96 error npm notice 130B  lib/ui-molecules/AppCard/index.css
+96 error npm notice 927B  lib/ui-molecules/AppCard/index.js
+96 error npm notice 1.0kB lib/ui-molecules/AppCards/index.js
+96 error npm notice 194B  lib/ui-molecules/AppCarosel/index.css
+96 error npm notice 1.0kB lib/ui-molecules/AppCarosel/index.js
+96 error npm notice 1.0kB lib/ui-molecules/AppliedRoute/index.js
+96 error npm notice 1.3kB lib/ui-molecules/AppOptionCard/index.js
+96 error npm notice 2.2kB lib/ui-molecules/CardWithMedia/index.js
+96 error npm notice 56B   lib/ui-molecules/CommonView/index.css
+96 error npm notice 2.3kB lib/ui-molecules/CommonView/index.js
+96 error npm notice 5.1kB lib/ui-molecules/ComponentInterface/index.js
+96 error npm notice 4.0kB lib/ui-molecules/index.js
+96 error npm notice 1.6kB lib/ui-molecules/LoadingIndicator/index.js
+96 error npm notice 1.4kB lib/ui-molecules/Map/index.css
+96 error npm notice 7.8kB lib/ui-molecules/Map/index.js
+96 error npm notice 1.6kB lib/ui-molecules/RenderRoutes/index.js
+96 error npm notice 2.8kB lib/ui-molecules/RenderScreen/index.js
+96 error npm notice 5.5kB lib/ui-molecules/StepperNonLinearWithoutAction/index.js
+96 error npm notice 1.0kB lib/ui-redux/app/actions.js
+96 error npm notice 244B  lib/ui-redux/app/actionTypes.js
+96 error npm notice 728B  lib/ui-redux/app/middleware.js
+96 error npm notice 1.6kB lib/ui-redux/app/reducer.js
+96 error npm notice 13B   lib/ui-redux/app/utils.js
+96 error npm notice 1.3kB lib/ui-redux/auth/actions.js
+96 error npm notice 329B  lib/ui-redux/auth/actionTypes.js
+96 error npm notice 345B  lib/ui-redux/auth/middlewares/index.js
+96 error npm notice 2.4kB lib/ui-redux/auth/middlewares/logout.js
+96 error npm notice 1.8kB lib/ui-redux/auth/reducer.js
+96 error npm notice 1.9kB lib/ui-redux/form/utils.js
+96 error npm notice 5.4kB lib/ui-redux/screen-configuration/actions.js
+96 error npm notice 413B  lib/ui-redux/screen-configuration/actionTypes.js
+96 error npm notice 1.7kB lib/ui-redux/screen-configuration/middlewares/handleScreenConfigurationFieldChange.js
+96 error npm notice 495B  lib/ui-redux/screen-configuration/middlewares/index.js
+96 error npm notice 2.2kB lib/ui-redux/screen-configuration/reducer.js
+96 error npm notice 5.9kB lib/ui-redux/screen-configuration/utils.js
+96 error npm notice 1.6kB lib/ui-redux/store/index.js
+96 error npm notice 670B  lib/ui-redux/store/reducer.js
+96 error npm notice 56B   lib/ui-routes/index.css
+96 error npm notice 616B  lib/ui-routes/index.js
+96 error npm notice 6.3kB lib/ui-utils/api.js
+96 error npm notice 3.6kB lib/ui-utils/commons.js
+96 error npm notice 447B  lib/ui-utils/index.js
+96 error npm notice 0     lib/ui-views/App/index.css
+96 error npm notice 4.9kB lib/ui-views/App/index.js
+96 error npm notice 593B  lib/ui-views/App/index.test.js
+96 error npm notice 1.6kB lib/ui-views/Landing/css.js
+96 error npm notice 7.8kB lib/ui-views/Landing/index.js
+96 error npm notice 1.4kB lib/ui-views/Playground/css.js
+96 error npm notice 7.5kB lib/ui-views/Playground/index.js
+96 error npm notice 2.3kB lib/ui-views/ScreenInterface/index.js
+96 error npm notice 1.3kB ui-atoms/Appbar/index.js
+96 error npm notice 971B  ui-atoms/Button/index.js
+96 error npm notice 31B   ui-atoms/Card/index.css
+96 error npm notice 1.2kB ui-atoms/Card/index.js
+96 error npm notice 1.0kB ui-atoms/CardContent/index.js
+96 error npm notice 853B  ui-atoms/CardMedia/index.js
+96 error npm notice 971B  ui-atoms/Drawer/index.js
+96 error npm notice 677B  ui-atoms/HtmlElements/Div/index.js
+96 error npm notice 843B  ui-atoms/HtmlElements/Iframe/index.js
+96 error npm notice 681B  ui-atoms/HtmlElements/Main/index.js
+96 error npm notice 746B  ui-atoms/Icon/index.js
+96 error npm notice 6.6kB ui-atoms/index.js
+96 error npm notice 1.0kB ui-atoms/InputAdornment/index.js
+96 error npm notice 1.3kB ui-atoms/Layout/Container/index.js
+96 error npm notice 1.1kB ui-atoms/Layout/Item/index.js
+96 error npm notice 687B  ui-atoms/LinearSpinner/index.js
+96 error npm notice 953B  ui-atoms/Lists/List/index.js
+96 error npm notice 989B  ui-atoms/Lists/ListItem/index.js
+96 error npm notice 1.0kB ui-atoms/Lists/ListItemIcon/index.js
+96 error npm notice 789B  ui-atoms/Lists/ListItemText/index.js
+96 error npm notice 2.6kB ui-atoms/TextFields/Phonenumber/index.js
+96 error npm notice 1.4kB ui-atoms/TextFields/Text/index.js
+96 error npm notice 980B  ui-atoms/ToolBar/index.js
+96 error npm notice 1.4kB ui-atoms/Typegraphy/index.js
+96 error npm notice 368B  ui-atoms/UtilityElement/Break/index.js
+96 error npm notice 423B  ui-atoms/UtilityElement/Label/index.js
+96 error npm notice 331B  ui-hocs/index.js
+96 error npm notice 7.7kB ui-hocs/screen.js
+96 error npm notice 130B  ui-molecules/AppCard/index.css
+96 error npm notice 927B  ui-molecules/AppCard/index.js
+96 error npm notice 1.0kB ui-molecules/AppCards/index.js
+96 error npm notice 194B  ui-molecules/AppCarosel/index.css
+96 error npm notice 1.0kB ui-molecules/AppCarosel/index.js
+96 error npm notice 1.0kB ui-molecules/AppliedRoute/index.js
+96 error npm notice 1.3kB ui-molecules/AppOptionCard/index.js
+96 error npm notice 2.2kB ui-molecules/CardWithMedia/index.js
+96 error npm notice 56B   ui-molecules/CommonView/index.css
+96 error npm notice 2.3kB ui-molecules/CommonView/index.js
+96 error npm notice 5.1kB ui-molecules/ComponentInterface/index.js
+96 error npm notice 4.0kB ui-molecules/index.js
+96 error npm notice 1.6kB ui-molecules/LoadingIndicator/index.js
+96 error npm notice 1.4kB ui-molecules/Map/index.css
+96 error npm notice 7.8kB ui-molecules/Map/index.js
+96 error npm notice 1.6kB ui-molecules/RenderRoutes/index.js
+96 error npm notice 2.8kB ui-molecules/RenderScreen/index.js
+96 error npm notice 5.5kB ui-molecules/StepperNonLinearWithoutAction/index.js
+96 error npm notice 1.0kB ui-redux/app/actions.js
+96 error npm notice 244B  ui-redux/app/actionTypes.js
+96 error npm notice 728B  ui-redux/app/middleware.js
+96 error npm notice 1.6kB ui-redux/app/reducer.js
+96 error npm notice 13B   ui-redux/app/utils.js
+96 error npm notice 1.3kB ui-redux/auth/actions.js
+96 error npm notice 329B  ui-redux/auth/actionTypes.js
+96 error npm notice 345B  ui-redux/auth/middlewares/index.js
+96 error npm notice 2.4kB ui-redux/auth/middlewares/logout.js
+96 error npm notice 1.8kB ui-redux/auth/reducer.js
+96 error npm notice 1.9kB ui-redux/form/utils.js
+96 error npm notice 5.4kB ui-redux/screen-configuration/actions.js
+96 error npm notice 413B  ui-redux/screen-configuration/actionTypes.js
+96 error npm notice 1.7kB ui-redux/screen-configuration/middlewares/handleScreenConfigurationFieldChange.js
+96 error npm notice 495B  ui-redux/screen-configuration/middlewares/index.js
+96 error npm notice 2.2kB ui-redux/screen-configuration/reducer.js
+96 error npm notice 5.9kB ui-redux/screen-configuration/utils.js
+96 error npm notice 1.6kB ui-redux/store/index.js
+96 error npm notice 670B  ui-redux/store/reducer.js
+96 error npm notice 6.3kB ui-utils/api.js
+96 error npm notice 3.6kB ui-utils/commons.js
+96 error npm notice 447B  ui-utils/index.js
+96 error npm notice === Tarball Details ===
+96 error npm notice name:          mihy-ui-framework
+96 error npm notice version:       0.0.4
+96 error npm notice package size:  52.8 kB
+96 error npm notice unpacked size: 323.1 kB
+96 error npm notice shasum:        0868ab559d1e1b7ad2e0b670be5c30975858e2d2
+96 error npm notice integrity:     sha512-0ndgowTIMmNEX[...]e1Q51bVbtjZnQ==
+96 error npm notice total files:   177
+96 error npm notice
+96 error npm ERR! publish Failed PUT 401
+96 error npm ERR! code E401
+96 error npm ERR! You must be logged in to publish packages. : mihy-ui-framework
+96 error
+96 error npm ERR! A complete log of this run can be found in:
+96 error npm ERR!     /Users/GoodWork/.npm/_logs/2018-09-06T06_55_34_502Z-debug.log
+96 error
+96 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
+96 error     at <anonymous>
