@@ -1,97 +1,88 @@
+import {
+  getStepperObject,
+  getCommonApplyHeader,
+  getCommonApplyFooter,
+  getCommonCard,
+  getCommonApplySubHeader,
+  getCommonApplyParagraph,
+  getBreak,
+  getLabel
+} from "./apply/utils";
+
+const stepsData = [
+  {
+    props: {
+      label: "Trade Details",
+      current: true
+    }
+  },
+  {
+    props: {
+      label: "Owner Details"
+    }
+  },
+  {
+    props: {
+      label: "Documents"
+    }
+  },
+  {
+    props: {
+      label: "Summary"
+    }
+  }
+];
+const stepperData = getStepperObject(
+  { props: { currentIndex: 1, className: "bx--progress-overide" } },
+  stepsData
+);
+const commonApplyHeader = getCommonApplyHeader(
+  "Application for New Trade License (2018-2019)"
+);
+const commonApplyFooter = getCommonApplyFooter({
+  nextButton: {
+    uiFramework: "material-ui",
+    componentPath: "Button",
+    props: {
+      variant:"contained",
+      color: "primary"
+    },
+    children:{
+      nextButtonLabel:getLabel("Next Step")
+    }
+  }
+});
+const commonCardOne = getCommonCard({
+  header: getCommonApplySubHeader("Please Provide Trade Details"),
+  break: getBreak(),
+  paragraph: getCommonApplyParagraph(
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+  )
+});
+const commonCardTwo = getCommonCard({
+  header: getCommonApplySubHeader("Please Provide Trade Location Details"),
+  break: getBreak(),
+  paragraph: getCommonApplyParagraph(
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+  )
+});
+
 const screenConfig = {
   uiFramework: "carbon",
-  name: "mihyBloodDashboard",
+  name: "mihytradeliceceapply",
   components: {
-    mihytradeliceceapply: {
+    div: {
       uiFramework: "custom-atoms",
       componentPath: "Div",
       props: {
-        style: {
-          padding: "16px",
-          width: "100%"
-        }
+        className: "common-div-css"
       },
       children: {
-        mihytradelicencestepper: {
-          uiFramework: "carbon",
-          componentPath: "ProgressIndicator",
-          props: {
-            currentIndex: 1
-          },
-          children: {
-            stepOne: {
-              uiFramework: "carbon",
-              componentPath: "ProgressStep",
-              props: {
-                label: "First step",
-                description: "Step 1: Getting Started with Node.js",
-                current: true,
-                complete: true
-              }
-            },
-            stepTwo: {
-              uiFramework: "carbon",
-              componentPath: "ProgressStep",
-              props: {
-                label: "First step 2",
-                description: "Step 2: Getting Started with Node.js"
-              }
-            },
-            stepThree: {
-              uiFramework: "carbon",
-              componentPath: "ProgressStep",
-              props: {
-                label: "First step",
-                description: "Step 2: Getting Started with Node.js"
-              }
-            },
-            stepFour: {
-              uiFramework: "carbon",
-              componentPath: "ProgressStep",
-              props: {
-                label: "First step",
-                description: "Step 2: Getting Started with Node.js"
-              }
-            }
-          }
-        },
-        card: {
-          uiFramework: "custom-atoms",
-          componentPath: "Card",
-          children: {
-            content: {
-              uiFramework: "custom-atoms",
-              componentPath: "CardContent",
-              style: {
-                height: "100px"
-              },
-              children: {
-                tradeType: {
-                  componentPath: "TextInput",
-                  props: {
-                    labelText: "Trade Type"
-                  },
-                  componentJsonpath:
-                    "components.mihytradeliceceapply.children.card.children.content.children.tradeType",
-                  gridDefination: {
-                    xs: 6
-                  }
-                },
-                tradeName: {
-                  componentPath: "TextInput",
-                  props: {
-                    labelText: "Trade Type"
-                  },
-                  componentJsonpath:
-                    "components.mihytradeliceceapply.children.card.children.content.children.tradeName",
-                  gridDefination: {
-                    xs: 6
-                  }
-                }
-              }
-            }
-          }
-        }
+        header: commonApplyHeader,
+        stepper: stepperData,
+        footer: commonApplyFooter,
+        tradeDetails: commonCardOne,
+        tradeLocationDetails: commonCardTwo
       }
     }
   }
