@@ -7,7 +7,9 @@ import {
   getCommonApplyParagraph,
   getBreak,
   getLabel
-} from "./apply/utils";
+} from "./applyResource/utils";
+
+import {tradeDetails} from "./applyResource/tradeDetails";
 
 const stepsData = [
   {
@@ -40,13 +42,19 @@ const commonApplyHeader = getCommonApplyHeader(
   "Application for New Trade License (2018-2019)"
 );
 const commonApplyFooter = getCommonApplyFooter({
-  nextButton: {
-    uiFramework: "material-ui",
+  previousButton: {
+    uiFramework: "carbon",
     componentPath: "Button",
-    props: {
-      variant:"contained",
-      color: "primary"
+    props:{
+      kind:"secondary"
     },
+    children:{
+      nextButtonLabel:getLabel("Previous Step")
+    }
+  },
+  nextButton: {
+    uiFramework: "carbon",
+    componentPath: "Button",
     children:{
       nextButtonLabel:getLabel("Next Step")
     }
@@ -57,7 +65,10 @@ const commonCardOne = getCommonCard({
   break: getBreak(),
   paragraph: getCommonApplyParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-  )
+  ),
+  break: getBreak(),
+  break: getBreak(),
+  // tradeDetailsForm:tradeDetails
 });
 const commonCardTwo = getCommonCard({
   header: getCommonApplySubHeader("Please Provide Trade Location Details"),
@@ -68,7 +79,7 @@ const commonCardTwo = getCommonCard({
 });
 
 const screenConfig = {
-  uiFramework: "carbon",
+  uiFramework: "material-ui",
   name: "mihytradeliceceapply",
   components: {
     div: {
