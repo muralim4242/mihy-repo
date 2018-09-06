@@ -74,8 +74,6 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
     render() {
       const { screenConfig } = this.props;
       const { [screenKey]: currentScreenConfig ,preparedFinalObject} = screenConfig;
-      // console.log(this);
-      // console.log(currentScreenConfig);
       if (currentScreenConfig) {
         const { handleScreenConfigurationFieldChange,onClick } = this;
         const { uiFramework, components, name } = currentScreenConfig;
@@ -136,7 +134,6 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
         ),
       initScreen: (screenKey, screenConfig) =>
         dispatch(initScreen(screenKey, screenConfig))
-      // deleteForm: () => dispatch(deleteForm(formKey)),
     };
   };
 
