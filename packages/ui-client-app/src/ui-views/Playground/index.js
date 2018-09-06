@@ -9,71 +9,13 @@ import { compose } from "recompose";
 import ReactJson from "react-json-view";
 import { screenHoc } from "ui-hocs";
 import CommonView from "ui-molecules/CommonView";
+// import defaultScreenConfig from "ui-config/screens/specs/blood/dashboard";
+ import defaultScreenConfig from "ui-config/screens/specs/tradelicence/apply";
+ // import defaultScreenConfig from "ui-config/screens/specs/tradelicence/wizard";
 
-const initScreenConfig = {
-  uiFramework: "material-ui",
-  name: "mihyLoginScreen",
-  components: {
-    mihyLoginUsername: {
-      componentPath: "TextField",
-      props: {
-        label: "Email",
-        margin: "normal",
-        fullWidth: true,
-        autoFocus: true,
-        required: true
-      },
-      required: true,
-      jsonPath: "body.mihy.username",
-      pattern: "^([a-zA-Z0-9@.])+$"
-    },
-    mihyLoginPassword: {
-      componentPath: "TextField",
-      props: {
-        label: "Password",
-        type: "password",
-        margin: "normal",
-        fullWidth: true,
-        required: true
-      },
-      jsonPath: "body.mihy.password",
-      required: true,
-      pattern: "^([a-zA-Z0-9!])+$"
-    },
-    mihyBreakOne: {
-      uiFramework: "custom-atoms",
-      componentPath: "Break"
-    },
-    mihyBreakTwo: {
-      uiFramework: "custom-atoms",
-      componentPath: "Break"
-    },
-    mihyLoginButton: {
-      componentPath: "Button",
-      props: {
-        variant: "contained",
-        color: "primary",
-        fullWidth: true
-      },
-      children: {
-        mihyLoginButtonText: {
-          uiFramework: "custom-atoms",
-          componentPath: "Label",
-          props: {
-            label: "Login"
-          }
-        }
-      },
-      onClickDefination: {
-        action: "submit",
-        method: "get",
-        endPoint: "afbc.com",
-        purpose: "authLogin",
-        redirectionUrl: "/"
-      }
-    }
-  }
-};
+
+
+const initScreenConfig = defaultScreenConfig;
 
 class Playground extends React.Component {
   state = {
@@ -91,34 +33,36 @@ class Playground extends React.Component {
     this.initScreen(screenConfig);
   }
 
-  initScreen=(screenConfig)=> {
+  initScreen = screenConfig => {
     const hasOwnConfig = true;
     this.setState({
       view: screenHoc({ hasOwnConfig, screenConfig })(CommonView)
     });
-  }
+  };
 
-  updateScreen=(jsonStatus, action)=> {
-    console.log(action);
-    console.log(jsonStatus);
+  updateScreen = (jsonStatus, action) => {
     this.initScreen(jsonStatus.updated_src);
-  }
+  };
 
   render() {
     const { updateScreen } = this;
-    const { classes, theme} = this.props;
+    const { classes, theme } = this.props;
     const { view: View, screenConfig } = this.state;
 
     const drawer = (
       <Div>
-        <br />
-        Screen configuration
-        <br />
-        <br />
+        <AppBar style={{backgroundColor:"#880E4F"}}>
+          <Toolbar>
+            <Typegraphy variant="title" color="inherit" noWrap>
+              Screen configuration
+            </Typegraphy>
+          </Toolbar>
+        </AppBar>
+        <br/>
         <ReactJson
           src={screenConfig}
-          collapsed={true}
           displayDataTypes={false}
+          collapsed={2}
           onAdd={add => {
             updateScreen(add, "add");
           }}
@@ -179,8 +123,9 @@ class Playground extends React.Component {
           </Drawer>
         </Hidden>
         <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {View && <View />}</main>
+          <div className={classes.toolbar} />
+          {View && <View />}
+        </main>
       </Div>
     );
   }
@@ -192,3 +137,14 @@ Playground.propTypes = {
 };
 
 export default compose(withStyles(styles, { withTheme: true }))(Playground);
+//
+// <br />
+// <br />
+// <Button variant="contained" color="primary" fullWidth="true">
+//   Export
+// </Button>
+// <br />
+// <br />
+// <Button variant="contained" color="secondary" fullWidth="true">
+//   Import
+// </Button>

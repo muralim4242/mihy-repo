@@ -39,6 +39,21 @@ const CommonView = Loadable({
   loading: () => <Loading />
 });
 
+const AppCard = Loadable({
+  loader: () => import("./AppCard")  ,
+  loading: () => <Loading />
+});
+
+const AppCards = Loadable({
+  loader: () => import("./AppCards")  ,
+  loading: () => <Loading />
+});
+
+const AppCarosel = Loadable({
+  loader: () => import("./AppCarosel")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -48,5 +63,8 @@ export {
   RenderScreen,
   AppliedRoute,
   LoadingIndicator,
-  CommonView
+  CommonView,
+  AppCard,
+  AppCards,
+  AppCarosel
 };
