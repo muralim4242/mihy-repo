@@ -61,6 +61,17 @@ export const getCommonCard = children => {
   };
 };
 
+export const getInnerCard = children => {
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    props: {
+      className: "common-card-css"
+    },
+    children
+  };
+};
+
 export const getBreak = () => {
   return {
     uiFramework: "custom-atoms",
@@ -84,12 +95,41 @@ export const getTextField = (
   required,
   pattern,
   gridDefination = {
-    xs: 6
+    xs: 12
   }
 ) => {
   return {
+    uiFramework: "material-ui",
     componentPath: "TextField",
     props: {
+      label,
+      InputLabelProps: {
+        shrink: true
+      },
+      placeholder,
+      fullWidth: true,
+      required
+    },
+    gridDefination,
+    required,
+    pattern
+  };
+};
+
+export const getSelectTextField = (
+  label,
+  placeholder,
+  required,
+  pattern,
+  gridDefination = {
+    xs: 12
+  }
+) => {
+  return {
+    uiFramework: "material-ui",
+    componentPath: "TextField",
+    props: {
+      select: true,
       label,
       InputLabelProps: {
         shrink: true
