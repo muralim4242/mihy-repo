@@ -12,8 +12,7 @@ body {
   margin: 8px;
 }
 
-.bx--progress-overide {
-  width: 100%;
+.mihy-stepper-overide {
   margin-top: 32px;
 }
 
@@ -30,13 +29,13 @@ body {
 .apply-wizard-footer {
   background-color: #ffffff;
   box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.24);
-  padding: 9px 45px 9px;
+  padding: 8px;
   position: fixed !important;
   bottom: 0;
   left: 0;
   width: 100vw;
-  z-index: 1000;
-  height: 65px;
+  /* z-index: 1000; */
+  /* height: 55px; */
   text-align: right
 }
 
@@ -44,7 +43,7 @@ body {
   margin-top: 32px;
   margin-left: 24px;
   margin-right: 45px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .common-card-css {
@@ -52,9 +51,9 @@ body {
   border: 0.5px solid rgba(255, 255, 255, 0.800000011920929);
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.23999999463558197), 0 0 2px 0 rgba(0, 0, 0, 0.11999999731779099);
-  width: 100%;
+  /* width: 100%; */
   margin-top: 24px;
-  margin-right: 24px;
+  /* margin-right: 24px; */
   padding: 16px;
 }
 

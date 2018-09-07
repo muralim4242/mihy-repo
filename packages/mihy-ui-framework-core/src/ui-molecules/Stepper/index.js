@@ -1,13 +1,40 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-const Stepper=()=>{
-  return(
-    <ProgressIndicator currentIndex={3}>
-      <ProgressStep label="First step" description="Step 1: Getting Started with Node.js" />
-      <ProgressStep label="Second step" description="Step 2: Getting Started with Node.js" />
-      <ProgressStep label="Third step" description="Step 3: Getting Started with Node.js" />
-      <ProgressStep label="Fourth step" description="Step 4: Getting Started with Node.js" />
-      <ProgressStep label="Fifth step" description="Step 5: Getting Started with Node.js" />
-    </ProgressIndicator>
-  )
+const styles = theme => ({
+  root: {
+    width: '100%',
+  }
+});
+
+
+class HorizontalLabelPositionBelowStepper extends React.Component {
+  render() {
+    const { classes,activeStep,steps } = this.props;
+    return (
+      <div className={classes.root}>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map(label => {
+            return (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </div>
+    );
+  }
 }
+
+HorizontalLabelPositionBelowStepper.propTypes = {
+  classes: PropTypes.object,
+};
+
+export default withStyles(styles)(HorizontalLabelPositionBelowStepper);

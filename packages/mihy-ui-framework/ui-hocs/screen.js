@@ -32,9 +32,15 @@ var _reactRedux = require("react-redux");
 
 var _actions = require("../ui-redux/screen-configuration/actions");
 
+var _actions2 = require("../ui-redux/app/actions");
+
 var _isEmpty = require("lodash/isEmpty");
 
 var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
+var _get = require("lodash/get");
+
+var _get2 = _interopRequireDefault(_get);
 
 var _uiUtils = require("../ui-utils");
 
@@ -72,6 +78,8 @@ var screenHoc = function screenHoc(_ref) {
         };
 
         _this.onClick = function (onClickDefination) {
+          var componentJsonpath = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+
           switch (onClickDefination.action) {
             case "submit":
               var _submitForm = _this.props.submitForm;
@@ -83,6 +91,24 @@ var screenHoc = function screenHoc(_ref) {
                   queryObjectJsonPath = onClickDefination.queryObjectJsonPath;
 
               _submitForm(screenKey, method, endPoint, purpose, redirectionUrl, bodyObjectsJsonPaths || {}, queryObjectJsonPath || []);
+              break;
+            case "condition":
+              var _this$props = _this.props,
+                  state = _this$props.state,
+                  dispatchAction = _this$props.dispatchAction;
+
+              var configObject = (0, _get2.default)(_this.screenConfig, componentJsonpath);
+              var callBack = configObject.onClickDefination.callBack;
+
+              if (typeof callBack === "function") {
+                callBack(state, dispatchAction);
+              }
+              break;
+            case "page_change":
+              var _setRoute = _this.props.setRoute;
+              var _path = onClickDefination.path;
+
+              _setRoute(_path);
               break;
             default:
 
@@ -127,8 +153,6 @@ var screenHoc = function screenHoc(_ref) {
           var screenConfig = this.props.screenConfig;
           var currentScreenConfig = screenConfig[screenKey],
               preparedFinalObject = screenConfig.preparedFinalObject;
-          // console.log(this);
-          // console.log(currentScreenConfig);
 
           if (currentScreenConfig) {
             var _handleScreenConfigurationFieldChange = this.handleScreenConfigurationFieldChange,
@@ -153,12 +177,12 @@ var screenHoc = function screenHoc(_ref) {
       return ScreenWrapper;
     }(_react2.default.Component);
 
-    var mapStateToProps = function mapStateToProps(_ref2) {
-      var screenConfiguration = _ref2.screenConfiguration;
+    var mapStateToProps = function mapStateToProps(state) {
+      var screenConfiguration = state.screenConfiguration;
       var screenConfig = screenConfiguration.screenConfig,
           preparedFinalObject = screenConfiguration.preparedFinalObject;
 
-      return { screenConfig: screenConfig, preparedFinalObject: preparedFinalObject };
+      return { screenConfig: screenConfig, preparedFinalObject: preparedFinalObject, state: state };
     };
 
     var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -173,8 +197,11 @@ var screenHoc = function screenHoc(_ref) {
         },
         initScreen: function initScreen(screenKey, screenConfig) {
           return dispatch((0, _actions.initScreen)(screenKey, screenConfig));
+        },
+        dispatchAction: dispatch,
+        setRoute: function setRoute(path) {
+          return dispatch((0, _actions2.setRoute)(path));
         }
-        // deleteForm: () => dispatch(deleteForm(formKey)),
       };
     };
 

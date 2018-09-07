@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AppCarosel = exports.AppCards = exports.AppCard = exports.CommonView = exports.LoadingIndicator = exports.AppliedRoute = exports.RenderScreen = exports.CardWithMedia = exports.StepperNonLinearWithoutAction = exports.ComponentInterface = exports.Map = exports.RenderRoutes = undefined;
+exports.Stepper = exports.AppCarosel = exports.AppCards = exports.AppCard = exports.CommonView = exports.LoadingIndicator = exports.AppliedRoute = exports.RenderScreen = exports.CardWithMedia = exports.StepperNonLinearWithoutAction = exports.ComponentInterface = exports.Map = exports.RenderRoutes = undefined;
 
 var _react = require("react");
 
@@ -122,6 +122,15 @@ var AppCarosel = (0, _reactLoadable2.default)({
   }
 });
 
+var Stepper = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import("./Stepper");
+  },
+  loading: function loading() {
+    return _react2.default.createElement(Loading, null);
+  }
+});
+
 exports.RenderRoutes = RenderRoutes;
 exports.Map = Map;
 exports.ComponentInterface = ComponentInterface;
@@ -134,3 +143,4 @@ exports.CommonView = CommonView;
 exports.AppCard = AppCard;
 exports.AppCards = AppCards;
 exports.AppCarosel = AppCarosel;
+exports.Stepper = Stepper;

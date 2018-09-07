@@ -6,57 +6,79 @@ import {
   getCommonApplySubHeader,
   getCommonApplyParagraph,
   getBreak,
-  getLabel
+  getLabel,
+  getTextField
 } from "./applyResource/utils";
 
-import {tradeDetails} from "./applyResource/tradeDetails";
+import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import get from "lodash/get";
+// import { tradeDetails } from "./applyResource/tradeDetails";
 
-const stepsData = [
-  {
-    props: {
-      label: "Trade Details",
-      current: true
-    }
-  },
-  {
-    props: {
-      label: "Owner Details"
-    }
-  },
-  {
-    props: {
-      label: "Documents"
-    }
-  },
-  {
-    props: {
-      label: "Summary"
-    }
-  }
-];
-const stepperData = getStepperObject(
-  { props: { currentIndex: 1, className: "bx--progress-overide" } },
-  stepsData
-);
-const commonApplyHeader = getCommonApplyHeader(
-  "Application for New Trade License (2018-2019)"
-);
+const stepsData = ["Trade Details", "Owner Details", "Documents", "Summary"];
 const commonApplyFooter = getCommonApplyFooter({
   previousButton: {
-    uiFramework: "carbon",
     componentPath: "Button",
-    props:{
-      kind:"secondary"
+    props: {
+      variant: "contained",
+      style: {
+        width: "200px",
+        height: "48px",
+        marginRight: "16px"
+      }
     },
-    children:{
-      nextButtonLabel:getLabel("Previous Step")
+    children: {
+      nextButtonLabel: getLabel("Previous Step")
+    },
+    onClickDefination: {
+      action: "condition",
+      callBack: (state, dispatch) => {
+        let activeStep = get(
+          state.screenConfiguration.screenConfig["apply"],
+          "components.div.children.stepper.props.activeStep",
+          0
+        );
+        dispatch(
+          handleField(
+            "apply",
+            "components.div.children.stepper.props",
+            "activeStep",
+            activeStep - 1
+          )
+        );
+      }
     }
   },
   nextButton: {
-    uiFramework: "carbon",
     componentPath: "Button",
-    children:{
-      nextButtonLabel:getLabel("Next Step")
+    props: {
+      variant: "contained",
+      color: "secondary",
+      style: {
+        width: "200px",
+        height: "48px",
+        marginRight: "45px"
+      }
+    },
+    children: {
+      nextButtonLabel: getLabel("Next Step")
+    },
+    onClickDefination: {
+      action: "condition",
+      callBack: (state, dispatch) => {
+        let activeStep = get(
+          state.screenConfiguration.screenConfig["apply"],
+          "components.div.children.stepper.props.activeStep",
+          0
+        );
+        dispatch(
+          handleField(
+            "apply",
+            "components.div.children.stepper.props",
+            "activeStep",
+            activeStep + 1
+          )
+        );
+      }
     }
   }
 });
@@ -66,9 +88,8 @@ const commonCardOne = getCommonCard({
   paragraph: getCommonApplyParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   ),
-  break: getBreak(),
-  break: getBreak(),
-  // tradeDetailsForm:tradeDetails
+  tradeDetailsForm: getTextField("label", "placeholder", true, ""),
+  tradeDetailsForm2: getTextField("label", "placeholder", true, "")
 });
 const commonCardTwo = getCommonCard({
   header: getCommonApplySubHeader("Please Provide Trade Location Details"),
@@ -89,11 +110,19 @@ const screenConfig = {
         className: "common-div-css"
       },
       children: {
-        header: commonApplyHeader,
-        stepper: stepperData,
-        footer: commonApplyFooter,
-        tradeDetails: commonCardOne,
-        tradeLocationDetails: commonCardTwo
+        header: getCommonApplyHeader(
+          "Application for New Trade License (2018-2019)"
+        ),
+        stepper: getStepperObject({ props: { activeStep: 1 } }, stepsData),
+        ownerDetails: {
+          uiFramework: "custom-atoms",
+          componentPath: "Div",
+          children: {
+            tradeDetails: commonCardOne,
+            tradeLocationDetails: commonCardTwo
+          }
+        },
+        footer: commonApplyFooter
       }
     }
   }

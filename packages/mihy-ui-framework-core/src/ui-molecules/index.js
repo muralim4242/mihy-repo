@@ -54,6 +54,11 @@ const AppCarosel = Loadable({
   loading: () => <Loading />
 });
 
+const Stepper = Loadable({
+  loader: () => import("./Stepper")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -66,5 +71,6 @@ export {
   CommonView,
   AppCard,
   AppCards,
-  AppCarosel
+  AppCarosel,
+  Stepper
 };

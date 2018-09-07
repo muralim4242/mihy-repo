@@ -20,6 +20,7 @@ var addComponentJsonpath = exports.addComponentJsonpath = function addComponentJ
 
   for (var componentKey in components) {
     if (components.hasOwnProperty(componentKey)) {
+      // typeof components[componentKey].children!=="string" && 
       if (components[componentKey].children) {
         components[componentKey].componentJsonpath = jsonPath + "." + componentKey;
         var childJsonpath = components[componentKey].componentJsonpath + ".children";

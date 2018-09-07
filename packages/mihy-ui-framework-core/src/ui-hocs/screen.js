@@ -5,7 +5,11 @@ import {
   handleScreenConfigurationFieldChange,
   submitForm
 } from "../ui-redux/screen-configuration/actions";
+import {
+  setRoute
+} from "../ui-redux/app/actions";
 import isEmpty from "lodash/isEmpty";
+import get from "lodash/get";
 import { addComponentJsonpath } from "../ui-utils";
 // import $ from "jquery";
 
@@ -59,12 +63,25 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
       );
     };
 
-    onClick=(onClickDefination)=>{
+    onClick=(onClickDefination,componentJsonpath="")=>{
       switch (onClickDefination.action) {
         case "submit":
           const {submitForm}=this.props;
           const {method,endPoint,purpose,redirectionUrl,bodyObjectsJsonPaths,queryObjectJsonPath}=onClickDefination;
           submitForm(screenKey,method,endPoint,purpose,redirectionUrl,bodyObjectsJsonPaths||{},queryObjectJsonPath||[]);
+          break;
+        case "condition":
+          const {state,dispatchAction}=this.props;
+          const configObject=get(this.screenConfig,componentJsonpath);
+          const {callBack}=configObject.onClickDefination;
+          if (typeof callBack==="function") {
+            callBack(state,dispatchAction);
+          }
+          break;
+        case "page_change":
+          const {setRoute}=this.props;
+          const {path} =onClickDefination;
+          setRoute(path)
           break;
         default:
 
@@ -93,9 +110,10 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
     }
   }
 
-  const mapStateToProps = ({ screenConfiguration }) => {
+  const mapStateToProps = (state) => {
+    const {screenConfiguration}=state;
     const { screenConfig,preparedFinalObject } = screenConfiguration;
-    return { screenConfig,preparedFinalObject };
+    return { screenConfig,preparedFinalObject,state};
   };
 
   const mapDispatchToProps = dispatch => {
@@ -133,7 +151,9 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
           )
         ),
       initScreen: (screenKey, screenConfig) =>
-        dispatch(initScreen(screenKey, screenConfig))
+        dispatch(initScreen(screenKey, screenConfig)),
+      dispatchAction:dispatch,
+      setRoute:(path)=>dispatch(setRoute(path))
     };
   };
 
