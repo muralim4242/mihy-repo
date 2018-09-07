@@ -36,7 +36,8 @@ var RenderScreen = function RenderScreen(_ref) {
         jsonPath = _components$component.jsonPath,
         props = _components$component.props,
         onClickDefination = _components$component.onClickDefination,
-        gridDefination = _components$component.gridDefination;
+        gridDefination = _components$component.gridDefination,
+        visible = _components$component.visible;
 
     var extraProps = jsonPath ? {
       onChange: function onChange(e) {
@@ -62,7 +63,8 @@ var RenderScreen = function RenderScreen(_ref) {
           uiFramework: uiFramework || rootFramework,
           componentPath: componentPath,
           props: (0, _extends3.default)({}, props, extraProps),
-          gridDefination: gridDefination
+          gridDefination: gridDefination,
+          visible: visible
         },
         _react2.default.createElement(RenderScreen, { components: components[componentKey].children, onFieldChange: onFieldChange, onComponentClick: onComponentClick, uiFramework: rootFramework })
       );
@@ -74,7 +76,8 @@ var RenderScreen = function RenderScreen(_ref) {
         uiFramework: uiFramework || rootFramework,
         componentPath: componentPath,
         props: (0, _extends3.default)({}, props, extraProps),
-        gridDefination: gridDefination
+        gridDefination: gridDefination,
+        visible: visible
       });
     }
   }) : null;

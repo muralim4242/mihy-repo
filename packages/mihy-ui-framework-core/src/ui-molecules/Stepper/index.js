@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   }
 });
 
@@ -19,7 +19,9 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
     const { classes,activeStep,steps } = this.props;
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+        <Stepper activeStep={activeStep} alternativeLabel style={{
+          background:"inherit"
+        }}>
           {steps.map(label => {
             return (
               <Step key={label}>

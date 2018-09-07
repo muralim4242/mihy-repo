@@ -1,100 +1,51 @@
 import {
   getStepperObject,
-  getCommonApplyHeader,
-  getCommonApplyFooter,
+  getCommonHeader,
   getCommonCard,
-  getCommonApplySubHeader,
-  getCommonApplyParagraph,
+  getCommonSubHeader,
+  getCommonParagraph,
   getBreak,
-  getLabel,
-  getTextField
-} from "./applyResource/utils";
+} from "../utils";
 
-import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
-import get from "lodash/get";
-// import { tradeDetails } from "./applyResource/tradeDetails";
+import {footer} from "./applyResource/footer";
 
 const stepsData = ["Trade Details", "Owner Details", "Documents", "Summary"];
-const commonApplyFooter = getCommonApplyFooter({
-  previousButton: {
-    componentPath: "Button",
-    props: {
-      variant: "contained",
-      style: {
-        width: "200px",
-        height: "48px",
-        marginRight: "16px"
-      }
-    },
-    children: {
-      nextButtonLabel: getLabel("Previous Step")
-    },
-    onClickDefination: {
-      action: "condition",
-      callBack: (state, dispatch) => {
-        let activeStep = get(
-          state.screenConfiguration.screenConfig["apply"],
-          "components.div.children.stepper.props.activeStep",
-          0
-        );
-        dispatch(
-          handleField(
-            "apply",
-            "components.div.children.stepper.props",
-            "activeStep",
-            activeStep - 1
-          )
-        );
-      }
-    }
-  },
-  nextButton: {
-    componentPath: "Button",
-    props: {
-      variant: "contained",
-      color: "secondary",
-      style: {
-        width: "200px",
-        height: "48px",
-        marginRight: "45px"
-      }
-    },
-    children: {
-      nextButtonLabel: getLabel("Next Step")
-    },
-    onClickDefination: {
-      action: "condition",
-      callBack: (state, dispatch) => {
-        let activeStep = get(
-          state.screenConfiguration.screenConfig["apply"],
-          "components.div.children.stepper.props.activeStep",
-          0
-        );
-        dispatch(
-          handleField(
-            "apply",
-            "components.div.children.stepper.props",
-            "activeStep",
-            activeStep + 1
-          )
-        );
-      }
-    }
-  }
-});
-const commonCardOne = getCommonCard({
-  header: getCommonApplySubHeader("Please Provide Trade Details"),
+const header=getCommonHeader(
+  "Application for New Trade License (2018-2019)"
+);
+const stepper=getStepperObject({ props: { activeStep: 0 } }, stepsData)
+const tradeDetails = getCommonCard({
+  header: getCommonSubHeader("Please Provide Trade Details"),
   break: getBreak(),
-  paragraph: getCommonApplyParagraph(
+  paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-  ),
-  tradeDetailsForm: getTextField("label", "placeholder", true, ""),
-  tradeDetailsForm2: getTextField("label", "placeholder", true, "")
+  )
 });
-const commonCardTwo = getCommonCard({
-  header: getCommonApplySubHeader("Please Provide Trade Location Details"),
+const tradeLocationDetails = getCommonCard({
+  header: getCommonSubHeader("Please Provide Trade Location Details"),
   break: getBreak(),
-  paragraph: getCommonApplyParagraph(
+  paragraph: getCommonParagraph(
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+  )
+});
+const tradeOwnerDetails = getCommonCard({
+  header: getCommonSubHeader("Please Provide Trade Owner Details"),
+  break: getBreak(),
+  paragraph: getCommonParagraph(
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+  )
+});
+const tradeDocumentDetails = getCommonCard({
+  header: getCommonSubHeader("Please Upload the Required Documents for Verification"),
+  break: getBreak(),
+  paragraph: getCommonParagraph(
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+  )
+});
+const tradeReviewDetails = getCommonCard({
+  header: getCommonSubHeader("Please review your Application and Submit"),
+  break: getBreak(),
+  paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   )
 });
@@ -110,19 +61,41 @@ const screenConfig = {
         className: "common-div-css"
       },
       children: {
-        header: getCommonApplyHeader(
-          "Application for New Trade License (2018-2019)"
-        ),
-        stepper: getStepperObject({ props: { activeStep: 1 } }, stepsData),
-        ownerDetails: {
+        header,
+        stepper,
+        formwizardFirstStep: {
           uiFramework: "custom-atoms",
           componentPath: "Div",
           children: {
-            tradeDetails: commonCardOne,
-            tradeLocationDetails: commonCardTwo
-          }
+            tradeDetails,
+            tradeLocationDetails
+          },
         },
-        footer: commonApplyFooter
+        formwizardSecondStep: {
+          uiFramework: "custom-atoms",
+          componentPath: "Div",
+          children: {
+            tradeOwnerDetails
+          },
+          visible:false
+        },
+        formwizardThreeStep: {
+          uiFramework: "custom-atoms",
+          componentPath: "Div",
+          children: {
+            tradeDocumentDetails
+          },
+          visible:false
+        },
+        formwizardFourStep: {
+          uiFramework: "custom-atoms",
+          componentPath: "Div",
+          children: {
+            tradeReviewDetails
+          },
+          visible:false
+        },
+        footer
       }
     }
   }

@@ -8,7 +8,7 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-    width: '100%',
+    width: '100%'
   },
   appBar: {
     position: 'absolute',
@@ -16,7 +16,8 @@ const styles = theme => ({
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
     },
-    background:"#2e73ab"
+    background:"#ffffff",
+    color:"rgba(0, 0, 0, 0.8700000047683716)"
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -35,6 +36,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit,
     overflow:"scroll"
+    // ,
     // [theme.breakpoints.up('md')]: {
     //   paddingLeft: drawerWidth+10,
     // },

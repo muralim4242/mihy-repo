@@ -75,7 +75,7 @@ class Landing extends React.Component {
               <Icon iconName="menu" />
             </IconButton>
             <Typegraphy variant="title" color="inherit" noWrap>
-              Mihy
+              Rainmaker
             </Typegraphy>
           </Toolbar>
         </AppBar>

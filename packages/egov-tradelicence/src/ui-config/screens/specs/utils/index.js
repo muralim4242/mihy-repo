@@ -4,23 +4,7 @@ export const getStepperObject = (
   uiFramework = "material-ui"
 ) => {
   let stepperData = {};
-  if (uiFramework === "carbon") {
-    stepperData = {
-      uiFramework: "carbon",
-      componentPath: "ProgressIndicator",
-      props: stpperProps.props,
-      children: stepsData.reduce((map, obj, i) => {
-        map[`step${i}`] = {
-          uiFramework: "carbon",
-          componentPath: "ProgressStep",
-          props: {
-            ...obj.props
-          }
-        };
-        return map;
-      }, {})
-    };
-  } else if (uiFramework === "material-ui") {
+  if (uiFramework === "material-ui") {
     stepperData = {
       componentPath: "Stepper",
       uiFramework: "custom-molecules",
@@ -28,27 +12,12 @@ export const getStepperObject = (
         steps: stepsData,
         ...stpperProps.props
       }
-      //props: stpperProps.props,
-      // children: stepsData.reduce((map, obj, i) => {
-      //   map[`step${i}`] = {
-      //     componentPath: "Step",
-      //     children: {
-      //       [`stepLabel${i}`]: {
-      //         componentPath: "StepLabel",
-      //         children: {
-      //           [`stepLabelDiv${i}`]: getLabel(obj.label)
-      //         }
-      //       }
-      //     }
-      //   };
-      //   return map;
-      // }, {})
     };
   }
   return stepperData;
 };
 
-export const getCommonApplyHeader = header => {
+export const getCommonHeader = header => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Label",
@@ -59,7 +28,7 @@ export const getCommonApplyHeader = header => {
   };
 };
 
-export const getCommonApplySubHeader = header => {
+export const getCommonSubHeader = header => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Label",
@@ -70,7 +39,7 @@ export const getCommonApplySubHeader = header => {
   };
 };
 
-export const getCommonApplyParagraph = Paragraph => {
+export const getCommonParagraph = Paragraph => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Label",
@@ -78,17 +47,6 @@ export const getCommonApplyParagraph = Paragraph => {
       label: Paragraph,
       className: "mihy-paragraph"
     }
-  };
-};
-
-export const getCommonApplyFooter = children => {
-  return {
-    uiFramework: "custom-atoms",
-    componentPath: "Div",
-    props: {
-      className: "apply-wizard-footer"
-    },
-    children
   };
 };
 

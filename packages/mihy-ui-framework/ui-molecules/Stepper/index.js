@@ -81,7 +81,9 @@ var HorizontalLabelPositionBelowStepper = function (_React$Component) {
         { className: classes.root },
         _react2.default.createElement(
           _Stepper2.default,
-          { activeStep: activeStep, alternativeLabel: true },
+          { activeStep: activeStep, alternativeLabel: true, style: {
+              background: "inherit"
+            } },
           steps.map(function (label) {
             return _react2.default.createElement(
               _Step2.default,
