@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StepperNonLinearWithoutAction, CardWithMedia } from "ui-molecules";
-import { Div } from "ui-atoms";
+import { StepperNonLinearWithoutAction, CardWithMedia } from "mihy-ui-framework/ui-molecules";
+import { Div } from "mihy-ui-framework/ui-atoms";
 
 function getSteps() {
   return [

@@ -1,5 +1,5 @@
 import React from "react";
-import {Card,CardContent,Div,Break,Item,Container,Text} from "ui-atoms";
+import {Card,CardContent,Div,Break,Item,Container,Text} from "mihy-ui-framework/ui-atoms";
 
 class Registration extends React.Component {
   render()

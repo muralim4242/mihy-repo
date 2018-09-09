@@ -16,9 +16,9 @@ const styles = theme => ({
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
     },
-    borderBottomLeftRadius: "50%",
-    borderBottomRightRadius: "50%",
-    height: "200px",
+    // borderBottomLeftRadius: "50%",
+    // borderBottomRightRadius: "50%",
+    // height: "200px",
     background:"#2e73ab"
   },
   navIconHide: {
@@ -36,10 +36,12 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit,
-    [theme.breakpoints.up('md')]: {
-      paddingLeft: drawerWidth+10,
-    },
+    padding: "16px",
+    // [theme.breakpoints.up('md')]: {
+    //   paddingLeft: drawerWidth+10,
+    // },
+    // zIndex:10000,
+    overflow:"scroll"
   },
 });
 

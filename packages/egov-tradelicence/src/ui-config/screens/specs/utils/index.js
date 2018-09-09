@@ -95,7 +95,8 @@ export const getTextField = (
   required,
   pattern,
   gridDefination = {
-    xs: 12
+    xs: 12,
+    sm:6
   }
 ) => {
   return {
@@ -122,7 +123,8 @@ export const getSelectTextField = (
   required,
   pattern,
   gridDefination = {
-    xs: 12
+    xs: 12,
+    sm:6
   }
 ) => {
   return {
@@ -143,3 +145,13 @@ export const getSelectTextField = (
     pattern
   };
 };
+
+export const getCommonContainer=(children)=>{
+  return {
+      componentPath:"Grid",
+      props:{
+        container:true
+      },
+      children
+  }
+}

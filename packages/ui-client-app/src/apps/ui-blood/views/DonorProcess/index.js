@@ -1,5 +1,5 @@
 import React from "react";
-import {Button,Container,Item,Div,Icon} from "ui-atoms";
+import {Button,Container,Item,Div,Icon} from "mihy-ui-framework/ui-atoms";
 import {Route} from "react-router-dom";
 import Dashboard from "./Dashboard";
 import ProcessOverview from "./ProcessOverview";

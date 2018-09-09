@@ -3,12 +3,12 @@ import {withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import {compose} from "recompose";
 import MainRoutes from "ui-routes";
-import LoadingIndicator from "ui-molecules/LoadingIndicator";
+import LoadingIndicator from "mihy-ui-framework/ui-molecules/LoadingIndicator";
 // import { Auth } from "aws-amplify";
-import Div from "ui-atoms/HtmlElements/Div";
-// import { logout } from "ui-redux/auth/actions";
-import { setRoute } from "ui-redux/app/actions";
-// import {authenticated} from "ui-redux/auth/actions";
+import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
+// import { logout } from "mihy-ui-framework/ui-redux/auth/actions";
+import { setRoute } from "mihy-ui-framework/ui-redux/app/actions";
+// import {authenticated} from "mihy-ui-framework/ui-redux/auth/actions";
 import "./index.css";
 
 class App extends React.Component {

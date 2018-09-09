@@ -28,10 +28,6 @@ var _RenderScreen = require("../RenderScreen");
 
 var _RenderScreen2 = _interopRequireDefault(_RenderScreen);
 
-var _Container = require("../../ui-atoms/Layout/Container");
-
-var _Container2 = _interopRequireDefault(_Container);
-
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54,20 +50,18 @@ var CommonView = function (_React$Component) {
           onComponentClick = _props.onComponentClick,
           preparedFinalObject = _props.preparedFinalObject;
 
-      return _react2.default.createElement(
-        _Container2.default,
-        { className: "main-route" },
-        _react2.default.createElement(_RenderScreen2.default, {
-          components: components,
-          uiFramework: uiFramework,
-          onFieldChange: onFieldChange,
-          onComponentClick: onComponentClick,
-          preparedFinalObject: preparedFinalObject
-        })
-      );
+      return _react2.default.createElement(_RenderScreen2.default, {
+        components: components,
+        uiFramework: uiFramework,
+        onFieldChange: onFieldChange,
+        onComponentClick: onComponentClick,
+        preparedFinalObject: preparedFinalObject
+      });
     }
   }]);
   return CommonView;
 }(_react2.default.Component);
+// import Container from "../../ui-atoms/Layout/Container";
+
 
 exports.default = CommonView;

@@ -20,7 +20,6 @@ var AppCarosel = function AppCarosel(_ref) {
   return _react2.default.createElement(
     _uiAtoms.Container,
     null,
-    _react2.default.createElement(_uiAtoms.Item, { xs: 1, sm: 3 }),
     _react2.default.createElement(
       _uiAtoms.Item,
       { xs: 10, sm: 6 },
@@ -29,7 +28,7 @@ var AppCarosel = function AppCarosel(_ref) {
         {
           fullWidth: true,
           variant: "extendedFab",
-          className: "mihy-app-carosel-card"
+          className: "mihy-app-sub-option-card"
         },
         _react2.default.createElement(
           _uiAtoms.Container,
@@ -37,7 +36,7 @@ var AppCarosel = function AppCarosel(_ref) {
           _react2.default.createElement(
             _uiAtoms.Item,
             { xs: 6 },
-            _react2.default.createElement(_uiAtoms.Div, { className: "mihy-app-carosel", style: item.itemImage ? {
+            _react2.default.createElement(_uiAtoms.Div, { className: "mihy-app-sub-option", style: item.itemImage ? {
                 backgroundImage: "url(" + item.itemImage + ")",
                 backgroundSize: "cover"
               } : {} })
@@ -62,8 +61,7 @@ var AppCarosel = function AppCarosel(_ref) {
           )
         )
       )
-    ),
-    _react2.default.createElement(_uiAtoms.Item, { xs: 1, sm: 3 })
+    )
   );
 };
 

@@ -27,12 +27,38 @@ var AppCard = function AppCard(_ref) {
       fullWidth: true,
       variant: "extendedFab",
       "aria-label": item.displayLabel
-    }, item.buttonProps),
-    _react2.default.createElement(_uiAtoms.Div, { className: "mihy-left-icon-style" }),
+    }, item.buttonProps, {
+      className: "mihy-app-card"
+    }),
     _react2.default.createElement(
-      _uiAtoms.Div,
+      _uiAtoms.Container,
       null,
-      item.displayLabel
+      _react2.default.createElement(
+        _uiAtoms.Item,
+        { xs: 3, sm: 4 },
+        _react2.default.createElement(_uiAtoms.Div, { className: "mihy-left-icon-style", style: {
+            backgroundImage: "url(" + item.iconImgae + ")",
+            backgroundSize: "cover"
+          } })
+      ),
+      _react2.default.createElement(
+        _uiAtoms.Item,
+        { xs: 9, sm: 8 },
+        _react2.default.createElement(
+          _uiAtoms.Div,
+          { className: "mihy-app-right-section" },
+          _react2.default.createElement(
+            _uiAtoms.Typegraphy,
+            { variant: "body2", className: "mihy-black-color", align: "left" },
+            item.displayLabel
+          ),
+          _react2.default.createElement(
+            _uiAtoms.Typegraphy,
+            { variant: "caption", className: "mihy-black-color", align: "left" },
+            item.displaySubLabel
+          )
+        )
+      )
     )
   );
 };

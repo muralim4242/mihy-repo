@@ -12,11 +12,11 @@ import {
   Typegraphy,
   Icon,
   Main
-} from "ui-atoms";
+} from "mihy-ui-framework/ui-atoms";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Divider from "@material-ui/core/Divider";
-import { RenderRoutes } from "ui-molecules";
+import { RenderRoutes } from "mihy-ui-framework/ui-molecules";
 import appRoutes from "ui-config/routes/mihy";
 import styles from "./css";
 // import BloodDashboard from "apps/ui-blood/views/Dashboard";
@@ -25,7 +25,7 @@ import styles from "./css";
 // import DonorProcess from "apps/ui-blood/views/DonorProcess";
 import {compose} from "recompose";
 import {connect} from "react-redux";
-import {logout} from "ui-redux/auth/actions";
+import {logout} from "mihy-ui-framework/ui-redux/auth/actions";
 
 
 class Landing extends React.Component {

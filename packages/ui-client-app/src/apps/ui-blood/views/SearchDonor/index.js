@@ -1,5 +1,5 @@
 import React from "react";
-import {Map} from "ui-molecules";
+import {Map} from "mihy-ui-framework/ui-molecules";
 
 class SearchDonor extends React.Component {
   render()
