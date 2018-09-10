@@ -22,6 +22,12 @@ const themeObject = {
       item: { // Name of the rule
         padding: '12px 24px 12px 0', // Some CSS
       }
+    },
+    MuiCard:
+    {
+      root:{
+        marginTop:"24px"
+      }
     }
   }
 };

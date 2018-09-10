@@ -2,12 +2,12 @@ import {
   getStepperObject,
   getCommonHeader,
   getCommonCard,
+  getCommonGrayCard,
   getCommonSubHeader,
   getCommonParagraph,
   getBreak,
   getTextField,
   getSelectTextField,
-  getInnerCard,
   getCommonContainer
 } from "../utils";
 
@@ -17,7 +17,7 @@ const stepsData = ["Trade Details", "Owner Details", "Documents", "Summary"];
 const header = getCommonHeader("Application for New Trade License (2018-2019)");
 const stepper = getStepperObject({ props: { activeStep: 0 } }, stepsData);
 
-const tradeUnitCard = getInnerCard({
+const tradeUnitCard = getCommonGrayCard({
   header: getCommonSubHeader("Trade Unit  "),
   break: getBreak(),
   tradeUnitCardContainer: getCommonContainer({
@@ -39,7 +39,7 @@ const tradeUnitCard = getInnerCard({
   })
 });
 
-const accessoriesCard = getInnerCard({
+const accessoriesCard = getCommonGrayCard({
   header: getCommonSubHeader("Accessories"),
   break: getBreak(),
   accessoriesCardContainer: getCommonContainer({

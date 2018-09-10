@@ -50,27 +50,26 @@ export const getCommonParagraph = Paragraph => {
   };
 };
 
-export const getCommonCard = children => {
+export const getCommonCard = (children,cardProps={}) => {
   return {
-    uiFramework: "custom-atoms",
-    componentPath: "Div",
-    props: {
-      className: "common-card-css"
+    componentPath: "Card",
+    props:{
+      ...cardProps
     },
-    children
+    children:{
+      cardContent:{
+        componentPath:"CardContent",
+        children
+      }
+    }
   };
 };
 
-export const getInnerCard = children => {
-  return {
-    uiFramework: "custom-atoms",
-    componentPath: "Div",
-    props: {
-      className: "common-card-css"
-    },
-    children
-  };
+export const getCommonGrayCard = (children) => {
+  return getCommonCard(children,{style:{backgroundColor:"#F2F2F2"}})
 };
+
+
 
 export const getBreak = () => {
   return {
