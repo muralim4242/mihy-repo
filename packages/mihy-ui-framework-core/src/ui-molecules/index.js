@@ -54,6 +54,11 @@ const AppCarosel = Loadable({
   loading: () => <Loading />
 });
 
+const AppSubOption = Loadable({
+  loader: () => import("./AppSubOption")  ,
+  loading: () => <Loading />
+});
+
 const Stepper = Loadable({
   loader: () => import("./Stepper")  ,
   loading: () => <Loading />
@@ -72,5 +77,6 @@ export {
   AppCard,
   AppCards,
   AppCarosel,
+  AppSubOption,
   Stepper
 };

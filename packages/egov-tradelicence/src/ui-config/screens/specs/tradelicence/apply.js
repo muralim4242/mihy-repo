@@ -5,7 +5,6 @@ import {
   getCommonSubHeader,
   getCommonParagraph,
   getBreak,
-  getLabel,
   getTextField,
   getSelectTextField,
   getInnerCard,

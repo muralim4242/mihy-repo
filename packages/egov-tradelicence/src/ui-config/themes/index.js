@@ -15,6 +15,14 @@ const themeObject = {
     background:{
       default: "#F4F7FB"
     }
+  },
+  overrides:{
+    MuiGrid:
+    {
+      item: { // Name of the rule
+        padding: '12px 24px 12px 0', // Some CSS
+      }
+    }
   }
 };
 
