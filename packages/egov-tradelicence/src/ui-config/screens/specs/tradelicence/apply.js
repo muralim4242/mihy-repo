@@ -242,7 +242,7 @@ const screenConfig = {
           }
           // visible: false
         },
-        formwizardThreeStep: {
+        formwizardThirdStep: {
           uiFramework: "custom-atoms",
           componentPath: "Div",
           children: {
@@ -250,7 +250,7 @@ const screenConfig = {
           },
           visible: false
         },
-        formwizardFourStep: {
+        formwizardFourthStep: {
           uiFramework: "custom-atoms",
           componentPath: "Div",
           children: {

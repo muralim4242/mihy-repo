@@ -130,16 +130,10 @@ var ComponentInterface = function (_React$Component) {
           gridDefination = _props2.gridDefination,
           visible = _props2.visible;
 
-      var extraProps = {};
-      if (visible === false) {
-        extraProps["style"] = {
-          display: "none"
-        };
-      }
       if (gridDefination) {
-        return Component && _react2.default.createElement(
+        return Component && visible !== false && _react2.default.createElement(
           _Item2.default,
-          (0, _extends3.default)({}, gridDefination, extraProps),
+          gridDefination,
           _react2.default.createElement(
             Component,
             (0, _extends3.default)({ id: uiFramework + "-" + id }, props),
@@ -147,11 +141,11 @@ var ComponentInterface = function (_React$Component) {
           )
         );
       } else {
-        return Component && _react2.default.createElement(
+        return Component && visible !== false && _react2.default.createElement(
           Component,
           (0, _extends3.default)({
             id: uiFramework + "-" + id
-          }, extraProps, props),
+          }, props),
           children && children
         );
       }

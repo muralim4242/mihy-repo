@@ -59,18 +59,11 @@ class ComponentInterface extends React.Component {
       gridDefination,
       visible
     } = this.props;
-    let extraProps={};
-    if (visible===false) {
-      extraProps["style"]={
-        display:"none"
-      }
-    }
     if (gridDefination) {
       return (
-        Component && (
+        Component && visible!==false && (
           <Item
             {...gridDefination}
-            {...extraProps}
           >
             <Component id={`${uiFramework}-${id}`} {...props}>
               {children && children}
@@ -80,10 +73,9 @@ class ComponentInterface extends React.Component {
       );
     } else {
       return (
-        Component && (
+        Component && visible!==false && (
           <Component
             id={`${uiFramework}-${id}`}
-            {...extraProps}
             {...props}
           >
             {children && children}

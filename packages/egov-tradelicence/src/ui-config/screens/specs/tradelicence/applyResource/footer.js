@@ -1,5 +1,4 @@
-import { getLabel } from "../../utils";
-import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import { getLabel, dispatchMultipleFieldChangeAction } from "../../utils";
 import get from "lodash/get";
 
 export const callBackForNext = (state, dispatch) => {
@@ -14,22 +13,110 @@ const changeStep = (state, dispatch, mode = "next") => {
   );
   activeStep = mode === "next" ? activeStep + 1 : activeStep - 1;
   const isPreviousButtonVisible = activeStep > 0 ? true : false;
-  dispatch(
-    handleField(
-      "apply",
-      "components.div.children.stepper.props",
-      "activeStep",
-      activeStep
-    )
-  );
-  dispatch(
-    handleField(
-      "apply",
-      "components.div.children.footer.children.previousButton",
-      "visible",
-      isPreviousButtonVisible
-    )
-  );
+  const isNextButtonVisible = activeStep < 3 ? true : false;
+  const isPayButtonVisible = activeStep === 3 ? true : false;
+  const actionDefination = [
+    {
+      path: "components.div.children.stepper.props",
+      property: "activeStep",
+      value: activeStep
+    },
+    {
+      path: "components.div.children.footer.children.previousButton",
+      property: "visible",
+      value: isPreviousButtonVisible
+    },
+    {
+      path: "components.div.children.footer.children.nextButton",
+      property: "visible",
+      value: isNextButtonVisible
+    },
+    {
+      path: "components.div.children.footer.children.payButton",
+      property: "visible",
+      value: isPayButtonVisible
+    }
+  ];
+  dispatchMultipleFieldChangeAction("apply", actionDefination, dispatch);
+  renderSteps(activeStep, dispatch);
+};
+
+export const renderSteps = (activeStep, dispatch) => {
+  switch (activeStep) {
+    case 0:
+      dispatchMultipleFieldChangeAction(
+        "apply",
+        getActionDefinationForStepper(
+          "components.div.children.formwizardFirstStep"
+        ),
+        dispatch
+      );
+      break;
+    case 1:
+      dispatchMultipleFieldChangeAction(
+        "apply",
+        getActionDefinationForStepper(
+          "components.div.children.formwizardSecondStep"
+        ),
+        dispatch
+      );
+      break;
+    case 2:
+      dispatchMultipleFieldChangeAction(
+        "apply",
+        getActionDefinationForStepper(
+          "components.div.children.formwizardThirdStep"
+        ),
+        dispatch
+      );
+      break;
+    default:
+      dispatchMultipleFieldChangeAction(
+        "apply",
+        getActionDefinationForStepper(
+          "components.div.children.formwizardFourthStep"
+        ),
+        dispatch
+      );
+  }
+};
+
+export const getActionDefinationForStepper = path => {
+  const actionDefination = [
+    {
+      path: "components.div.children.formwizardFirstStep",
+      property: "visible",
+      value: true
+    },
+    {
+      path: "components.div.children.formwizardSecondStep",
+      property: "visible",
+      value: false
+    },
+    {
+      path: "components.div.children.formwizardThirdStep",
+      property: "visible",
+      value: false
+    },
+    {
+      path: "components.div.children.formwizardFourthStep",
+      property: "visible",
+      value: false
+    }
+  ];
+  for (var i = 0; i < actionDefination.length; i++) {
+    actionDefination[i] = {
+      ...actionDefination[i],
+      value: false
+    };
+    if (path === actionDefination[i].path) {
+      actionDefination[i] = {
+        ...actionDefination[i],
+        value: true
+      };
+    }
+  }
+  return actionDefination;
 };
 
 export const callBackForPrevious = (state, dispatch) => {
@@ -86,5 +173,25 @@ export const footer = getCommonApplyFooter({
       action: "condition",
       callBack: callBackForNext
     }
+  },
+  payButton: {
+    componentPath: "Button",
+    props: {
+      variant: "contained",
+      color: "primary",
+      style: {
+        width: "200px",
+        height: "48px",
+        marginRight: "45px"
+      }
+    },
+    children: {
+      nextButtonLabel: getLabel("Submit")
+    },
+    // onClickDefination: {
+    //   action: "condition",
+    //   callBack: callBackForNext
+    // }
+    visible: false
   }
 });

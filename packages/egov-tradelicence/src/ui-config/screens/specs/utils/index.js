@@ -1,3 +1,6 @@
+import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+
+
 export const getStepperObject = (
   stpperProps,
   stepsData,
@@ -152,5 +155,12 @@ export const getCommonContainer=(children)=>{
         container:true
       },
       children
+  }
+}
+
+export const dispatchMultipleFieldChangeAction=(screenKey,actionDefination=[],dispatch)=>{
+  for (var i = 0; i < actionDefination.length; i++) {
+    const {path,property,value}=actionDefination[i];
+    dispatch(handleField(screenKey,path,property,value));
   }
 }

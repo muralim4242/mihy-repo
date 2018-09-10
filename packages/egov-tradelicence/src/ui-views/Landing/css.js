@@ -35,9 +35,9 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit,
-    [theme.breakpoints.up('md')]: {
-      paddingLeft:drawerWidth+10
-    }
+    // [theme.breakpoints.up('md')]: {
+    //   paddingLeft:drawerWidth+10
+    // }
   }
 });
 
