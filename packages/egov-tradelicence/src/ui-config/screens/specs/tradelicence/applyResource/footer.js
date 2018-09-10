@@ -25,7 +25,7 @@ const changeStep = (state, dispatch, mode = "next") => {
   dispatch(
     handleField(
       "apply",
-      "components.div.children.div.children.footer.previousButton",
+      "components.div.children.footer.children.previousButton",
       "visible",
       isPreviousButtonVisible
     )
@@ -66,7 +66,7 @@ export const footer = getCommonApplyFooter({
       action: "condition",
       callBack: callBackForPrevious
     },
-    visible: true
+    visible: false
   },
   nextButton: {
     componentPath: "Button",

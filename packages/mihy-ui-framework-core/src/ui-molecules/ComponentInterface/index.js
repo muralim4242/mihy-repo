@@ -9,9 +9,10 @@ class ComponentInterface extends React.Component {
     this.state = { module: null };
   }
   componentDidMount() {
-    const { componentPath, uiFramework ,visible} = this.props;
+    const { componentPath, uiFramework } = this.props;
+    // ,visible
     let LoadableComponent=null;
-    if (visible!==false) {
+    // if (visible!==false) {
       switch (uiFramework) {
         case "carbon":
           LoadableComponent = Loadable({
@@ -44,7 +45,7 @@ class ComponentInterface extends React.Component {
           });
           break;
       }
-    }
+    // }
     this.setState({ module: LoadableComponent });
   }
 
@@ -55,13 +56,21 @@ class ComponentInterface extends React.Component {
       uiFramework,
       props,
       children,
-      gridDefination
+      gridDefination,
+      visible
     } = this.props;
+    let extraProps={};
+    if (visible===false) {
+      extraProps["style"]={
+        display:"none"
+      }
+    }
     if (gridDefination) {
       return (
         Component && (
           <Item
             {...gridDefination}
+            {...extraProps}
           >
             <Component id={`${uiFramework}-${id}`} {...props}>
               {children && children}
@@ -74,6 +83,7 @@ class ComponentInterface extends React.Component {
         Component && (
           <Component
             id={`${uiFramework}-${id}`}
+            {...extraProps}
             {...props}
           >
             {children && children}

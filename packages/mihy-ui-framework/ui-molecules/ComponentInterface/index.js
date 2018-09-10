@@ -59,62 +59,62 @@ var ComponentInterface = function (_React$Component) {
     value: function componentDidMount() {
       var _props = this.props,
           componentPath = _props.componentPath,
-          uiFramework = _props.uiFramework,
-          visible = _props.visible;
+          uiFramework = _props.uiFramework;
+      // ,visible
 
       var LoadableComponent = null;
-      if (visible !== false) {
-        switch (uiFramework) {
-          case "carbon":
-            LoadableComponent = (0, _reactLoadable2.default)({
-              loader: function loader() {
-                return import("carbon-components-react").then(function (module) {
-                  return module[componentPath];
-                });
-              },
-              loading: function loading() {
-                return _react2.default.createElement(_LinearSpinner2.default, null);
-              }
-            });
-            break;
-          case "custom-atoms":
-            LoadableComponent = (0, _reactLoadable2.default)({
-              loader: function loader() {
-                return import("../../ui-atoms").then(function (module) {
-                  return module[componentPath];
-                });
-              },
-              loading: function loading() {
-                return _react2.default.createElement(_LinearSpinner2.default, null);
-              }
-            });
-            break;
-          case "custom-molecules":
-            LoadableComponent = (0, _reactLoadable2.default)({
-              loader: function loader() {
-                return import("../../ui-molecules").then(function (module) {
-                  return module[componentPath];
-                });
-              },
-              loading: function loading() {
-                return _react2.default.createElement(_LinearSpinner2.default, null);
-              }
-            });
-            break;
-          case "material-ui":
-            LoadableComponent = (0, _reactLoadable2.default)({
-              loader: function loader() {
-                return import("@material-ui/core").then(function (module) {
-                  return module[componentPath];
-                });
-              },
-              loading: function loading() {
-                return _react2.default.createElement(_LinearSpinner2.default, null);
-              }
-            });
-            break;
-        }
+      // if (visible!==false) {
+      switch (uiFramework) {
+        case "carbon":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("carbon-components-react").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
+        case "custom-atoms":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("../../ui-atoms").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
+        case "custom-molecules":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("../../ui-molecules").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
+        case "material-ui":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("@material-ui/core").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
       }
+      // }
       this.setState({ module: LoadableComponent });
     }
   }, {
@@ -127,12 +127,19 @@ var ComponentInterface = function (_React$Component) {
           uiFramework = _props2.uiFramework,
           props = _props2.props,
           children = _props2.children,
-          gridDefination = _props2.gridDefination;
+          gridDefination = _props2.gridDefination,
+          visible = _props2.visible;
 
+      var extraProps = {};
+      if (visible === false) {
+        extraProps["style"] = {
+          display: "none"
+        };
+      }
       if (gridDefination) {
         return Component && _react2.default.createElement(
           _Item2.default,
-          gridDefination,
+          (0, _extends3.default)({}, gridDefination, extraProps),
           _react2.default.createElement(
             Component,
             (0, _extends3.default)({ id: uiFramework + "-" + id }, props),
@@ -144,7 +151,7 @@ var ComponentInterface = function (_React$Component) {
           Component,
           (0, _extends3.default)({
             id: uiFramework + "-" + id
-          }, props),
+          }, extraProps, props),
           children && children
         );
       }
