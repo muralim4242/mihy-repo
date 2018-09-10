@@ -239,8 +239,8 @@ const screenConfig = {
           componentPath: "Div",
           children: {
             tradeOwnerDetails
-          }
-          // visible: false
+          },
+          visible: false
         },
         formwizardThirdStep: {
           uiFramework: "custom-atoms",
