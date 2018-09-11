@@ -19,34 +19,33 @@ export const getStepperObject = (
   return stepperData;
 };
 
-
-export const getCommonHeader = (header,props) => {
+export const getCommonHeader = (header, props) => {
   return {
     componentPath: "Typography",
     props: {
-      variant:"headline",
+      variant: "headline",
       ...props
     },
-    children:{
-      [header]:getLabel(header)
+    children: {
+      [header]: getLabel(header)
     }
   };
 };
 
 export const getCommonTitle = header => {
-  return getCommonHeader(header,{variant:"title"})
+  return getCommonHeader(header, { variant: "title" });
 };
 
 export const getCommonSubHeader = header => {
-  return getCommonHeader(header,{variant:"subheading"})
+  return getCommonHeader(header, { variant: "subheading" });
 };
 
 export const getCommonParagraph = paragraph => {
-  return getCommonHeader(paragraph,{variant:"body1"})
+  return getCommonHeader(paragraph, { variant: "body1" });
 };
 
 export const getCommonValue = value => {
-  return getCommonHeader(value,{variant:"body2"})
+  return getCommonHeader(value, { variant: "body2" });
 };
 
 export const getCommonCard = (children, cardProps = {}) => {
@@ -167,4 +166,43 @@ export const dispatchMultipleFieldChangeAction = (
     const { path, property, value } = actionDefination[i];
     dispatch(handleField(screenKey, path, property, value));
   }
+};
+
+// export const getDarkSubHeader = header => {
+//   return {
+//     uiFramework: "custom-atoms",
+//     componentPath: "Label",
+//     props: {
+//       label: header,
+//       className: "review-dark-text"
+//     },
+//     fullWidth: true
+//   };
+// };
+
+// export const getLightSubHeader = header => {
+//   return {
+//     uiFramework: "custom-atoms",
+//     componentPath: "Label",
+//     props: {
+//       label: header,
+//       className: "review-light-text"
+//     },
+//     fullWidth: true
+//   };
+// };
+
+export const getLabelWithValue = (label, value) => {
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    gridDefination: {
+      xs: 6,
+      sm: 3
+    },
+    children: {
+      [label]: getCommonParagraph(label),
+      [value]: getCommonValue(value)
+    }
+  };
 };

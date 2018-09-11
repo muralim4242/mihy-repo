@@ -9,7 +9,8 @@ import {
   getBreak,
   getTextField,
   getSelectTextField,
-  getCommonContainer
+  getCommonContainer,
+  getLabelWithValue
 } from "../utils";
 
 import { footer } from "./applyResource/footer";
@@ -19,36 +20,36 @@ const header = getCommonHeader("Application for New Trade License (2018-2019)");
 const stepper = getStepperObject({ props: { activeStep: 0 } }, stepsData);
 
 const multipleTradeUnitCard =
-// {
-//   uiFramework: "custom-molecules",
-//   componentPath: "MultiItem",
-//   props: {
-//     scheama:
-     getCommonGrayCard({
-      header: getCommonSubHeader("Trade Unit  "),
-      tradeUnitCardContainer: getCommonContainer({
-        tradeCategory: getSelectTextField(
-          "Trade Category",
-          "Select Trade Category",
-          true,
-          ""
-        ),
-        tradeType: getSelectTextField(
-          "Trade  Type",
-          "Select Trade Type",
-          true,
-          ""
-        ),
-        tradeSubType: getSelectTextField(
-          "Trade Sub-Type",
-          "Select Trade Sub-Type",
-          true,
-          ""
-        ),
-        tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, ""),
-        tradeUOMValue: getTextField("UOM Value", "Enter UOM Value", true, "")
-      })
-    });
+  // {
+  //   uiFramework: "custom-molecules",
+  //   componentPath: "MultiItem",
+  //   props: {
+  //     scheama:
+  getCommonGrayCard({
+    header: getCommonSubHeader("Trade Unit  "),
+    tradeUnitCardContainer: getCommonContainer({
+      tradeCategory: getSelectTextField(
+        "Trade Category",
+        "Select Trade Category",
+        true,
+        ""
+      ),
+      tradeType: getSelectTextField(
+        "Trade  Type",
+        "Select Trade Type",
+        true,
+        ""
+      ),
+      tradeSubType: getSelectTextField(
+        "Trade Sub-Type",
+        "Select Trade Sub-Type",
+        true,
+        ""
+      ),
+      tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, ""),
+      tradeUOMValue: getTextField("UOM Value", "Enter UOM Value", true, "")
+    })
+  });
 //     items: [],
 //     addItemLabel: "ADD TRADE UNIT"
 //   },
@@ -219,7 +220,29 @@ const tradeReviewDetails = getCommonCard({
   header: getCommonTitle("Please review your Application and Submit"),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-  )
+  ),
+  viewOne: getCommonContainer({
+    revoiewLicenceType: getLabelWithValue("Licence Type", "Temporary"),
+    reviewTradeName: getLabelWithValue("Trade Name", "Matchbox Packing Unit"),
+    reviewTradeMobility: getLabelWithValue("Trade Mobility", "Immovable"),
+    reviewCommencementDate: getLabelWithValue(
+      "Commencement Date",
+      "12/12/2018"
+    ),
+    reviewOperationalArea: getLabelWithValue("Operational Area", "2000 Sqft"),
+    reviewNoOfEmployee: getLabelWithValue("No of Employees", "200"),
+    reviewGSTNo: getLabelWithValue("GST No.", "364565")
+  }),
+  viewTwo: getCommonContainer({
+    revoiewTradeCategory: getLabelWithValue("Trade Category", "Goods"),
+    reviewTradeType: getLabelWithValue("Trade Type", "Value"),
+    reviewTradeSubtype: getLabelWithValue(
+      "Trade Sub-Type",
+      "Manufacuring Plant"
+    ),
+    reviewTradeUOM: getLabelWithValue("UOM (Unit of Measurement)", "Sq Ft"),
+    reviewTradeUOMValue: getLabelWithValue("UOM Value", "2000")
+  })
 });
 
 const screenConfig = {
@@ -264,8 +287,8 @@ const screenConfig = {
           componentPath: "Div",
           children: {
             tradeReviewDetails
-          },
-          visible: false
+          }
+          // visible: ture
         },
         footer
       }
