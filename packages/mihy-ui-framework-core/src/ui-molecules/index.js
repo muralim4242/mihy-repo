@@ -64,6 +64,11 @@ const Stepper = Loadable({
   loading: () => <Loading />
 });
 
+const MultiItem = Loadable({
+  loader: () => import("./MultiItem")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -78,5 +83,6 @@ export {
   AppCards,
   AppCarosel,
   AppSubOption,
-  Stepper
+  Stepper,
+  MultiItem
 };

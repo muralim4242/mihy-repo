@@ -3,6 +3,7 @@ import {
   getCommonHeader,
   getCommonCard,
   getCommonGrayCard,
+  getCommonTitle,
   getCommonSubHeader,
   getCommonParagraph,
   getBreak,
@@ -17,31 +18,45 @@ const stepsData = ["Trade Details", "Owner Details", "Documents", "Summary"];
 const header = getCommonHeader("Application for New Trade License (2018-2019)");
 const stepper = getStepperObject({ props: { activeStep: 0 } }, stepsData);
 
-const tradeUnitCard = getCommonGrayCard({
-  header: getCommonSubHeader("Trade Unit  "),
-  break: getBreak(),
-  tradeUnitCardContainer: getCommonContainer({
-    tradeCategory: getSelectTextField(
-      "Trade Category",
-      "Select Trade Category",
-      true,
-      ""
-    ),
-    tradeType: getSelectTextField("Trade  Type", "Select Trade Type", true, ""),
-    tradeSubType: getSelectTextField(
-      "Trade Sub-Type",
-      "Select Trade Sub-Type",
-      true,
-      ""
-    ),
-    tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, ""),
-    tradeUOMValue: getTextField("UOM Value", "Enter UOM Value", true, "")
-  })
-});
+const multipleTradeUnitCard =
+// {
+//   uiFramework: "custom-molecules",
+//   componentPath: "MultiItem",
+//   props: {
+//     scheama:
+     getCommonGrayCard({
+      header: getCommonSubHeader("Trade Unit  "),
+      tradeUnitCardContainer: getCommonContainer({
+        tradeCategory: getSelectTextField(
+          "Trade Category",
+          "Select Trade Category",
+          true,
+          ""
+        ),
+        tradeType: getSelectTextField(
+          "Trade  Type",
+          "Select Trade Type",
+          true,
+          ""
+        ),
+        tradeSubType: getSelectTextField(
+          "Trade Sub-Type",
+          "Select Trade Sub-Type",
+          true,
+          ""
+        ),
+        tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, ""),
+        tradeUOMValue: getTextField("UOM Value", "Enter UOM Value", true, "")
+      })
+    });
+//     items: [],
+//     addItemLabel: "ADD TRADE UNIT"
+//   },
+//   jsonPath: "tradeLicence[0].tradeUnit"
+// };
 
 const accessoriesCard = getCommonGrayCard({
   header: getCommonSubHeader("Accessories"),
-  break: getBreak(),
   accessoriesCardContainer: getCommonContainer({
     accessoriesName: getSelectTextField(
       "Accessories",
@@ -55,8 +70,7 @@ const accessoriesCard = getCommonGrayCard({
 });
 
 const tradeDetails = getCommonCard({
-  header: getCommonSubHeader("Please Provide Trade Details"),
-  break: getBreak(),
+  header: getCommonTitle("Please Provide Trade Details"),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   ),
@@ -99,12 +113,11 @@ const tradeDetails = getCommonCard({
       ""
     )
   }),
-  tradeUnitCard,
+  multipleTradeUnitCard,
   accessoriesCard
 });
 const tradeLocationDetails = getCommonCard({
-  header: getCommonSubHeader("Please Provide Trade Location Details"),
-  break: getBreak(),
+  header: getCommonTitle("Please Provide Trade Location Details"),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   ),
@@ -153,7 +166,6 @@ const tradeLocationDetails = getCommonCard({
 
 const OwnerInfoCard = getCommonGrayCard({
   header: getCommonSubHeader("Owner Information"),
-  break: getBreak(),
   tradeUnitCardContainer: getCommonContainer({
     ownerMobileNo: getTextField("Mobile No.", "Enter Mobile No.", true, ""),
     ownerName: getTextField("Name", "Enter Name", true, ""),
@@ -183,8 +195,7 @@ const OwnerInfoCard = getCommonGrayCard({
 });
 
 const tradeOwnerDetails = getCommonCard({
-  header: getCommonSubHeader("Please Provide Trade Owner Details"),
-  break: getBreak(),
+  header: getCommonTitle("Please Provide Trade Owner Details"),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   ),
@@ -197,17 +208,15 @@ const tradeOwnerDetails = getCommonCard({
   OwnerInfoCard
 });
 const tradeDocumentDetails = getCommonCard({
-  header: getCommonSubHeader(
+  header: getCommonTitle(
     "Please Upload the Required Documents for Verification"
   ),
-  break: getBreak(),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   )
 });
 const tradeReviewDetails = getCommonCard({
-  header: getCommonSubHeader("Please review your Application and Submit"),
-  break: getBreak(),
+  header: getCommonTitle("Please review your Application and Submit"),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   )

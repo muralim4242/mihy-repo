@@ -1,6 +1,5 @@
 import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 
-
 export const getStepperObject = (
   stpperProps,
   stepsData,
@@ -20,59 +19,60 @@ export const getStepperObject = (
   return stepperData;
 };
 
-export const getCommonHeader = header => {
+
+export const getCommonHeader = (header,props) => {
   return {
-    uiFramework: "custom-atoms",
-    componentPath: "Label",
+    componentPath: "Typography",
     props: {
-      label: header,
-      className: "apply-application-for-new"
+      variant:"headline",
+      ...props
+    },
+    children:{
+      [header]:getLabel(header)
     }
   };
+};
+
+export const getCommonTitle = header => {
+  return getCommonHeader(header,{variant:"title"})
 };
 
 export const getCommonSubHeader = header => {
-  return {
-    uiFramework: "custom-atoms",
-    componentPath: "Label",
-    props: {
-      label: header,
-      className: "mihy-subheader"
-    }
-  };
+  return getCommonHeader(header,{variant:"subheading"})
 };
 
-export const getCommonParagraph = Paragraph => {
-  return {
-    uiFramework: "custom-atoms",
-    componentPath: "Label",
-    props: {
-      label: Paragraph,
-      className: "mihy-paragraph"
-    }
-  };
+export const getCommonParagraph = paragraph => {
+  return getCommonHeader(paragraph,{variant:"body1"})
 };
 
-export const getCommonCard = (children,cardProps={}) => {
+export const getCommonValue = value => {
+  return getCommonHeader(value,{variant:"body2"})
+};
+
+export const getCommonCard = (children, cardProps = {}) => {
   return {
     componentPath: "Card",
-    props:{
+    props: {
       ...cardProps
     },
-    children:{
-      cardContent:{
-        componentPath:"CardContent",
+    children: {
+      cardContent: {
+        componentPath: "CardContent",
         children
       }
     }
   };
 };
 
-export const getCommonGrayCard = (children) => {
-  return getCommonCard(children,{style:{backgroundColor:"#F2F2F2"}})
+export const getCommonGrayCard = children => {
+  return getCommonCard(children, {
+    style: {
+      backgroundColor: "rgb(242, 242, 242)",
+      boxShadow: "none",
+      borderRadius: 0
+    }
+  });
 };
-
-
 
 export const getBreak = () => {
   return {
@@ -98,7 +98,7 @@ export const getTextField = (
   pattern,
   gridDefination = {
     xs: 12,
-    sm:6
+    sm: 6
   }
 ) => {
   return {
@@ -126,7 +126,7 @@ export const getSelectTextField = (
   pattern,
   gridDefination = {
     xs: 12,
-    sm:6
+    sm: 6
   }
 ) => {
   return {
@@ -148,19 +148,23 @@ export const getSelectTextField = (
   };
 };
 
-export const getCommonContainer=(children)=>{
+export const getCommonContainer = children => {
   return {
-      componentPath:"Grid",
-      props:{
-        container:true
-      },
-      children
-  }
-}
+    componentPath: "Grid",
+    props: {
+      container: true
+    },
+    children
+  };
+};
 
-export const dispatchMultipleFieldChangeAction=(screenKey,actionDefination=[],dispatch)=>{
+export const dispatchMultipleFieldChangeAction = (
+  screenKey,
+  actionDefination = [],
+  dispatch
+) => {
   for (var i = 0; i < actionDefination.length; i++) {
-    const {path,property,value}=actionDefination[i];
-    dispatch(handleField(screenKey,path,property,value));
+    const { path, property, value } = actionDefination[i];
+    dispatch(handleField(screenKey, path, property, value));
   }
-}
+};
