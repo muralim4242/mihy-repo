@@ -10,7 +10,8 @@ class CommonView extends React.Component {
       uiFramework,
       onFieldChange,
       onComponentClick,
-      preparedFinalObject
+      preparedFinalObject,
+      screenKey
     } = this.props;
     return (
         <RenderScreen
@@ -19,6 +20,7 @@ class CommonView extends React.Component {
           onFieldChange={onFieldChange}
           onComponentClick={onComponentClick}
           preparedFinalObject={preparedFinalObject}
+          screenKey={screenKey}
         />
     );
   }

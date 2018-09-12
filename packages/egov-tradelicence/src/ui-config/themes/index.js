@@ -2,14 +2,11 @@ const themeObject = {
   palette: {
     primary: {
       main: "#FE7A51",
-      // light: '#757ce8',
       dark: '#FE7A51',
       contrastText: '#fff',
     },
     secondary: {
       main: "#fff",
-      // light: '#757ce8',
-      // dark: '#002884',
       contrastText: '#000',
     },
     background:{
@@ -36,7 +33,7 @@ const themeObject = {
     },
     MuiTypography:{
       title:{
-        color: "rgba(0, 0, 0, 0.8700000047683716)",
+        color: "rgba(0, 0, 0, 0.87)",
         fontFamily: "Roboto",
         fontSize: "20px",
         fontWeight: 400,
@@ -44,7 +41,7 @@ const themeObject = {
         lineHeight: "24px"
       },
       body1:{
-        color: "rgba(0, 0, 0, 0.6000000238418579)",
+        color: "rgba(0, 0, 0, 0.60)",
         fontFamily: "Roboto",
         fontSize: "14px",
         fontWeight: 400,
@@ -52,7 +49,7 @@ const themeObject = {
         marginBottom:"12px"
       },
       body2:{
-        color: "rgba(0, 0, 0, 0.8700000047683716)",
+        color: "rgba(0, 0, 0, 0.87)",
         fontFamily: "Roboto",
         fontSize: "16px",
         fontWeight: 400,
@@ -60,7 +57,7 @@ const themeObject = {
         lineHeight: "19px"
       },
       subheading:{
-        color: "rgba(0, 0, 0, 0.8700000047683716)",
+        color: "rgba(0, 0, 0, 0.87)",
         fontFamily: "Roboto",
         fontSize: "18px",
         letterSpacing: "0.75px",

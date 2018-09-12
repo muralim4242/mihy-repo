@@ -44,7 +44,23 @@ var _Button = require("../../ui-atoms/Button");
 
 var _Button2 = _interopRequireDefault(_Button);
 
+var _IconButton = require("@material-ui/core/IconButton");
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
+var _Clear = require("@material-ui/icons/Clear");
+
+var _Clear2 = _interopRequireDefault(_Clear);
+
 var _reactRedux = require("react-redux");
+
+var _get = require("lodash/get");
+
+var _get2 = _interopRequireDefault(_get);
+
+var _set = require("lodash/set");
+
+var _set2 = _interopRequireDefault(_set);
 
 var _actions = require("../../ui-redux/screen-configuration/actions");
 
@@ -65,26 +81,35 @@ var MultiItem = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MultiItem.__proto__ || Object.getPrototypeOf(MultiItem)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
+      var items = _this.props.items;
+
+      if (!items.length) {
+        _this.addItem();
+      }
+    }, _this.addItem = function () {
       var _this$props = _this.props,
           addItem = _this$props.onFieldChange,
+          screenKey = _this$props.screenKey,
           scheama = _this$props.scheama,
-          componentJsonpath = _this$props.componentJsonpath;
+          componentJsonpath = _this$props.componentJsonpath,
+          headerName = _this$props.headerName,
+          headerJsonPath = _this$props.headerJsonPath,
+          screenConfig = _this$props.screenConfig;
 
-      addItem("", componentJsonpath, "props.items[0].item0", scheama);
-    }, _this.addItem = function () {
+      var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
+      var itemsLength = items.length;
+      (0, _set2.default)(scheama, headerJsonPath, headerName + " " + itemsLength);
+      addItem(screenKey, componentJsonpath, "props.items[" + itemsLength + "].item" + itemsLength, scheama);
+    }, _this.removeItem = function (index) {
       var _this$props2 = _this.props,
-          addItem = _this$props2.onFieldChange,
-          scheama = _this$props2.scheama,
-          componentJsonpath = _this$props2.componentJsonpath;
+          removeItem = _this$props2.onFieldChange,
+          screenKey = _this$props2.screenKey,
+          componentJsonpath = _this$props2.componentJsonpath,
+          screenConfig = _this$props2.screenConfig;
 
-      addItem("", componentJsonpath, "props.items[0].item1", scheama);
-    }, _this.removeItem = function () {
-      var _this$props3 = _this.props,
-          addItem = _this$props3.onFieldChange,
-          scheama = _this$props3.scheama,
-          componentJsonpath = _this$props3.componentJsonpath;
-
-      addItem("", componentJsonpath, "props.items[0].item1", scheama);
+      var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
+      items.splice(index, 1);
+      removeItem(screenKey, componentJsonpath, "props.items", items);
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
@@ -100,20 +125,40 @@ var MultiItem = function (_React$Component) {
           uiFramework = _props.uiFramework,
           onFieldChange = _props.onFieldChange,
           onComponentClick = _props.onComponentClick;
-      var addItem = this.addItem;
+      var addItem = this.addItem,
+          removeItem = this.removeItem;
 
       return _react2.default.createElement(
         _Div2.default,
         null,
         items.length > 0 && items.map(function (item, key) {
           console.log(item);
-          return _react2.default.createElement(_RenderScreen2.default, {
-            key: key,
-            components: item,
-            uiFramework: uiFramework,
-            onFieldChange: onFieldChange,
-            onComponentClick: onComponentClick
-          });
+          return _react2.default.createElement(
+            _Div2.default,
+            null,
+            items.length > 1 && _react2.default.createElement(
+              _Container2.default,
+              null,
+              _react2.default.createElement(
+                _Item2.default,
+                { xs: 12, align: "right" },
+                _react2.default.createElement(
+                  _IconButton2.default,
+                  { style: { marginBottom: "-110px" }, onClick: function onClick(e) {
+                      return removeItem(key);
+                    }, "aria-label": "Remove" },
+                  _react2.default.createElement(_Clear2.default, null)
+                )
+              )
+            ),
+            _react2.default.createElement(_RenderScreen2.default, {
+              key: key,
+              components: item,
+              uiFramework: uiFramework,
+              onFieldChange: onFieldChange,
+              onComponentClick: onComponentClick
+            })
+          );
         }),
         _react2.default.createElement(
           _Container2.default,
@@ -136,4 +181,16 @@ var MultiItem = function (_React$Component) {
   return MultiItem;
 }(_react2.default.Component);
 
-exports.default = MultiItem;
+var mapStateToProps = function mapStateToProps(state) {
+  var screenConfiguration = state.screenConfiguration;
+  var screenConfig = screenConfiguration.screenConfig,
+      preparedFinalObject = screenConfiguration.preparedFinalObject;
+
+  return { screenConfig: screenConfig, preparedFinalObject: preparedFinalObject, state: state };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return null;
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MultiItem);

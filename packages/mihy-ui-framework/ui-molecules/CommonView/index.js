@@ -48,14 +48,16 @@ var CommonView = function (_React$Component) {
           uiFramework = _props.uiFramework,
           onFieldChange = _props.onFieldChange,
           onComponentClick = _props.onComponentClick,
-          preparedFinalObject = _props.preparedFinalObject;
+          preparedFinalObject = _props.preparedFinalObject,
+          screenKey = _props.screenKey;
 
       return _react2.default.createElement(_RenderScreen2.default, {
         components: components,
         uiFramework: uiFramework,
         onFieldChange: onFieldChange,
         onComponentClick: onComponentClick,
-        preparedFinalObject: preparedFinalObject
+        preparedFinalObject: preparedFinalObject,
+        screenKey: screenKey
       });
     }
   }]);

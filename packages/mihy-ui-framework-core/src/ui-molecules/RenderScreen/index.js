@@ -2,7 +2,7 @@ import React from "react";
 import isEmpty from "lodash/isEmpty";
 import ComponentInterface  from "../ComponentInterface";
 
-const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onComponentClick }) => {
+const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onComponentClick,screenKey }) => {
   return components
     ? Object.keys(components).map(componentKey => {
         const {
@@ -37,7 +37,8 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
             onFieldChange,
             onComponentClick,
             uiFramework:rootFramework,
-            componentJsonpath
+            componentJsonpath,
+            screenKey
           }
         }
         if (!isEmpty(components[componentKey].children)) {
@@ -54,7 +55,7 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
                 gridDefination={gridDefination}
                 visible={visible}
               >
-                <RenderScreen components={components[componentKey].children} onFieldChange={onFieldChange} onComponentClick={onComponentClick} uiFramework={rootFramework}/>
+                <RenderScreen components={components[componentKey].children} onFieldChange={onFieldChange} onComponentClick={onComponentClick} uiFramework={rootFramework} screenKey={screenKey}/>
               </ComponentInterface>
             );
           // }

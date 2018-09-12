@@ -119,6 +119,7 @@ const screenHoc = ({
         return (
           <Screen
             uiFramework={uiFramework}
+            screenKey={screenKey}
             components={components}
             screenKey={name}
             onFieldChange={handleScreenConfigurationFieldChange}

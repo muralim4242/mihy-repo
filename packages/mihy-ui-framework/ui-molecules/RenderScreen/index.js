@@ -26,7 +26,8 @@ var RenderScreen = function RenderScreen(_ref) {
   var components = _ref.components,
       rootFramework = _ref.uiFramework,
       onFieldChange = _ref.onFieldChange,
-      onComponentClick = _ref.onComponentClick;
+      onComponentClick = _ref.onComponentClick,
+      screenKey = _ref.screenKey;
 
   return components ? Object.keys(components).map(function (componentKey) {
     var _components$component = components[componentKey],
@@ -57,7 +58,8 @@ var RenderScreen = function RenderScreen(_ref) {
         onFieldChange: onFieldChange,
         onComponentClick: onComponentClick,
         uiFramework: rootFramework,
-        componentJsonpath: componentJsonpath
+        componentJsonpath: componentJsonpath,
+        screenKey: screenKey
       });
     }
     if (!(0, _isEmpty2.default)(components[componentKey].children)) {
@@ -75,7 +77,7 @@ var RenderScreen = function RenderScreen(_ref) {
           gridDefination: gridDefination,
           visible: visible
         },
-        _react2.default.createElement(RenderScreen, { components: components[componentKey].children, onFieldChange: onFieldChange, onComponentClick: onComponentClick, uiFramework: rootFramework })
+        _react2.default.createElement(RenderScreen, { components: components[componentKey].children, onFieldChange: onFieldChange, onComponentClick: onComponentClick, uiFramework: rootFramework, screenKey: screenKey })
       );
       // }
     } else {

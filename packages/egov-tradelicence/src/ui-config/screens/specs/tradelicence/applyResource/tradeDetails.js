@@ -76,10 +76,14 @@ const accessoriesCard = {
     }),
 
     items: [],
-    addItemLabel: "ADD ACCESSORIES"
+    addItemLabel: "ADD ACCESSORIES",
+    headerName: "Accessory",
+    headerJsonPath:
+      "children.cardContent.children.header.children.Accessories.props.label"
   },
   type: "array"
 };
+
 
 export const tradeDetails = getCommonCard({
   header: getCommonTitle("Please Provide Trade Details"),

@@ -27,7 +27,7 @@ const tradeDocumentDetails = getCommonCard({
 
 const screenConfig = {
   uiFramework: "material-ui",
-  name: "mihytradeliceceapply",
+  name: "apply",
   components: {
     div: {
       uiFramework: "custom-atoms",

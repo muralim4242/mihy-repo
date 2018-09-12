@@ -9,35 +9,52 @@ import {
   getCommonContainer
 } from "../../utils";
 
-const OwnerInfoCard = getCommonGrayCard({
-  header: getCommonSubHeader("Owner Information"),
-  tradeUnitCardContainer: getCommonContainer({
-    ownerMobileNo: getTextField("Mobile No.", "Enter Mobile No.", true, ""),
-    ownerName: getTextField("Name", "Enter Name", true, ""),
-    ownerFatherName: getTextField(
-      "Father/Husband's Name",
-      "Enter Father/Husband's Name",
-      true,
-      ""
-    ),
-    OwnerGender: getSelectTextField("Gender", "Select Gender", true, ""),
-    ownerDOB: getTextField("Date of Birth", "Enter Date of Birth", true, ""),
-    ownerEmail: getTextField("Email", "Enter Email", false, ""),
-    ownerPAN: getTextField("PAN No.", "Enter Owner's PAN No.", false, ""),
-    ownerAddress: getTextField(
-      "Corrospondence Address",
-      "Enter Corrospondence Address",
-      true,
-      ""
-    ),
-    OwnerSpecialCategory: getSelectTextField(
-      "Special Owner Category",
-      "Select Special Owner Category",
-      true,
-      ""
-    )
-  })
-});
+const OwnerInfoCard = {
+  uiFramework: "custom-molecules",
+  componentPath: "MultiItem",
+  props: {
+    scheama: getCommonGrayCard({
+      header: getCommonSubHeader("Owner Information"),
+      tradeUnitCardContainer: getCommonContainer({
+        ownerMobileNo: getTextField("Mobile No.", "Enter Mobile No.", true, ""),
+        ownerName: getTextField("Name", "Enter Name", true, ""),
+        ownerFatherName: getTextField(
+          "Father/Husband's Name",
+          "Enter Father/Husband's Name",
+          true,
+          ""
+        ),
+        OwnerGender: getSelectTextField("Gender", "Select Gender", true, ""),
+        ownerDOB: getTextField(
+          "Date of Birth",
+          "Enter Date of Birth",
+          true,
+          ""
+        ),
+        ownerEmail: getTextField("Email", "Enter Email", false, ""),
+        ownerPAN: getTextField("PAN No.", "Enter Owner's PAN No.", false, ""),
+        ownerAddress: getTextField(
+          "Corrospondence Address",
+          "Enter Corrospondence Address",
+          true,
+          ""
+        ),
+        OwnerSpecialCategory: getSelectTextField(
+          "Special Owner Category",
+          "Select Special Owner Category",
+          true,
+          ""
+        )
+      })
+    }),
+    items: [],
+    addItemLabel: "ADD OWNER",
+    headerName: "Owner Information",
+    headerJsonPath:
+      "children.cardContent.children.header.children.Owner Information.props.label"
+  },
+  type: "array"
+};
 
 export const tradeOwnerDetails = getCommonCard({
   header: getCommonTitle("Please Provide Trade Owner Details"),
