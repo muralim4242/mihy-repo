@@ -13,7 +13,8 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
           props,
           onClickDefination,
           gridDefination,
-          visible
+          visible,
+          type
         } = components[componentKey];
         let extraProps = jsonPath
           ? {
@@ -28,6 +29,15 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
             onClick:e =>{
               onComponentClick(onClickDefination,componentJsonpath);
             }
+          }
+        }
+        if (type && type==="array") {
+          extraProps={
+            ...extraProps,
+            onFieldChange,
+            onComponentClick,
+            uiFramework:rootFramework,
+            componentJsonpath
           }
         }
         if (!isEmpty(components[componentKey].children)) {

@@ -44,6 +44,10 @@ export const getCommonParagraph = paragraph => {
   return getCommonHeader(paragraph, { variant: "body1" });
 };
 
+export const getCommonCaption = paragraph => {
+  return getCommonHeader(paragraph, { variant: "caption" });
+};
+
 export const getCommonValue = value => {
   return getCommonHeader(value, { variant: "body2" });
 };
@@ -201,7 +205,7 @@ export const getLabelWithValue = (label, value) => {
       sm: 3
     },
     children: {
-      [label]: getCommonParagraph(label),
+      [label]: getCommonCaption(label),
       [value]: getCommonValue(value)
     }
   };

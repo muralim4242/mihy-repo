@@ -6,7 +6,6 @@ import {
   getCommonTitle,
   getCommonSubHeader,
   getCommonParagraph,
-  getBreak,
   getTextField,
   getSelectTextField,
   getCommonContainer,
@@ -50,25 +49,46 @@ const multipleTradeUnitCard =
       tradeUOMValue: getTextField("UOM Value", "Enter UOM Value", true, "")
     })
   });
+//     ,
 //     items: [],
 //     addItemLabel: "ADD TRADE UNIT"
 //   },
-//   jsonPath: "tradeLicence[0].tradeUnit"
+//   type:"array"
 // };
 
-const accessoriesCard = getCommonGrayCard({
-  header: getCommonSubHeader("Accessories"),
-  accessoriesCardContainer: getCommonContainer({
-    accessoriesName: getSelectTextField(
-      "Accessories",
-      "Select Accessories",
-      false,
-      ""
-    ),
-    accessoriesUOM: getTextField("UOM (Unit of Measurement)", "UOM", false, ""),
-    accessoriesUOMValue: getTextField("UOM Value", "Enter UOM Value", false, "")
-  })
-});
+const accessoriesCard = {
+  uiFramework: "custom-molecules",
+  componentPath: "MultiItem",
+  props: {
+    scheama: getCommonGrayCard({
+      header: getCommonSubHeader("Accessories"),
+      accessoriesCardContainer: getCommonContainer({
+        accessoriesName: getSelectTextField(
+          "Accessories",
+          "Select Accessories",
+          false,
+          ""
+        ),
+        accessoriesUOM: getTextField(
+          "UOM (Unit of Measurement)",
+          "UOM",
+          false,
+          ""
+        ),
+        accessoriesUOMValue: getTextField(
+          "UOM Value",
+          "Enter UOM Value",
+          false,
+          ""
+        )
+      })
+    }),
+
+    items: [],
+    addItemLabel: "ADD ACCESSORIES"
+  },
+  type: "array"
+};
 
 const tradeDetails = getCommonCard({
   header: getCommonTitle("Please Provide Trade Details"),
@@ -117,6 +137,7 @@ const tradeDetails = getCommonCard({
   multipleTradeUnitCard,
   accessoriesCard
 });
+
 const tradeLocationDetails = getCommonCard({
   header: getCommonTitle("Please Provide Trade Location Details"),
   paragraph: getCommonParagraph(
@@ -287,8 +308,8 @@ const screenConfig = {
           componentPath: "Div",
           children: {
             tradeReviewDetails
-          }
-          // visible: ture
+          },
+          visible: false
         },
         footer
       }

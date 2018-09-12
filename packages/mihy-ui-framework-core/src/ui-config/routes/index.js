@@ -33,6 +33,7 @@ const mainRoutes = [
     path: mainRouteConstants.PLAYGROUND,
     component: Playground
   },
+  
   {
     isRedirect:true,
     to:mainRouteConstants.REDIRECT

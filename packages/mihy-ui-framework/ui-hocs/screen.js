@@ -44,20 +44,22 @@ var _get2 = _interopRequireDefault(_get);
 
 var _uiUtils = require("../ui-utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _jquery = require("jquery");
 
-// import $ from "jquery";
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var screenHoc = function screenHoc(_ref) {
   var _ref$path = _ref.path,
       path = _ref$path === undefined ? "" : _ref$path,
       screenKey = _ref.screenKey,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ["path", "screenKey"]),
       _ref$hasOwnConfig = _ref.hasOwnConfig,
       hasOwnConfig = _ref$hasOwnConfig === undefined ? false : _ref$hasOwnConfig,
       defaultScreenConfig = _ref.screenConfig,
       _ref$hasRemoteConfig = _ref.hasRemoteConfig,
-      hasRemoteConfig = _ref$hasRemoteConfig === undefined ? false : _ref$hasRemoteConfig;
+      hasRemoteConfig = _ref$hasRemoteConfig === undefined ? false : _ref$hasRemoteConfig,
+      rest = (0, _objectWithoutProperties3.default)(_ref, ["path", "screenKey", "hasOwnConfig", "screenConfig", "hasRemoteConfig"]);
   return function (Screen) {
     var ScreenWrapper = function (_React$Component) {
       (0, _inherits3.default)(ScreenWrapper, _React$Component);
@@ -70,11 +72,11 @@ var screenHoc = function screenHoc(_ref) {
         _this.handleScreenConfigurationFieldChange = function () {
           var sreenKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
           var componentJsonpath = arguments[1];
-          var jsonPath = arguments[2];
+          var jsonPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "value";
           var value = arguments[3];
           var handleScreenConfigurationFieldChange = _this.props.handleScreenConfigurationFieldChange;
 
-          handleScreenConfigurationFieldChange(screenKey, componentJsonpath, "value", value);
+          handleScreenConfigurationFieldChange(screenKey, componentJsonpath, jsonPath, value);
         };
 
         _this.onClick = function (onClickDefination) {
@@ -111,7 +113,6 @@ var screenHoc = function screenHoc(_ref) {
               _setRoute(_path);
               break;
             default:
-
           }
         };
 

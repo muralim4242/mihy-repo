@@ -37,7 +37,8 @@ var RenderScreen = function RenderScreen(_ref) {
         props = _components$component.props,
         onClickDefination = _components$component.onClickDefination,
         gridDefination = _components$component.gridDefination,
-        visible = _components$component.visible;
+        visible = _components$component.visible,
+        type = _components$component.type;
 
     var extraProps = jsonPath ? {
       onChange: function onChange(e) {
@@ -49,6 +50,14 @@ var RenderScreen = function RenderScreen(_ref) {
         onClick: function onClick(e) {
           onComponentClick(onClickDefination, componentJsonpath);
         }
+      });
+    }
+    if (type && type === "array") {
+      extraProps = (0, _extends3.default)({}, extraProps, {
+        onFieldChange: onFieldChange,
+        onComponentClick: onComponentClick,
+        uiFramework: rootFramework,
+        componentJsonpath: componentJsonpath
       });
     }
     if (!(0, _isEmpty2.default)(components[componentKey].children)) {

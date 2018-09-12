@@ -5,26 +5,32 @@ import {
   handleScreenConfigurationFieldChange,
   submitForm
 } from "../ui-redux/screen-configuration/actions";
-import {
-  setRoute
-} from "../ui-redux/app/actions";
+import { setRoute } from "../ui-redux/app/actions";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import { addComponentJsonpath } from "../ui-utils";
-// import $ from "jquery";
+import $ from "jquery";
 
-const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConfig:defaultScreenConfig,hasRemoteConfig=false}) => Screen => {
+const screenHoc = ({
+  path = "",
+  screenKey,
+  hasOwnConfig = false,
+  screenConfig: defaultScreenConfig,
+  hasRemoteConfig = false,
+  ...rest
+}) => Screen => {
   class ScreenWrapper extends React.Component {
     constructor(props) {
       super(props);
       const { initScreen } = props;
-      this.screenConfig={};
+      this.screenConfig = {};
       try {
-        const getConfig=(path,screenKey)=>{
-          return require(`ui-config/screens/specs/${path}/${screenKey}`).default;
-        }
+        const getConfig = (path, screenKey) => {
+          return require(`ui-config/screens/specs/${path}/${screenKey}`)
+            .default;
+        };
         if (hasOwnConfig) {
-          this.screenConfig=defaultScreenConfig ||{};
+          this.screenConfig = defaultScreenConfig || {};
         } else if (hasRemoteConfig) {
           // const url=`http://rawgit.com/muralim4242/mihy-repo/master/packages/ui-client-app/src/ui-config/screens/specs/${path}/${screenKey}.js`;
           // $.getScript(url, function( data, textStatus, jqxhr ) {
@@ -33,10 +39,9 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
           //     console.log( jqxhr.status ); // 200
           //     console.log( "Load was performed." );
           // });
-          this.screenConfig = getConfig(path,screenKey);
-        }
-        else {
-          this.screenConfig = getConfig(path,screenKey);
+          this.screenConfig = getConfig(path, screenKey);
+        } else {
+          this.screenConfig = getConfig(path, screenKey);
         }
         if (!isEmpty(this.screenConfig)) {
           addComponentJsonpath(this.screenConfig.components);
@@ -51,48 +56,65 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
     handleScreenConfigurationFieldChange = (
       sreenKey = "",
       componentJsonpath,
-      jsonPath,
+      jsonPath="value",
       value
     ) => {
       const { handleScreenConfigurationFieldChange } = this.props;
       handleScreenConfigurationFieldChange(
         screenKey,
         componentJsonpath,
-        "value",
+        jsonPath,
         value
       );
     };
 
-    onClick=(onClickDefination,componentJsonpath="")=>{
+    onClick = (onClickDefination, componentJsonpath = "") => {
       switch (onClickDefination.action) {
         case "submit":
-          const {submitForm}=this.props;
-          const {method,endPoint,purpose,redirectionUrl,bodyObjectsJsonPaths,queryObjectJsonPath}=onClickDefination;
-          submitForm(screenKey,method,endPoint,purpose,redirectionUrl,bodyObjectsJsonPaths||{},queryObjectJsonPath||[]);
+          const { submitForm } = this.props;
+          const {
+            method,
+            endPoint,
+            purpose,
+            redirectionUrl,
+            bodyObjectsJsonPaths,
+            queryObjectJsonPath
+          } = onClickDefination;
+          submitForm(
+            screenKey,
+            method,
+            endPoint,
+            purpose,
+            redirectionUrl,
+            bodyObjectsJsonPaths || {},
+            queryObjectJsonPath || []
+          );
           break;
         case "condition":
-          const {state,dispatchAction}=this.props;
-          const configObject=get(this.screenConfig,componentJsonpath);
-          const {callBack}=configObject.onClickDefination;
-          if (typeof callBack==="function") {
-            callBack(state,dispatchAction);
+          const { state, dispatchAction } = this.props;
+          const configObject = get(this.screenConfig, componentJsonpath);
+          const { callBack } = configObject.onClickDefination;
+          if (typeof callBack === "function") {
+            callBack(state, dispatchAction);
           }
           break;
         case "page_change":
-          const {setRoute}=this.props;
-          const {path} =onClickDefination;
-          setRoute(path)
+          const { setRoute } = this.props;
+          const { path } = onClickDefination;
+          setRoute(path);
           break;
         default:
-
       }
-    }
+    };
 
     render() {
       const { screenConfig } = this.props;
-      const { [screenKey]: currentScreenConfig ,preparedFinalObject} = screenConfig;
+      const {
+        [screenKey]: currentScreenConfig,
+        preparedFinalObject
+      } = screenConfig;
       if (currentScreenConfig) {
-        const { handleScreenConfigurationFieldChange,onClick } = this;
+        const { handleScreenConfigurationFieldChange, onClick } = this;
         const { uiFramework, components, name } = currentScreenConfig;
         return (
           <Screen
@@ -110,10 +132,10 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
     }
   }
 
-  const mapStateToProps = (state) => {
-    const {screenConfiguration}=state;
-    const { screenConfig,preparedFinalObject } = screenConfiguration;
-    return { screenConfig,preparedFinalObject,state};
+  const mapStateToProps = state => {
+    const { screenConfiguration } = state;
+    const { screenConfig, preparedFinalObject } = screenConfiguration;
+    return { screenConfig, preparedFinalObject, state };
   };
 
   const mapDispatchToProps = dispatch => {
@@ -152,8 +174,8 @@ const screenHoc = ({ path = "", screenKey, ...rest,hasOwnConfig=false,screenConf
         ),
       initScreen: (screenKey, screenConfig) =>
         dispatch(initScreen(screenKey, screenConfig)),
-      dispatchAction:dispatch,
-      setRoute:(path)=>dispatch(setRoute(path))
+      dispatchAction: dispatch,
+      setRoute: path => dispatch(setRoute(path))
     };
   };
 
