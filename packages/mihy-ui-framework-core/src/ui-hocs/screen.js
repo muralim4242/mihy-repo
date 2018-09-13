@@ -54,16 +54,16 @@ const screenHoc = ({
     }
 
     handleScreenConfigurationFieldChange = (
-      sreenKey = "",
+      screenKey,
       componentJsonpath,
-      jsonPath="value",
+      property,
       value
     ) => {
       const { handleScreenConfigurationFieldChange } = this.props;
       handleScreenConfigurationFieldChange(
         screenKey,
         componentJsonpath,
-        jsonPath,
+        property,
         value
       );
     };
@@ -144,14 +144,14 @@ const screenHoc = ({
       handleScreenConfigurationFieldChange: (
         screenKey,
         componentJsonpath,
-        jsonPath,
+        property,
         value
       ) =>
         dispatch(
           handleScreenConfigurationFieldChange(
             screenKey,
             componentJsonpath,
-            jsonPath,
+            property,
             value
           )
         ),

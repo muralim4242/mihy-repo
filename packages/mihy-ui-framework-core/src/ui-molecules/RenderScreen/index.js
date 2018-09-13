@@ -19,7 +19,7 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
         let extraProps = jsonPath
           ? {
               onChange: e => {
-                onFieldChange("", componentJsonpath, jsonPath, e.target.value);
+                onFieldChange(screenKey, componentJsonpath, "value", e.target.value);
               }
             }
           : {};

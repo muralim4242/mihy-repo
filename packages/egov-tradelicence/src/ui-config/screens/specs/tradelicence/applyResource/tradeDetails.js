@@ -63,8 +63,9 @@ const accessoriesCard = {
         accessoriesUOM: getTextField(
           "UOM (Unit of Measurement)",
           "UOM",
-          false,
-          ""
+          true,
+          "",
+          "tradeDetails[0].unit"
         ),
         accessoriesUOMValue: getTextField(
           "UOM Value",

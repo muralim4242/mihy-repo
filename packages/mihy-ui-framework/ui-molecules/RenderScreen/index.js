@@ -43,7 +43,7 @@ var RenderScreen = function RenderScreen(_ref) {
 
     var extraProps = jsonPath ? {
       onChange: function onChange(e) {
-        onFieldChange("", componentJsonpath, jsonPath, e.target.value);
+        onFieldChange(screenKey, componentJsonpath, "value", e.target.value);
       }
     } : {};
     if (onClickDefination) {

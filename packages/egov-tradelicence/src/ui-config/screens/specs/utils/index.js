@@ -99,10 +99,11 @@ export const getTextField = (
   placeholder,
   required,
   pattern,
+  jsonPath="",
   gridDefination = {
     xs: 12,
     sm: 6
-  }
+  },
 ) => {
   return {
     uiFramework: "material-ui",
@@ -118,7 +119,8 @@ export const getTextField = (
     },
     gridDefination,
     required,
-    pattern
+    pattern,
+    jsonPath
   };
 };
 
