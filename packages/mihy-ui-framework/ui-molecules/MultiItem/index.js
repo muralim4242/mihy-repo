@@ -48,9 +48,9 @@ var _IconButton = require("@material-ui/core/IconButton");
 
 var _IconButton2 = _interopRequireDefault(_IconButton);
 
-var _Clear = require("@material-ui/icons/Clear");
+var _Icon = require("../../ui-atoms/Icon");
 
-var _Clear2 = _interopRequireDefault(_Clear);
+var _Icon2 = _interopRequireDefault(_Icon);
 
 var _reactRedux = require("react-redux");
 
@@ -98,8 +98,8 @@ var MultiItem = function (_React$Component) {
 
       var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
       var itemsLength = items.length;
-      (0, _set2.default)(scheama, headerJsonPath, headerName + " " + itemsLength);
-      addItem(screenKey, componentJsonpath, "props.items[" + itemsLength + "].item" + itemsLength, scheama);
+      (0, _set2.default)(scheama, headerJsonPath, headerName + " - " + (itemsLength + 1));
+      addItem(screenKey, componentJsonpath, "props.items[" + itemsLength + "].item" + itemsLength, JSON.parse(JSON.stringify(scheama)));
     }, _this.removeItem = function (index) {
       var _this$props2 = _this.props,
           removeItem = _this$props2.onFieldChange,
@@ -124,7 +124,8 @@ var MultiItem = function (_React$Component) {
           id = _props.id,
           uiFramework = _props.uiFramework,
           onFieldChange = _props.onFieldChange,
-          onComponentClick = _props.onComponentClick;
+          onComponentClick = _props.onComponentClick,
+          hasAddItem = _props.hasAddItem;
       var addItem = this.addItem,
           removeItem = this.removeItem;
 
@@ -147,7 +148,7 @@ var MultiItem = function (_React$Component) {
                   { style: { marginBottom: "-110px" }, onClick: function onClick(e) {
                       return removeItem(key);
                     }, "aria-label": "Remove" },
-                  _react2.default.createElement(_Clear2.default, null)
+                  _react2.default.createElement(_Icon2.default, { iconName: "clear" })
                 )
               )
             ),
@@ -160,7 +161,7 @@ var MultiItem = function (_React$Component) {
             })
           );
         }),
-        _react2.default.createElement(
+        hasAddItem !== false && _react2.default.createElement(
           _Container2.default,
           { style: { marginTop: "8px" } },
           _react2.default.createElement(
@@ -171,6 +172,7 @@ var MultiItem = function (_React$Component) {
               { onClick: function onClick(e) {
                   return addItem();
                 }, color: "primary" },
+              _react2.default.createElement(_Icon2.default, { iconName: "add" }),
               addItemLabel
             )
           )

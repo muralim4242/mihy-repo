@@ -84,7 +84,6 @@ const accessoriesCard = {
   type: "array"
 };
 
-
 export const tradeDetails = getCommonCard({
   header: getCommonTitle("Please Provide Trade Details"),
   paragraph: getCommonParagraph(

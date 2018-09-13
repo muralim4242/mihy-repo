@@ -5,7 +5,7 @@ import Container from "../../ui-atoms/Layout/Container";
 import Item from "../../ui-atoms/Layout/Item";
 import Button from "../../ui-atoms/Button";
 import IconButton from '@material-ui/core/IconButton';
-import RemoveIcon from '@material-ui/icons/Clear';
+import Icon from "../../ui-atoms/Icon";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import set from "lodash/set";
@@ -23,8 +23,8 @@ class MultiItem extends React.Component {
     const { onFieldChange: addItem,screenKey, scheama, componentJsonpath,headerName, headerJsonPath,screenConfig} = this.props;
     const items=get(screenConfig,`${screenKey}.${componentJsonpath}.props.items`);
     const itemsLength=items.length;
-    set(scheama,headerJsonPath,`${headerName} ${itemsLength}`)
-    addItem(screenKey, componentJsonpath, `props.items[${itemsLength}].item${itemsLength}`, scheama);
+    set(scheama,headerJsonPath,`${headerName} - ${itemsLength+1}`)
+    addItem(screenKey, componentJsonpath, `props.items[${itemsLength}].item${itemsLength}`, JSON.parse(JSON.stringify(scheama)));
   };
 
   removeItem = (index) => {
@@ -43,7 +43,8 @@ class MultiItem extends React.Component {
       id,
       uiFramework,
       onFieldChange,
-      onComponentClick
+      onComponentClick,
+      hasAddItem
     } = this.props;
     const { addItem ,removeItem} = this;
     return (
@@ -56,7 +57,7 @@ class MultiItem extends React.Component {
                 {items.length>1 && <Container>
                   <Item xs={12} align="right">
                     <IconButton style={{marginBottom:"-110px"}} onClick={e => removeItem(key)} aria-label="Remove">
-                      <RemoveIcon/>
+                      <Icon iconName="clear"/>
                     </IconButton>
                   </Item>
                 </Container>}
@@ -70,13 +71,14 @@ class MultiItem extends React.Component {
               </Div>
             );
           })}
-        <Container style={{marginTop:"8px"}}>
+        {hasAddItem!==false && <Container style={{marginTop:"8px"}}>
           <Item xs={12} align="right">
             <Button onClick={e => addItem()} color="primary">
+              <Icon iconName="add"/>
               {addItemLabel}
             </Button>
           </Item>
-        </Container>
+        </Container>}
       </Div>
     );
   }
