@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -62,7 +66,7 @@ var _set = require("lodash/set");
 
 var _set2 = _interopRequireDefault(_set);
 
-var _actions = require("../../ui-redux/screen-configuration/actions");
+var _uiUtils = require("../../ui-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -99,7 +103,7 @@ var MultiItem = function (_React$Component) {
       var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
       var itemsLength = items.length;
       (0, _set2.default)(scheama, headerJsonPath, headerName + " - " + (itemsLength + 1));
-      addItem(screenKey, componentJsonpath, "props.items[" + itemsLength + "].item" + itemsLength, JSON.parse(JSON.stringify(scheama)));
+      addItem(screenKey, componentJsonpath, "props.items[" + itemsLength + "]", JSON.parse(JSON.stringify((0, _uiUtils.addComponentJsonpath)((0, _defineProperty3.default)({}, "item" + itemsLength, scheama), componentJsonpath + ".props.items[" + itemsLength + "]"))));
     }, _this.removeItem = function (index) {
       var _this$props2 = _this.props,
           removeItem = _this$props2.onFieldChange,
@@ -125,7 +129,8 @@ var MultiItem = function (_React$Component) {
           uiFramework = _props.uiFramework,
           onFieldChange = _props.onFieldChange,
           onComponentClick = _props.onComponentClick,
-          hasAddItem = _props.hasAddItem;
+          hasAddItem = _props.hasAddItem,
+          screenKey = _props.screenKey;
       var addItem = this.addItem,
           removeItem = this.removeItem;
 
@@ -154,6 +159,7 @@ var MultiItem = function (_React$Component) {
             ),
             _react2.default.createElement(_RenderScreen2.default, {
               key: key,
+              screenKey: screenKey,
               components: item,
               uiFramework: uiFramework,
               onFieldChange: onFieldChange,

@@ -9,7 +9,7 @@ import Icon from "../../ui-atoms/Icon";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import set from "lodash/set";
-import { handleScreenConfigurationFieldChange } from "../../ui-redux/screen-configuration/actions";
+import {addComponentJsonpath} from "../../ui-utils";
 
 class MultiItem extends React.Component {
   componentDidMount = () => {
@@ -24,7 +24,7 @@ class MultiItem extends React.Component {
     const items=get(screenConfig,`${screenKey}.${componentJsonpath}.props.items`);
     const itemsLength=items.length;
     set(scheama,headerJsonPath,`${headerName} - ${itemsLength+1}`)
-    addItem(screenKey, componentJsonpath, `props.items[${itemsLength}].item${itemsLength}`, JSON.parse(JSON.stringify(scheama)));
+    addItem(screenKey, componentJsonpath, `props.items[${itemsLength}]`, JSON.parse(JSON.stringify(addComponentJsonpath({[`item${itemsLength}`]:scheama},`${componentJsonpath}.props.items[${itemsLength}]`))));
   };
 
   removeItem = (index) => {
@@ -44,7 +44,8 @@ class MultiItem extends React.Component {
       uiFramework,
       onFieldChange,
       onComponentClick,
-      hasAddItem
+      hasAddItem,
+      screenKey
     } = this.props;
     const { addItem ,removeItem} = this;
     return (
@@ -63,6 +64,7 @@ class MultiItem extends React.Component {
                 </Container>}
                 <RenderScreen
                   key={key}
+                  screenKey={screenKey}
                   components={item}
                   uiFramework={uiFramework}
                   onFieldChange={onFieldChange}
