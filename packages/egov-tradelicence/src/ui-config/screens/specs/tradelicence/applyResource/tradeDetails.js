@@ -22,22 +22,47 @@ const multipleTradeUnitCard =
         "Trade Category",
         "Select Trade Category",
         true,
-        ""
+        "",
+        {
+          xs: 12,
+          sm: 4
+        }
       ),
       tradeType: getSelectTextField(
         "Trade  Type",
         "Select Trade Type",
         true,
-        ""
+        "",
+        {
+          xs: 12,
+          sm: 4
+        }
       ),
       tradeSubType: getSelectTextField(
         "Trade Sub-Type",
         "Select Trade Sub-Type",
         true,
-        ""
+        "",
+        {
+          xs: 12,
+          sm: 4
+        }
       ),
-      tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, ""),
-      tradeUOMValue: getTextField("UOM Value", "Enter UOM Value", true, "")
+      tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, "", "", {
+        xs: 12,
+        sm: 4
+      }),
+      tradeUOMValue: getTextField(
+        "UOM Value",
+        "Enter UOM Value",
+        true,
+        "",
+        "",
+        {
+          xs: 12,
+          sm: 4
+        }
+      )
     })
   });
 //     ,
@@ -58,20 +83,33 @@ const accessoriesCard = {
           "Accessories",
           "Select Accessories",
           false,
-          ""
+          "",
+          {
+            xs: 12,
+            sm: 4
+          }
         ),
         accessoriesUOM: getTextField(
           "UOM (Unit of Measurement)",
           "UOM",
           true,
           "",
-          "tradeDetails[0].unit"
+          "tradeDetails[0].unit",
+          {
+            xs: 12,
+            sm: 4
+          }
         ),
         accessoriesUOMValue: getTextField(
           "UOM Value",
           "Enter UOM Value",
           false,
-          ""
+          "",
+          "",
+          {
+            xs: 12,
+            sm: 4
+          }
         )
       })
     }),
@@ -97,15 +135,21 @@ export const tradeDetails = getCommonCard({
       true,
       ""
     ),
-    tradeTradeMobility: getSelectTextField(
-      "Trade Mobility",
-      "Select Trade Mobility",
-      true,
-      ""
-    ),
     tradeName: getTextField(
       "Name of Trade",
       "Example Diljit Da Dhaba",
+      true,
+      ""
+    ),
+    tradeStructureType: getSelectTextField(
+      "Structure Type",
+      "Select Structure Type",
+      true,
+      ""
+    ),
+    tradeStructureSubType: getSelectTextField(
+      "Structure Sub Type",
+      "Select Structure Sub Type",
       true,
       ""
     ),
