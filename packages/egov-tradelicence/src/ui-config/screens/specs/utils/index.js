@@ -99,11 +99,11 @@ export const getTextField = (
   placeholder,
   required,
   pattern,
-  jsonPath="",
+  jsonPath = "",
   gridDefination = {
     xs: 12,
     sm: 6
-  },
+  }
 ) => {
   return {
     uiFramework: "material-ui",
@@ -160,6 +160,12 @@ export const getCommonContainer = children => {
       container: true
     },
     children
+  };
+};
+
+export const getDivider = () => {
+  return {
+    componentPath: "Divider"
   };
 };
 

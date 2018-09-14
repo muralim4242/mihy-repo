@@ -5,7 +5,8 @@ import {
   getCommonSubHeader,
   getCommonParagraph,
   getCommonContainer,
-  getLabelWithValue
+  getLabelWithValue,
+  getDivider
 } from "../../utils";
 
 const reviewTradeDetails = getCommonGrayCard({
@@ -22,6 +23,7 @@ const reviewTradeDetails = getCommonGrayCard({
     reviewNoOfEmployee: getLabelWithValue("No of Employees", "200"),
     reviewGSTNo: getLabelWithValue("GST No.", "364565")
   }),
+  div1: getDivider(),
   viewTwo: getCommonContainer({
     reviewTradeCategory: getLabelWithValue("Trade Category", "Goods"),
     reviewTradeType: getLabelWithValue("Trade Type", "Value"),
@@ -32,11 +34,13 @@ const reviewTradeDetails = getCommonGrayCard({
     reviewTradeUOM: getLabelWithValue("UOM (Unit of Measurement)", "Sq Ft"),
     reviewTradeUOMValue: getLabelWithValue("UOM Value", "2000")
   }),
+  div2: getDivider(),
   viewThree: getCommonContainer({
     reviewAccessoryType: getLabelWithValue("Accesory Type", "Generator"),
     reviewAccessoryUOM: getLabelWithValue("UOM", "Watt"),
     reviewAccessoryUOMValue: getLabelWithValue("UOM Value", "5000")
   }),
+  div3: getDivider(),
   viewFour: getCommonContainer({
     reviewPropertyID: getLabelWithValue("Property Assessment ID", "456"),
     reviewElectricityNo: getLabelWithValue("Electricity Connection No.", "789"),
