@@ -10,42 +10,53 @@ class ComponentInterface extends React.Component {
   }
   componentDidMount() {
     const { componentPath, uiFramework } = this.props;
-    // ,visible
-    let LoadableComponent=null;
-    // if (visible!==false) {
-      switch (uiFramework) {
-        case "carbon":
-          LoadableComponent = Loadable({
-            loader: () =>
-              import("carbon-components-react").then(
-                module => module[componentPath]
-              ),
-            loading: () => <LinearProgress />
-          });
-          break;
-        case "custom-atoms":
-          LoadableComponent = Loadable({
-            loader: () =>
-              import("../../ui-atoms").then(module => module[componentPath]),
-            loading: () => <LinearProgress />
-          });
-          break;
-        case "custom-molecules":
-          LoadableComponent = Loadable({
-            loader: () =>
-              import("../../ui-molecules").then(module => module[componentPath]),
-            loading: () => <LinearProgress />
-          });
-          break;
-        case "material-ui":
-          LoadableComponent = Loadable({
-            loader: () =>
-              import("@material-ui/core").then(module => module[componentPath]),
-            loading: () => <LinearProgress />
-          });
-          break;
-      }
-    // }
+    let LoadableComponent = null;
+    switch (uiFramework) {
+      case "carbon":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("carbon-components-react").then(
+              module => module[componentPath]
+            ),
+          loading: () => <LinearProgress />
+        });
+        break;
+      case "custom-atoms":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("../../ui-atoms").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
+      case "custom-molecules":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("../../ui-molecules").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
+      // case "custom-atoms-local":
+      //   LoadableComponent = Loadable({
+      //     loader: () =>
+      //       import("ui-atoms").then(module => module[componentPath]),
+      //     loading: () => <LinearProgress />
+      //   });
+      //   break;
+      // case "custom-molecules-local":
+      //   LoadableComponent = Loadable({
+      //     loader: () =>
+      //       import("ui-molecules").then(module => module[componentPath]),
+      //     loading: () => <LinearProgress />
+      //   });
+      //   break;
+      case "material-ui":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("@material-ui/core").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
+    }
     this.setState({ module: LoadableComponent });
   }
 
@@ -61,10 +72,9 @@ class ComponentInterface extends React.Component {
     } = this.props;
     if (gridDefination) {
       return (
-        Component && visible!==false && (
-          <Item
-            {...gridDefination}
-          >
+        Component &&
+        visible !== false && (
+          <Item {...gridDefination}>
             <Component id={`${uiFramework}-${id}`} {...props}>
               {children && children}
             </Component>
@@ -73,11 +83,9 @@ class ComponentInterface extends React.Component {
       );
     } else {
       return (
-        Component && visible!==false && (
-          <Component
-            id={`${uiFramework}-${id}`}
-            {...props}
-          >
+        Component &&
+        visible !== false && (
+          <Component id={`${uiFramework}-${id}`} {...props}>
             {children && children}
           </Component>
         )

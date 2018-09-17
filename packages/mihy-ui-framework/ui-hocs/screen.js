@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -69,14 +73,10 @@ var screenHoc = function screenHoc(_ref) {
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (ScreenWrapper.__proto__ || Object.getPrototypeOf(ScreenWrapper)).call(this, props));
 
-        _this.handleScreenConfigurationFieldChange = function () {
-          var sreenKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-          var componentJsonpath = arguments[1];
-          var jsonPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "value";
-          var value = arguments[3];
+        _this.handleScreenConfigurationFieldChange = function (screenKey, componentJsonpath, property, value) {
           var handleScreenConfigurationFieldChange = _this.props.handleScreenConfigurationFieldChange;
 
-          handleScreenConfigurationFieldChange(screenKey, componentJsonpath, jsonPath, value);
+          handleScreenConfigurationFieldChange(screenKey, componentJsonpath, property, value);
         };
 
         _this.onClick = function (onClickDefination) {
@@ -156,20 +156,19 @@ var screenHoc = function screenHoc(_ref) {
               preparedFinalObject = screenConfig.preparedFinalObject;
 
           if (currentScreenConfig) {
+            var _React$createElement;
+
             var _handleScreenConfigurationFieldChange = this.handleScreenConfigurationFieldChange,
                 onClick = this.onClick;
             var uiFramework = currentScreenConfig.uiFramework,
                 components = currentScreenConfig.components,
                 name = currentScreenConfig.name;
 
-            return _react2.default.createElement(Screen, {
+            return _react2.default.createElement(Screen, (_React$createElement = {
               uiFramework: uiFramework,
-              components: components,
-              screenKey: name,
-              onFieldChange: _handleScreenConfigurationFieldChange,
-              onComponentClick: onClick,
-              preparedFinalObject: preparedFinalObject
-            });
+              screenKey: screenKey,
+              components: components
+            }, (0, _defineProperty3.default)(_React$createElement, "screenKey", name), (0, _defineProperty3.default)(_React$createElement, "onFieldChange", _handleScreenConfigurationFieldChange), (0, _defineProperty3.default)(_React$createElement, "onComponentClick", onClick), (0, _defineProperty3.default)(_React$createElement, "preparedFinalObject", preparedFinalObject), _React$createElement));
           } else {
             return null;
           }
@@ -188,8 +187,8 @@ var screenHoc = function screenHoc(_ref) {
 
     var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return {
-        handleScreenConfigurationFieldChange: function handleScreenConfigurationFieldChange(screenKey, componentJsonpath, jsonPath, value) {
-          return dispatch((0, _actions.handleScreenConfigurationFieldChange)(screenKey, componentJsonpath, jsonPath, value));
+        handleScreenConfigurationFieldChange: function handleScreenConfigurationFieldChange(screenKey, componentJsonpath, property, value) {
+          return dispatch((0, _actions.handleScreenConfigurationFieldChange)(screenKey, componentJsonpath, property, value));
         },
         submitForm: function submitForm(screenKey, method, endpoint, action) {
           var bodyObjectsJsonPaths = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];

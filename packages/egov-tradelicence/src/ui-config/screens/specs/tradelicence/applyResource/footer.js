@@ -1,4 +1,4 @@
-import { getLabel, dispatchMultipleFieldChangeAction } from "../../utils";
+import { getLabel, dispatchMultipleFieldChangeAction } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import get from "lodash/get";
 
 export const callBackForNext = (state, dispatch) => {

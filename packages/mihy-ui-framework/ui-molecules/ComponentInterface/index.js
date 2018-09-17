@@ -60,10 +60,8 @@ var ComponentInterface = function (_React$Component) {
       var _props = this.props,
           componentPath = _props.componentPath,
           uiFramework = _props.uiFramework;
-      // ,visible
 
       var LoadableComponent = null;
-      // if (visible!==false) {
       switch (uiFramework) {
         case "carbon":
           LoadableComponent = (0, _reactLoadable2.default)({
@@ -101,6 +99,20 @@ var ComponentInterface = function (_React$Component) {
             }
           });
           break;
+        // case "custom-atoms-local":
+        //   LoadableComponent = Loadable({
+        //     loader: () =>
+        //       import("ui-atoms").then(module => module[componentPath]),
+        //     loading: () => <LinearProgress />
+        //   });
+        //   break;
+        // case "custom-molecules-local":
+        //   LoadableComponent = Loadable({
+        //     loader: () =>
+        //       import("ui-molecules").then(module => module[componentPath]),
+        //     loading: () => <LinearProgress />
+        //   });
+        //   break;
         case "material-ui":
           LoadableComponent = (0, _reactLoadable2.default)({
             loader: function loader() {
@@ -114,7 +126,6 @@ var ComponentInterface = function (_React$Component) {
           });
           break;
       }
-      // }
       this.setState({ module: LoadableComponent });
     }
   }, {
@@ -143,9 +154,7 @@ var ComponentInterface = function (_React$Component) {
       } else {
         return Component && visible !== false && _react2.default.createElement(
           Component,
-          (0, _extends3.default)({
-            id: uiFramework + "-" + id
-          }, props),
+          (0, _extends3.default)({ id: uiFramework + "-" + id }, props),
           children && children
         );
       }

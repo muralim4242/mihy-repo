@@ -13,8 +13,9 @@ const styles = theme => ({
   appBar: {
     position: "absolute",
     [theme.breakpoints.up("md")]: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`
+      // marginLeft: drawerWidth,
+      // width: `calc(100% - ${drawerWidth}px)`,
+      zIndex:10000
     },
     background: "#ffffff",
     color: "rgba(0, 0, 0, 0.8700000047683716)"
@@ -35,9 +36,9 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit,
-    [theme.breakpoints.up("md")]: {
-      paddingLeft: drawerWidth + 10
-    }
+    // [theme.breakpoints.up("md")]: {
+    //   paddingLeft: drawerWidth + 10
+    // }
   }
 });
 

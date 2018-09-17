@@ -1,4 +1,4 @@
-import { appOptions } from "./dashboardResources/appOptions";
+import { donationProcessOptions } from "./donationProcessResources/donationProcessOptions";
 import { appOptionsCardsWithIcons } from "../utils";
 
 const screenConfig = {
@@ -21,7 +21,7 @@ const screenConfig = {
     //     ]
     //   }
     // },
-    mihyBloodDashboardAppCards: appOptionsCardsWithIcons(appOptions)
+    mihyBloodDashboardAppCards: appOptionsCardsWithIcons(donationProcessOptions)
   }
 };
 

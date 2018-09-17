@@ -5,7 +5,7 @@ import {
   getTextField,
   getSelectTextField,
   getCommonContainer
-} from "../../utils";
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 export const tradeLocationDetails = getCommonCard({
   header: getCommonTitle("Please Provide Trade Location Details"),

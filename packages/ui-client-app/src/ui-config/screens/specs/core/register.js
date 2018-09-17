@@ -1,136 +1,135 @@
+import {
+  getCommonCardWithHeader,
+  getLabel
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
+
 const screenConfig = {
   uiFramework: "material-ui",
   name: "mihyRegisterScreen",
   components: {
     mihyRegisterGrid: {
-      componentPath: "Grid",
+      uiFramework: "custom-atoms",
+      componentPath: "Container",
       children: {
         mihyEmptyRow: {
-          componentPath: "Grid",
+          uiFramework: "custom-atoms",
+          componentPath: "Item",
           props: {
-            item: true,
             sm: 4
           }
         },
         mihyRegisterItem: {
-          componentPath: "Grid",
+          uiFramework: "custom-atoms",
+          componentPath: "Item",
           props: {
-            item: true,
             sm: 4,
             xs: 12
           },
           children: {
-            mihyRegisterCard: {
-              componentPath: "Card",
-              children: {
-                mihyRegisterCardContent: {
-                  componentPath: "CardContent",
+            mihyRegisterCard: getCommonCardWithHeader(
+              {
+                mihyloginDiv: {
+                  uiFramework: "custom-atoms",
+                  componentPath: "Div",
+                  props: {
+                    className: "text-center"
+                  },
                   children: {
-                    mihyRegisterHeader: {
-                      componentPath: "Typography",
-                      children: {
-                        "mihy-login-header-text": {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Label",
-                          props: {
-                            label: "Register"
-                          }
+                    mihyRegisterUsername: {
+                      uiFramework: "custom-molecules",
+                      componentPath: "TextfieldWithIcon",
+                      props: {
+                        label: "Email",
+                        margin: "normal",
+                        fullWidth: true,
+                        autoFocus: true,
+                        required: true,
+                        iconObj: {
+                          position: "end",
+                          iconName: "email"
                         }
                       },
-                      props: {
-                        align: "center",
-                        variant: "title"
-                      }
+                      required: true,
+                      jsonPath: "body.mihy.username",
+                      pattern: "^([a-zA-Z0-9@.])+$"
                     },
-                    mihyloginDiv: {
-                      uiFramework: "custom-atoms",
-                      componentPath: "Div",
+                    mihyRegisterPassword: {
+                      uiFramework: "custom-molecules",
+                      componentPath: "TextfieldWithIcon",
                       props: {
-                        className: "text-center"
+                        label: "Password",
+                        type: "password",
+                        margin: "normal",
+                        fullWidth: true,
+                        required: true,
+                        iconObj: { position: "end", iconName: "lock" }
+                      },
+                      jsonPath: "body.mihy.password",
+                      required: true,
+                      pattern: "^([a-zA-Z0-9!])+$"
+                    },
+                    mihyRegisterConfirmPassword: {
+                      uiFramework: "custom-molecules",
+                      componentPath: "TextfieldWithIcon",
+                      props: {
+                        label: "Confirm password",
+                        type: "password",
+                        margin: "normal",
+                        fullWidth: true,
+                        required: true,
+                        iconObj: { position: "end", iconName: "confirmation_number" }
+                      },
+                      jsonPath: "body.mihy.password",
+                      required: true,
+                      pattern: "^([a-zA-Z0-9!])+$"
+                    },
+                    mihyBreakOne: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Break"
+                    },
+                    mihyBreakTwo: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Break"
+                    },
+                    mihyRegisterButton: {
+                      componentPath: "Button",
+                      props: {
+                        color: "primary",
+                        fullWidth: true
                       },
                       children: {
-                        mihyRegisterUsername: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Email",
-                            margin: "normal",
-                            fullWidth: true,
-                            autoFocus: true,
-                            required: true
-                          },
-                          required:true,
-                          jsonPath: "body.mihy.username",
-                          pattern: "^([a-zA-Z0-9@.])+$"
-                        },
-                        mihyRegisterPassword: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Password",
-                            type: "password",
-                            margin: "normal",
-                            fullWidth: true,
-                            required: true
-                          },
-                          jsonPath: "body.mihy.password",
-                          required: true,
-                          pattern: "^([a-zA-Z0-9!])+$"
-                        },
-                        mihyRegisterConfirmPassword: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Confirm Password",
-                            type: "password",
-                            margin: "normal",
-                            fullWidth: true,
-                            required: true
-                          },
-                          jsonPath: "body.mihy.confirm",
-                          required: true,
-                          pattern: "^([a-zA-Z0-9!])+$"
-                        },
-                        mihyBreakOne: {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Break"
-                        },
-                        mihyBreakTwo: {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Break"
-                        },
-                        mihyRegisterButton: {
-                          componentPath: "Button",
-                          props: {
-                            variant: "contained",
-                            color: "primary",
-                            fullWidth: true
-                          },
-                          children: {
-                            mihyRegisterButtonText: {
-                              uiFramework: "custom-atoms",
-                              componentPath: "Label",
-                              props: {
-                                label: "Register"
-                              }
-                            }
-                          },
-                          onClickDefination:{
-                            action:"submit",
-                            method:"get",
-                            endPoint:"afbc.com",
-                            purpose:"authLogin",
-                            redirectionUrl:"/"
-                          }
-                        }
+                        mihyRegisterButtonText: getLabel("Let's go")
                       }
+                      // onClickDefination:{
+                      //   action:"submit",
+                      //   method:"get",
+                      //   endPoint:"afbc.com",
+                      //   purpose:"authRegister",
+                      //   redirectionUrl:"/"
+                      // }
                     }
                   }
                 }
               },
-              props: { classes: { root: "container-margin" } }
-            }
+              {
+                mihyRegisterHeader: {
+                  componentPath: "Typography",
+                  children: {
+                    mihyRegisterHeaderText: getLabel("Register")
+                  },
+                  props: {
+                    align: "center",
+                    variant: "title",
+                    style: {
+                      color: "white"
+                    }
+                  }
+                }
+              }
+            )
           }
         }
-      },
-      props: { container: true }
+      }
     }
   }
 };

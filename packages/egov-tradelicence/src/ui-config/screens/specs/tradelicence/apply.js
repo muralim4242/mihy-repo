@@ -4,7 +4,7 @@ import {
   getCommonCard,
   getCommonTitle,
   getCommonParagraph
-} from "../utils";
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import { footer } from "./applyResource/footer";
 import { tradeReviewDetails } from "./applyResource/tradeReviewDetails";

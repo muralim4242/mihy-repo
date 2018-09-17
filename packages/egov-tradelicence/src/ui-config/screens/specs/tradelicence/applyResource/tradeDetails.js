@@ -7,7 +7,7 @@ import {
   getTextField,
   getSelectTextField,
   getCommonContainer
-} from "../../utils";
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 const multipleTradeUnitCard =
   // {

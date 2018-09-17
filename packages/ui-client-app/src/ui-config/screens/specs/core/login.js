@@ -1,127 +1,120 @@
+import {
+  getCommonCardWithHeader,
+  getLabel
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
+
 const screenConfig = {
   uiFramework: "material-ui",
   name: "mihyLoginScreen",
   components: {
     mihyLoginGrid: {
-      componentPath: "Grid",
+      uiFramework: "custom-atoms",
+      componentPath: "Container",
       children: {
         mihyEmptyRow: {
-          componentPath: "Grid",
+          uiFramework: "custom-atoms",
+          componentPath: "Item",
           props: {
-            item: true,
             sm: 4
           }
         },
         mihyLoginItem: {
-          componentPath: "Grid",
+          uiFramework: "custom-atoms",
+          componentPath: "Item",
           props: {
-            item: true,
             sm: 4,
             xs: 12
           },
           children: {
-            mihyLoginCard: {
-              componentPath: "Card",
-              children: {
-                mihyLoginCardContent: {
-                  componentPath: "CardContent",
+            mihyLoginCard: getCommonCardWithHeader(
+              {
+                mihyloginDiv: {
+                  uiFramework: "custom-atoms",
+                  componentPath: "Div",
+                  props: {
+                    className: "text-center"
+                  },
                   children: {
-                    mihyLoginHeader: {
-                      componentPath: "Typography",
-                      children: {
-                        "mihy-login-header-text": {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Label",
-                          props: {
-                            label: "Login"
-                          }
+                    mihyLoginUsername: {
+                      uiFramework: "custom-molecules",
+                      componentPath: "TextfieldWithIcon",
+                      props: {
+                        label: "Email",
+                        margin: "normal",
+                        fullWidth: true,
+                        autoFocus: true,
+                        required: true,
+                        iconObj: {
+                          position: "end",
+                          iconName: "email"
                         }
                       },
-                      props: {
-                        align: "center",
-                        variant: "title"
-                      }
+                      required: true,
+                      jsonPath: "body.mihy.username",
+                      pattern: "^([a-zA-Z0-9@.])+$"
                     },
-                    mihyloginDiv: {
-                      uiFramework: "custom-atoms",
-                      componentPath: "Div",
+                    mihyLoginPassword: {
+                      uiFramework: "custom-molecules",
+                      componentPath: "TextfieldWithIcon",
                       props: {
-                        className: "text-center"
+                        label: "Password",
+                        type: "password",
+                        margin: "normal",
+                        fullWidth: true,
+                        required: true,
+                        iconObj: { position: "end", iconName: "lock" }
+                      },
+                      jsonPath: "body.mihy.password",
+                      required: true,
+                      pattern: "^([a-zA-Z0-9!])+$"
+                    },
+                    mihyBreakOne: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Break"
+                    },
+                    mihyBreakTwo: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Break"
+                    },
+                    mihyLoginButton: {
+                      componentPath: "Button",
+                      props: {
+                        color: "primary",
+                        fullWidth: true
                       },
                       children: {
-                        mihyLoginUsername: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Email",
-                            margin: "normal",
-                            fullWidth: true,
-                            autoFocus: true,
-                            required: true
-                          },
-                          required:true,
-                          jsonPath: "body.mihy.username",
-                          pattern: "^([a-zA-Z0-9@.])+$",
-                          // gridDefination:{
-                          //   xs:12,
-                          //   sm:6
-                          // }
-                        },
-                        mihyLoginPassword: {
-                          componentPath: "TextField",
-                          props: {
-                            label: "Password",
-                            type: "password",
-                            margin: "normal",
-                            fullWidth: true,
-                            required: true
-                          },
-                          jsonPath: "body.mihy.password",
-                          required: true,
-                          pattern: "^([a-zA-Z0-9!])+$"
-                        },
-                        mihyBreakOne: {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Break"
-                        },
-                        mihyBreakTwo: {
-                          uiFramework: "custom-atoms",
-                          componentPath: "Break"
-                        },
-                        mihyLoginButton: {
-                          componentPath: "Button",
-                          props: {
-                            variant: "contained",
-                            color: "primary",
-                            fullWidth: true
-                          },
-                          children: {
-                            mihyLoginButtonText: {
-                              uiFramework: "custom-atoms",
-                              componentPath: "Label",
-                              props: {
-                                label: "Login"
-                              }
-                            }
-                          },
-                          onClickDefination:{
-                            action:"submit",
-                            method:"get",
-                            endPoint:"afbc.com",
-                            purpose:"authLogin",
-                            redirectionUrl:"/"
-                          }
-                        }
+                        mihyLoginButtonText: getLabel("Let's go")
                       }
+                      // onClickDefination:{
+                      //   action:"submit",
+                      //   method:"get",
+                      //   endPoint:"afbc.com",
+                      //   purpose:"authLogin",
+                      //   redirectionUrl:"/"
+                      // }
                     }
                   }
                 }
               },
-              props: { classes: { root: "container-margin" } }
-            }
+              {
+                mihyLoginHeader: {
+                  componentPath: "Typography",
+                  children: {
+                    mihyLoginHeaderText: getLabel("Login")
+                  },
+                  props: {
+                    align: "center",
+                    variant: "title",
+                    style: {
+                      color: "white"
+                    }
+                  }
+                }
+              }
+            )
           }
         }
-      },
-      props: { container: true }
+      }
     }
   }
 };

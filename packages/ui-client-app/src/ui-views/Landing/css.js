@@ -19,7 +19,7 @@ const styles = theme => ({
     // borderBottomLeftRadius: "50%",
     // borderBottomRightRadius: "50%",
     // height: "200px",
-    background:"#2e73ab"
+    // background:"#2e73ab"
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -36,7 +36,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: "16px",
+    // padding: "16px",
     // [theme.breakpoints.up('md')]: {
     //   paddingLeft: drawerWidth+10,
     // },

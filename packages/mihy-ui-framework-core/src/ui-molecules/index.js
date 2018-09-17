@@ -69,6 +69,21 @@ const MultiItem = Loadable({
   loading: () => <Loading />
 });
 
+const Carousel = Loadable({
+  loader: () => import("./Carousel")  ,
+  loading: () => <Loading />
+});
+
+const StepperStaticVertical = Loadable({
+  loader: () => import("./StepperStaticVertical")  ,
+  loading: () => <Loading />
+});
+
+const TextfieldWithIcon = Loadable({
+  loader: () => import("./TextfieldWithIcon")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -84,5 +99,8 @@ export {
   AppCarosel,
   AppSubOption,
   Stepper,
-  MultiItem
+  MultiItem,
+  Carousel,
+  StepperStaticVertical,
+  TextfieldWithIcon
 };
