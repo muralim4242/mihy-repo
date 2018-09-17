@@ -3,7 +3,7 @@ import {
   getSelectTextField,
   getCommonContainer,
   getCommonSubHeader
-} from "../../utils";
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 import { payeeDetails } from "./payeeDetails";
 
 export const chequeDetails = getCommonContainer({

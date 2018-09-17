@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -214,6 +214,12 @@ var getCommonContainer = exports.getCommonContainer = function getCommonContaine
       container: true
     },
     children: children
+  };
+};
+
+var getDivider = exports.getDivider = function getDivider() {
+  return {
+    componentPath: "Divider"
   };
 };
 

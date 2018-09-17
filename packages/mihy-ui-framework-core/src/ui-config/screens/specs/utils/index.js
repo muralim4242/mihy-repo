@@ -212,6 +212,12 @@ export const getCommonContainer = children => {
   };
 };
 
+export const getDivider = () => {
+  return {
+    componentPath: "Divider"
+  };
+};
+
 export const dispatchMultipleFieldChangeAction = (
   screenKey,
   actionDefination = [],

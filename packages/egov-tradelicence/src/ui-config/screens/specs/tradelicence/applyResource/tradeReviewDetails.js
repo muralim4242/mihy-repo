@@ -7,7 +7,7 @@ import {
   getCommonContainer,
   getLabelWithValue,
   getDivider
-} from "../../utils";
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 const reviewTradeDetails = getCommonGrayCard({
   header: getCommonSubHeader("Trade Details"),
