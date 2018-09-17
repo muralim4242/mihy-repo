@@ -149,14 +149,16 @@ export const getTextField = (
   required,
   pattern,
   jsonPath = "",
+  iconObj={},
   gridDefination = {
     xs: 12,
     sm: 6
-  }
+  },
 ) => {
   return {
-    uiFramework: "material-ui",
-    componentPath: "TextField",
+    // uiFramework: "material-ui",
+    uiFramework:"custom-molecules",
+    componentPath: "TextfieldWithIcon",
     props: {
       label,
       InputLabelProps: {
@@ -164,7 +166,8 @@ export const getTextField = (
       },
       placeholder,
       fullWidth: true,
-      required
+      required,
+      iconObj
     },
     gridDefination,
     required,
@@ -178,6 +181,8 @@ export const getSelectTextField = (
   placeholder,
   required,
   pattern,
+  jsonPath = "",
+  iconObj={},
   gridDefination = {
     xs: 12,
     sm: 6

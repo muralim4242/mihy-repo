@@ -158,14 +158,16 @@ var getLabel = exports.getLabel = function getLabel(label) {
 
 var getTextField = exports.getTextField = function getTextField(label, placeholder, required, pattern) {
   var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
-  var gridDefination = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {
+  var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
     xs: 12,
     sm: 6
   };
 
   return {
-    uiFramework: "material-ui",
-    componentPath: "TextField",
+    // uiFramework: "material-ui",
+    uiFramework: "custom-molecules",
+    componentPath: "TextfieldWithIcon",
     props: {
       label: label,
       InputLabelProps: {
@@ -173,7 +175,8 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
       },
       placeholder: placeholder,
       fullWidth: true,
-      required: required
+      required: required,
+      iconObj: iconObj
     },
     gridDefination: gridDefination,
     required: required,
@@ -183,7 +186,9 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
 };
 
 var getSelectTextField = exports.getSelectTextField = function getSelectTextField(label, placeholder, required, pattern) {
-  var gridDefination = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {
+  var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
+  var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
     xs: 12,
     sm: 6
   };

@@ -23,6 +23,8 @@ const multipleTradeUnitCard =
         "Select Trade Category",
         true,
         "",
+        "",
+        {},
         {
           xs: 12,
           sm: 4
@@ -33,6 +35,8 @@ const multipleTradeUnitCard =
         "Select Trade Type",
         true,
         "",
+        "",
+        {},
         {
           xs: 12,
           sm: 4
@@ -43,12 +47,14 @@ const multipleTradeUnitCard =
         "Select Trade Sub-Type",
         true,
         "",
+        "",
+        {},
         {
           xs: 12,
           sm: 4
         }
       ),
-      tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, "", "", {
+      tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, "", "",{}, {
         xs: 12,
         sm: 4
       }),
@@ -58,6 +64,7 @@ const multipleTradeUnitCard =
         true,
         "",
         "",
+        {},
         {
           xs: 12,
           sm: 4
@@ -84,6 +91,8 @@ const accessoriesCard = {
           "Select Accessories",
           false,
           "",
+          "",
+          {},
           {
             xs: 12,
             sm: 4
@@ -95,6 +104,7 @@ const accessoriesCard = {
           true,
           "",
           "tradeDetails[0].unit",
+          {},
           {
             xs: 12,
             sm: 4
@@ -106,6 +116,7 @@ const accessoriesCard = {
           false,
           "",
           "",
+          {},
           {
             xs: 12,
             sm: 4
@@ -157,7 +168,12 @@ export const tradeDetails = getCommonCard({
       "Trade Commencement Date",
       "Enter Trade Commencement Date",
       true,
-      ""
+      "",
+      "",
+      {
+        position:"end",
+        iconName:"date_range"
+      }
     ),
     tradeGSTNo: getTextField("Trade GST No.", "Enter Trade GST No.", false, ""),
     tradeOperationalArea: getTextField(

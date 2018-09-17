@@ -32,6 +32,10 @@ var _Icon = require('../../ui-atoms/Icon');
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
+var _isEmpty = require('lodash/isEmpty');
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function InputWithIcon(props) {
@@ -39,7 +43,7 @@ function InputWithIcon(props) {
       iconObj = props.iconObj,
       rest = (0, _objectWithoutProperties3.default)(props, ['label', 'iconObj']);
 
-  var extraProps = iconObj && (iconObj.position === "end" ? { InputProps: {
+  var extraProps = !(0, _isEmpty2.default)(iconObj) && (iconObj.position === "end" ? { InputProps: {
       endAdornment: _react2.default.createElement(
         _InputAdornment2.default,
         { position: 'end' },

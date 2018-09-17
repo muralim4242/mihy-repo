@@ -29,7 +29,12 @@ const OwnerInfoCard = {
           "Date of Birth",
           "Enter Date of Birth",
           true,
-          ""
+          "",
+          "",
+          {
+            position:"end",
+            iconName:"date_range"
+          }
         ),
         ownerEmail: getTextField("Email", "Enter Email", false, ""),
         ownerPAN: getTextField("PAN No.", "Enter Owner's PAN No.", false, ""),
