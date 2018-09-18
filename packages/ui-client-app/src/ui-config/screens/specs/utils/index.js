@@ -127,13 +127,15 @@ const appCardIconBoxStyle = (colorOne = "#ffa726", colorTwo = "#fb8c00") => {
 };
 
 export const getApps = app => {
+  const {name,onClickDefination}=app;
   return {
     componentPath: "Button",
     props: {
       variant: "contained",
       color:"primary"
     },
-    children: {[app.name]:getLabel(app.name)}
+    children: {[name]:getLabel(name)},
+    onClickDefination
   };
 };
 
@@ -143,8 +145,7 @@ export const appCardWithIcon = (
   iconColorOne,
   iconColorTwo,
   apps,
-  onClickDefinationLabel = {},
-  onClickDefinationIcon = {},
+  onClickDefination,
   gridDefination = { xs: 12, sm: 6 }
 ) => {
   return {
@@ -176,7 +177,6 @@ export const appCardWithIcon = (
                   }
                 }
               },
-              onClickDefination: onClickDefinationLabel,
               gridDefination: {
                 xs: 12
               }
@@ -195,7 +195,6 @@ export const appCardWithIcon = (
                   }
                 }
               },
-              onClickDefination: onClickDefinationIcon,
               gridDefination: {
                 xs: 12,
                 align: "center"
