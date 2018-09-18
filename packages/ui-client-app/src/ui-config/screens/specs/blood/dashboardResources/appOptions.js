@@ -16,7 +16,11 @@ export const appOptions = [
     displaySubLabel: "Only one file can be uploaded for one document.",
     iconName: "autorenew",
     iconColorOne:"#ef5350",
-    iconColorTwo:"#e53935"
+    iconColorTwo:"#e53935",
+    onClickDefination:{
+      action:"page_change",
+      path:"/landing/mihy-ui-framework/blood/donation-process"
+    }
   },
   {
     displayLabel: "Things need to know",

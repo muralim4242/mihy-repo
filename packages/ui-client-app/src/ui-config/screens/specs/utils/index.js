@@ -30,8 +30,7 @@ export const appOptionCardWithIcon = (
   iconName,
   iconColorOne,
   iconColorTwo,
-  onClickDefinationLabel = {},
-  onClickDefinationIcon = {},
+  onClickDefination={},
   gridDefination = { xs: 12, sm: 6 }
 ) => {
   return {
@@ -62,7 +61,6 @@ export const appOptionCardWithIcon = (
                   }
                 }
               },
-              onClickDefination: onClickDefinationLabel,
               gridDefination: {
                 xs: 4,
                 align: "left"
@@ -82,13 +80,13 @@ export const appOptionCardWithIcon = (
                   }
                 }
               },
-              onClickDefination: onClickDefinationIcon,
               gridDefination: {
                 xs: 8,
                 align: "right"
               }
             }
-          }
+          },
+          onClickDefination
         }
       })
     }
@@ -100,12 +98,13 @@ export const appOptionsCardsWithIcons = apps => {
     uiFramework: "custom-atoms",
     componentPath: "Container",
     children: apps.reduce((acc, obj, index) => {
-      const { displayLabel, iconName, iconColorOne, iconColorTwo } = obj;
+      const { displayLabel, iconName, iconColorOne, iconColorTwo,onClickDefination } = obj;
       acc[`app${index}`] = appOptionCardWithIcon(
         displayLabel,
         iconName,
         iconColorOne,
-        iconColorTwo
+        iconColorTwo,
+        onClickDefination
       );
       return acc;
     }, {})
