@@ -11,6 +11,8 @@ import { tradeReviewDetails } from "./applyResource/tradeReviewDetails";
 import { tradeDetails } from "./applyResource/tradeDetails";
 import { tradeLocationDetails } from "./applyResource/tradeLocationDetails";
 import { tradeOwnerDetails } from "./applyResource/tradeOwnerDetails";
+import { documentList } from "./applyResource/documentList";
+
 
 const stepsData = ["Trade Details", "Owner Details", "Documents", "Summary"];
 const header = getCommonHeader("Application for New Trade License (2018-2019)");
@@ -22,7 +24,8 @@ const tradeDocumentDetails = getCommonCard({
   ),
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-  )
+  ),
+  documentList
 });
 
 const screenConfig = {

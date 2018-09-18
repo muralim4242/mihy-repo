@@ -18,7 +18,7 @@ function InputWithIcon(props) {
     {
       InputProps: {
         startAdornment: (
-          <InputAdornment position="end">
+          <InputAdornment position="start">
             <Icon iconName={iconObj.iconName} />
           </InputAdornment>
         ),

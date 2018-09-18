@@ -165,7 +165,6 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
   };
 
   return {
-    // uiFramework: "material-ui",
     uiFramework: "custom-molecules",
     componentPath: "TextfieldWithIcon",
     props: {

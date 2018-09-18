@@ -84,6 +84,21 @@ const TextfieldWithIcon = Loadable({
   loading: () => <Loading />
 });
 
+const StepperStaticVerticalWithTab = Loadable({
+  loader: () => import("./StepperStaticVerticalWithTab")  ,
+  loading: () => <Loading />
+});
+
+const TooltipWithChildren = Loadable({
+  loader: () => import("./TooltipWithChildren")  ,
+  loading: () => <Loading />
+});
+
+const DocumentList = Loadable({
+  loader: () => import("./DocumentList")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -102,5 +117,8 @@ export {
   MultiItem,
   Carousel,
   StepperStaticVertical,
-  TextfieldWithIcon
+  TextfieldWithIcon,
+  StepperStaticVerticalWithTab,
+  TooltipWithChildren,
+  DocumentList
 };

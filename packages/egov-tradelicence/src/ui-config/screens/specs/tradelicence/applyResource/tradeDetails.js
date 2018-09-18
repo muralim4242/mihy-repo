@@ -9,6 +9,10 @@ import {
   getCommonContainer
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
+import {
+  getTooltip
+} from "../../utils";
+
 const multipleTradeUnitCard =
   // {
   //   uiFramework: "custom-molecules",
@@ -84,7 +88,7 @@ const accessoriesCard = {
   componentPath: "MultiItem",
   props: {
     scheama: getCommonGrayCard({
-      header: getCommonSubHeader("Accessories"),
+      header:getCommonSubHeader("Accessories"),
       accessoriesCardContainer: getCommonContainer({
         accessoriesName: getSelectTextField(
           "Accessories",

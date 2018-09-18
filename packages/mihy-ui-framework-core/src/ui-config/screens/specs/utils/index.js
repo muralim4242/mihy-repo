@@ -156,7 +156,6 @@ export const getTextField = (
   },
 ) => {
   return {
-    // uiFramework: "material-ui",
     uiFramework:"custom-molecules",
     componentPath: "TextfieldWithIcon",
     props: {

@@ -53,7 +53,7 @@ function InputWithIcon(props) {
     InputProps: {
       startAdornment: _react2.default.createElement(
         _InputAdornment2.default,
-        { position: 'end' },
+        { position: 'start' },
         _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName })
       )
     }

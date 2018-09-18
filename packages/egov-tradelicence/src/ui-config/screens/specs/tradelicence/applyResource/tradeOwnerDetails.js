@@ -16,7 +16,7 @@ const OwnerInfoCard = {
     scheama: getCommonGrayCard({
       header: getCommonSubHeader("Owner Information"),
       tradeUnitCardContainer: getCommonContainer({
-        ownerMobileNo: getTextField("Mobile No.", "Enter Mobile No.", true, ""),
+        ownerMobileNo: getTextField("Mobile No.", "Enter Mobile No.", true, "","Trade[0].tradeDetails[0].owner[0].mobileNo"),
         ownerName: getTextField("Name", "Enter Name", true, ""),
         ownerFatherName: getTextField(
           "Father/Husband's Name",
