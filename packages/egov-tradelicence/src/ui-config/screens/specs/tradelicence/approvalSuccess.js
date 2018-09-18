@@ -1,5 +1,5 @@
 import { getCommonHeader } from "mihy-ui-framework/ui-config/screens/specs/utils";
-import { footer } from "./acknowledgementResource/paymentSuccessFooter";
+import { footer } from "./acknowledgementResource/approvalSuccessFooter";
 import getAcknowledgementCard from "./acknowledgementResource/acknowledgementUtils";
 
 const header = getCommonHeader("Trade License Application (2018-2019)");
@@ -20,7 +20,7 @@ const screenConfig = {
           uiFramework: "custom-atoms",
           componentPath: "Div",
           children: {
-            card: getAcknowledgementCard("success", "approve", "5343")
+            card: getAcknowledgementCard("approve", "success", "5343")
           }
         },
         footer

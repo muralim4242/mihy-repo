@@ -1,5 +1,5 @@
 import { getCommonHeader } from "mihy-ui-framework/ui-config/screens/specs/utils";
-import { footer } from "./acknowledgementResource/paymentSuccessFooter";
+import { footer } from "./acknowledgementResource/applicationSuccessFooter";
 import getAcknowledgementCard from "./acknowledgementResource/acknowledgementUtils";
 
 const header = getCommonHeader("Application for New Trade License (2018-2019)");
