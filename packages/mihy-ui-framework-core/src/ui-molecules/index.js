@@ -104,6 +104,11 @@ const FeesEstimateCard = Loadable({
   loading: () => <Loading />
 });
 
+const MultiDownloadCard = Loadable({
+  loader: () => import("./MultiDownloadCard")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -126,5 +131,6 @@ export {
   StepperStaticVerticalWithTab,
   TooltipWithChildren,
   DocumentList,
-  FeesEstimateCard
+  FeesEstimateCard,
+  MultiDownloadCard
 };
