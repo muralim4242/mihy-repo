@@ -43,7 +43,7 @@ class Landing extends React.Component {
     const drawer = (
       <Div>
         <Div className={classes.toolbar} />
-        <Divider />
+        
         <List>
           <ListItem button>
             <ListItemText primary="Home" />
