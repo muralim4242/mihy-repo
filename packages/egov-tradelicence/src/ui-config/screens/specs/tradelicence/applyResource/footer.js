@@ -1,17 +1,26 @@
-import { getLabel, dispatchMultipleFieldChangeAction } from "mihy-ui-framework/ui-config/screens/specs/utils";
+import {
+  getLabel,
+  dispatchMultipleFieldChangeAction
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 import get from "lodash/get";
 
 export const callBackForNext = (state, dispatch) => {
   changeStep(state, dispatch);
 };
 
-const changeStep = (state, dispatch, mode = "next") => {
+
+export const changeStep = (state, dispatch, mode = "next", defaultActiveStep = -1) => {
   let activeStep = get(
     state.screenConfiguration.screenConfig["apply"],
     "components.div.children.stepper.props.activeStep",
     0
   );
-  activeStep = mode === "next" ? activeStep + 1 : activeStep - 1;
+  if (defaultActiveStep === -1) {
+    activeStep = mode === "next" ? activeStep + 1 : activeStep - 1;
+  } else {
+    activeStep = defaultActiveStep;
+  }
+
   const isPreviousButtonVisible = activeStep > 0 ? true : false;
   const isNextButtonVisible = activeStep < 3 ? true : false;
   const isPayButtonVisible = activeStep === 3 ? true : false;

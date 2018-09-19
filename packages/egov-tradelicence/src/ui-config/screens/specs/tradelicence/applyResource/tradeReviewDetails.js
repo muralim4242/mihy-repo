@@ -6,11 +6,53 @@ import {
   getCommonParagraph,
   getCommonContainer,
   getLabelWithValue,
-  getDivider
+  getDivider,
+  getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
+import {changeStep} from "./footer";
+
 const reviewTradeDetails = getCommonGrayCard({
-  header: getCommonSubHeader("Trade Details"),
+  headerDiv:{
+    uiFramework: "custom-atoms",
+    componentPath: "Container",
+    children:{
+      header:{
+        gridDefination:{
+          xs:"12",
+          sm:"10"
+        },
+        ...getCommonSubHeader("Trade Details")
+      },
+      editSection:{
+        componentPath:"Button",
+        props:{
+          color:"primary"
+        },
+        gridDefination:{
+          xs:"12",
+          sm:"2",
+          align:"right"
+        },
+        children:{
+          editIcon:{
+            uiFramework:"custom-atoms",
+            componentPath:"Icon",
+            props:{
+              iconName:"edit"
+            }
+          },
+          buttonLabel:getLabel("Edit")
+        },
+        onClickDefination:{
+          action:"condition",
+          callBack:(state,dispatch)=>{
+            changeStep(state, dispatch, "", 0)
+          }
+        }
+      }
+    }
+  },
   viewOne: getCommonContainer({
     reviewLicenceType: getLabelWithValue("Licence Type", "Temporary"),
     reviewTradeName: getLabelWithValue("Trade Name", "Matchbox Packing Unit"),
@@ -57,7 +99,46 @@ const reviewTradeDetails = getCommonGrayCard({
 });
 
 const reviewOwnerDetails = getCommonGrayCard({
-  header: getCommonSubHeader("Owner Details"),
+  headerDiv:{
+    uiFramework: "custom-atoms",
+    componentPath: "Container",
+    children:{
+      header:{
+        gridDefination:{
+          xs:"12",
+          sm:"10"
+        },
+        ...getCommonSubHeader("Owner Details")
+      },
+      editSection:{
+        componentPath:"Button",
+        props:{
+          color:"primary"
+        },
+        gridDefination:{
+          xs:"12",
+          sm:"2",
+          align:"right"
+        },
+        children:{
+          editIcon:{
+            uiFramework:"custom-atoms",
+            componentPath:"Icon",
+            props:{
+              iconName:"edit"
+            }
+          },
+          buttonLabel:getLabel("Edit")
+        },
+        onClickDefination:{
+          action:"condition",
+          callBack:(state,dispatch)=>{
+            changeStep(state, dispatch, "", 1)
+          }
+        }
+      }
+    }
+  },
   viewFive: getCommonContainer({
     reviewOwnerName: getLabelWithValue("Name", "Satinder Singh"),
     reviewOwnerFatherName: getLabelWithValue(
@@ -78,7 +159,46 @@ const reviewOwnerDetails = getCommonGrayCard({
 });
 
 const reviewDocumentDetails = getCommonGrayCard({
-  header: getCommonSubHeader("Documents")
+  headerDiv:{
+    uiFramework: "custom-atoms",
+    componentPath: "Container",
+    children:{
+      header:{
+        gridDefination:{
+          xs:"12",
+          sm:"10"
+        },
+        ...getCommonSubHeader("Documents")
+      },
+      editSection:{
+        componentPath:"Button",
+        props:{
+          color:"primary"
+        },
+        gridDefination:{
+          xs:"12",
+          sm:"2",
+          align:"right"
+        },
+        children:{
+          editIcon:{
+            uiFramework:"custom-atoms",
+            componentPath:"Icon",
+            props:{
+              iconName:"edit"
+            }
+          },
+          buttonLabel:getLabel("Edit")
+        },
+        onClickDefination:{
+          action:"condition",
+          callBack:(state,dispatch)=>{
+            changeStep(state, dispatch, "", 2)
+          }
+        }
+      }
+    }
+  }
 });
 
 export const tradeReviewDetails = getCommonCard({
