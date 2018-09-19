@@ -8,6 +8,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _styles = require("@material-ui/core/styles");
 
 var _Card = require("@material-ui/core/Card");
@@ -77,7 +81,7 @@ var styles = {
 
 function totalAmount(arr) {
   return arr.map(function (item) {
-    return item.value;
+    return item.value ? item.value : 0;
   }).reduce(function (prev, next) {
     return prev + next;
   }, 0);
@@ -89,125 +93,159 @@ function FeesEstimateCard(props) {
 
   var total = totalAmount(estimate.fees);
   return _react2.default.createElement(
-    _Card2.default,
-    { className: classes.card, container: true },
+    _Grid2.default,
+    { container: true, spacing: 24 },
     _react2.default.createElement(
       _Grid2.default,
-      { container: true, spacing: 24 },
+      { xs: 12, sm: 7 },
       _react2.default.createElement(
-        _Grid2.default,
-        { item: true, xs: 12, sm: 7 },
+        _CardContent2.default,
+        null,
         _react2.default.createElement(
-          _CardContent2.default,
-          null,
-          _react2.default.createElement(
-            _Typography2.default,
-            { variant: "subheading" },
-            estimate.header
-          )
-        ),
-        _react2.default.createElement(
-          _CardContent2.default,
-          { style: { maxWidth: 500 } },
-          _react2.default.createElement(
-            _Grid2.default,
-            { container: true },
-            _react2.default.createElement(
-              _Grid2.default,
-              { item: true, xs: 8 },
-              estimate.fees.map(function (fee, key) {
-                return _react2.default.createElement(
-                  _Grid2.default,
-                  { container: true },
-                  _react2.default.createElement(
-                    _Typography2.default,
-                    { variant: "body1" },
-                    fee.name
-                  ),
-                  _react2.default.createElement(
-                    _Tooltip2.default,
-                    { title: fee.info },
-                    _react2.default.createElement(
-                      _Icon2.default,
-                      {
-                        className: classes.toolTipIcon,
-                        style: { fontSize: 18 }
-                      },
-                      "info_circle"
-                    )
-                  )
-                );
-              })
-            ),
-            _react2.default.createElement(
-              _Grid2.default,
-              { item: true, xs: 4, align: "right" },
-              estimate.fees.map(function (fee, key) {
-                return _react2.default.createElement(
-                  _Typography2.default,
-                  { variant: "body1" },
-                  fee.value
-                );
-              })
-            )
-          ),
-          _react2.default.createElement(_Divider2.default, null),
-          _react2.default.createElement(
-            _Grid2.default,
-            { container: true },
-            _react2.default.createElement(
-              _Grid2.default,
-              { item: true, xs: 6 },
-              _react2.default.createElement(
-                _Typography2.default,
-                { variant: "body2" },
-                "Total"
-              )
-            ),
-            _react2.default.createElement(
-              _Grid2.default,
-              { item: true, xs: 6, align: "right" },
-              _react2.default.createElement(
-                _Typography2.default,
-                { variant: "body2" },
-                total
-              )
-            )
-          )
+          _Typography2.default,
+          { variant: "subheading" },
+          estimate.header
         )
       ),
       _react2.default.createElement(
-        _Grid2.default,
-        { item: true, xs: 12, sm: 5 },
+        _CardContent2.default,
+        { style: { maxWidth: 500 } },
         _react2.default.createElement(
-          _CardContent2.default,
-          null,
-          _react2.default.createElement(
-            _Typography2.default,
-            { variant: "body2", align: "right" },
-            "Total Amount"
-          ),
-          _react2.default.createElement(
-            _Typography2.default,
-            { className: classes.bigheader, align: "right" },
-            "Rs ",
-            total
-          ),
-          _react2.default.createElement(
-            _Card2.default,
-            { className: classes.whiteCard },
-            estimate.extra.map(function (item, key) {
-              return _react2.default.createElement(
+          _Grid2.default,
+          { container: true },
+          estimate.fees.map(function (fee, key) {
+            var tooltip = fee.info ? _react2.default.createElement(
+              _Tooltip2.default,
+              { title: fee.info },
+              _react2.default.createElement(
+                _Icon2.default,
+                {
+                  className: classes.toolTipIcon,
+                  style: { fontSize: 18 }
+                },
+                "info_circle"
+              )
+            ) : "";
+            var textLeft = fee.name ? _react2.default.createElement(
+              _Grid2.default,
+              { container: true, xs: 8 },
+              _react2.default.createElement(
                 _Typography2.default,
-                { variant: "body1" },
-                item
-              );
-            })
+                null,
+                fee.name
+              ),
+              tooltip
+            ) : _react2.default.createElement(_Grid2.default, { xs: 8 });
+            var textRight = fee.value ? _react2.default.createElement(
+              _Grid2.default,
+              { xs: 4, align: "right" },
+              _react2.default.createElement(
+                _Typography2.default,
+                null,
+                fee.value
+              )
+            ) : _react2.default.createElement(_Grid2.default, { xs: 4 });
+            return _react2.default.createElement(
+              _Grid2.default,
+              { container: true },
+              textLeft,
+              textRight
+            );
+          })
+        ),
+        _react2.default.createElement(_Divider2.default, { style: { margin: 0 } }),
+        _react2.default.createElement(
+          _Grid2.default,
+          { container: true },
+          _react2.default.createElement(
+            _Grid2.default,
+            { item: true, xs: 6 },
+            _react2.default.createElement(
+              _Typography2.default,
+              { variant: "body2" },
+              "Total"
+            )
+          ),
+          _react2.default.createElement(
+            _Grid2.default,
+            { item: true, xs: 6, align: "right", style: { paddingRight: 0 } },
+            _react2.default.createElement(
+              _Typography2.default,
+              { variant: "body2" },
+              total
+            )
           )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Grid2.default,
+      { xs: 12, sm: 5 },
+      _react2.default.createElement(
+        _CardContent2.default,
+        null,
+        _react2.default.createElement(
+          _Typography2.default,
+          { variant: "body2", align: "right" },
+          "Total Amount"
+        ),
+        _react2.default.createElement(
+          _Typography2.default,
+          { className: classes.bigheader, align: "right" },
+          "Rs ",
+          total
+        ),
+        _react2.default.createElement(
+          _Card2.default,
+          { className: classes.whiteCard },
+          estimate.extra.map(function (item, key) {
+            var textLeft = void 0,
+                textRight = void 0;
+            var colLeft = item.textRight ? 6 : 12;
+            var colRight = item.textLeft ? 6 : 12;
+            if (item.textLeft) {
+              textLeft = _react2.default.createElement(
+                _Grid2.default,
+                { xs: colLeft },
+                _react2.default.createElement(
+                  _Typography2.default,
+                  null,
+                  item.textLeft
+                )
+              );
+            } else {
+              textLeft = _react2.default.createElement(_Grid2.default, { xs: colLeft });
+            }
+            if (item.textRight) {
+              textRight = _react2.default.createElement(
+                _Grid2.default,
+                { xs: colRight },
+                _react2.default.createElement(
+                  _Typography2.default,
+                  { align: "right" },
+                  item.textRight
+                )
+              );
+            } else {
+              textRight = _react2.default.createElement(_Grid2.default, { xs: colRight });
+            }
+            return _react2.default.createElement(
+              _Grid2.default,
+              { container: true },
+              textLeft,
+              textRight
+            );
+          })
         )
       )
     )
   );
 }
+
+FeesEstimateCard.propTypes = {
+  header: _propTypes2.default.string.isRequired,
+  fees: _propTypes2.default.array.isRequired,
+  extra: _propTypes2.default.array.isRequired
+};
 
 exports.default = (0, _styles.withStyles)(styles)(FeesEstimateCard);
