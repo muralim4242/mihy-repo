@@ -130,7 +130,7 @@ function FeesEstimateCard(props) {
             if (item.textRight) {
               textRight = (
                 <Grid xs={colRight}>
-                  <Typography align="right">{item.textRight}</Typography>
+                  <Typography>{item.textRight}</Typography>
                 </Grid>
               );
             } else {
