@@ -197,10 +197,10 @@ export const footer = getCommonApplyFooter({
     children: {
       nextButtonLabel: getLabel("Submit")
     },
-    // onClickDefination: {
-    //   action: "condition",
-    //   callBack: callBackForNext
-    // }
+    onClickDefination: {
+      action: "page_change",
+      path: "/landing/mihy-ui-framework/tradelicence/application-success"
+    },
     visible: false
   }
 });
