@@ -6,7 +6,8 @@ import {
   getCommonParagraph,
   getTextField,
   getSelectTextField,
-  getCommonContainer
+  getCommonContainer,
+  getPattern
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 const OwnerInfoCard = {
@@ -16,33 +17,48 @@ const OwnerInfoCard = {
     scheama: getCommonGrayCard({
       header: getCommonSubHeader("Owner Information"),
       tradeUnitCardContainer: getCommonContainer({
-        ownerMobileNo: getTextField("Mobile No.", "Enter Mobile No.", true, "","Trade[0].tradeDetails[0].owner[0].mobileNo"),
-        ownerName: getTextField("Name", "Enter Name", true, ""),
+        ownerMobileNo: getTextField(
+          "Mobile No.",
+          "Enter Mobile No.",
+          true,
+          getPattern("MobileNo")
+        ),
+        ownerName: getTextField("Name", "Enter Name", true, getPattern("Name")),
         ownerFatherName: getTextField(
           "Father/Husband's Name",
           "Enter Father/Husband's Name",
           true,
-          ""
+          getPattern("Name")
         ),
         OwnerGender: getSelectTextField("Gender", "Select Gender", true, ""),
         ownerDOB: getTextField(
           "Date of Birth",
           "Enter Date of Birth",
           true,
-          "",
+          getPattern("Date"),
           "",
           {
-            position:"end",
-            iconName:"date_range"
+            position: "end",
+            iconName: "date_range"
           }
         ),
-        ownerEmail: getTextField("Email", "Enter Email", false, ""),
-        ownerPAN: getTextField("PAN No.", "Enter Owner's PAN No.", false, ""),
+        ownerEmail: getTextField(
+          "Email",
+          "Enter Email",
+          false,
+          getPattern("Email")
+        ),
+        ownerPAN: getTextField(
+          "PAN No.",
+          "Enter Owner's PAN No.",
+          false,
+          getPattern("PAN")
+        ),
         ownerAddress: getTextField(
           "Corrospondence Address",
           "Enter Corrospondence Address",
           true,
-          ""
+          getPattern("Address")
         ),
         OwnerSpecialCategory: getSelectTextField(
           "Special Owner Category",

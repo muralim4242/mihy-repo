@@ -4,7 +4,8 @@ import {
   getCommonParagraph,
   getTextField,
   getSelectTextField,
-  getCommonContainer
+  getCommonContainer,
+  getPattern
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 export const tradeLocationDetails = getCommonCard({
@@ -17,29 +18,34 @@ export const tradeLocationDetails = getCommonCard({
       "Property ID",
       "Enter Property ID",
       false,
-      ""
+      getPattern("PropertyID")
     ),
     tradeLocCity: getSelectTextField("City", "Select City", false, ""),
     tradeLocDoorHouseNo: getTextField(
       "Door/House No.",
       "Enter Door/House No.",
       false,
-      ""
+      getPattern("DoorHouseNo")
     ),
     tradeLocBuilidingName: getTextField(
       "Building/Colony Name",
       "Enter Building/Colony Name",
       false,
-      ""
+      getPattern("BuildingStreet")
     ),
     tradeLocStreetName: getTextField(
       "Street Name",
       "Enter Street Name",
       false,
-      ""
+      getPattern("BuildingStreet")
     ),
     tradeLocMohalla: getTextField("Mohalla", "Enter Mohalla", true, ""),
-    tradeLocPincode: getTextField("Pincode", "Enter Pincode", false, ""),
+    tradeLocPincode: getTextField(
+      "Pincode",
+      "Enter Pincode",
+      false,
+      getPattern("Pincode")
+    ),
     tradeLocGISCoord: getTextField(
       "GIS Coordinates",
       "Select your trade location on map",
@@ -50,7 +56,7 @@ export const tradeLocationDetails = getCommonCard({
       "Electricity Connection No.",
       "Enter Electricity Connection No. of Trade Loaction",
       false,
-      ""
+      getPattern("ElectricityConnNo")
     )
   })
 });

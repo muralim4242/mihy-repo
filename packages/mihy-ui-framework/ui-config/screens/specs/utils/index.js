@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -277,4 +277,56 @@ var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(l
     },
     children: (_children2 = {}, (0, _defineProperty3.default)(_children2, label, getCommonCaption(label)), (0, _defineProperty3.default)(_children2, value, getCommonValue(value)), _children2)
   };
+};
+
+var getPattern = exports.getPattern = function getPattern(type) {
+  switch (type) {
+    case "Name":
+      return (/^[a-zA-Z\s]{1,50}$/i
+      );
+    case "MobileNo":
+      return (/^[6789][0-9]{9}$/i
+      );
+    case "Email":
+      return (/^(?=^.{1,64}$)((([^<>()\[\]\\.,;:\s$*@'"]+(\.[^<>()\[\]\\.,;:\s@'"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})))$/i
+      );
+    case "Address":
+      return (/^[<>()\-+_\|\[\]\\.,;:\s$*@'"\/#%& 0-9A-Za-z]{1,500}$/i
+      );
+    case "PAN":
+      return "/^[A-Za-z]{5}d{4}[A-Za-z]{1}$/i";
+    case "TradeName":
+      return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
+      );
+    case "Date":
+      return (/(^(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11)))[/](19|[2-9][0-9])dd$)|(^29[/]02[/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/i
+      );
+    case "UOMValue":
+      return (/^[1-9][0-9]{0,3}$/i
+      );
+    case "OperationalArea":
+      return (/^[1-9][0-9]{0,6}$/i
+      );
+    case "NoOfEmp":
+      return (/^[1-9][0-9]{0,2}$/i
+      );
+    case "GSTNo":
+      return (/^d{2}[A-Z]{5}d{4}[A-Z]{1}d[Z]{1}[A-Zd]{1}$/i
+      );
+    case "DoorHouseNo":
+      return (/^[a-zA-Z0-9\s]{1,10}$/i
+      );
+    case "BuildingStreet":
+      return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
+      );
+    case "Pincode":
+      return (/^[1-9][0-9]{5}$/i
+      );
+    case "PropertyID":
+      return (/^[a-zA-z0-9\s\\/\-]$/i
+      );
+    case "ElectricityConnNo":
+      return (/^[0-9]{15}$/i
+      );
+  }
 };

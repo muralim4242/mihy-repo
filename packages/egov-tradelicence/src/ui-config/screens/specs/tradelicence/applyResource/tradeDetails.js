@@ -6,7 +6,8 @@ import {
   getCommonParagraph,
   getTextField,
   getSelectTextField,
-  getCommonContainer
+  getCommonContainer,
+  getPattern
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import {
@@ -58,15 +59,23 @@ const multipleTradeUnitCard =
           sm: 4
         }
       ),
-      tradeUOM: getTextField("UOM (Unit of Measurement)", "", true, "", "",{}, {
-        xs: 12,
-        sm: 4
-      }),
+      tradeUOM: getTextField(
+        "UOM (Unit of Measurement)",
+        "",
+        true,
+        "",
+        "",
+        {},
+        {
+          xs: 12,
+          sm: 4
+        }
+      ),
       tradeUOMValue: getTextField(
         "UOM Value",
         "Enter UOM Value",
         true,
-        "",
+        getPattern("UOMValue"),
         "",
         {},
         {
@@ -118,7 +127,7 @@ const accessoriesCard = {
           "UOM Value",
           "Enter UOM Value",
           false,
-          "",
+          getPattern("UOMValue"),
           "",
           {},
           {
@@ -154,7 +163,7 @@ export const tradeDetails = getCommonCard({
       "Name of Trade",
       "Example Diljit Da Dhaba",
       true,
-      ""
+      getPattern("TradeName")
     ),
     tradeStructureType: getSelectTextField(
       "Structure Type",
@@ -172,25 +181,30 @@ export const tradeDetails = getCommonCard({
       "Trade Commencement Date",
       "Enter Trade Commencement Date",
       true,
-      "",
+      getPattern("Date"),
       "",
       {
-        position:"end",
-        iconName:"date_range"
+        position: "end",
+        iconName: "date_range"
       }
     ),
-    tradeGSTNo: getTextField("Trade GST No.", "Enter Trade GST No.", false, ""),
+    tradeGSTNo: getTextField(
+      "Trade GST No.",
+      "Enter Trade GST No.",
+      false,
+      getPattern("GSTNo")
+    ),
     tradeOperationalArea: getTextField(
       "Operatonal Area (Sq Ft)",
       "Enter Operatonal Area in Sq Ft",
       false,
-      ""
+      getPattern("OperationalArea")
     ),
     tradeNoOfEmployee: getTextField(
       "No. Of Employee",
       "Enter No. Of Employee",
       false,
-      ""
+      getPattern("NoOfEmp")
     )
   }),
   multipleTradeUnitCard,
