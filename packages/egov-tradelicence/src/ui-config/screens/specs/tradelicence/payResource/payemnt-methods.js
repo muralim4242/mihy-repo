@@ -14,7 +14,11 @@ export const payeeDetails = getCommonContainer({
     "Enter Payer Mobile No.",
     false,
     getPattern("Date"),
-    ""
+    "",
+    {
+        position:"start",
+        label:"+91 |",
+     }
   )
 });
 
