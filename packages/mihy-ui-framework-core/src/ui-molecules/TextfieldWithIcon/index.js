@@ -11,7 +11,7 @@ function InputWithIcon(props) {
   const extraProps = !isEmpty(iconObj) &&(iconObj.position === "end"?  {InputProps :{
       endAdornment: (
         <InputAdornment position="end">
-          <Icon iconName={iconObj.iconName} />
+          <span style={{color:iconObj.color?iconObj.color:"inherit"}}><Icon iconName={iconObj.iconName} /><span style={{position: "relative",top: "-7px"}}>{iconObj.label && iconObj.label}</span> </span>
         </InputAdornment>
       ),
   }}:

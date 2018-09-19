@@ -18,7 +18,14 @@ export const tradeLocationDetails = getCommonCard({
       "Property ID",
       "Enter Property ID",
       false,
-      getPattern("PropertyID")
+      getPattern("PropertyID"),
+      "",
+      {
+        iconName:"search",
+        position:"end",
+        color:"#FE7A51",
+        label:"SEARCH"
+      }
     ),
     tradeLocCity: getSelectTextField("City", "Select City", false, ""),
     tradeLocDoorHouseNo: getTextField(
@@ -50,7 +57,12 @@ export const tradeLocationDetails = getCommonCard({
       "GIS Coordinates",
       "Select your trade location on map",
       false,
-      ""
+      "",
+      "",
+      {
+        iconName:"gps_fixed",
+        position:"end"
+      }
     ),
     tradeLocElectricity: getTextField(
       "Electricity Connection No.",

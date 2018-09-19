@@ -77,6 +77,10 @@ const reviewOwnerDetails = getCommonGrayCard({
   })
 });
 
+const reviewDocumentDetails = getCommonGrayCard({
+  header: getCommonSubHeader("Documents")
+});
+
 export const tradeReviewDetails = getCommonCard({
   header: getCommonTitle("Please review your Application and Submit"),
   paragraph: getCommonParagraph(
@@ -102,5 +106,6 @@ export const tradeReviewDetails = getCommonCard({
     }
   },
   reviewTradeDetails,
-  reviewOwnerDetails
+  reviewOwnerDetails,
+  reviewDocumentDetails
 });
