@@ -95,7 +95,7 @@ function FeesEstimateCard(props) {
               );
             })}
           </Grid>
-          <Divider/>
+          <Divider style={{ margin: 0 }} />
           <Grid container>
             <Grid item xs={6}>
               <Typography variant="body2">Total</Typography>

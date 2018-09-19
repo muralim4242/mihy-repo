@@ -149,7 +149,7 @@ function FeesEstimateCard(props) {
             );
           })
         ),
-        _react2.default.createElement(_Divider2.default, null),
+        _react2.default.createElement(_Divider2.default, { style: { margin: 0 } }),
         _react2.default.createElement(
           _Grid2.default,
           { container: true },
