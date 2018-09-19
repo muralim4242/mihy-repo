@@ -1,6 +1,6 @@
 {
   "name": "notes-app-api",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "description": "A Node.js starter for the Serverless Framework with async/await and unit test support",
   "main": "handler.js",
   "private": true,
