@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DocumentList = exports.TooltipWithChildren = exports.StepperStaticVerticalWithTab = exports.TextfieldWithIcon = exports.StepperStaticVertical = exports.Carousel = exports.MultiItem = exports.Stepper = exports.AppSubOption = exports.AppCarosel = exports.AppCards = exports.AppCard = exports.CommonView = exports.LoadingIndicator = exports.AppliedRoute = exports.RenderScreen = exports.CardWithMedia = exports.StepperNonLinearWithoutAction = exports.ComponentInterface = exports.Map = exports.RenderRoutes = undefined;
+exports.FeesEstimateCard = exports.DocumentList = exports.TooltipWithChildren = exports.StepperStaticVerticalWithTab = exports.TextfieldWithIcon = exports.StepperStaticVertical = exports.Carousel = exports.MultiItem = exports.Stepper = exports.AppSubOption = exports.AppCarosel = exports.AppCards = exports.AppCard = exports.CommonView = exports.LoadingIndicator = exports.AppliedRoute = exports.RenderScreen = exports.CardWithMedia = exports.StepperNonLinearWithoutAction = exports.ComponentInterface = exports.Map = exports.RenderRoutes = undefined;
 
 var _react = require("react");
 
@@ -203,6 +203,15 @@ var DocumentList = (0, _reactLoadable2.default)({
   }
 });
 
+var FeesEstimateCard = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import("./FeesEstimateCard");
+  },
+  loading: function loading() {
+    return _react2.default.createElement(Loading, null);
+  }
+});
+
 exports.RenderRoutes = RenderRoutes;
 exports.Map = Map;
 exports.ComponentInterface = ComponentInterface;
@@ -224,3 +233,4 @@ exports.TextfieldWithIcon = TextfieldWithIcon;
 exports.StepperStaticVerticalWithTab = StepperStaticVerticalWithTab;
 exports.TooltipWithChildren = TooltipWithChildren;
 exports.DocumentList = DocumentList;
+exports.FeesEstimateCard = FeesEstimateCard;

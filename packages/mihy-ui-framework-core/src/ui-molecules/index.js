@@ -99,6 +99,11 @@ const DocumentList = Loadable({
   loading: () => <Loading />
 });
 
+const FeesEstimateCard = Loadable({
+  loader: () => import("./FeesEstimateCard")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -120,5 +125,6 @@ export {
   TextfieldWithIcon,
   StepperStaticVerticalWithTab,
   TooltipWithChildren,
-  DocumentList
+  DocumentList,
+  FeesEstimateCard
 };
