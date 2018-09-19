@@ -94,22 +94,18 @@ function FeesEstimateCard(props) {
   var total = totalAmount(estimate.fees);
   return _react2.default.createElement(
     _Grid2.default,
-    { container: true, spacing: 24 },
+    { container: true },
     _react2.default.createElement(
       _Grid2.default,
       { xs: 12, sm: 7 },
       _react2.default.createElement(
-        _CardContent2.default,
-        null,
-        _react2.default.createElement(
-          _Typography2.default,
-          { variant: "subheading" },
-          estimate.header
-        )
+        _Typography2.default,
+        { variant: "subheading" },
+        estimate.header
       ),
       _react2.default.createElement(
-        _CardContent2.default,
-        { style: { maxWidth: 500 } },
+        "div",
+        { style: { marginTop: 48, maxWidth: 400 } },
         _react2.default.createElement(
           _Grid2.default,
           { container: true },
@@ -182,61 +178,57 @@ function FeesEstimateCard(props) {
       _Grid2.default,
       { xs: 12, sm: 5 },
       _react2.default.createElement(
-        _CardContent2.default,
-        null,
-        _react2.default.createElement(
-          _Typography2.default,
-          { variant: "body2", align: "right" },
-          "Total Amount"
-        ),
-        _react2.default.createElement(
-          _Typography2.default,
-          { className: classes.bigheader, align: "right" },
-          "Rs ",
-          total
-        ),
-        _react2.default.createElement(
-          _Card2.default,
-          { className: classes.whiteCard },
-          estimate.extra.map(function (item, key) {
-            var textLeft = void 0,
-                textRight = void 0;
-            var colLeft = item.textRight ? 6 : 12;
-            var colRight = item.textLeft ? 6 : 12;
-            if (item.textLeft) {
-              textLeft = _react2.default.createElement(
-                _Grid2.default,
-                { xs: colLeft },
-                _react2.default.createElement(
-                  _Typography2.default,
-                  null,
-                  item.textLeft
-                )
-              );
-            } else {
-              textLeft = _react2.default.createElement(_Grid2.default, { xs: colLeft });
-            }
-            if (item.textRight) {
-              textRight = _react2.default.createElement(
-                _Grid2.default,
-                { xs: colRight },
-                _react2.default.createElement(
-                  _Typography2.default,
-                  { align: "right" },
-                  item.textRight
-                )
-              );
-            } else {
-              textRight = _react2.default.createElement(_Grid2.default, { xs: colRight });
-            }
-            return _react2.default.createElement(
+        _Typography2.default,
+        { variant: "body2", align: "right" },
+        "Total Amount"
+      ),
+      _react2.default.createElement(
+        _Typography2.default,
+        { className: classes.bigheader, align: "right" },
+        "Rs ",
+        total
+      ),
+      _react2.default.createElement(
+        _Card2.default,
+        { className: classes.whiteCard },
+        estimate.extra.map(function (item, key) {
+          var textLeft = void 0,
+              textRight = void 0;
+          var colLeft = item.textRight ? 6 : 12;
+          var colRight = item.textLeft ? 6 : 12;
+          if (item.textLeft) {
+            textLeft = _react2.default.createElement(
               _Grid2.default,
-              { container: true },
-              textLeft,
-              textRight
+              { xs: colLeft },
+              _react2.default.createElement(
+                _Typography2.default,
+                null,
+                item.textLeft
+              )
             );
-          })
-        )
+          } else {
+            textLeft = _react2.default.createElement(_Grid2.default, { xs: colLeft });
+          }
+          if (item.textRight) {
+            textRight = _react2.default.createElement(
+              _Grid2.default,
+              { xs: colRight },
+              _react2.default.createElement(
+                _Typography2.default,
+                { align: "right" },
+                item.textRight
+              )
+            );
+          } else {
+            textRight = _react2.default.createElement(_Grid2.default, { xs: colRight });
+          }
+          return _react2.default.createElement(
+            _Grid2.default,
+            { container: true },
+            textLeft,
+            textRight
+          );
+        })
       )
     )
   );

@@ -24,10 +24,10 @@ const OwnerInfoCard = {
           getPattern("MobileNo"),
           "",
           {
-            iconName:"search",
-            position:"end",
-            color:"#FE7A51",
-            label:"SEARCH"
+            iconName: "search",
+            position: "end",
+            color: "#FE7A51",
+            label: "SEARCH"
           }
         ),
         ownerName: getTextField("Name", "Enter Name", true, getPattern("Name")),
