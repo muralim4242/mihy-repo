@@ -2,10 +2,10 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import {compose} from "recompose";
-import MainRoutes from "ui-routes";
+import MainRoutes from "../../ui-routes";
 import LoadingIndicator from "mihy-ui-framework/ui-molecules/LoadingIndicator";
 import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
-import { setRoute } from "ui-redux/app/actions";
+import { setRoute } from "../../ui-redux/app/actions";
 import "./index.css";
 
 class App extends React.Component {

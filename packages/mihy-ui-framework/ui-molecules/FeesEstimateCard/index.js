@@ -215,7 +215,7 @@ function FeesEstimateCard(props) {
               { xs: colRight },
               _react2.default.createElement(
                 _Typography2.default,
-                { align: "right" },
+                null,
                 item.textRight
               )
             );
