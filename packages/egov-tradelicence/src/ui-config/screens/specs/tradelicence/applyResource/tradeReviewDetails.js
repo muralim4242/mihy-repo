@@ -10,44 +10,66 @@ import {
   getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
-import {changeStep} from "./footer";
+import { changeStep } from "./footer";
+
+const estimate= getCommonGrayCard({estimateSection:{
+  uiFramework: "custom-molecules",
+  componentPath: "FeesEstimateCard",
+  props: {
+    estimate: {
+      header: "Trade License Fee",
+      fees: [
+        { name: "Trade License Charge" },
+        { name: "Penalty", value: 500, info: "Information about Penalty" },
+        { name: "Rebate", value: 200, info: "Information about Rebate" }
+      ],
+      extra: [
+        { textLeft: "Last Date for Rebate (20% of TL)" },
+        {
+          textLeft: "Penalty (10% of TL) applicable from"
+        },
+        { textLeft: "Additoinal Penalty (20% of TL) applicable from" }
+      ]
+    }
+  }
+}})
 
 const reviewTradeDetails = getCommonGrayCard({
-  headerDiv:{
+  headerDiv: {
     uiFramework: "custom-atoms",
     componentPath: "Container",
-    children:{
-      header:{
-        gridDefination:{
-          xs:"12",
-          sm:"10"
+    children: {
+      header: {
+        gridDefination: {
+          xs: "12",
+          sm: "10"
         },
         ...getCommonSubHeader("Trade Details")
       },
-      editSection:{
-        componentPath:"Button",
-        props:{
-          color:"primary"
+      editSection: {
+        componentPath: "Button",
+        props: {
+          color: "primary"
         },
-        gridDefination:{
-          xs:"12",
-          sm:"2",
-          align:"right"
+        gridDefination: {
+          xs: "12",
+          sm: "2",
+          align: "right"
         },
-        children:{
-          editIcon:{
-            uiFramework:"custom-atoms",
-            componentPath:"Icon",
-            props:{
-              iconName:"edit"
+        children: {
+          editIcon: {
+            uiFramework: "custom-atoms",
+            componentPath: "Icon",
+            props: {
+              iconName: "edit"
             }
           },
-          buttonLabel:getLabel("Edit")
+          buttonLabel: getLabel("Edit")
         },
-        onClickDefination:{
-          action:"condition",
-          callBack:(state,dispatch)=>{
-            changeStep(state, dispatch, "", 0)
+        onClickDefination: {
+          action: "condition",
+          callBack: (state, dispatch) => {
+            changeStep(state, dispatch, "", 0);
           }
         }
       }
@@ -99,41 +121,41 @@ const reviewTradeDetails = getCommonGrayCard({
 });
 
 const reviewOwnerDetails = getCommonGrayCard({
-  headerDiv:{
+  headerDiv: {
     uiFramework: "custom-atoms",
     componentPath: "Container",
-    children:{
-      header:{
-        gridDefination:{
-          xs:"12",
-          sm:"10"
+    children: {
+      header: {
+        gridDefination: {
+          xs: "12",
+          sm: "10"
         },
         ...getCommonSubHeader("Owner Details")
       },
-      editSection:{
-        componentPath:"Button",
-        props:{
-          color:"primary"
+      editSection: {
+        componentPath: "Button",
+        props: {
+          color: "primary"
         },
-        gridDefination:{
-          xs:"12",
-          sm:"2",
-          align:"right"
+        gridDefination: {
+          xs: "12",
+          sm: "2",
+          align: "right"
         },
-        children:{
-          editIcon:{
-            uiFramework:"custom-atoms",
-            componentPath:"Icon",
-            props:{
-              iconName:"edit"
+        children: {
+          editIcon: {
+            uiFramework: "custom-atoms",
+            componentPath: "Icon",
+            props: {
+              iconName: "edit"
             }
           },
-          buttonLabel:getLabel("Edit")
+          buttonLabel: getLabel("Edit")
         },
-        onClickDefination:{
-          action:"condition",
-          callBack:(state,dispatch)=>{
-            changeStep(state, dispatch, "", 1)
+        onClickDefination: {
+          action: "condition",
+          callBack: (state, dispatch) => {
+            changeStep(state, dispatch, "", 1);
           }
         }
       }
@@ -159,41 +181,41 @@ const reviewOwnerDetails = getCommonGrayCard({
 });
 
 const reviewDocumentDetails = getCommonGrayCard({
-  headerDiv:{
+  headerDiv: {
     uiFramework: "custom-atoms",
     componentPath: "Container",
-    children:{
-      header:{
-        gridDefination:{
-          xs:"12",
-          sm:"10"
+    children: {
+      header: {
+        gridDefination: {
+          xs: "12",
+          sm: "10"
         },
         ...getCommonSubHeader("Documents")
       },
-      editSection:{
-        componentPath:"Button",
-        props:{
-          color:"primary"
+      editSection: {
+        componentPath: "Button",
+        props: {
+          color: "primary"
         },
-        gridDefination:{
-          xs:"12",
-          sm:"2",
-          align:"right"
+        gridDefination: {
+          xs: "12",
+          sm: "2",
+          align: "right"
         },
-        children:{
-          editIcon:{
-            uiFramework:"custom-atoms",
-            componentPath:"Icon",
-            props:{
-              iconName:"edit"
+        children: {
+          editIcon: {
+            uiFramework: "custom-atoms",
+            componentPath: "Icon",
+            props: {
+              iconName: "edit"
             }
           },
-          buttonLabel:getLabel("Edit")
+          buttonLabel: getLabel("Edit")
         },
-        onClickDefination:{
-          action:"condition",
-          callBack:(state,dispatch)=>{
-            changeStep(state, dispatch, "", 2)
+        onClickDefination: {
+          action: "condition",
+          callBack: (state, dispatch) => {
+            changeStep(state, dispatch, "", 2);
           }
         }
       }
@@ -206,25 +228,7 @@ export const tradeReviewDetails = getCommonCard({
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   ),
-  estimate: {
-    uiFramework: "custom-molecules",
-    componentPath: "FeesEstimateCard",
-    props: {
-      estimate: {
-        header: "Trade License Fee",
-        fees: [
-          { name: "Trade License Charge", value: 2800, info: "Some info" },
-          { name: "Penalty", value: 500, info: "Information about Penalty" },
-          { name: "Rebate", value: 200, info: "Information about Rebate" }
-        ],
-        extra: [
-          "Last Date for Rebate (20% of TL)",
-          "Penalty (10% of TL) applicable from",
-          "Additoinal Penalty (20% of TL) applicable from"
-        ]
-      }
-    }
-  },
+  estimate,
   reviewTradeDetails,
   reviewOwnerDetails,
   reviewDocumentDetails

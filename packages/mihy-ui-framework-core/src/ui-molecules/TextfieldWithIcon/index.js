@@ -19,7 +19,7 @@ function InputWithIcon(props) {
       InputProps: {
         startAdornment: (
           <InputAdornment position="start">
-            <Icon iconName={iconObj.iconName} />
+              <span style={{color:iconObj.color?iconObj.color:"inherit"}}><Icon iconName={iconObj.iconName} /><span style={{position: "relative",top: "-7px"}}>{iconObj.label && iconObj.label}</span> </span>
           </InputAdornment>
         ),
       }

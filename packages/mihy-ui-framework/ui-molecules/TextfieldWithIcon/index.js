@@ -64,7 +64,17 @@ function InputWithIcon(props) {
       startAdornment: _react2.default.createElement(
         _InputAdornment2.default,
         { position: 'start' },
-        _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName })
+        _react2.default.createElement(
+          'span',
+          { style: { color: iconObj.color ? iconObj.color : "inherit" } },
+          _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
+          _react2.default.createElement(
+            'span',
+            { style: { position: "relative", top: "-7px" } },
+            iconObj.label && iconObj.label
+          ),
+          ' '
+        )
       )
     }
   });
