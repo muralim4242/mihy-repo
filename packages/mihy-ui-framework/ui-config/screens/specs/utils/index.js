@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -208,6 +208,63 @@ var getSelectTextField = exports.getSelectTextField = function getSelectTextFiel
     gridDefination: gridDefination,
     required: required,
     pattern: pattern
+  };
+};
+
+var getCheckBoxwithLabel = exports.getCheckBoxwithLabel = function getCheckBoxwithLabel(label) {
+  var gridDefination = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    xs: 12,
+    sm: 12
+  };
+
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    gridDefination: gridDefination,
+    children: {
+      div: {
+        uiFramework: "material-ui",
+        componentPath: "Checkbox",
+        props: {
+          color: "primary"
+        }
+      },
+      label: getLabel(label)
+    }
+  };
+};
+
+var getRadiobuttonwithLabel = exports.getRadiobuttonwithLabel = function getRadiobuttonwithLabel(label) {
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+
+    children: {
+      div: {
+        uiFramework: "material-ui",
+        componentPath: "Radio",
+        props: {
+          color: "primary"
+        }
+      },
+      label: getLabel(label)
+    }
+  };
+};
+
+var getRadiobuttonGroup = exports.getRadiobuttonGroup = function getRadiobuttonGroup(labels) {
+  var gridDefination = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    xs: 12,
+    sm: 12
+  };
+
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Container",
+    gridDefination: gridDefination,
+    children: labels && labels.map(function (label) {
+      return getRadiobuttonwithLabel(label);
+    })
   };
 };
 

@@ -204,3 +204,44 @@ export const footer = getCommonApplyFooter({
     visible: false
   }
 });
+
+export const footerApprove = getCommonApplyFooter({
+  previousButton: {
+    componentPath: "Button",
+    props: {
+      variant: "outlined",
+      color: "primary",
+      style: {
+        width: "200px",
+        height: "48px",
+        marginRight: "16px"
+      }
+    },
+    children: {
+      nextButtonLabel: getLabel("CANCEL")
+    },
+    onClickDefination: {
+      action: "condition",
+      callBack: callBackForPrevious
+    }
+  },
+  nextButton: {
+    componentPath: "Button",
+    props: {
+      variant: "contained",
+      color: "primary",
+      style: {
+        width: "200px",
+        height: "48px",
+        marginRight: "45px"
+      }
+    },
+    children: {
+      nextButtonLabel: getLabel("APPROVE")
+    },
+    onClickDefination: {
+      action: "condition",
+      callBack: callBackForNext
+    }
+  }
+});

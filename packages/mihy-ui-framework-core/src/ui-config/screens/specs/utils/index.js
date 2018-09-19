@@ -206,6 +206,67 @@ export const getSelectTextField = (
   };
 };
 
+export const getCheckBoxwithLabel = (
+  label,
+  gridDefination = {
+    xs: 12,
+    sm: 12
+  }
+) => {
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    gridDefination,
+    children: {
+      div: {
+        uiFramework: "material-ui",
+        componentPath: "Checkbox",
+        props: {
+          color: "primary"
+        }
+      },
+      label: getLabel(label)
+    }
+  };
+};
+
+export const getRadiobuttonwithLabel = label => {
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+
+    children: {
+      div: {
+        uiFramework: "material-ui",
+        componentPath: "Radio",
+        props: {
+          color: "primary"
+        }
+      },
+      label: getLabel(label)
+    }
+  };
+};
+
+export const getRadiobuttonGroup = (
+  labels,
+  gridDefination = {
+    xs: 12,
+    sm: 12
+  }
+) => {
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Container",
+    gridDefination,
+    children:
+      labels &&
+      labels.map(label => {
+        return getRadiobuttonwithLabel(label);
+      })
+  };
+};
+
 export const getCommonContainer = children => {
   return {
     componentPath: "Grid",
