@@ -49,11 +49,11 @@ function InputWithIcon(props) {
         { position: 'end' },
         _react2.default.createElement(
           'span',
-          { style: { color: iconObj.color ? iconObj.color : "inherit" } },
-          _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
+          { style: { color: iconObj.color ? iconObj.color : "rgba(0, 0, 0, 0.60" } },
+          iconObj.iconName && _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
           _react2.default.createElement(
             'span',
-            { style: { position: "relative", top: "-7px" } },
+            { style: iconObj.iconName ? { position: "relative", top: "-7px" } : {} },
             iconObj.label && iconObj.label
           ),
           ' '
@@ -66,11 +66,11 @@ function InputWithIcon(props) {
         { position: 'start' },
         _react2.default.createElement(
           'span',
-          { style: { color: iconObj.color ? iconObj.color : "inherit" } },
-          _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
+          { style: { color: iconObj.color ? iconObj.color : "rgba(0, 0, 0, 0.60" } },
+          iconObj.iconName && _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
           _react2.default.createElement(
             'span',
-            { style: { position: "relative", top: "-7px" } },
+            { style: iconObj.iconName ? { position: "relative", top: "-7px" } : {} },
             iconObj.label && iconObj.label
           ),
           ' '
