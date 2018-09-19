@@ -272,6 +272,28 @@ export const getLabelWithValue = (label, value) => {
   };
 };
 
+export const getTabs = list => {
+  return {
+    uiFramework: "material-ui",
+    componentPath: "Tabs",
+    children:
+      list &&
+      list.map(element => {
+        return getTab(element);
+      })
+  };
+};
+
+export const getTab = label => {
+  return {
+    uiFramework: "material-ui",
+    componentPath: "Tab",
+    props: {
+      label
+    }
+  };
+};
+
 export const getPattern = type => {
   switch (type) {
     case "Name":

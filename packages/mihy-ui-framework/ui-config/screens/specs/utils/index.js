@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -276,6 +276,26 @@ var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(l
       sm: 3
     },
     children: (_children2 = {}, (0, _defineProperty3.default)(_children2, label, getCommonCaption(label)), (0, _defineProperty3.default)(_children2, value, getCommonValue(value)), _children2)
+  };
+};
+
+var getTabs = exports.getTabs = function getTabs(list) {
+  return {
+    uiFramework: "material-ui",
+    componentPath: "Tabs",
+    children: list && list.map(function (element) {
+      return getTab(element);
+    })
+  };
+};
+
+var getTab = exports.getTab = function getTab(label) {
+  return {
+    uiFramework: "material-ui",
+    componentPath: "Tab",
+    props: {
+      label: label
+    }
   };
 };
 
