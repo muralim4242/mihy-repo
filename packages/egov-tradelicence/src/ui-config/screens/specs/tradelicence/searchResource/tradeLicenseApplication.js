@@ -66,7 +66,6 @@ import {
             false,
             getPattern("Date"),
             "",
-            "",
             {
               position:"end",
               iconName:"date_range"
@@ -82,7 +81,6 @@ import {
             "To date",
             false,
             getPattern("Date"),
-            "",
             "",
             {
               position:"end",
