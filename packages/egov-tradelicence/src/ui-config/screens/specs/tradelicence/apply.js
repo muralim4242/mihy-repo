@@ -3,7 +3,8 @@ import {
   getCommonHeader,
   getCommonCard,
   getCommonTitle,
-  getCommonParagraph
+  getCommonParagraph,
+  getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import { footer } from "./applyResource/footer";
@@ -39,7 +40,33 @@ const screenConfig = {
         className: "common-div-css"
       },
       children: {
-        header,
+        headerDiv:{
+          uiFramework: "custom-atoms",
+          componentPath: "Container",
+          children:{
+            header:{
+              gridDefination:{
+                xs:"12",
+                sm:"10"
+              },
+              ...header
+            },
+            helpSection:{
+              componentPath:"Button",
+              props:{
+                color:"primary"
+              },
+              gridDefination:{
+                xs:"12",
+                sm:"2",
+                align:"right"
+              },
+              children:{
+                buttonLabel:getLabel("help ?")
+              }
+            }
+          }
+        },
         stepper,
         formwizardFirstStep: {
           uiFramework: "custom-atoms",

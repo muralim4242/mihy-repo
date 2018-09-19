@@ -82,6 +82,25 @@ export const tradeReviewDetails = getCommonCard({
   paragraph: getCommonParagraph(
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   ),
+  estimate: {
+    uiFramework: "custom-molecules",
+    componentPath: "FeesEstimateCard",
+    props: {
+      estimate: {
+        header: "Trade License Fee",
+        fees: [
+          { name: "Trade License Charge", value: 2800, info: "Some info" },
+          { name: "Penalty", value: 500, info: "Information about Penalty" },
+          { name: "Rebate", value: 200, info: "Information about Rebate" }
+        ],
+        extra: [
+          "Last Date for Rebate (20% of TL)",
+          "Penalty (10% of TL) applicable from",
+          "Additoinal Penalty (20% of TL) applicable from"
+        ]
+      }
+    }
+  },
   reviewTradeDetails,
   reviewOwnerDetails
 });

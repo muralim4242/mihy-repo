@@ -14,6 +14,12 @@ const themeObject = {
     }
   },
   overrides:{
+    MuiDivider:{
+      root:{
+        marginBottom:"24px",
+        marginTop:"24px"
+      }
+    },
     MuiStepper:{
       root:{
         paddingBottom:"0px"
