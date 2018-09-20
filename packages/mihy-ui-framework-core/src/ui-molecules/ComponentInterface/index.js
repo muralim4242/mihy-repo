@@ -35,7 +35,6 @@ class ComponentInterface extends React.Component {
           loading: () => <LinearProgress />
         });
         break;
-      //   break;
       case "custom-atoms-local":
         LoadableComponent = Loadable({
           loader: () =>
