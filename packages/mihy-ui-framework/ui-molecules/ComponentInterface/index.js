@@ -63,18 +63,15 @@ var ComponentInterface = function (_React$Component) {
 
       var LoadableComponent = null;
       switch (uiFramework) {
-        case "carbon":
-          LoadableComponent = (0, _reactLoadable2.default)({
-            loader: function loader() {
-              return import("carbon-components-react").then(function (module) {
-                return module[componentPath];
-              });
-            },
-            loading: function loading() {
-              return _react2.default.createElement(_LinearSpinner2.default, null);
-            }
-          });
-          break;
+        // case "carbon":
+        //   LoadableComponent = Loadable({
+        //     loader: () =>
+        //       import("carbon-components-react").then(
+        //         module => module[componentPath]
+        //       ),
+        //     loading: () => <LinearProgress />
+        //   });
+        //   break;
         case "custom-atoms":
           LoadableComponent = (0, _reactLoadable2.default)({
             loader: function loader() {
@@ -99,20 +96,30 @@ var ComponentInterface = function (_React$Component) {
             }
           });
           break;
-        // case "custom-atoms-local":
-        //   LoadableComponent = Loadable({
-        //     loader: () =>
-        //       import("ui-atoms").then(module => module[componentPath]),
-        //     loading: () => <LinearProgress />
-        //   });
-        //   break;
-        // case "custom-molecules-local":
-        //   LoadableComponent = Loadable({
-        //     loader: () =>
-        //       import("ui-molecules").then(module => module[componentPath]),
-        //     loading: () => <LinearProgress />
-        //   });
-        //   break;
+        case "custom-atoms-local":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("ui-atoms-local").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
+        case "custom-molecules-local":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("ui-molecules-local").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
         case "material-ui":
           LoadableComponent = (0, _reactLoadable2.default)({
             loader: function loader() {

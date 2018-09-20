@@ -35,20 +35,21 @@ class ComponentInterface extends React.Component {
           loading: () => <LinearProgress />
         });
         break;
-      // case "custom-atoms-local":
-      //   LoadableComponent = Loadable({
-      //     loader: () =>
-      //       import("ui-atoms").then(module => module[componentPath]),
-      //     loading: () => <LinearProgress />
-      //   });
       //   break;
-      // case "custom-molecules-local":
-      //   LoadableComponent = Loadable({
-      //     loader: () =>
-      //       import("ui-molecules").then(module => module[componentPath]),
-      //     loading: () => <LinearProgress />
-      //   });
-      //   break;
+      case "custom-atoms-local":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("ui-atoms-local").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
+      case "custom-molecules-local":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("ui-molecules-local").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
       case "material-ui":
         LoadableComponent = Loadable({
           loader: () =>
