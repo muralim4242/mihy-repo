@@ -12,15 +12,15 @@ class ComponentInterface extends React.Component {
     const { componentPath, uiFramework } = this.props;
     let LoadableComponent = null;
     switch (uiFramework) {
-      case "carbon":
-        LoadableComponent = Loadable({
-          loader: () =>
-            import("carbon-components-react").then(
-              module => module[componentPath]
-            ),
-          loading: () => <LinearProgress />
-        });
-        break;
+      // case "carbon":
+      //   LoadableComponent = Loadable({
+      //     loader: () =>
+      //       import("carbon-components-react").then(
+      //         module => module[componentPath]
+      //       ),
+      //     loading: () => <LinearProgress />
+      //   });
+      //   break;
       case "custom-atoms":
         LoadableComponent = Loadable({
           loader: () =>
