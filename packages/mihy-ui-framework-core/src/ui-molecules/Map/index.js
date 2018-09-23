@@ -9,14 +9,19 @@ import {
 } from "react-google-maps";
 import isEqual from "lodash/isEqual";
 import isEmpty from "lodash/isEmpty";
+// import InputAdornment from '@material-ui/core/InputAdornment';
+// import TextField from '@material-ui/core/TextField';
+// import Icon from '@material-ui/core/Icon';
 // import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 import "./index.css";
 const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
+const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
-
-const getMapKey=(env)=>{
-  return  process.env.hasOwnProperty(`REACT_APP_${env}_API_KEY`)?process.env[`REACT_APP_${env}_API_KEY`]:process.env.REACT_APP_MAP_API_KEY;
-}
+const getMapKey = env => {
+  return process.env.hasOwnProperty(`REACT_APP_${env}_API_KEY`)
+    ? process.env[`REACT_APP_${env}_API_KEY`]
+    : process.env.REACT_APP_MAP_API_KEY;
+};
 
 const API_KEY = getMapKey(process.env.REACT_APP_ENV);
 
@@ -46,28 +51,66 @@ const addressBoxStyle = {
   color: "black",
   padding: "10px 18px 10px 12px",
   width: "330px",
-  zIndex:"100000"
+  zIndex: "100000"
 };
 
 let bounds;
-let gMap;
+let gMap={};
 
 const MyMapComponent = compose(
   withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
+    // googleMapURL: `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${API_KEY}`,
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${API_KEY}`,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `100%`, minWidth: `300px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
-  withScriptjs,
-  withGoogleMap,
   lifecycle({
     componentWillMount() {
-      global.google = window.google;
-      var SlidingMarker = require("marker-animate-unobtrusive");
-      SlidingMarker.initializeGlobally();
-    },
+      this.setState({
+        bounds: null,
+        center: { lat: 21.7679, lng: 78.8718 },
+        markers: [],
+        onMapMounted: ref => {
+          gMap.map = ref;
+        },
+        onBoundsChanged: () => {
+          this.setState({
+            bounds: gMap.map.getBounds(),
+            center: gMap.map.getCenter()
+          });
+        },
+        onSearchBoxMounted: ref => {
+          gMap.searchBox = ref;
+        },
+        onPlacesChanged: () => {
+          const places = gMap.searchBox.getPlaces();
+          const bounds = new window.google.maps.LatLngBounds();
 
+          places.forEach(place => {
+            if (place.geometry.viewport) {
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          const nextMarkers = places.map(place => ({
+            position: place.geometry.location
+          }));
+          const nextCenter = _.get(
+            nextMarkers,
+            "0.position",
+            this.state.center
+          );
+
+          this.setState({
+            center: nextCenter,
+            markers: nextMarkers
+          });
+          // gMap.map.fitBounds(bounds);
+        }
+      });
+    },
     componentDidMount() {
       this.reRender(this.props);
     },
@@ -77,128 +120,158 @@ const MyMapComponent = compose(
         this.reRender(nextProps);
       }
     },
-
     reRender(props, rndBool) {
       if (props.isDirectionShown) {
-          const DirectionsService = new window.google.maps.DirectionsService();
-          bounds = new window.google.maps.LatLngBounds();
-          let waypts = [];
-          const fitBound = () => {
-            // Create bounds from markers
-            if (gMap.map) {
-              bounds.extend(
-                new window.google.maps.LatLng(
-                  props.destination.lat - 0.01,
-                  props.destination.lng + 0.01
-                )
-              );
-              for (var index in waypts) {
-                var latlng = new window.google.maps.LatLng(
-                  waypts[index].location.lat(),
-                  waypts[index].location.lng()
-                );
-                bounds.extend(latlng);
-              }
-              // Don't zoom in too far on only one marker
-              if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                var extendPoint1 = new window.window.google.maps.LatLng(
-                  bounds.getNorthEast().lat() + 0.01,
-                  bounds.getNorthEast().lng() + 0.01
-                );
-                var extendPoint2 = new window.window.google.maps.LatLng(
-                  bounds.getNorthEast().lat() - 0.01,
-                  bounds.getNorthEast().lng() - 0.01
-                );
-                bounds.extend(extendPoint1);
-                bounds.extend(extendPoint2);
-              }
-
-              gMap.map.fitBounds(bounds);
-            }
-            // Adjusting zoom here doesn't work :/
-          };
-          const getDestinationDirection = () => {
-            DirectionsService.route(
-              {
-                origin: new window.google.maps.LatLng(
-                  props.source.lat,
-                  props.source.lng
-                ),
-                destination: new window.google.maps.LatLng(
-                  props.destination.lat,
-                  props.destination.lng
-                ),
-                travelMode: window.google.maps.TravelMode.DRIVING,
-                waypoints: waypts,
-                optimizeWaypoints: true
-              },
-              (result, status) => {
-                if (status === window.google.maps.DirectionsStatus.OK) {
-                  this.setState({
-                    directions: result,
-                    waypoints: waypts
-                  });
-                  bounds.union(result.routes[0].bounds);
-                  fitBound();
-                }
-              }
+        const DirectionsService = new window.google.maps.DirectionsService();
+        bounds = new window.google.maps.LatLngBounds();
+        let waypts = [];
+        const fitBound = () => {
+          // Create bounds from markers
+          if (gMap.map) {
+            bounds.extend(
+              new window.google.maps.LatLng(
+                props.destination.lat - 0.01,
+                props.destination.lng + 0.01
+              )
             );
-          };
-          getDestinationDirection();
-        }
-    }
-  })
-)(props =>{
-  console.log(props);
-  return  (
-  <GoogleMap
-    ref={el => {
-      gMap = el;
-    }}
-    defaultZoom={props.zoomLevel}
-    defaultCenter={isEmpty(props.defaultCenter)?{ lat: 21.7679, lng: 78.8718 }:props.defaultCenter}
-    // center={props.defaultCenter}
-    options={{
-          mapTypeControl: false,
-          draggable: true,
-          fullscreenControl: false,
-          scaleControl: true,
-          scrollwheel: true,
-          streetViewControl: false,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: window.google.maps.ControlPosition.LEFT_BOTTOM
-          }
-        }}
-  >
-
-
-    {props.isDirectionShown &&
-      props.directions && (
-        <DirectionsRenderer
-          directions={props.directions}
-          options={{
-            preserveViewport: true,
-            suppressMarkers: true,
-            polylineOptions: {
-              strokeColor: "#4f72ec",
-              strokeOpacity: 0,
-              strokeWeight: 3,
-              icons: [
-                {
-                  icon: {
-                    path: window.google.maps.SymbolPath.CIRCLE,
-                    fillOpacity: 1,
-                    scale: 3
-                  },
-                  offset: "0",
-                  repeat: "1px"
-                }
-              ]
+            for (var index in waypts) {
+              var latlng = new window.google.maps.LatLng(
+                waypts[index].location.lat(),
+                waypts[index].location.lng()
+              );
+              bounds.extend(latlng);
             }
+            // Don't zoom in too far on only one marker
+            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+              var extendPoint1 = new window.google.maps.LatLng(
+                bounds.getNorthEast().lat() + 0.01,
+                bounds.getNorthEast().lng() + 0.01
+              );
+              var extendPoint2 = new window.google.maps.LatLng(
+                bounds.getNorthEast().lat() - 0.01,
+                bounds.getNorthEast().lng() - 0.01
+              );
+              bounds.extend(extendPoint1);
+              bounds.extend(extendPoint2);
+            }
+
+            gMap.map.fitBounds(bounds);
+          }
+          // Adjusting zoom here doesn't work :/
+        };
+        const getDestinationDirection = () => {
+          DirectionsService.route(
+            {
+              origin: new window.google.maps.LatLng(
+                props.source.lat,
+                props.source.lng
+              ),
+              destination: new window.google.maps.LatLng(
+                props.destination.lat,
+                props.destination.lng
+              ),
+              travelMode: window.google.maps.TravelMode.DRIVING,
+              waypoints: waypts,
+              optimizeWaypoints: true
+            },
+            (result, status) => {
+              if (status === window.google.maps.DirectionsStatus.OK) {
+                this.setState({
+                  directions: result,
+                  waypoints: waypts
+                });
+                bounds.union(result.routes[0].bounds);
+                fitBound();
+              }
+            }
+          );
+        };
+        getDestinationDirection();
+      }
+    }
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props => {
+  console.log(props);
+  return (
+    <GoogleMap
+      ref={props.onMapMounted}
+      defaultZoom={props.zoomLevel}
+      defaultCenter={
+        isEmpty(props.defaultCenter)
+          ? { lat: 21.7679, lng: 78.8718 }
+          : props.defaultCenter
+      }
+      // center={props.defaultCenter}
+      options={{
+        mapTypeControl: false,
+        draggable: true,
+        fullscreenControl: false,
+        scaleControl: true,
+        scrollwheel: true,
+        streetViewControl: false,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: window.google.maps.ControlPosition.LEFT_BOTTOM
+        }
+      }}
+      onBoundsChanged={props.onBoundsChanged}
+    >
+      <SearchBox
+        ref={props.onSearchBoxMounted}
+        bounds={props.bounds}
+        controlPosition={google.maps.ControlPosition.TOP_LEFT}
+        onPlacesChanged={props.onPlacesChanged}
+      >
+        <input
+          type="text"
+          placeholder="Pick your location"
+          style={{
+            boxSizing: `border-box`,
+            border: `1px solid transparent`,
+            width: `96%`,
+            height: `50px`,
+            marginTop: `16px`,
+            padding: `0 12px`,
+            borderRadius: `3px`,
+            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+            fontSize: `14px`,
+            outline: `none`,
+            textOverflow: `ellipses`,
+            marginLeft:"8px"
           }}
         />
-      )}
+      </SearchBox>
+      {props.markers.map((marker, index) => (
+        <Marker key={index} position={marker.position} />
+      ))}
+      {props.isDirectionShown &&
+        props.directions && (
+          <DirectionsRenderer
+            directions={props.directions}
+            options={{
+              preserveViewport: true,
+              suppressMarkers: true,
+              polylineOptions: {
+                strokeColor: "#4f72ec",
+                strokeOpacity: 0,
+                strokeWeight: 3,
+                icons: [
+                  {
+                    icon: {
+                      path: window.google.maps.SymbolPath.CIRCLE,
+                      fillOpacity: 1,
+                      scale: 3
+                    },
+                    offset: "0",
+                    repeat: "1px"
+                  }
+                ]
+              }
+            }}
+          />
+        )}
       {props.isEntityTypeShown &&
         props.entityTypes.map((entity, entityKey) => {
           if (entity.isLabelShown) {
@@ -210,19 +283,19 @@ const MyMapComponent = compose(
                 position={{ ...entity.position }}
                 // labelAnchor={new window.google.maps.Point(0, 0)}
                 // labelStyle={addressBoxStyle}
-                onClick={()=>props.onInfoBoxToggle(entity.id)}
+                onClick={() => props.onInfoBoxToggle(entity.id)}
                 icon={entity.icon}
                 animation={window.google.maps.Animation.DROP}
               >
-                {entity.labelStatus && <InfoBox
+                {entity.labelStatus && (
+                  <InfoBox
                     // visible={entity.labelStatus}
                     // onCloseClick={()=>props.onToggleOpen(entity.id,{},false)}
                     options={{ closeBoxURL: ``, enableEventPropagation: true }}
                   >
-                    <div style={addressBoxStyle}>
-                      {entity.component}
-                    </div>
-                    </InfoBox>}
+                    <div style={addressBoxStyle}>{entity.component}</div>
+                  </InfoBox>
+                )}
               </Marker>
             );
           } else {
@@ -231,12 +304,13 @@ const MyMapComponent = compose(
                 position={{ ...entity.position }}
                 key={entityKey}
                 icon={entity.icon}
-                onClick={()=>props.onInfoBoxToggle(entity.id)}
+                onClick={() => props.onInfoBoxToggle(entity.id)}
               />
             );
           }
         })}
-  </GoogleMap>
-)});
+    </GoogleMap>
+  );
+});
 
 export default MyMapComponent;

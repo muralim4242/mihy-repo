@@ -2,7 +2,11 @@ export const appOptions = [
   {
     displayLabel: "Search donor",
     displaySubLabel: "Only one file can be uploaded for one document.",
-    iconName: "search"
+    iconName: "search",
+    onClickDefination:{
+      action:"page_change",
+      path:"/landing/mihy-ui-framework/blood/seach-donor"
+    }
   },
   {
     displayLabel: "Registration",
