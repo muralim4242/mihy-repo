@@ -332,7 +332,12 @@ export const getLabelWithValue = (label, value,props={}) => {
       xs: 6,
       sm: 3
     },
-    props,
+    props:{
+      style:{
+        marginBottom: "16px"
+      },
+      ...props
+    },
     children: {
       [label]: getCommonCaption(label),
       [value]: getCommonValue(value)

@@ -358,7 +358,11 @@ var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(l
       xs: 6,
       sm: 3
     },
-    props: props,
+    props: (0, _extends3.default)({
+      style: {
+        marginBottom: "16px"
+      }
+    }, props),
     children: (_children2 = {}, (0, _defineProperty3.default)(_children2, label, getCommonCaption(label)), (0, _defineProperty3.default)(_children2, value, getCommonValue(value)), _children2)
   };
 };
