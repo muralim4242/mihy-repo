@@ -56,6 +56,19 @@ const screenConfig = {
               props:{
                 bloodGrp
               }
+            },
+            actionButtons:{
+              search:{
+                componentPath:"Button",
+                props:{
+                  variant:"fab",
+                  style:{
+                    position:"absolute",
+                    top:"100px",
+                    left:"250px"
+                  }
+                }
+              }
             }
           }
         }

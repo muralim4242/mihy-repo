@@ -20,6 +20,10 @@ var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -46,6 +50,8 @@ var _FormControl = require("@material-ui/core/FormControl");
 
 var _FormControl2 = _interopRequireDefault(_FormControl);
 
+require("./index.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = function styles(theme) {
@@ -53,11 +59,13 @@ var styles = function styles(theme) {
     root: {
       display: "flex"
     },
-    formControl: {
-      margin: theme.spacing.unit * 3
-    },
-    group: {
-      margin: theme.spacing.unit + "px 0"
+    formControl: {},
+    group: (0, _defineProperty3.default)({
+      margin: theme.spacing.unit + "px 0",
+      display: "inline-block"
+    }, "margin", 0),
+    radioRoot: {
+      marginBottom: 0
     }
   };
 };
@@ -77,7 +85,7 @@ var RadioButtonsGroup = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RadioButtonsGroup.__proto__ || Object.getPrototypeOf(RadioButtonsGroup)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      value: "female"
+      value: "No"
     }, _this.handleChange = function (event) {
       _this.setState({ value: event.target.value });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
@@ -86,7 +94,9 @@ var RadioButtonsGroup = function (_React$Component) {
   (0, _createClass3.default)(RadioButtonsGroup, [{
     key: "render",
     value: function render() {
-      var classes = this.props.classes;
+      var _props = this.props,
+          classes = _props.classes,
+          buttons = _props.buttons;
 
 
       return _react2.default.createElement(
@@ -104,13 +114,19 @@ var RadioButtonsGroup = function (_React$Component) {
               value: this.state.value,
               onChange: this.handleChange
             },
-            _react2.default.createElement(_FormControlLabel2.default, {
-              value: "female",
-              control: _react2.default.createElement(_Radio2.default, null),
-              label: "Female"
-            }),
-            _react2.default.createElement(_FormControlLabel2.default, { value: "male", control: _react2.default.createElement(_Radio2.default, null), label: "Male" }),
-            _react2.default.createElement(_FormControlLabel2.default, { value: "other", control: _react2.default.createElement(_Radio2.default, null), label: "Other" })
+            buttons && buttons.map(function (button) {
+              return _react2.default.createElement(_FormControlLabel2.default, {
+                classes: { label: "radio-button-label" },
+                value: button,
+                control: _react2.default.createElement(_Radio2.default, {
+                  classes: {
+                    root: "radio-root"
+                  },
+                  color: "primary"
+                }),
+                label: button
+              });
+            })
           )
         )
       );

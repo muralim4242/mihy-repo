@@ -9,7 +9,7 @@
     width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
-    z-index: 1;
+    /* z-index: 1; */
     height: 100%;
 }
 
@@ -18,13 +18,13 @@
     flex: 1 1 auto;
     position: relative;
     margin-left: 240px;
-    z-index: -1;
+    /* z-index: -1; */
     padding-top: 65px;
     padding-bottom: 65px;
     -webkit-transform: translate3d(0, 0, 0)
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 960px) {
 
     body {
         overflow-y: hidden;

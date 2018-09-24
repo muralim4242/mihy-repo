@@ -47,24 +47,24 @@ export const getCommonHeader = (header, props) => {
   };
 };
 
-export const getCommonTitle = header => {
-  return getCommonHeader(header, { variant: "title" });
+export const getCommonTitle = (header,props={}) => {
+  return getCommonHeader(header, { variant: "title",...props });
 };
 
-export const getCommonSubHeader = header => {
-  return getCommonHeader(header, { variant: "subheading" });
+export const getCommonSubHeader = (header,props={}) => {
+  return getCommonHeader(header, { variant: "subheading",...props });
 };
 
-export const getCommonParagraph = paragraph => {
-  return getCommonHeader(paragraph, { variant: "body1" });
+export const getCommonParagraph = (paragraph,props={}) => {
+  return getCommonHeader(paragraph, { variant: "body1",...props });
 };
 
-export const getCommonCaption = paragraph => {
-  return getCommonHeader(paragraph, { variant: "caption" });
+export const getCommonCaption = (paragraph,props={}) => {
+  return getCommonHeader(paragraph, { variant: "caption",...props });
 };
 
-export const getCommonValue = value => {
-  return getCommonHeader(value, { variant: "body2" });
+export const getCommonValue = (value,props={}) => {
+  return getCommonHeader(value, { variant: "body2",...props });
 };
 
 export const getCommonCard = (children, cardProps = {}) => {
@@ -126,19 +126,21 @@ export const getCommonGrayCard = children => {
   });
 };
 
-export const getBreak = () => {
+export const getBreak = (props={}) => {
   return {
     uiFramework: "custom-atoms",
-    componentPath: "Break"
+    componentPath: "Break",
+    props
   };
 };
 
-export const getLabel = label => {
+export const getLabel = (label,props={}) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Label",
     props: {
-      label
+      label,
+      ...props
     }
   };
 };
@@ -211,12 +213,14 @@ export const getCheckBoxwithLabel = (
   gridDefination = {
     xs: 12,
     sm: 12
-  }
+  },
+  props={}
 ) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
     gridDefination,
+    props,
     children: {
       div: {
         uiFramework: "material-ui",
@@ -230,11 +234,11 @@ export const getCheckBoxwithLabel = (
   };
 };
 
-export const getRadiobuttonwithLabel = label => {
+export const getRadiobuttonwithLabel = (label,props={}) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
-
+    props,
     children: {
       div: {
         uiFramework: "material-ui",
@@ -267,19 +271,21 @@ export const getRadiobuttonGroup = (
   };
 };
 
-export const getCommonContainer = children => {
+export const getCommonContainer = (children,props={}) => {
   return {
     componentPath: "Grid",
     props: {
-      container: true
+      container: true,
+      ...props
     },
     children
   };
 };
 
-export const getDivider = () => {
+export const getDivider = (props={}) => {
   return {
-    componentPath: "Divider"
+    componentPath: "Divider",
+    props
   };
 };
 
@@ -318,7 +324,7 @@ export const dispatchMultipleFieldChangeAction = (
 //   };
 // };
 
-export const getLabelWithValue = (label, value) => {
+export const getLabelWithValue = (label, value,props={}) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
@@ -326,6 +332,7 @@ export const getLabelWithValue = (label, value) => {
       xs: 6,
       sm: 3
     },
+    props,
     children: {
       [label]: getCommonCaption(label),
       [value]: getCommonValue(value)
@@ -333,10 +340,11 @@ export const getLabelWithValue = (label, value) => {
   };
 };
 
-export const getTabs = list => {
+export const getTabs = (list,props={}) => {
   return {
     uiFramework: "material-ui",
     componentPath: "Tabs",
+    props,
     children:
       list &&
       list.map(element => {
@@ -345,12 +353,13 @@ export const getTabs = list => {
   };
 };
 
-export const getTab = label => {
+export const getTab = (label,props={}) => {
   return {
     uiFramework: "material-ui",
     componentPath: "Tab",
     props: {
-      label
+      label,
+      ...props
     }
   };
 };

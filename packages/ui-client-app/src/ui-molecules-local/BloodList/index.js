@@ -20,7 +20,7 @@ const styles = theme => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
-    padding: "8px 0 16px 16px"
+    padding: "8px 0 8px 8px"
   }
 });
 
@@ -29,7 +29,7 @@ function SingleLineGridList(props) {
 
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3.5} cellHeight={56}>
+      <GridList className={classes.gridList} cols={5.5} cellHeight={56}>
         {bloodGrp.map((item, itemKey) => (
           <GridListTile key={itemKey}>
             <Button color="primary" variant="fab">

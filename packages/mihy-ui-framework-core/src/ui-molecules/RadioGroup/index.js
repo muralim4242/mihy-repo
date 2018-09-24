@@ -5,22 +5,26 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import "./index.css";
 
 const styles = theme => ({
   root: {
     display: "flex"
   },
-  formControl: {
-    margin: theme.spacing.unit * 3
-  },
+  formControl: {},
   group: {
-    margin: `${theme.spacing.unit}px 0`
+    margin: `${theme.spacing.unit}px 0`,
+    display: "inline-block",
+    margin: 0
+  },
+  radioRoot: {
+    marginBottom: 0
   }
 });
 
 class RadioButtonsGroup extends React.Component {
   state = {
-    value: "female"
+    value: "No"
   };
 
   handleChange = event => {
@@ -28,7 +32,7 @@ class RadioButtonsGroup extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, buttons } = this.props;
 
     return (
       <div className={classes.root}>
@@ -40,13 +44,24 @@ class RadioButtonsGroup extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
           >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            {buttons &&
+              buttons.map(button => {
+                return (
+                  <FormControlLabel
+                    classes={{ label: "radio-button-label" }}
+                    value={button}
+                    control={
+                      <Radio
+                        classes={{
+                          root: "radio-root"
+                        }}
+                        color="primary"
+                      />
+                    }
+                    label={button}
+                  />
+                );
+              })}
           </RadioGroup>
         </FormControl>
       </div>

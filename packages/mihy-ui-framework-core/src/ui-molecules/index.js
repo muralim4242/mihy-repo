@@ -109,6 +109,11 @@ const MultiDownloadCard = Loadable({
   loading: () => <Loading />
 });
 
+const RadioGroup = Loadable({
+  loader: () => import("./RadioGroup")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -132,5 +137,6 @@ export {
   TooltipWithChildren,
   DocumentList,
   FeesEstimateCard,
-  MultiDownloadCard
+  MultiDownloadCard,
+  RadioGroup
 };
