@@ -1,6 +1,6 @@
 {
   "name": "mihy-ui-framework-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./lib",
   "private": true,
   "dependencies": {
@@ -10,7 +10,7 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "marker-animate-unobtrusive": "^0.2.8",
-    "mihy-ui-framework": "^0.1.0",
+    "mihy-ui-framework": "^0.1.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-google-maps": "^9.4.5",
