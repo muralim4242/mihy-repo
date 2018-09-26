@@ -178,7 +178,7 @@ var getLabel = exports.getLabel = function getLabel(label, labelKey) {
   var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
-    uiFramework: "custom-molecules-local",
+    uiFramework: "custom-molecules",
     componentPath: "LabelContainer",
     props: (0, _extends3.default)({
       label: label,

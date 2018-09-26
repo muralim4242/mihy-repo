@@ -147,7 +147,7 @@ export const getBreak = (props = {}) => {
 
 export const getLabel = (label, labelKey, props = {}) => {
   return {
-    uiFramework: "custom-molecules-local",
+    uiFramework: "custom-molecules",
     componentPath: "LabelContainer",
     props: {
       label,
