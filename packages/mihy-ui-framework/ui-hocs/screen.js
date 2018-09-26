@@ -52,6 +52,10 @@ var _jquery = require("jquery");
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _cloneDeep = require("lodash/cloneDeep");
+
+var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var screenHoc = function screenHoc(_ref) {
@@ -98,9 +102,7 @@ var screenHoc = function screenHoc(_ref) {
               var _this$props = _this.props,
                   state = _this$props.state,
                   dispatchAction = _this$props.dispatchAction;
-
-              var configObject = (0, _get2.default)(_this.screenConfig, componentJsonpath);
-              var callBack = configObject.onClickDefination.callBack;
+              var callBack = onClickDefination.callBack;
 
               if (typeof callBack === "function") {
                 callBack(state, dispatchAction);
@@ -140,7 +142,7 @@ var screenHoc = function screenHoc(_ref) {
           if (!(0, _isEmpty2.default)(_this.screenConfig)) {
             (0, _uiUtils.addComponentJsonpath)(_this.screenConfig.components);
           }
-          initScreen(screenKey, JSON.parse(JSON.stringify(_this.screenConfig)));
+          initScreen(screenKey, (0, _cloneDeep2.default)(_this.screenConfig));
         } catch (error) {
           // the error is assumed to have occured due to absence of config; so ignore it!
           console.log(error);

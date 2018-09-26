@@ -93,8 +93,7 @@ const screenHoc = ({
           break;
         case "condition":
           const { state, dispatchAction } = this.props;
-          const configObject = get(this.screenConfig, componentJsonpath);
-          const { callBack } = configObject.onClickDefination;
+          const { callBack } = onClickDefination;
           if (typeof callBack === "function") {
             callBack(state, dispatchAction);
           }

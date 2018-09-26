@@ -141,7 +141,7 @@ var MultiItem = function (_React$Component) {
           console.log(item);
           return _react2.default.createElement(
             _Div2.default,
-            null,
+            { key: key },
             items.length > 1 && _react2.default.createElement(
               _Container2.default,
               null,
@@ -158,7 +158,6 @@ var MultiItem = function (_React$Component) {
               )
             ),
             _react2.default.createElement(_RenderScreen2.default, {
-              key: key,
               screenKey: screenKey,
               components: item,
               uiFramework: uiFramework,
@@ -198,7 +197,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return null;
+  return {};
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MultiItem);

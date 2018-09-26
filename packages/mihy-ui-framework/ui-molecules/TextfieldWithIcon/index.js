@@ -85,7 +85,7 @@ function InputWithIcon(props) {
 }
 
 InputWithIcon.propTypes = {
-  classes: _propTypes2.default.object.isRequired
+  // classes: PropTypes.object.isRequired,
 };
 
 exports.default = InputWithIcon;

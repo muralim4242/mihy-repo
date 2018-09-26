@@ -54,7 +54,7 @@ class MultiItem extends React.Component {
           items.map((item, key) => {
             console.log(item);
             return (
-              <Div>
+              <Div key={key}>
                 {items.length>1 && <Container>
                   <Item xs={12} align="right">
                     <IconButton style={{marginBottom:"-110px"}} onClick={e => removeItem(key)} aria-label="Remove">
@@ -63,7 +63,6 @@ class MultiItem extends React.Component {
                   </Item>
                 </Container>}
                 <RenderScreen
-                  key={key}
                   screenKey={screenKey}
                   components={item}
                   uiFramework={uiFramework}
@@ -93,7 +92,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return null
+  return {}
 };
 
 

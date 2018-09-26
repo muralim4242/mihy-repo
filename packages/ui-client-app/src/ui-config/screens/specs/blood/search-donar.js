@@ -58,14 +58,53 @@ const screenConfig = {
               }
             },
             actionButtons:{
-              search:{
-                componentPath:"Button",
-                props:{
-                  variant:"fab",
-                  style:{
-                    position:"absolute",
-                    top:"100px",
-                    left:"250px"
+              uiFramework:"custom-atoms",
+              componentPath:"Div",
+              props:{
+                style:{
+                  position:"absolute",
+                  right:"8px",
+                  bottom:"73px",
+                  display: "flex",
+                  flexDirection: "column"
+                }
+              },
+              children:{
+                position:{
+                  componentPath:"Button",
+                  props:{
+                    variant:"fab",
+                    style:{
+                      background:"white"
+                    }
+                  },
+                  children:{
+                    positionIcon:{
+                      uiFramework:"custom-atoms",
+                      componentPath:"Icon",
+                      props:{
+                        iconName:"my_location"
+                      }
+                    }
+                  }
+                },
+                search:{
+                  componentPath:"Button",
+                  props:{
+                    variant:"fab",
+                    style:{
+                      marginTop:"16px",
+                      background:"white"
+                    }
+                  },
+                  children:{
+                    positionIcon:{
+                      uiFramework:"custom-atoms",
+                      componentPath:"Icon",
+                      props:{
+                        iconName:"search"
+                      }
+                    }
                   }
                 }
               }
@@ -74,6 +113,9 @@ const screenConfig = {
         }
       }
     }
+  },
+  beforeInitScreen:(action,state,dispatch)=>{
+    return action;
   }
 };
 
