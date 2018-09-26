@@ -150,7 +150,7 @@ var MultiItem = function (_React$Component) {
                 { xs: 12, align: "right" },
                 _react2.default.createElement(
                   _IconButton2.default,
-                  { style: { marginBottom: "-110px" }, onClick: function onClick(e) {
+                  { style: { marginBottom: "-105px", width: "40px", height: "40px" }, onClick: function onClick(e) {
                       return removeItem(key);
                     }, "aria-label": "Remove" },
                   _react2.default.createElement(_Icon2.default, { iconName: "clear" })

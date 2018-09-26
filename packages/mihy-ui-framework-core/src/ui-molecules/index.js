@@ -114,8 +114,8 @@ const RadioGroup = Loadable({
   loading: () => <Loading />
 });
 
-const RadioGroup = Loadable({
-  loader: () => import("./RadioGroup")  ,
+const LabelContainer = Loadable({
+  loader: () => import("./LabelContainer"),
   loading: () => <Loading />
 });
 
@@ -143,5 +143,6 @@ export {
   DocumentList,
   FeesEstimateCard,
   MultiDownloadCard,
-  RadioGroup
+  RadioGroup,
+  LabelContainer
 };

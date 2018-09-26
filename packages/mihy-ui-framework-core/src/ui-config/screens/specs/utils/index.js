@@ -47,24 +47,24 @@ export const getCommonHeader = (header, props) => {
   };
 };
 
-export const getCommonTitle = (header,props={}) => {
-  return getCommonHeader(header, { variant: "title",...props });
+export const getCommonTitle = (header, props = {}) => {
+  return getCommonHeader(header, { variant: "title", ...props });
 };
 
-export const getCommonSubHeader = (header,props={}) => {
-  return getCommonHeader(header, { variant: "subheading",...props });
+export const getCommonSubHeader = (header, props = {}) => {
+  return getCommonHeader(header, { variant: "subheading", ...props });
 };
 
-export const getCommonParagraph = (paragraph,props={}) => {
-  return getCommonHeader(paragraph, { variant: "body1",...props });
+export const getCommonParagraph = (paragraph, props = {}) => {
+  return getCommonHeader(paragraph, { variant: "body1", ...props });
 };
 
-export const getCommonCaption = (paragraph,props={}) => {
-  return getCommonHeader(paragraph, { variant: "caption",...props });
+export const getCommonCaption = (paragraph, props = {}) => {
+  return getCommonHeader(paragraph, { variant: "caption", ...props });
 };
 
-export const getCommonValue = (value,props={}) => {
-  return getCommonHeader(value, { variant: "body2",...props });
+export const getCommonValue = (value, props = {}) => {
+  return getCommonHeader(value, { variant: "body2", ...props });
 };
 
 export const getCommonCard = (children, cardProps = {}) => {
@@ -126,7 +126,7 @@ export const getCommonGrayCard = children => {
   });
 };
 
-export const getBreak = (props={}) => {
+export const getBreak = (props = {}) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Break",
@@ -134,12 +134,24 @@ export const getBreak = (props={}) => {
   };
 };
 
-export const getLabel = (label,props={}) => {
+// export const getLabel = (label, props = {}) => {
+//   return {
+//     uiFramework: "custom-atoms",
+//     componentPath: "Label",
+//     props: {
+//       label,
+//       ...props
+//     }
+//   };
+// };
+
+export const getLabel = (label, labelKey, props = {}) => {
   return {
-    uiFramework: "custom-atoms",
-    componentPath: "Label",
+    uiFramework: "custom-molecules-local",
+    componentPath: "LabelContainer",
     props: {
       label,
+      labelKey,
       ...props
     }
   };
@@ -214,7 +226,7 @@ export const getCheckBoxwithLabel = (
     xs: 12,
     sm: 12
   },
-  props={}
+  props = {}
 ) => {
   return {
     uiFramework: "custom-atoms",
@@ -234,7 +246,7 @@ export const getCheckBoxwithLabel = (
   };
 };
 
-export const getRadiobuttonwithLabel = (label,props={}) => {
+export const getRadiobuttonwithLabel = (label, props = {}) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
@@ -271,7 +283,7 @@ export const getRadiobuttonGroup = (
   };
 };
 
-export const getCommonContainer = (children,props={}) => {
+export const getCommonContainer = (children, props = {}) => {
   return {
     componentPath: "Grid",
     props: {
@@ -282,7 +294,7 @@ export const getCommonContainer = (children,props={}) => {
   };
 };
 
-export const getDivider = (props={}) => {
+export const getDivider = (props = {}) => {
   return {
     componentPath: "Divider",
     props
@@ -324,7 +336,7 @@ export const dispatchMultipleFieldChangeAction = (
 //   };
 // };
 
-export const getLabelWithValue = (label, value,props={}) => {
+export const getLabelWithValue = (label, value, props = {}) => {
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
@@ -332,8 +344,8 @@ export const getLabelWithValue = (label, value,props={}) => {
       xs: 6,
       sm: 3
     },
-    props:{
-      style:{
+    props: {
+      style: {
         marginBottom: "16px"
       },
       ...props
@@ -345,7 +357,7 @@ export const getLabelWithValue = (label, value,props={}) => {
   };
 };
 
-export const getTabs = (list,props={}) => {
+export const getTabs = (list, props = {}) => {
   return {
     uiFramework: "material-ui",
     componentPath: "Tabs",
@@ -358,7 +370,7 @@ export const getTabs = (list,props={}) => {
   };
 };
 
-export const getTab = (label,props={}) => {
+export const getTab = (label, props = {}) => {
   return {
     uiFramework: "material-ui",
     componentPath: "Tab",
@@ -367,6 +379,35 @@ export const getTab = (label,props={}) => {
       ...props
     }
   };
+};
+
+//Localization utils
+
+export const transformById = (payload, id) => {
+  return (
+    payload &&
+    payload.reduce((result, item) => {
+      result[item[id]] = {
+        ...item
+      };
+
+      return result;
+    }, {})
+  );
+};
+
+export const getTranslatedLabel = (labelKey, localizationLabels) => {
+  let translatedLabel = null;
+  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
+    translatedLabel = localizationLabels[labelKey];
+    if (
+      translatedLabel &&
+      typeof translatedLabel === "object" &&
+      translatedLabel.hasOwnProperty("message")
+    )
+      translatedLabel = translatedLabel.message;
+  }
+  return translatedLabel || labelKey;
 };
 
 export const getPattern = type => {
