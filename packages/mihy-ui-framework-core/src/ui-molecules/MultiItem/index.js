@@ -57,7 +57,7 @@ class MultiItem extends React.Component {
               <Div key={key}>
                 {items.length>1 && <Container>
                   <Item xs={12} align="right">
-                    <IconButton style={{marginBottom:"-110px"}} onClick={e => removeItem(key)} aria-label="Remove">
+                    <IconButton  style={{marginBottom:"-105px",width:"40px",height:"40px"}} onClick={e => removeItem(key)} aria-label="Remove">
                       <Icon iconName="clear"/>
                     </IconButton>
                   </Item>
