@@ -6,7 +6,7 @@ import * as mainRouteConstants from "./route-names";
 const Loading = () => <LinearProgress/>;
 
 const ScreenInterface=Loadable({
-  loader:()=>import ('ui-views/ScreenInterface'),
+  loader:()=>import ('../../../ui-views/ScreenInterface'),
   loading:Loading
 })
 

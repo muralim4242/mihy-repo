@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -62,23 +62,33 @@ var getCommonHeader = exports.getCommonHeader = function getCommonHeader(header,
 };
 
 var getCommonTitle = exports.getCommonTitle = function getCommonTitle(header) {
-  return getCommonHeader(header, { variant: "title" });
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return getCommonHeader(header, (0, _extends3.default)({ variant: "title" }, props));
 };
 
 var getCommonSubHeader = exports.getCommonSubHeader = function getCommonSubHeader(header) {
-  return getCommonHeader(header, { variant: "subheading" });
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return getCommonHeader(header, (0, _extends3.default)({ variant: "subheading" }, props));
 };
 
 var getCommonParagraph = exports.getCommonParagraph = function getCommonParagraph(paragraph) {
-  return getCommonHeader(paragraph, { variant: "body1" });
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return getCommonHeader(paragraph, (0, _extends3.default)({ variant: "body1" }, props));
 };
 
 var getCommonCaption = exports.getCommonCaption = function getCommonCaption(paragraph) {
-  return getCommonHeader(paragraph, { variant: "caption" });
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return getCommonHeader(paragraph, (0, _extends3.default)({ variant: "caption" }, props));
 };
 
 var getCommonValue = exports.getCommonValue = function getCommonValue(value) {
-  return getCommonHeader(value, { variant: "body2" });
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return getCommonHeader(value, (0, _extends3.default)({ variant: "body2" }, props));
 };
 
 var getCommonCard = exports.getCommonCard = function getCommonCard(children) {
@@ -140,19 +150,24 @@ var getCommonGrayCard = exports.getCommonGrayCard = function getCommonGrayCard(c
 };
 
 var getBreak = exports.getBreak = function getBreak() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
   return {
     uiFramework: "custom-atoms",
-    componentPath: "Break"
+    componentPath: "Break",
+    props: props
   };
 };
 
 var getLabel = exports.getLabel = function getLabel(label) {
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
   return {
     uiFramework: "custom-atoms",
     componentPath: "Label",
-    props: {
+    props: (0, _extends3.default)({
       label: label
-    }
+    }, props)
   };
 };
 
@@ -165,7 +180,6 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
   };
 
   return {
-    // uiFramework: "material-ui",
     uiFramework: "custom-molecules",
     componentPath: "TextfieldWithIcon",
     props: {
@@ -212,19 +226,85 @@ var getSelectTextField = exports.getSelectTextField = function getSelectTextFiel
   };
 };
 
+var getCheckBoxwithLabel = exports.getCheckBoxwithLabel = function getCheckBoxwithLabel(label) {
+  var gridDefination = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    xs: 12,
+    sm: 12
+  };
+  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    gridDefination: gridDefination,
+    props: props,
+    children: {
+      div: {
+        uiFramework: "material-ui",
+        componentPath: "Checkbox",
+        props: {
+          color: "primary"
+        }
+      },
+      label: getLabel(label)
+    }
+  };
+};
+
+var getRadiobuttonwithLabel = exports.getRadiobuttonwithLabel = function getRadiobuttonwithLabel(label) {
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    props: props,
+    children: {
+      div: {
+        uiFramework: "material-ui",
+        componentPath: "Radio",
+        props: {
+          color: "primary"
+        }
+      },
+      label: getLabel(label)
+    }
+  };
+};
+
+var getRadiobuttonGroup = exports.getRadiobuttonGroup = function getRadiobuttonGroup(labels) {
+  var gridDefination = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    xs: 12,
+    sm: 12
+  };
+
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Container",
+    gridDefination: gridDefination,
+    children: labels && labels.map(function (label) {
+      return getRadiobuttonwithLabel(label);
+    })
+  };
+};
+
 var getCommonContainer = exports.getCommonContainer = function getCommonContainer(children) {
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
   return {
     componentPath: "Grid",
-    props: {
+    props: (0, _extends3.default)({
       container: true
-    },
+    }, props),
     children: children
   };
 };
 
 var getDivider = exports.getDivider = function getDivider() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
   return {
-    componentPath: "Divider"
+    componentPath: "Divider",
+    props: props
   };
 };
 
@@ -269,6 +349,8 @@ var dispatchMultipleFieldChangeAction = exports.dispatchMultipleFieldChangeActio
 var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(label, value) {
   var _children2;
 
+  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
@@ -276,6 +358,88 @@ var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(l
       xs: 6,
       sm: 3
     },
+    props: (0, _extends3.default)({
+      style: {
+        marginBottom: "16px"
+      }
+    }, props),
     children: (_children2 = {}, (0, _defineProperty3.default)(_children2, label, getCommonCaption(label)), (0, _defineProperty3.default)(_children2, value, getCommonValue(value)), _children2)
   };
+};
+
+var getTabs = exports.getTabs = function getTabs(list) {
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return {
+    uiFramework: "material-ui",
+    componentPath: "Tabs",
+    props: props,
+    children: list && list.map(function (element) {
+      return getTab(element);
+    })
+  };
+};
+
+var getTab = exports.getTab = function getTab(label) {
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return {
+    uiFramework: "material-ui",
+    componentPath: "Tab",
+    props: (0, _extends3.default)({
+      label: label
+    }, props)
+  };
+};
+
+var getPattern = exports.getPattern = function getPattern(type) {
+  switch (type) {
+    case "Name":
+      return (/^[a-zA-Z\s]{1,50}$/i
+      );
+    case "MobileNo":
+      return (/^[6789][0-9]{9}$/i
+      );
+    case "Email":
+      return (/^(?=^.{1,64}$)((([^<>()\[\]\\.,;:\s$*@'"]+(\.[^<>()\[\]\\.,;:\s@'"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})))$/i
+      );
+    case "Address":
+      return (/^[<>()\-+_\|\[\]\\.,;:\s$*@'"\/#%& 0-9A-Za-z]{1,500}$/i
+      );
+    case "PAN":
+      return "/^[A-Za-z]{5}d{4}[A-Za-z]{1}$/i";
+    case "TradeName":
+      return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
+      );
+    case "Date":
+      return (/(^(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11)))[/](19|[2-9][0-9])dd$)|(^29[/]02[/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/i
+      );
+    case "UOMValue":
+      return (/^[1-9][0-9]{0,3}$/i
+      );
+    case "OperationalArea":
+      return (/^[1-9][0-9]{0,6}$/i
+      );
+    case "NoOfEmp":
+      return (/^[1-9][0-9]{0,2}$/i
+      );
+    case "GSTNo":
+      return (/^d{2}[A-Z]{5}d{4}[A-Z]{1}d[Z]{1}[A-Zd]{1}$/i
+      );
+    case "DoorHouseNo":
+      return (/^[a-zA-Z0-9\s]{1,10}$/i
+      );
+    case "BuildingStreet":
+      return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
+      );
+    case "Pincode":
+      return (/^[1-9][0-9]{5}$/i
+      );
+    case "PropertyID":
+      return (/^[a-zA-z0-9\s\\/\-]$/i
+      );
+    case "ElectricityConnNo":
+      return (/^[0-9]{15}$/i
+      );
+  }
 };

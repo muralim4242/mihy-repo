@@ -37,9 +37,9 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     // padding: "16px",
-    // [theme.breakpoints.up('md')]: {
-    //   paddingLeft: drawerWidth+10,
-    // },
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: drawerWidth+10,
+    },
     // zIndex:10000,
     overflow:"scroll"
   },

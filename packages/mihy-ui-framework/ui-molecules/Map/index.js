@@ -30,8 +30,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _require = require("react-google-maps/lib/components/addons/InfoBox"),
     InfoBox = _require.InfoBox;
+// import InputAdornment from '@material-ui/core/InputAdornment';
+// import TextField from '@material-ui/core/TextField';
+// import Icon from '@material-ui/core/Icon';
 // import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
+
+var _require2 = require("react-google-maps/lib/components/places/SearchBox"),
+    SearchBox = _require2.SearchBox;
 
 var getMapKey = function getMapKey(env) {
   return process.env.hasOwnProperty("REACT_APP_" + env + "_API_KEY") ? process.env["REACT_APP_" + env + "_API_KEY"] : process.env.REACT_APP_MAP_API_KEY;
@@ -69,18 +75,59 @@ var addressBoxStyle = {
 };
 
 var bounds = void 0;
-var gMap = void 0;
+var gMap = {};
 
 var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
-  googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
+  // googleMapURL: `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${API_KEY}`,
+  googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + API_KEY,
   loadingElement: _react2.default.createElement("div", { style: { height: "100%" } }),
-  containerElement: _react2.default.createElement("div", { style: { height: "100%" } }),
+  containerElement: _react2.default.createElement("div", { style: { height: "100%", minWidth: "300px" } }),
   mapElement: _react2.default.createElement("div", { style: { height: "100%" } })
-}), _reactGoogleMaps.withScriptjs, _reactGoogleMaps.withGoogleMap, (0, _recompose.lifecycle)({
+}), (0, _recompose.lifecycle)({
   componentWillMount: function componentWillMount() {
-    global.google = window.google;
-    var SlidingMarker = require("marker-animate-unobtrusive");
-    SlidingMarker.initializeGlobally();
+    var _this = this;
+
+    this.setState({
+      bounds: null,
+      center: { lat: 21.7679, lng: 78.8718 },
+      markers: [],
+      onMapMounted: function onMapMounted(ref) {
+        gMap.map = ref;
+      },
+      onBoundsChanged: function onBoundsChanged() {
+        _this.setState({
+          bounds: gMap.map.getBounds(),
+          center: gMap.map.getCenter()
+        });
+      },
+      onSearchBoxMounted: function onSearchBoxMounted(ref) {
+        gMap.searchBox = ref;
+      },
+      onPlacesChanged: function onPlacesChanged() {
+        var places = gMap.searchBox.getPlaces();
+        var bounds = new window.google.maps.LatLngBounds();
+
+        places.forEach(function (place) {
+          if (place.geometry.viewport) {
+            bounds.union(place.geometry.viewport);
+          } else {
+            bounds.extend(place.geometry.location);
+          }
+        });
+        var nextMarkers = places.map(function (place) {
+          return {
+            position: place.geometry.location
+          };
+        });
+        var nextCenter = _.get(nextMarkers, "0.position", _this.state.center);
+
+        _this.setState({
+          center: nextCenter,
+          markers: nextMarkers
+        });
+        // gMap.map.fitBounds(bounds);
+      }
+    });
   },
   componentDidMount: function componentDidMount() {
     this.reRender(this.props);
@@ -91,7 +138,7 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
     }
   },
   reRender: function reRender(props, rndBool) {
-    var _this = this;
+    var _this2 = this;
 
     if (props.isDirectionShown) {
       var DirectionsService = new window.google.maps.DirectionsService();
@@ -107,8 +154,8 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
           }
           // Don't zoom in too far on only one marker
           if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-            var extendPoint1 = new window.window.google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-            var extendPoint2 = new window.window.google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+            var extendPoint1 = new window.google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+            var extendPoint2 = new window.google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
             bounds.extend(extendPoint1);
             bounds.extend(extendPoint2);
           }
@@ -126,7 +173,7 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
           optimizeWaypoints: true
         }, function (result, status) {
           if (status === window.google.maps.DirectionsStatus.OK) {
-            _this.setState({
+            _this2.setState({
               directions: result,
               waypoints: waypts
             });
@@ -138,14 +185,12 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
       getDestinationDirection();
     }
   }
-}))(function (props) {
+}), _reactGoogleMaps.withScriptjs, _reactGoogleMaps.withGoogleMap)(function (props) {
   console.log(props);
   return _react2.default.createElement(
     _reactGoogleMaps.GoogleMap,
     {
-      ref: function ref(el) {
-        gMap = el;
-      },
+      ref: props.onMapMounted,
       defaultZoom: props.zoomLevel,
       defaultCenter: (0, _isEmpty2.default)(props.defaultCenter) ? { lat: 21.7679, lng: 78.8718 } : props.defaultCenter
       // center={props.defaultCenter}
@@ -160,8 +205,39 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
         zoomControlOptions: {
           position: window.google.maps.ControlPosition.LEFT_BOTTOM
         }
-      }
+      },
+      onBoundsChanged: props.onBoundsChanged
     },
+    _react2.default.createElement(
+      SearchBox,
+      {
+        ref: props.onSearchBoxMounted,
+        bounds: props.bounds,
+        controlPosition: google.maps.ControlPosition.TOP_LEFT,
+        onPlacesChanged: props.onPlacesChanged
+      },
+      _react2.default.createElement("input", {
+        type: "text",
+        placeholder: "Pick your location",
+        style: {
+          boxSizing: "border-box",
+          border: "1px solid transparent",
+          width: "96%",
+          height: "50px",
+          marginTop: "16px",
+          padding: "0 12px",
+          borderRadius: "3px",
+          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
+          fontSize: "14px",
+          outline: "none",
+          textOverflow: "ellipses",
+          marginLeft: "8px"
+        }
+      })
+    ),
+    props.markers.map(function (marker, index) {
+      return _react2.default.createElement(_reactGoogleMaps.Marker, { key: index, position: marker.position });
+    }),
     props.isDirectionShown && props.directions && _react2.default.createElement(_reactGoogleMaps.DirectionsRenderer, {
       directions: props.directions,
       options: {

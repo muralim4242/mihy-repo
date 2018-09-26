@@ -47,14 +47,34 @@ function InputWithIcon(props) {
       endAdornment: _react2.default.createElement(
         _InputAdornment2.default,
         { position: 'end' },
-        _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName })
+        _react2.default.createElement(
+          'span',
+          { style: { color: iconObj.color ? iconObj.color : "rgba(0, 0, 0, 0.60" } },
+          iconObj.iconName && _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
+          _react2.default.createElement(
+            'span',
+            { style: iconObj.iconName ? { position: "relative", top: "-7px" } : {} },
+            iconObj.label && iconObj.label
+          ),
+          ' '
+        )
       )
     } } : {
     InputProps: {
       startAdornment: _react2.default.createElement(
         _InputAdornment2.default,
-        { position: 'end' },
-        _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName })
+        { position: 'start' },
+        _react2.default.createElement(
+          'span',
+          { style: { color: iconObj.color ? iconObj.color : "rgba(0, 0, 0, 0.60" } },
+          iconObj.iconName && _react2.default.createElement(_Icon2.default, { iconName: iconObj.iconName }),
+          _react2.default.createElement(
+            'span',
+            { style: iconObj.iconName ? { position: "relative", top: "-7px" } : {} },
+            iconObj.label && iconObj.label
+          ),
+          ' '
+        )
       )
     }
   });

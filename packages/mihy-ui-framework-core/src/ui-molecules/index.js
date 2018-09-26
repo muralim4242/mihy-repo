@@ -84,6 +84,36 @@ const TextfieldWithIcon = Loadable({
   loading: () => <Loading />
 });
 
+const StepperStaticVerticalWithTab = Loadable({
+  loader: () => import("./StepperStaticVerticalWithTab")  ,
+  loading: () => <Loading />
+});
+
+const TooltipWithChildren = Loadable({
+  loader: () => import("./TooltipWithChildren")  ,
+  loading: () => <Loading />
+});
+
+const DocumentList = Loadable({
+  loader: () => import("./DocumentList")  ,
+  loading: () => <Loading />
+});
+
+const FeesEstimateCard = Loadable({
+  loader: () => import("./FeesEstimateCard")  ,
+  loading: () => <Loading />
+});
+
+const MultiDownloadCard = Loadable({
+  loader: () => import("./MultiDownloadCard")  ,
+  loading: () => <Loading />
+});
+
+const RadioGroup = Loadable({
+  loader: () => import("./RadioGroup")  ,
+  loading: () => <Loading />
+});
+
 export {
   RenderRoutes,
   Map,
@@ -102,5 +132,11 @@ export {
   MultiItem,
   Carousel,
   StepperStaticVertical,
-  TextfieldWithIcon
+  TextfieldWithIcon,
+  StepperStaticVerticalWithTab,
+  TooltipWithChildren,
+  DocumentList,
+  FeesEstimateCard,
+  MultiDownloadCard,
+  RadioGroup
 };

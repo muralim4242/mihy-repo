@@ -17,8 +17,5 @@
     "mihy-ui-framework-atoms": "babel packages/mihy-ui-framework-core/src/ui-atoms --out-dir packages/mihy-ui-framework/ui-atoms --copy-files",
     "mihy-ui-framework-molecules": "babel packages/mihy-ui-framework-core/src/ui-molecules --out-dir packages/mihy-ui-framework/ui-molecules --copy-files",
     "mihy-ui-framework": "npm run mihy-ui-framework-redux && npm run mihy-ui-framework-utils && npm run mihy-ui-framework-atoms && npm run mihy-ui-framework-molecules && npm run mihy-ui-framework-hocs && npm run mihy-ui-framework-config"
-  },
-  "dependencies": {
-    "react-responsive-carousel": "^3.1.41"
   }
 }

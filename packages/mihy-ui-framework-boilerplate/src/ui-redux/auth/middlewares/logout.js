@@ -1,6 +1,6 @@
 import * as authActionTypes from "../actionTypes";
 import {setRoute} from "../../app/actions";
-import {logoutRequest} from "ui-utils";
+import {logoutRequest} from "../../../ui-utils";
 
 const logout = (store) => (next) => async (action) => {
   const { type} = action;

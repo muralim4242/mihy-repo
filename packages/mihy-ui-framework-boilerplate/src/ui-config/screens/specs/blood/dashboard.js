@@ -8,13 +8,13 @@ const screenConfig = {
       uiFramework: "custom-atoms",
       componentPath: "Div",
       children:{
-        mihyBloodDashboardAppCarosel:{
-          uiFramework:"custom-molecules",
-          componentPath:"AppCarosel",
-          props:{
-            
-          }
-        },
+        // mihyBloodDashboardAppCarosel:{
+        //   uiFramework:"custom-molecules",
+        //   componentPath:"AppCarosel",
+        //   props:{
+        //
+        //   }
+        // },
         mihyBloodDashboardAppCards:{
           uiFramework:"custom-molecules",
           componentPath:"AppCards",

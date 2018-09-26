@@ -8,11 +8,29 @@ class ScreenInterface extends React.Component {
     this.state = { view: null };
   }
   componentDidMount() {
-    const { match } = this.props;
+    this.initInterface(this.props);
+  }
+
+  initInterface = props => {
+    const { match} = props;
     const { params } = match;
-    const {path,screenKey,hasRemoteConfig} = params;
+    const { path, screenKey, hasRemoteConfig } = params;
     if (path && screenKey) {
-      this.setState({ view: screenHoc({ path, screenKey,hasRemoteConfig })(CommonView) });
+      this.setState({
+        view: screenHoc({ path, screenKey, hasRemoteConfig })(CommonView)
+      });
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const { match:nextMatch } = nextProps;
+    const { match:currentMatch } = this.props;
+    const { params:nextParams } = nextMatch;
+    const { params:currentParams } = currentMatch;
+    const { path:nextPath, screenKey:nextScreenKey } = nextParams;
+    const { path:currentPath, screenKey:currentScreenKey} = currentParams;
+    if ((nextPath!==currentPath)||(nextScreenKey!==currentScreenKey)) {
+      this.initInterface(nextProps);
     }
   }
 

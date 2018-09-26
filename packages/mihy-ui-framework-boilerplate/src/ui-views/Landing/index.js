@@ -17,11 +17,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Divider from "@material-ui/core/Divider";
 import RenderRoutes from "mihy-ui-framework/ui-molecules/RenderRoutes";
-import appRoutes from "ui-config/routes/mihy";
+import appRoutes from "../../ui-config/routes/mihy";
 import styles from "./css";
 import {compose} from "recompose";
 import {connect} from "react-redux";
-import {logout} from "ui-redux/auth/actions";
+import {logout} from "../../ui-redux/auth/actions";
 
 
 class Landing extends React.Component {
