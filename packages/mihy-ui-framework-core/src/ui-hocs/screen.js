@@ -10,6 +10,7 @@ import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import { addComponentJsonpath } from "../ui-utils";
 import $ from "jquery";
+import cloneDeep from "lodash/cloneDeep"
 
 const screenHoc = ({
   path = "",
@@ -46,7 +47,7 @@ const screenHoc = ({
         if (!isEmpty(this.screenConfig)) {
           addComponentJsonpath(this.screenConfig.components);
         }
-        initScreen(screenKey, JSON.parse(JSON.stringify(this.screenConfig)));
+        initScreen(screenKey, cloneDeep(this.screenConfig));
       } catch (error) {
         // the error is assumed to have occured due to absence of config; so ignore it!
         console.log(error);
