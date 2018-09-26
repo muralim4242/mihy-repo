@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTranslatedLabel = exports.transformById = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+
+var _typeof2 = require("babel-runtime/helpers/typeof");
+
+var _typeof3 = _interopRequireDefault(_typeof2);
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -159,14 +163,26 @@ var getBreak = exports.getBreak = function getBreak() {
   };
 };
 
-var getLabel = exports.getLabel = function getLabel(label) {
-  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+// export const getLabel = (label, props = {}) => {
+//   return {
+//     uiFramework: "custom-atoms",
+//     componentPath: "Label",
+//     props: {
+//       label,
+//       ...props
+//     }
+//   };
+// };
+
+var getLabel = exports.getLabel = function getLabel(label, labelKey) {
+  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
-    uiFramework: "custom-atoms",
-    componentPath: "Label",
+    uiFramework: "custom-molecules-local",
+    componentPath: "LabelContainer",
     props: (0, _extends3.default)({
-      label: label
+      label: label,
+      labelKey: labelKey
     }, props)
   };
 };
@@ -390,6 +406,25 @@ var getTab = exports.getTab = function getTab(label) {
       label: label
     }, props)
   };
+};
+
+//Localization utils
+
+var transformById = exports.transformById = function transformById(payload, id) {
+  return payload && payload.reduce(function (result, item) {
+    result[item[id]] = (0, _extends3.default)({}, item);
+
+    return result;
+  }, {});
+};
+
+var getTranslatedLabel = exports.getTranslatedLabel = function getTranslatedLabel(labelKey, localizationLabels) {
+  var translatedLabel = null;
+  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
+    translatedLabel = localizationLabels[labelKey];
+    if (translatedLabel && (typeof translatedLabel === "undefined" ? "undefined" : (0, _typeof3.default)(translatedLabel)) === "object" && translatedLabel.hasOwnProperty("message")) translatedLabel = translatedLabel.message;
+  }
+  return translatedLabel || labelKey;
 };
 
 var getPattern = exports.getPattern = function getPattern(type) {

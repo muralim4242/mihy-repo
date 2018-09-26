@@ -35,82 +35,87 @@ const LoadingIndicator = Loadable({
   loading: () => <Loading />
 });
 const CommonView = Loadable({
-  loader: () => import("./CommonView")  ,
+  loader: () => import("./CommonView"),
   loading: () => <Loading />
 });
 
 const AppCard = Loadable({
-  loader: () => import("./AppCard")  ,
+  loader: () => import("./AppCard"),
   loading: () => <Loading />
 });
 
 const AppCards = Loadable({
-  loader: () => import("./AppCards")  ,
+  loader: () => import("./AppCards"),
   loading: () => <Loading />
 });
 
 const AppCarosel = Loadable({
-  loader: () => import("./AppCarosel")  ,
+  loader: () => import("./AppCarosel"),
   loading: () => <Loading />
 });
 
 const AppSubOption = Loadable({
-  loader: () => import("./AppSubOption")  ,
+  loader: () => import("./AppSubOption"),
   loading: () => <Loading />
 });
 
 const Stepper = Loadable({
-  loader: () => import("./Stepper")  ,
+  loader: () => import("./Stepper"),
   loading: () => <Loading />
 });
 
 const MultiItem = Loadable({
-  loader: () => import("./MultiItem")  ,
+  loader: () => import("./MultiItem"),
   loading: () => <Loading />
 });
 
 const Carousel = Loadable({
-  loader: () => import("./Carousel")  ,
+  loader: () => import("./Carousel"),
   loading: () => <Loading />
 });
 
 const StepperStaticVertical = Loadable({
-  loader: () => import("./StepperStaticVertical")  ,
+  loader: () => import("./StepperStaticVertical"),
   loading: () => <Loading />
 });
 
 const TextfieldWithIcon = Loadable({
-  loader: () => import("./TextfieldWithIcon")  ,
+  loader: () => import("./TextfieldWithIcon"),
   loading: () => <Loading />
 });
 
 const StepperStaticVerticalWithTab = Loadable({
-  loader: () => import("./StepperStaticVerticalWithTab")  ,
+  loader: () => import("./StepperStaticVerticalWithTab"),
   loading: () => <Loading />
 });
 
 const TooltipWithChildren = Loadable({
-  loader: () => import("./TooltipWithChildren")  ,
+  loader: () => import("./TooltipWithChildren"),
   loading: () => <Loading />
 });
 
 const DocumentList = Loadable({
-  loader: () => import("./DocumentList")  ,
+  loader: () => import("./DocumentList"),
   loading: () => <Loading />
 });
 
 const FeesEstimateCard = Loadable({
-  loader: () => import("./FeesEstimateCard")  ,
+  loader: () => import("./FeesEstimateCard"),
   loading: () => <Loading />
 });
 
 const MultiDownloadCard = Loadable({
-  loader: () => import("./MultiDownloadCard")  ,
+  loader: () => import("./MultiDownloadCard"),
   loading: () => <Loading />
 });
 
 const RadioGroup = Loadable({
-  loader: () => import("./RadioGroup")  ,
+  loader: () => import("./RadioGroup"),
+  loading: () => <Loading />
+});
+
+const LabelContainer = Loadable({
+  loader: () => import("./LabelContainer"),
   loading: () => <Loading />
 });
 
@@ -138,5 +143,6 @@ export {
   DocumentList,
   FeesEstimateCard,
   MultiDownloadCard,
-  RadioGroup
+  RadioGroup,
+  LabelContainer
 };
