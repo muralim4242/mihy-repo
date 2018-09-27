@@ -20,10 +20,6 @@ var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -59,11 +55,14 @@ var styles = function styles(theme) {
     root: {
       display: "flex"
     },
-    formControl: {},
-    group: (0, _defineProperty3.default)({
-      margin: theme.spacing.unit + "px 0",
-      display: "inline-block"
-    }, "margin", 0),
+    formControl: {
+      marginTop: 0,
+      paddingBottom: 0
+    },
+    group: {
+      display: "inline-block",
+      margin: 0
+    },
     radioRoot: {
       marginBottom: 0
     }
@@ -114,8 +113,9 @@ var RadioButtonsGroup = function (_React$Component) {
               value: this.state.value,
               onChange: this.handleChange
             },
-            buttons && buttons.map(function (button) {
+            buttons && buttons.map(function (button, index) {
               return _react2.default.createElement(_FormControlLabel2.default, {
+                key: index,
                 classes: { label: "radio-button-label" },
                 value: button,
                 control: _react2.default.createElement(_Radio2.default, {
