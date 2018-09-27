@@ -1,6 +1,6 @@
 {
   "name": "mihy-ui-framework-biolerplate",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.1",
@@ -9,7 +9,7 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "marker-animate-unobtrusive": "^0.2.8",
-    "mihy-ui-framework": "^0.1.8",
+    "mihy-ui-framework": "^0.1.9",
     "pdfmake": "^0.1.38",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
