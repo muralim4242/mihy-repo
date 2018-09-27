@@ -36,6 +36,10 @@ var _reactRedux = require("react-redux");
 
 var _uiMolecules = require("../../ui-molecules");
 
+var _MenuItem = require("@material-ui/core/MenuItem");
+
+var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
 var _get = require("lodash/get");
 
 var _get2 = _interopRequireDefault(_get);
@@ -59,15 +63,43 @@ var TextFieldContainer = function (_React$Component) {
           jsonPath = _props.jsonPath,
           iconObj = _props.iconObj,
           value = _props.value,
-          rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value"]);
+          dropdownData = _props.dropdownData,
+          data = _props.data,
+          optionValue = _props.optionValue,
+          optionLabel = _props.optionLabel,
+          sourceJsonPath = _props.sourceJsonPath,
+          rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath"]);
 
-      return _react2.default.createElement(_uiMolecules.TextfieldWithIcon, (0, _extends3.default)({
-        label: label,
-        placeholder: placeholder,
-        jsonPath: jsonPath,
-        iconObj: iconObj,
-        value: value
-      }, rest));
+      if (dropdownData.length > 0) {
+        return _react2.default.createElement(
+          _uiMolecules.TextfieldWithIcon,
+          (0, _extends3.default)({
+            label: label,
+            placeholder: placeholder,
+            iconObj: iconObj,
+            value: value ? value : placeholder
+          }, rest),
+          _react2.default.createElement(
+            _MenuItem2.default,
+            { value: placeholder, disabled: true },
+            placeholder
+          ),
+          dropdownData.map(function (option, key) {
+            return _react2.default.createElement(
+              _MenuItem2.default,
+              { key: key, value: option.value },
+              option.label
+            );
+          })
+        );
+      } else {
+        return _react2.default.createElement(_uiMolecules.TextfieldWithIcon, (0, _extends3.default)({
+          label: label,
+          placeholder: placeholder,
+          iconObj: iconObj,
+          value: value
+        }, rest));
+      }
     }
   }]);
   return TextFieldContainer;
@@ -75,13 +107,34 @@ var TextFieldContainer = function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state, ownprops) {
   var jsonPath = ownprops.jsonPath,
-      value = ownprops.value;
+      value = ownprops.value,
+      select = ownprops.select,
+      data = ownprops.data,
+      optionValue = ownprops.optionValue,
+      optionLabel = ownprops.optionLabel,
+      sourceJsonPath = ownprops.sourceJsonPath;
   var screenConfiguration = state.screenConfiguration;
   var preparedFinalObject = screenConfiguration.preparedFinalObject;
 
   console.log("first,,,", ownprops);
   var fieldValue = value ? value : (0, _get2.default)(preparedFinalObject, jsonPath);
-  return { value: fieldValue };
+  var dropdownData = [];
+  if (select) {
+    var constructDropdown = function constructDropdown(dt) {
+      return dt.map(function (d) {
+        return {
+          value: d[optionValue],
+          label: d[optionLabel]
+        };
+      });
+    };
+    if (data && data.length > 0) {
+      dropdownData = constructDropdown(data || []);
+    } else if (sourceJsonPath) {
+      dropdownData = constructDropdown((0, _get2.default)(preparedFinalObject, sourceJsonPath, []));
+    }
+  }
+  return { value: fieldValue, dropdownData: dropdownData };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(TextFieldContainer);

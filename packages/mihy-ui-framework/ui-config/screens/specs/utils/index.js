@@ -217,14 +217,18 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
 
 var getSelectTextField = exports.getSelectTextField = function getSelectTextField(label, placeholder, required, pattern) {
   var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
-  var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
-  var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
+  var sourceJsonPath = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "";
+  var data = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
+  var optionValue = arguments[7];
+  var optionLabel = arguments[8];
+  var iconObj = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
+  var gridDefination = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {
     xs: 12,
     sm: 6
   };
 
   return {
-    uiFramework: "material-ui",
+    uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
     props: {
       select: true,
@@ -234,11 +238,16 @@ var getSelectTextField = exports.getSelectTextField = function getSelectTextFiel
       },
       placeholder: placeholder,
       fullWidth: true,
-      required: required
+      required: required,
+      data: data,
+      optionValue: optionValue,
+      optionLabel: optionLabel,
+      sourceJsonPath: sourceJsonPath
     },
     gridDefination: gridDefination,
     required: required,
-    pattern: pattern
+    pattern: pattern,
+    jsonPath: jsonPath
   };
 };
 

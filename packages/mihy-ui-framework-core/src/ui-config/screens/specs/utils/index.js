@@ -195,6 +195,10 @@ export const getSelectTextField = (
   required,
   pattern,
   jsonPath = "",
+  sourceJsonPath="",
+  data=[],
+  optionValue:"code",
+  optionLabel:"code",
   iconObj = {},
   gridDefination = {
     xs: 12,
@@ -202,7 +206,7 @@ export const getSelectTextField = (
   }
 ) => {
   return {
-    uiFramework: "material-ui",
+    uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
     props: {
       select: true,
@@ -212,11 +216,16 @@ export const getSelectTextField = (
       },
       placeholder,
       fullWidth: true,
-      required
+      required,
+      data,
+      optionValue,
+      optionLabel,
+      sourceJsonPath,
     },
     gridDefination,
     required,
-    pattern
+    pattern,
+    jsonPath
   };
 };
 
