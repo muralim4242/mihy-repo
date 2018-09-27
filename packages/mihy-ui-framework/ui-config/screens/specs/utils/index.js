@@ -363,8 +363,6 @@ var dispatchMultipleFieldChangeAction = exports.dispatchMultipleFieldChangeActio
 // };
 
 var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(label, value) {
-  var _children2;
-
   var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
@@ -379,7 +377,10 @@ var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(l
         marginBottom: "16px"
       }
     }, props),
-    children: (_children2 = {}, (0, _defineProperty3.default)(_children2, label, getCommonCaption(label)), (0, _defineProperty3.default)(_children2, value, getCommonValue(value)), _children2)
+    children: {
+      label: getCommonCaption(label),
+      value: getCommonValue(value)
+    }
   };
 };
 

@@ -27,7 +27,7 @@ var handleScreenConfigurationFieldChange = function handleScreenConfigurationFie
     return function (action) {
       var type = action.type;
 
-      if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property === "value") {
+      if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property === "props.value") {
         var screenKey = action.screenKey,
             componentJsonpath = action.componentJsonpath,
             value = action.value;
