@@ -147,7 +147,7 @@ export const getBreak = (props = {}) => {
 
 export const getLabel = (label, labelKey, props = {}) => {
   return {
-    uiFramework: "custom-molecules",
+    uiFramework: "custom-containers",
     componentPath: "LabelContainer",
     props: {
       label,
@@ -170,8 +170,8 @@ export const getTextField = (
   }
 ) => {
   return {
-    uiFramework: "custom-molecules",
-    componentPath: "TextfieldWithIcon",
+    uiFramework: "custom-containers",
+    componentPath: "TextFieldContainer",
     props: {
       label,
       InputLabelProps: {
@@ -203,7 +203,7 @@ export const getSelectTextField = (
 ) => {
   return {
     uiFramework: "material-ui",
-    componentPath: "TextField",
+    componentPath: "TextFieldContainer",
     props: {
       select: true,
       label,

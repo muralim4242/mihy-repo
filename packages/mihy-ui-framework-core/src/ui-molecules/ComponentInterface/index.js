@@ -49,6 +49,20 @@ class ComponentInterface extends React.Component {
           loading: () => <LinearProgress />
         });
         break;
+      case "custom-containers":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("../../ui-containers").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
+      case "custom-containers-local":
+        LoadableComponent = Loadable({
+          loader: () =>
+            import("ui-containers-local").then(module => module[componentPath]),
+          loading: () => <LinearProgress />
+        });
+        break;
       case "material-ui":
         LoadableComponent = Loadable({
           loader: () =>

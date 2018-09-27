@@ -120,6 +120,30 @@ var ComponentInterface = function (_React$Component) {
             }
           });
           break;
+        case "custom-containers":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("../../ui-containers").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
+        case "custom-containers-local":
+          LoadableComponent = (0, _reactLoadable2.default)({
+            loader: function loader() {
+              return import("ui-containers-local").then(function (module) {
+                return module[componentPath];
+              });
+            },
+            loading: function loading() {
+              return _react2.default.createElement(_LinearSpinner2.default, null);
+            }
+          });
+          break;
         case "material-ui":
           LoadableComponent = (0, _reactLoadable2.default)({
             loader: function loader() {

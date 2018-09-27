@@ -2,7 +2,8 @@ import {
   getCommonCard,
   getCommonContainer,
   getCommonParagraph,
-  getCommonSubHeader
+  getCommonSubHeader,
+  getCommonHeader
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
@@ -11,7 +12,6 @@ import {
   getRadioGroupWithLabel,
   getApprovalTextField,
   getSubHeaderLabel,
-  getCommonHeader,
   getCheckbox,
   getContainerWithElement,
   getUploadFilesMultiple
@@ -39,7 +39,6 @@ const tradeDetails = getCommonCard({
       : getCommonSubHeader(
           "Please provide the following details on the basis of your field verification"
         ),
-
   paragraphOne: getContainerWithElement(
     {
       paragraph: getCommonParagraph(
@@ -67,6 +66,7 @@ const tradeDetails = getCommonCard({
       ? {}
       : getRadioGroupWithLabel(
           "Are Safety Norms Satisfactory?",
+          "TL_APPROVAL_CHECKLIST_APPROV_CHECKLIST_ITEM_1",
           radioButtonLabels
         ),
 
@@ -75,6 +75,7 @@ const tradeDetails = getCommonCard({
       ? {}
       : getRadioGroupWithLabel(
           "Are Hygiene Levels Satisfactory?",
+          "TL_APPROVAL_CHECKLIST_APPROV_CHECKLIST_ITEM_2",
           radioButtonLabels
         ),
 
@@ -83,6 +84,7 @@ const tradeDetails = getCommonCard({
       ? {}
       : getRadioGroupWithLabel(
           "Is Locality harmed/disturbed by this trade?",
+          "TL_APPROVAL_CHECKLIST_APPROV_CHECKLIST_ITEM_3",
           radioButtonLabels
         ),
 
@@ -99,8 +101,8 @@ const tradeDetails = getCommonCard({
 
   uploadFileHeader: getCommonSubHeader("Upload Document"),
   uploadFileInfo: getCommonParagraph(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard.",
-    { styles: { body1: { fontSize: 25 } } }
+    "Only .jpg and .pdf files. 5MB max file size.",
+    { style: { fontSize: 12, marginBottom: 0 } }
   ),
   uploadFiles: getUploadFilesMultiple(),
   checkBoxContainer: getCheckbox(

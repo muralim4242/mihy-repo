@@ -1,9 +1,9 @@
 import React from "react";
-import { Label } from "mihy-ui-framework/ui-atoms";
+import { Label } from "../../ui-atoms";
 import {
   getTranslatedLabel,
   transformById
-} from "mihy-ui-framework/ui-config/screens/specs/utils";
+} from "../../ui-config/screens/specs/utils";
 
 const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   if (labelKey) {

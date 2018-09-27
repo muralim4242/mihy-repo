@@ -5,9 +5,13 @@ import {
 import {cash,demandDraft,cheque,card} from "./payment-methods";
 
 const capturePaymentDetails = getCommonGrayCard({
-  header: getCommonSubHeader("Capture Payment"),
+  header:getCommonSubHeader("Capture Payment",{
+    style:{
+      marginBottom:"8px"
+    }
+  }),
   tabSection: {
-    uiFramework: "custom-molecules-local",
+    uiFramework: "custom-containers-local",
     componentPath: "CustomTabContainer",
     props: {
       // horizontal: {

@@ -3,12 +3,8 @@ import {
   getCommonCard,
   getCommonTitle,
   getCommonParagraph,
-  getLabel,
   getCommonGrayCard,
-  getCommonSubHeader,
-  getCommonContainer,
-  getDivider,
-  getLabelWithValue
+  getCommonContainer
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import { getFeesEstimateCard } from "../utils";
@@ -17,13 +13,61 @@ import { getReviewTrade } from "./applyResource//review-trade";
 import { getReviewOwner } from "./applyResource//review-owner";
 import { getReviewDocuments } from "./applyResource//review-documents";
 import { getApprovalDetails } from "./applyResource/approval-rejection-details";
+import { getCancelDetails } from "./applyResource/cancel-details";
 
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 
 const role = getQueryArg(window.location.href, "role");
-const purpose = getQueryArg(window.location.href, "purpose");
+const status = getQueryArg(window.location.href, "status");
+const tradeLicenseNo = getQueryArg(window.location.href, "licenseNo");
 
-const header = getCommonContainer({
+let headerSideText = "";
+let titleText = "";
+let paraText =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard.";
+let titleVisibility = false;
+let paraVisibiliy = false;
+let approvalDetailsVisibility = false;
+let cancelDetailsVisibility = false;
+
+switch (status) {
+  case "approved": {
+    approvalDetailsVisibility = true;
+    headerSideText = "Trade License No: 3444";
+    if (role === "approver") {
+      titleText = "Please Review the Trade License";
+      titleVisibility = true;
+    }
+    break;
+  }
+  case "pending_payment": {
+    titleText = "Please Review the Application and Proceed with Payment";
+    titleVisibility = true;
+    headerSideText = "Status: Pending Payment";
+    break;
+  }
+  case "pending_approval": {
+    headerSideText = "Status: Pending Approval";
+    if (role === "approver") {
+      titleText = "Please Review the Application and Proceed with Approval";
+      titleVisibility = true;
+      paraText =
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard.";
+      paraVisibiliy = true;
+    }
+    break;
+  }
+  case "cancelled": {
+    cancelDetailsVisibility = true;
+    headerSideText = "Trade License No: 3444";
+    break;
+  }
+  default:
+    break;
+}
+
+const footer = footerReview(role, status);
+const headerrow = getCommonContainer({
   header: getCommonHeader("Trade License Application (2018-2019)"),
   applicationNumber: {
     uiFramework: "custom-atoms-local",
@@ -60,20 +104,25 @@ const reviewOwnerDetails = getReviewOwner(false);
 
 const reviewDocumentDetails = getReviewDocuments(false);
 
-const approvalDetails = getApprovalDetails();
+let approvalDetails = getApprovalDetails();
+let cancelDetails = getCancelDetails();
+let title = getCommonTitle(titleText);
+let paragraph = getCommonParagraph(paraText);
+
+title = { ...title, visible: titleVisibility };
+paragraph = { ...paragraph, visible: paraVisibiliy };
+cancelDetails = { ...cancelDetails, visible: cancelDetailsVisibility };
+approvalDetails = { ...approvalDetails, visible: approvalDetailsVisibility };
 
 export const tradeReviewDetails = getCommonCard({
-  header: getCommonTitle(
-    "Please review the Application and Proceed with Approval"
-  ),
-  paragraph: getCommonParagraph(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-  ),
+  title,
+  paragraph,
   estimate,
   reviewTradeDetails,
   reviewOwnerDetails,
   reviewDocumentDetails,
-  approvalDetails
+  approvalDetails,
+  cancelDetails
 });
 
 const screenConfig = {
@@ -96,7 +145,7 @@ const screenConfig = {
                 xs: "12",
                 sm: "9"
               },
-              ...header
+              ...headerrow
             },
             helpSection: {
               uiFramework: "custom-atoms",
@@ -110,13 +159,13 @@ const screenConfig = {
                 align: "right"
               },
               children: {
-                buttonLabel: getCommonTitle("Status: Pending Approval ")
+                buttonLabel: getCommonTitle(headerSideText)
               }
             }
           }
         },
         tradeReviewDetails,
-        footerReview
+        footer
       }
     }
   }

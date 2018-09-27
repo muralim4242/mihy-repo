@@ -1,11 +1,11 @@
 import React from "react";
-import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
-import RenderScreen from "mihy-ui-framework/ui-molecules/RenderScreen";
-import CustomTab from "../CustomTab";
+import Div from "../../ui-atoms/HtmlElements/Div";
+import RenderScreen from "../../ui-molecules/RenderScreen";
+import CustomTab from "../../ui-molecules/CustomTab";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import set from "lodash/set";
-import { addComponentJsonpath } from "mihy-ui-framework/ui-utils";
+import { addComponentJsonpath } from "../../ui-utils";
 
 class MultiItem extends React.Component {
   componentDidMount = () => {

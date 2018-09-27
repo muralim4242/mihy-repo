@@ -178,7 +178,7 @@ var getLabel = exports.getLabel = function getLabel(label, labelKey) {
   var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
-    uiFramework: "custom-molecules",
+    uiFramework: "custom-containers",
     componentPath: "LabelContainer",
     props: (0, _extends3.default)({
       label: label,
@@ -196,8 +196,8 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
   };
 
   return {
-    uiFramework: "custom-molecules",
-    componentPath: "TextfieldWithIcon",
+    uiFramework: "custom-containers",
+    componentPath: "TextFieldContainer",
     props: {
       label: label,
       InputLabelProps: {
@@ -225,7 +225,7 @@ var getSelectTextField = exports.getSelectTextField = function getSelectTextFiel
 
   return {
     uiFramework: "material-ui",
-    componentPath: "TextField",
+    componentPath: "TextFieldContainer",
     props: {
       select: true,
       label: label,

@@ -7,6 +7,8 @@ import {
   getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
+import { showHideAdhocPopup } from "../../utils";
+
 export const adhocPopup = getCommonContainer({
   header: getCommonHeader("Add Adhoc Penalty/Rebate"),
   adhocPenaltyCard: getCommonContainer(
@@ -85,6 +87,10 @@ export const adhocPopup = getCommonContainer({
         },
         children: {
           previousButtonLabel: getLabel("CANCEL")
+        },
+        onClickDefination: {
+          action: "condition",
+          callBack: showHideAdhocPopup
         }
       },
       addButton: {

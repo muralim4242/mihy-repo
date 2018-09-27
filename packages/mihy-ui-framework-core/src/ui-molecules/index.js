@@ -114,10 +114,7 @@ const RadioGroup = Loadable({
   loading: () => <Loading />
 });
 
-const LabelContainer = Loadable({
-  loader: () => import("./LabelContainer"),
-  loading: () => <Loading />
-});
+
 
 export {
   RenderRoutes,
@@ -143,6 +140,5 @@ export {
   DocumentList,
   FeesEstimateCard,
   MultiDownloadCard,
-  RadioGroup,
-  LabelContainer
+  RadioGroup
 };
