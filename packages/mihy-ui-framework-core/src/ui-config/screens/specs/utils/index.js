@@ -351,8 +351,8 @@ export const getLabelWithValue = (label, value, props = {}) => {
       ...props
     },
     children: {
-      [label]: getCommonCaption(label),
-      [value]: getCommonValue(value)
+      label: getCommonCaption(label),
+      value: getCommonValue(value)
     }
   };
 };
