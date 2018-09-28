@@ -195,10 +195,10 @@ export const getSelectTextField = (
   required,
   pattern,
   jsonPath = "",
-  sourceJsonPath="",
-  data=[],
-  optionValue:"code",
-  optionLabel:"code",
+  sourceJsonPath = "",
+  data = [],
+  optionValue = "code",
+  optionLabel = "code",
   iconObj = {},
   gridDefination = {
     xs: 12,
@@ -220,7 +220,7 @@ export const getSelectTextField = (
       data,
       optionValue,
       optionLabel,
-      sourceJsonPath,
+      sourceJsonPath
     },
     gridDefination,
     required,
