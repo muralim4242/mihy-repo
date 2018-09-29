@@ -1,4 +1,4 @@
-import { appCategories } from "./dashboardResources/appCategories";
+import { appCategories } from "./dashboard-resources/appCategories";
 import { appCardsWithIcons } from "../utils";
 
 const screenConfig = {
