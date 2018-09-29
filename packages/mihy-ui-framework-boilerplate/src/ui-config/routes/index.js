@@ -20,6 +20,11 @@ const ScreenInterface=Loadable({
   loading:Loading
 })
 
+const Catalog=Loadable({
+  loader:()=>import ('../../ui-views/Catalog'),
+  loading:Loading
+})
+
 const mainRoutes = [
   {
     path: mainRouteConstants.LANDING,
@@ -32,6 +37,10 @@ const mainRoutes = [
   {
     path: mainRouteConstants.PLAYGROUND,
     component: Playground
+  },
+  {
+    path: mainRouteConstants.CATALOG,
+    component: Catalog
   },
   {
     isRedirect:true,

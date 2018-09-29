@@ -5,7 +5,7 @@ export const appOptions = [
     iconName: "search",
     onClickDefination:{
       action:"page_change",
-      path:"/landing/mihy-ui-framework/blood/seach-donor"
+      path:"/landing/mihy-ui-framework/blood/search-donar"
     }
   },
   {

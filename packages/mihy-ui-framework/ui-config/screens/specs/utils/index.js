@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTranslatedLabel = exports.transformById = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTranslatedLabel = exports.transformById = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getDateField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _typeof2 = require("babel-runtime/helpers/typeof");
 
@@ -206,7 +206,38 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
       placeholder: placeholder,
       fullWidth: true,
       required: required,
-      iconObj: iconObj
+      iconObj: iconObj,
+      jsonPath: jsonPath
+    },
+    gridDefination: gridDefination,
+    required: required,
+    pattern: pattern,
+    jsonPath: jsonPath
+  };
+};
+
+var getDateField = exports.getDateField = function getDateField(label, placeholder, required, pattern) {
+  var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
+  var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
+  var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
+    xs: 12,
+    sm: 6
+  };
+
+  return {
+    uiFramework: "custom-containers",
+    componentPath: "TextFieldContainer",
+    props: {
+      label: label,
+      InputLabelProps: {
+        shrink: true
+      },
+      placeholder: placeholder,
+      fullWidth: true,
+      required: required,
+      iconObj: iconObj,
+      jsonPath: jsonPath,
+      type: "date"
     },
     gridDefination: gridDefination,
     required: required,
@@ -242,7 +273,8 @@ var getSelectTextField = exports.getSelectTextField = function getSelectTextFiel
       data: data,
       optionValue: optionValue,
       optionLabel: optionLabel,
-      sourceJsonPath: sourceJsonPath
+      sourceJsonPath: sourceJsonPath,
+      jsonPath: jsonPath
     },
     gridDefination: gridDefination,
     required: required,

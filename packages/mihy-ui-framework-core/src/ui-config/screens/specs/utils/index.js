@@ -180,7 +180,42 @@ export const getTextField = (
       placeholder,
       fullWidth: true,
       required,
-      iconObj
+      iconObj,
+      jsonPath
+    },
+    gridDefination,
+    required,
+    pattern,
+    jsonPath
+  };
+};
+
+export const getDateField = (
+  label,
+  placeholder,
+  required,
+  pattern,
+  jsonPath = "",
+  iconObj = {},
+  gridDefination = {
+    xs: 12,
+    sm: 6
+  }
+) => {
+  return {
+    uiFramework: "custom-containers",
+    componentPath: "TextFieldContainer",
+    props: {
+      label,
+      InputLabelProps: {
+        shrink: true
+      },
+      placeholder,
+      fullWidth: true,
+      required,
+      iconObj,
+      jsonPath,
+      type:"date"
     },
     gridDefination,
     required,
@@ -220,7 +255,8 @@ export const getSelectTextField = (
       data,
       optionValue,
       optionLabel,
-      sourceJsonPath
+      sourceJsonPath,
+      jsonPath
     },
     gridDefination,
     required,

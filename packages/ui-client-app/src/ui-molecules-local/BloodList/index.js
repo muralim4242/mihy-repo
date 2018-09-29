@@ -25,12 +25,12 @@ const styles = theme => ({
 });
 
 function SingleLineGridList(props) {
-  const { classes, bloodGrp } = props;
+  const { classes, bloodGrps } = props;
 
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={5.5} cellHeight={56}>
-        {bloodGrp.map((item, itemKey) => (
+        {bloodGrps.map((item, itemKey) => (
           <GridListTile key={itemKey}>
             <Button color="primary" variant="fab">
               {item.name}

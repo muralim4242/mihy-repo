@@ -8,4 +8,9 @@ const TextFieldContainer = Loadable({
   loading: () => <Loading />
 });
 
-export { TextFieldContainer };
+const TextFieldContainerNew = Loadable({
+  loader: () => import("./TextFieldContainerNew"),
+  loading: () => <Loading />
+});
+
+export { TextFieldContainer ,TextFieldContainerNew};

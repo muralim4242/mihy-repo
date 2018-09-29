@@ -13,7 +13,13 @@ const BloodList = Loadable({
   loading: () => <Loading />
 });
 
+const UrgencyDailog =Loadable({
+  loader: () => import("./UrgencyDailog"),
+  loading: () => <Loading />
+});
+
 export {
   TestMolecules,
-  BloodList
+  BloodList,
+  UrgencyDailog
 }

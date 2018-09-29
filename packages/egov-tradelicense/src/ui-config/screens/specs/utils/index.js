@@ -25,7 +25,7 @@ export const getTextFieldNew = (
 ) => {
   return {
     uiFramework: "custom-containers-local",
-    componentPath: "TextFieldContainer",
+    componentPath: "TextFieldContainerNew",
     props: {
       label,
       InputLabelProps: {
