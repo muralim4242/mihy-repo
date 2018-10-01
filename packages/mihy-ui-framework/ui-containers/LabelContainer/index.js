@@ -34,13 +34,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _uiAtoms = require("../../ui-atoms");
 
-var _utils = require("../../ui-config/screens/specs/utils");
+var _commons = require("../../ui-utils/commons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getLocaleLabelsforTL = function getLocaleLabelsforTL(label, labelKey, localizationLabels) {
   if (labelKey) {
-    var translatedLabel = (0, _utils.getTranslatedLabel)(labelKey, localizationLabels);
+    var translatedLabel = (0, _commons.getTranslatedLabel)(labelKey, localizationLabels);
     if (!translatedLabel || labelKey === translatedLabel) {
       return label;
     } else {
@@ -68,7 +68,7 @@ var LabelContainer = function (_React$Component) {
           rest = (0, _objectWithoutProperties3.default)(_props, ["label", "labelKey"]);
 
       var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
-      var transfomedKeys = (0, _utils.transformById)(localizationLabels, "code");
+      var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label, labelKey, transfomedKeys);
 
       return _react2.default.createElement(_uiAtoms.Label, (0, _extends3.default)({ label: translatedLabel }, rest));
