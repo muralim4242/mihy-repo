@@ -1,9 +1,6 @@
 import React from "react";
 import { Label } from "../../ui-atoms";
-import {
-  getTranslatedLabel,
-  transformById
-} from "../../ui-config/screens/specs/utils";
+import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
 
 const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   if (labelKey) {
