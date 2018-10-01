@@ -158,8 +158,8 @@ export const getLabel = (label, labelKey, props = {}) => {
 };
 
 export const getTextField = (
-  label,
-  placeholder,
+  label = {},
+  placeholder = {},
   required,
   pattern,
   jsonPath = "",
@@ -180,8 +180,7 @@ export const getTextField = (
       placeholder,
       fullWidth: true,
       required,
-      iconObj,
-      jsonPath
+      iconObj
     },
     gridDefination,
     required,
@@ -424,35 +423,6 @@ export const getTab = (label, props = {}) => {
       ...props
     }
   };
-};
-
-//Localization utils
-
-export const transformById = (payload, id) => {
-  return (
-    payload &&
-    payload.reduce((result, item) => {
-      result[item[id]] = {
-        ...item
-      };
-
-      return result;
-    }, {})
-  );
-};
-
-export const getTranslatedLabel = (labelKey, localizationLabels) => {
-  let translatedLabel = null;
-  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
-    translatedLabel = localizationLabels[labelKey];
-    if (
-      translatedLabel &&
-      typeof translatedLabel === "object" &&
-      translatedLabel.hasOwnProperty("message")
-    )
-      translatedLabel = translatedLabel.message;
-  }
-  return translatedLabel || labelKey;
 };
 
 export const getPattern = type => {
