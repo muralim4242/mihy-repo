@@ -187,7 +187,11 @@ var getLabel = exports.getLabel = function getLabel(label, labelKey) {
   };
 };
 
-var getTextField = exports.getTextField = function getTextField(label, placeholder, required, pattern) {
+var getTextField = exports.getTextField = function getTextField() {
+  var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var placeholder = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var required = arguments[2];
+  var pattern = arguments[3];
   var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
   var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
   var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
@@ -206,8 +210,7 @@ var getTextField = exports.getTextField = function getTextField(label, placehold
       placeholder: placeholder,
       fullWidth: true,
       required: required,
-      iconObj: iconObj,
-      jsonPath: jsonPath
+      iconObj: iconObj
     },
     gridDefination: gridDefination,
     required: required,
@@ -250,8 +253,8 @@ var getSelectTextField = exports.getSelectTextField = function getSelectTextFiel
   var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
   var sourceJsonPath = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "";
   var data = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
-  var optionValue = arguments[7];
-  var optionLabel = arguments[8];
+  var optionValue = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : "code";
+  var optionLabel = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : "code";
   var iconObj = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
   var gridDefination = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {
     xs: 12,

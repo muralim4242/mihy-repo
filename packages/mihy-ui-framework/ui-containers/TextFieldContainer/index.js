@@ -44,7 +44,22 @@ var _get = require("lodash/get");
 
 var _get2 = _interopRequireDefault(_get);
 
+var _commons = require("../../ui-utils/commons");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getLocaleLabelsforTL = function getLocaleLabelsforTL(label, labelKey, localizationLabels) {
+  if (labelKey) {
+    var translatedLabel = (0, _commons.getTranslatedLabel)(labelKey, localizationLabels);
+    if (!translatedLabel || labelKey === translatedLabel) {
+      return label;
+    } else {
+      return translatedLabel;
+    }
+  } else {
+    return label;
+  }
+};
 
 var TextFieldContainer = function (_React$Component) {
   (0, _inherits3.default)(TextFieldContainer, _React$Component);
@@ -70,12 +85,16 @@ var TextFieldContainer = function (_React$Component) {
           sourceJsonPath = _props.sourceJsonPath,
           rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath"]);
 
+      var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
+      var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
+      var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);
+      var translatedPlaceholder = getLocaleLabelsforTL(placeholder.labelName, placeholder.labelKey, transfomedKeys);
       if (dropdownData.length > 0) {
         return _react2.default.createElement(
           _uiMolecules.TextfieldWithIcon,
           (0, _extends3.default)({
-            label: label,
-            placeholder: placeholder,
+            label: translatedLabel,
+            placeholder: translatedPlaceholder,
             iconObj: iconObj,
             value: value ? value : placeholder
           }, rest),
@@ -94,8 +113,8 @@ var TextFieldContainer = function (_React$Component) {
         );
       } else {
         return _react2.default.createElement(_uiMolecules.TextfieldWithIcon, (0, _extends3.default)({
-          label: label,
-          placeholder: placeholder,
+          label: translatedLabel,
+          placeholder: translatedPlaceholder,
           iconObj: iconObj,
           value: value
         }, rest));
@@ -116,7 +135,6 @@ var mapStateToProps = function mapStateToProps(state, ownprops) {
   var screenConfiguration = state.screenConfiguration;
   var preparedFinalObject = screenConfiguration.preparedFinalObject;
 
-  console.log("first,,,", ownprops);
   var fieldValue = value ? value : (0, _get2.default)(preparedFinalObject, jsonPath);
   var dropdownData = [];
   if (select) {

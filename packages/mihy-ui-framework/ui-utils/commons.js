@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getDateInEpoch = exports.trimObj = exports.fetchFromLocalStorage = exports.persistInLocalStorage = exports.slugify = exports.isFieldEmpty = exports.addQueryArg = exports.getQueryArg = exports.addComponentJsonpath = undefined;
+exports.getTranslatedLabel = exports.transformById = exports.getDateInEpoch = exports.trimObj = exports.fetchFromLocalStorage = exports.persistInLocalStorage = exports.slugify = exports.isFieldEmpty = exports.addQueryArg = exports.getQueryArg = exports.addComponentJsonpath = undefined;
+
+var _extends2 = require("babel-runtime/helpers/extends");
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _typeof2 = require("babel-runtime/helpers/typeof");
 
@@ -20,7 +24,7 @@ var addComponentJsonpath = exports.addComponentJsonpath = function addComponentJ
 
   for (var componentKey in components) {
     if (components.hasOwnProperty(componentKey)) {
-      // typeof components[componentKey].children!=="string" && 
+      // typeof components[componentKey].children!=="string" &&
       if (components[componentKey].children) {
         components[componentKey].componentJsonpath = jsonPath + "." + componentKey;
         var childJsonpath = components[componentKey].componentJsonpath + ".children";
@@ -96,4 +100,21 @@ var trimObj = exports.trimObj = function trimObj(obj) {
 
 var getDateInEpoch = exports.getDateInEpoch = function getDateInEpoch() {
   return new Date().getTime();
+};
+
+var transformById = exports.transformById = function transformById(payload, id) {
+  return payload && payload.reduce(function (result, item) {
+    result[item[id]] = (0, _extends3.default)({}, item);
+
+    return result;
+  }, {});
+};
+
+var getTranslatedLabel = exports.getTranslatedLabel = function getTranslatedLabel(labelKey, localizationLabels) {
+  var translatedLabel = null;
+  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
+    translatedLabel = localizationLabels[labelKey];
+    if (translatedLabel && (typeof translatedLabel === "undefined" ? "undefined" : (0, _typeof3.default)(translatedLabel)) === "object" && translatedLabel.hasOwnProperty("message")) translatedLabel = translatedLabel.message;
+  }
+  return translatedLabel || labelKey;
 };
