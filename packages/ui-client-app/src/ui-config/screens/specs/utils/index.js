@@ -25,6 +25,35 @@ const appOptionCardIconBoxStyle = (
   };
 };
 
+export const getFormCommonCard=({iconName="",header="",iconColorOne="",iconColorTwo="",children={},gridDefination={ xs: 12, sm:12 },cardProps})=>{
+  return {
+    ...getCommonCard({
+      iconDiv: {
+        uiFramework: "custom-atoms",
+        componentPath: "Div",
+        props: {
+          style: appOptionCardIconBoxStyle(iconColorOne, iconColorTwo)
+        },
+        children: {
+          icon: {
+            uiFramework: "custom-atoms",
+            componentPath: "Icon",
+            props: {
+              iconName,
+              size: "36px"
+            }
+          }
+        },
+        gridDefination: {
+          xs: 4,
+          align: "left"
+        }
+      },
+    },cardProps),
+    gridDefination
+  }
+}
+
 export const appOptionCardWithIcon = (
   label,
   iconName,

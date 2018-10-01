@@ -1,11 +1,10 @@
 import React from "react";
+import {Page, HtmlSpecimen} from 'catalog';
 
-const Intro=()=>{
-  return (
-    <div>
-      intro
-    </div>
-  )
-}
-
-export default Intro;
+export default () => (
+  <Page>
+    <HtmlSpecimen dark>
+      Content goes here...
+    </HtmlSpecimen>
+  </Page>
+);

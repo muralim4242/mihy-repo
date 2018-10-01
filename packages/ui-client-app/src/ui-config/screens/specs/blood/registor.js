@@ -1,11 +1,12 @@
+import {getFormCommonCard} from "../utils"
+
 const screenConfig = {
   uiFramework: "material-ui",
-  name: "mihyBloodDonationProcessOptions",
+  name: "mihyBloodRegistor",
   components: {
-    mihyBloodDonationProcessOptionsAppCards: {
-      uiFramework:"custom-molecules",
-      componentPath:"Map"
-    }
+    cardSection:getFormCommonCard({
+      
+    })
   }
 };
 

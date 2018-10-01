@@ -89,10 +89,10 @@ const screenConfig = {
         }
       }
     },
-    popup:{
-      uiFramework:"custom-molecules-local",
-      componentPath:"UrgencyDailog"
-    }
+    // popup:{
+    //   uiFramework:"custom-molecules-local",
+    //   componentPath:"UrgencyDailog"
+    // }
   }
 };
 
