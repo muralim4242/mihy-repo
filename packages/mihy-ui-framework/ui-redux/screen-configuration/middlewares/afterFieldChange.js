@@ -21,7 +21,7 @@ var afterFieldChange = function afterFieldChange(store) {
     return function (action) {
       var type = action.type;
 
-      if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property === "value") {
+      if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property === "props.value") {
         var screenKey = action.screenKey,
             componentJsonpath = action.componentJsonpath,
             value = action.value;
@@ -30,7 +30,7 @@ var afterFieldChange = function afterFieldChange(store) {
         var state = store.getState();
         var componentObject = (0, _get2.default)(state, "screenConfiguration.screenConfig." + screenKey + "." + componentJsonpath);
         if (typeof (0, _get2.default)(componentObject, "afterFieldChange") === "function") {
-          componentObject.afterFieldChange(componentObject, state, dispatch);
+          componentObject.afterFieldChange(action, state, dispatch);
         }
         next(action);
       } else {

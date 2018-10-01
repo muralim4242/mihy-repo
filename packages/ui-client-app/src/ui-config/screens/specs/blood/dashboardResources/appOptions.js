@@ -13,7 +13,11 @@ export const appOptions = [
     displaySubLabel: "Only one file can be uploaded for one document.",
     iconName: "assignment_ind",
     iconColorOne:"#66bb6a",
-    iconColorTwo:"#43a047"
+    iconColorTwo:"#43a047",
+    onClickDefination:{
+      action:"page_change",
+      path:"/landing/mihy-ui-framework/blood/registor"
+    }
   },
   {
     displayLabel: "Blood donation process",

@@ -49,6 +49,7 @@ export const getFormCommonCard=({iconName="",header="",iconColorOne="",iconColor
           align: "left"
         }
       },
+      ...children
     },cardProps),
     gridDefination
   }

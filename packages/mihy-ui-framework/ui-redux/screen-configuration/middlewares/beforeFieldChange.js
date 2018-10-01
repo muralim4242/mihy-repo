@@ -23,7 +23,7 @@ var beforeFieldChange = function beforeFieldChange(store) {
     return function (action) {
       var type = action.type;
 
-      if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property === "value") {
+      if (type === screenActionTypes.HANDLE_SCREEN_CONFIGURATION_FIELD_CHANGE && action.property === "props.value") {
         var screenKey = action.screenKey,
             componentJsonpath = action.componentJsonpath,
             value = action.value;
@@ -32,7 +32,7 @@ var beforeFieldChange = function beforeFieldChange(store) {
         var state = store.getState();
         var componentObject = (0, _get2.default)(state, "screenConfiguration.screenConfig." + screenKey + "." + componentJsonpath);
         if (typeof (0, _get2.default)(componentObject, "beforeFieldChange") === "function") {
-          componentObject.beforeFieldChange(componentObject, state, dispatch);
+          componentObject.beforeFieldChange(action, state, dispatch);
         }
         next(action);
       } else {

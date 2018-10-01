@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTranslatedLabel = exports.transformById = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectTextField = exports.getDateField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
-
-var _typeof2 = require("babel-runtime/helpers/typeof");
-
-var _typeof3 = _interopRequireDefault(_typeof2);
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectField = exports.getDateField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -80,7 +76,22 @@ var getCommonSubHeader = exports.getCommonSubHeader = function getCommonSubHeade
 var getCommonParagraph = exports.getCommonParagraph = function getCommonParagraph(paragraph) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  return getCommonHeader(paragraph, (0, _extends3.default)({ variant: "body1" }, props));
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    props: (0, _extends3.default)({
+      style: {
+        color: "rgba(0, 0, 0, 0.60)",
+        fontFamily: "Roboto",
+        fontSize: "14px",
+        fontWeight: 400,
+        lineHeight: "20px",
+        marginBottom: "12px"
+      }
+    }, props),
+    children: (0, _defineProperty3.default)({}, paragraph, getLabel(paragraph))
+  };
+  // getCommonHeader(paragraph, { variant: "body1", ...props });
 };
 
 var getCommonCaption = exports.getCommonCaption = function getCommonCaption(paragraph) {
@@ -187,17 +198,22 @@ var getLabel = exports.getLabel = function getLabel(label, labelKey) {
   };
 };
 
-var getTextField = exports.getTextField = function getTextField() {
-  var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var placeholder = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var required = arguments[2];
-  var pattern = arguments[3];
-  var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
-  var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
-  var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
+var getTextField = exports.getTextField = function getTextField(textScheama) {
+  var _textScheama$label = textScheama.label,
+      label = _textScheama$label === undefined ? {} : _textScheama$label,
+      _textScheama$placehol = textScheama.placeholder,
+      placeholder = _textScheama$placehol === undefined ? {} : _textScheama$placehol,
+      required = textScheama.required,
+      pattern = textScheama.pattern,
+      _textScheama$jsonPath = textScheama.jsonPath,
+      jsonPath = _textScheama$jsonPath === undefined ? "" : _textScheama$jsonPath,
+      _textScheama$iconObj = textScheama.iconObj,
+      iconObj = _textScheama$iconObj === undefined ? {} : _textScheama$iconObj,
+      _textScheama$gridDefi = textScheama.gridDefination,
+      gridDefination = _textScheama$gridDefi === undefined ? {
     xs: 12,
     sm: 6
-  };
+  } : _textScheama$gridDefi;
 
   return {
     uiFramework: "custom-containers",
@@ -210,7 +226,8 @@ var getTextField = exports.getTextField = function getTextField() {
       placeholder: placeholder,
       fullWidth: true,
       required: required,
-      iconObj: iconObj
+      iconObj: iconObj,
+      jsonPath: jsonPath
     },
     gridDefination: gridDefination,
     required: required,
@@ -219,13 +236,20 @@ var getTextField = exports.getTextField = function getTextField() {
   };
 };
 
-var getDateField = exports.getDateField = function getDateField(label, placeholder, required, pattern) {
-  var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
-  var iconObj = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
-  var gridDefination = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {
+var getDateField = exports.getDateField = function getDateField(dateScheama) {
+  var label = dateScheama.label,
+      placeholder = dateScheama.placeholder,
+      required = dateScheama.required,
+      pattern = dateScheama.pattern,
+      _dateScheama$jsonPath = dateScheama.jsonPath,
+      jsonPath = _dateScheama$jsonPath === undefined ? "" : _dateScheama$jsonPath,
+      _dateScheama$iconObj = dateScheama.iconObj,
+      iconObj = _dateScheama$iconObj === undefined ? {} : _dateScheama$iconObj,
+      _dateScheama$gridDefi = dateScheama.gridDefination,
+      gridDefination = _dateScheama$gridDefi === undefined ? {
     xs: 12,
     sm: 6
-  };
+  } : _dateScheama$gridDefi;
 
   return {
     uiFramework: "custom-containers",
@@ -249,17 +273,28 @@ var getDateField = exports.getDateField = function getDateField(label, placehold
   };
 };
 
-var getSelectTextField = exports.getSelectTextField = function getSelectTextField(label, placeholder, required, pattern) {
-  var jsonPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
-  var sourceJsonPath = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "";
-  var data = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
-  var optionValue = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : "code";
-  var optionLabel = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : "code";
-  var iconObj = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
-  var gridDefination = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {
+var getSelectField = exports.getSelectField = function getSelectField(selectScheama) {
+  var label = selectScheama.label,
+      placeholder = selectScheama.placeholder,
+      required = selectScheama.required,
+      pattern = selectScheama.pattern,
+      _selectScheama$jsonPa = selectScheama.jsonPath,
+      jsonPath = _selectScheama$jsonPa === undefined ? "" : _selectScheama$jsonPa,
+      _selectScheama$source = selectScheama.sourceJsonPath,
+      sourceJsonPath = _selectScheama$source === undefined ? "" : _selectScheama$source,
+      _selectScheama$data = selectScheama.data,
+      data = _selectScheama$data === undefined ? [] : _selectScheama$data,
+      _selectScheama$option = selectScheama.optionValue,
+      optionValue = _selectScheama$option === undefined ? "code" : _selectScheama$option,
+      _selectScheama$option2 = selectScheama.optionLabel,
+      optionLabel = _selectScheama$option2 === undefined ? "code" : _selectScheama$option2,
+      _selectScheama$iconOb = selectScheama.iconObj,
+      iconObj = _selectScheama$iconOb === undefined ? {} : _selectScheama$iconOb,
+      _selectScheama$gridDe = selectScheama.gridDefination,
+      gridDefination = _selectScheama$gridDe === undefined ? {
     xs: 12,
     sm: 6
-  };
+  } : _selectScheama$gridDe;
 
   return {
     uiFramework: "custom-containers",
@@ -453,25 +488,6 @@ var getTab = exports.getTab = function getTab(label) {
   };
 };
 
-//Localization utils
-
-var transformById = exports.transformById = function transformById(payload, id) {
-  return payload && payload.reduce(function (result, item) {
-    result[item[id]] = (0, _extends3.default)({}, item);
-
-    return result;
-  }, {});
-};
-
-var getTranslatedLabel = exports.getTranslatedLabel = function getTranslatedLabel(labelKey, localizationLabels) {
-  var translatedLabel = null;
-  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
-    translatedLabel = localizationLabels[labelKey];
-    if (translatedLabel && (typeof translatedLabel === "undefined" ? "undefined" : (0, _typeof3.default)(translatedLabel)) === "object" && translatedLabel.hasOwnProperty("message")) translatedLabel = translatedLabel.message;
-  }
-  return translatedLabel || labelKey;
-};
-
 var getPattern = exports.getPattern = function getPattern(type) {
   switch (type) {
     case "Name":
@@ -492,7 +508,7 @@ var getPattern = exports.getPattern = function getPattern(type) {
       return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
       );
     case "Date":
-      return (/(^(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11)))[/](19|[2-9][0-9])dd$)|(^29[/]02[/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/i
+      return (/^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/i
       );
     case "UOMValue":
       return (/^[1-9][0-9]{0,3}$/i

@@ -56,7 +56,25 @@ export const getCommonSubHeader = (header, props = {}) => {
 };
 
 export const getCommonParagraph = (paragraph, props = {}) => {
-  return getCommonHeader(paragraph, { variant: "body1", ...props });
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    props: {
+      style: {
+        color: "rgba(0, 0, 0, 0.60)",
+        fontFamily: "Roboto",
+        fontSize: "14px",
+        fontWeight: 400,
+        lineHeight: "20px",
+        marginBottom: "12px"
+      },
+      ...props
+    },
+    children: {
+      [paragraph]: getLabel(paragraph)
+    }
+  };
+  // getCommonHeader(paragraph, { variant: "body1", ...props });
 };
 
 export const getCommonCaption = (paragraph, props = {}) => {
@@ -157,18 +175,19 @@ export const getLabel = (label, labelKey, props = {}) => {
   };
 };
 
-export const getTextField = (
-  label = {},
-  placeholder = {},
-  required,
-  pattern,
-  jsonPath = "",
-  iconObj = {},
-  gridDefination = {
-    xs: 12,
-    sm: 6
-  }
-) => {
+export const getTextField = textScheama => {
+  const {
+    label = {},
+    placeholder = {},
+    required,
+    pattern,
+    jsonPath = "",
+    iconObj = {},
+    gridDefination = {
+      xs: 12,
+      sm: 6
+    }
+  } = textScheama;
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
@@ -180,7 +199,8 @@ export const getTextField = (
       placeholder,
       fullWidth: true,
       required,
-      iconObj
+      iconObj,
+      jsonPath
     },
     gridDefination,
     required,
@@ -189,18 +209,19 @@ export const getTextField = (
   };
 };
 
-export const getDateField = (
-  label,
-  placeholder,
-  required,
-  pattern,
-  jsonPath = "",
-  iconObj = {},
-  gridDefination = {
-    xs: 12,
-    sm: 6
-  }
-) => {
+export const getDateField = dateScheama => {
+  const {
+    label,
+    placeholder,
+    required,
+    pattern,
+    jsonPath = "",
+    iconObj = {},
+    gridDefination = {
+      xs: 12,
+      sm: 6
+    }
+  } = dateScheama;
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
@@ -223,22 +244,23 @@ export const getDateField = (
   };
 };
 
-export const getSelectTextField = (
-  label,
-  placeholder,
-  required,
-  pattern,
-  jsonPath = "",
-  sourceJsonPath = "",
-  data = [],
-  optionValue = "code",
-  optionLabel = "code",
-  iconObj = {},
-  gridDefination = {
-    xs: 12,
-    sm: 6
-  }
-) => {
+export const getSelectField = selectScheama => {
+  const {
+    label,
+    placeholder,
+    required,
+    pattern,
+    jsonPath = "",
+    sourceJsonPath = "",
+    data = [],
+    optionValue = "code",
+    optionLabel = "code",
+    iconObj = {},
+    gridDefination = {
+      xs: 12,
+      sm: 6
+    }
+  } = selectScheama;
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
