@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container-padding {
+  margin: 8px;
+}
+
+.mihy-stepper-overide {
+  margin-top: 32px;
+}
+
+
+.wizard-footer {
+  background-color: #ffffff;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.24);
+  padding: 8px;
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  /* z-index: 1000; */
+  /* height: 55px; */
+  text-align: right;
+}
+
+.common-div-css {
+  margin: 16px 16px 88px 16px;
+}
+
+
+span[class^="MuiFormLabel-asterisk"] {
+    color:#E54D42;
+}

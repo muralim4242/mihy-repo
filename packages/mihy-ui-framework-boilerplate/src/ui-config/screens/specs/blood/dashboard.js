@@ -1,4 +1,7 @@
-import {dashBoardOption} from "./dashboard-utils";
+import { dashBoardOption } from "./dashboard-utils";
+import {
+  getLabel
+} from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 const screenConfig = {
   uiFramework: "material-ui",
@@ -7,7 +10,7 @@ const screenConfig = {
     mihyBloodDashboard: {
       uiFramework: "custom-atoms",
       componentPath: "Div",
-      children:{
+      children: {
         // mihyBloodDashboardAppCarosel:{
         //   uiFramework:"custom-molecules",
         //   componentPath:"AppCarosel",
@@ -15,11 +18,25 @@ const screenConfig = {
         //
         //   }
         // },
-        mihyBloodDashboardAppCards:{
-          uiFramework:"custom-molecules",
-          componentPath:"AppCards",
-          props:{
-            appCards:dashBoardOption
+        mihyBloodDashboardAppCards: {
+          uiFramework: "custom-molecules",
+          componentPath: "AppCards",
+          props: {
+            appCards: dashBoardOption
+          }
+        }
+      }
+    },
+    popup: {
+      componentPath: "Dialog",
+      props: {
+        open: true
+      },
+      children: {
+        dialogContent: {
+          componentPath: "DialogContent",
+          children: {
+            popup: getLabel("test")
           }
         }
       }

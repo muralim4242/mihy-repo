@@ -186,7 +186,8 @@ export const getTextField = textScheama => {
     gridDefination = {
       xs: 12,
       sm: 6
-    }
+    },
+    props={}
   } = textScheama;
   return {
     uiFramework: "custom-containers",
@@ -200,7 +201,8 @@ export const getTextField = textScheama => {
       fullWidth: true,
       required,
       iconObj,
-      jsonPath
+      jsonPath,
+      ...props
     },
     gridDefination,
     required,
@@ -220,7 +222,8 @@ export const getDateField = dateScheama => {
     gridDefination = {
       xs: 12,
       sm: 6
-    }
+    },
+    props={}
   } = dateScheama;
   return {
     uiFramework: "custom-containers",
@@ -235,7 +238,8 @@ export const getDateField = dateScheama => {
       required,
       iconObj,
       jsonPath,
-      type: "date"
+      type: "date",
+      ...props
     },
     gridDefination,
     required,
@@ -259,7 +263,8 @@ export const getSelectField = selectScheama => {
     gridDefination = {
       xs: 12,
       sm: 6
-    }
+    },
+    props={}
   } = selectScheama;
   return {
     uiFramework: "custom-containers",
@@ -277,7 +282,8 @@ export const getSelectField = selectScheama => {
       optionValue,
       optionLabel,
       sourceJsonPath,
-      jsonPath
+      jsonPath,
+      ...props
     },
     gridDefination,
     required,

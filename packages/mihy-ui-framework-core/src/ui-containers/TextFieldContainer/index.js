@@ -5,6 +5,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import get from "lodash/get";
 import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
 
+const localizationLabels = JSON.parse(
+  window.localStorage.getItem("localization_en_IN")
+);
+
 const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   if (labelKey) {
     let translatedLabel = getTranslatedLabel(labelKey, localizationLabels);
@@ -33,9 +37,6 @@ class TextFieldContainer extends React.Component {
       sourceJsonPath,
       ...rest
     } = this.props;
-    const localizationLabels = JSON.parse(
-      window.localStorage.getItem("localization_en_IN")
-    );
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(
       label.labelName,
@@ -53,11 +54,11 @@ class TextFieldContainer extends React.Component {
           label={translatedLabel}
           placeholder={translatedPlaceholder}
           iconObj={iconObj}
-          value={value ? value : placeholder}
+          value={value ? value : translatedPlaceholder}
           {...rest}
         >
-          <MenuItem value={placeholder} disabled>
-            {placeholder}
+          <MenuItem value={translatedPlaceholder} disabled>
+            {translatedPlaceholder}
           </MenuItem>
           {dropdownData.map((option, key) => (
             <MenuItem key={key} value={option.value}>

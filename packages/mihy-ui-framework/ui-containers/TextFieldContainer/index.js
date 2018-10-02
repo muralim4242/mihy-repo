@@ -48,6 +48,8 @@ var _commons = require("../../ui-utils/commons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
+
 var getLocaleLabelsforTL = function getLocaleLabelsforTL(label, labelKey, localizationLabels) {
   if (labelKey) {
     var translatedLabel = (0, _commons.getTranslatedLabel)(labelKey, localizationLabels);
@@ -85,7 +87,6 @@ var TextFieldContainer = function (_React$Component) {
           sourceJsonPath = _props.sourceJsonPath,
           rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath"]);
 
-      var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);
       var translatedPlaceholder = getLocaleLabelsforTL(placeholder.labelName, placeholder.labelKey, transfomedKeys);
@@ -96,12 +97,12 @@ var TextFieldContainer = function (_React$Component) {
             label: translatedLabel,
             placeholder: translatedPlaceholder,
             iconObj: iconObj,
-            value: value ? value : placeholder
+            value: value ? value : translatedPlaceholder
           }, rest),
           _react2.default.createElement(
             _MenuItem2.default,
-            { value: placeholder, disabled: true },
-            placeholder
+            { value: translatedPlaceholder, disabled: true },
+            translatedPlaceholder
           ),
           dropdownData.map(function (option, key) {
             return _react2.default.createElement(

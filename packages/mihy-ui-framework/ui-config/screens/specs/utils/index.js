@@ -213,12 +213,14 @@ var getTextField = exports.getTextField = function getTextField(textScheama) {
       gridDefination = _textScheama$gridDefi === undefined ? {
     xs: 12,
     sm: 6
-  } : _textScheama$gridDefi;
+  } : _textScheama$gridDefi,
+      _textScheama$props = textScheama.props,
+      props = _textScheama$props === undefined ? {} : _textScheama$props;
 
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
-    props: {
+    props: (0, _extends3.default)({
       label: label,
       InputLabelProps: {
         shrink: true
@@ -228,7 +230,7 @@ var getTextField = exports.getTextField = function getTextField(textScheama) {
       required: required,
       iconObj: iconObj,
       jsonPath: jsonPath
-    },
+    }, props),
     gridDefination: gridDefination,
     required: required,
     pattern: pattern,
@@ -249,12 +251,14 @@ var getDateField = exports.getDateField = function getDateField(dateScheama) {
       gridDefination = _dateScheama$gridDefi === undefined ? {
     xs: 12,
     sm: 6
-  } : _dateScheama$gridDefi;
+  } : _dateScheama$gridDefi,
+      _dateScheama$props = dateScheama.props,
+      props = _dateScheama$props === undefined ? {} : _dateScheama$props;
 
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
-    props: {
+    props: (0, _extends3.default)({
       label: label,
       InputLabelProps: {
         shrink: true
@@ -265,7 +269,7 @@ var getDateField = exports.getDateField = function getDateField(dateScheama) {
       iconObj: iconObj,
       jsonPath: jsonPath,
       type: "date"
-    },
+    }, props),
     gridDefination: gridDefination,
     required: required,
     pattern: pattern,
@@ -294,12 +298,14 @@ var getSelectField = exports.getSelectField = function getSelectField(selectSche
       gridDefination = _selectScheama$gridDe === undefined ? {
     xs: 12,
     sm: 6
-  } : _selectScheama$gridDe;
+  } : _selectScheama$gridDe,
+      _selectScheama$props = selectScheama.props,
+      props = _selectScheama$props === undefined ? {} : _selectScheama$props;
 
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
-    props: {
+    props: (0, _extends3.default)({
       select: true,
       label: label,
       InputLabelProps: {
@@ -313,7 +319,7 @@ var getSelectField = exports.getSelectField = function getSelectField(selectSche
       optionLabel: optionLabel,
       sourceJsonPath: sourceJsonPath,
       jsonPath: jsonPath
-    },
+    }, props),
     gridDefination: gridDefination,
     required: required,
     pattern: pattern,
