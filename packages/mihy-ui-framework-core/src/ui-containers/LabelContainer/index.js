@@ -28,7 +28,11 @@ class LabelContainer extends React.Component {
   render() {
     let { labelName, labelKey, fieldValue, ...rest } = this.props;
     let transfomedKeys = transformById(localizationLabels, "code");
-    let translatedLabel = getLocaleLabelsforTL(label, labelKey, transfomedKeys);
+    let translatedLabel = getLocaleLabelsforTL(
+      labelName,
+      labelKey,
+      transfomedKeys
+    );
     return (
       <Label label={fieldValue ? fieldValue : translatedLabel} {...rest} />
     );
