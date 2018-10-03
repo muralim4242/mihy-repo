@@ -186,7 +186,7 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
     }
   }
 }), _reactGoogleMaps.withScriptjs, _reactGoogleMaps.withGoogleMap)(function (props) {
-  console.log(props);
+  // console.log(props);
   return _react2.default.createElement(
     _reactGoogleMaps.GoogleMap,
     {

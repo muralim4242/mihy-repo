@@ -51,4 +51,4 @@ const mapStateToProps = (state, ownprops) => {
   return { fieldValue };
 };
 
-export default connect(mapStateToProps)(LabelContainer);
+export default connect(mapStateToProps,{})(LabelContainer);

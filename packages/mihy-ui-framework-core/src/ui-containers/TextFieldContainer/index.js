@@ -25,15 +25,15 @@ const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
 class TextFieldContainer extends React.Component {
   render() {
     let {
-      label,
-      placeholder,
+      label={},
+      placeholder={},
       jsonPath,
-      iconObj,
+      iconObj={},
       value,
       dropdownData,
-      data,
-      optionValue,
-      optionLabel,
+      data=[],
+      optionValue="code",
+      optionLabel="code",
       sourceJsonPath,
       ...rest
     } = this.props;
@@ -93,7 +93,7 @@ const mapStateToProps = (state, ownprops) => {
   } = ownprops;
   const { screenConfiguration } = state;
   const { preparedFinalObject } = screenConfiguration;
-  const fieldValue = value ? value : get(preparedFinalObject, jsonPath);
+  const fieldValue = value===undefined ? get(preparedFinalObject, jsonPath):value;
   let dropdownData = [];
   if (select) {
     const constructDropdown = dt => {

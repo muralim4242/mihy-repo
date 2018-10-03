@@ -97,4 +97,4 @@ var mapStateToProps = function mapStateToProps(state, ownprops) {
   return { fieldValue: fieldValue };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(LabelContainer);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(LabelContainer);

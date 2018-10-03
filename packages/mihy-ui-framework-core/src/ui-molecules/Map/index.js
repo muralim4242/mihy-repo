@@ -193,7 +193,7 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap
 )(props => {
-  console.log(props);
+  // console.log(props);
   return (
     <GoogleMap
       ref={props.onMapMounted}

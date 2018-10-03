@@ -13,7 +13,13 @@ const BloodList = Loadable({
   loading: () => <Loading />
 });
 
+const SearchResult = Loadable({
+  loader: () => import("./SearchResult"),
+  loading: () => <Loading />
+});
+
 export {
   TestMolecules,
-  BloodList
+  BloodList,
+  SearchResult
 }

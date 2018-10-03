@@ -75,15 +75,21 @@ var TextFieldContainer = function (_React$Component) {
     key: "render",
     value: function render() {
       var _props = this.props,
-          label = _props.label,
-          placeholder = _props.placeholder,
+          _props$label = _props.label,
+          label = _props$label === undefined ? {} : _props$label,
+          _props$placeholder = _props.placeholder,
+          placeholder = _props$placeholder === undefined ? {} : _props$placeholder,
           jsonPath = _props.jsonPath,
-          iconObj = _props.iconObj,
+          _props$iconObj = _props.iconObj,
+          iconObj = _props$iconObj === undefined ? {} : _props$iconObj,
           value = _props.value,
           dropdownData = _props.dropdownData,
-          data = _props.data,
-          optionValue = _props.optionValue,
-          optionLabel = _props.optionLabel,
+          _props$data = _props.data,
+          data = _props$data === undefined ? [] : _props$data,
+          _props$optionValue = _props.optionValue,
+          optionValue = _props$optionValue === undefined ? "code" : _props$optionValue,
+          _props$optionLabel = _props.optionLabel,
+          optionLabel = _props$optionLabel === undefined ? "code" : _props$optionLabel,
           sourceJsonPath = _props.sourceJsonPath,
           rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath"]);
 
@@ -136,7 +142,7 @@ var mapStateToProps = function mapStateToProps(state, ownprops) {
   var screenConfiguration = state.screenConfiguration;
   var preparedFinalObject = screenConfiguration.preparedFinalObject;
 
-  var fieldValue = value ? value : (0, _get2.default)(preparedFinalObject, jsonPath);
+  var fieldValue = value === undefined ? (0, _get2.default)(preparedFinalObject, jsonPath) : value;
   var dropdownData = [];
   if (select) {
     var constructDropdown = function constructDropdown(dt) {

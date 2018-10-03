@@ -174,84 +174,33 @@ export const getLabel = (label, props = {}) => {
   };
 };
 
-export const getTextField = textScheama => {
-  const {
-    label = {},
-    placeholder = {},
-    required,
-    pattern,
-    jsonPath = "",
-    iconObj = {},
-    gridDefination = {
-      xs: 12,
-      sm: 6
-    },
-    props={}
-  } = textScheama;
-  return {
-    uiFramework: "custom-containers",
-    componentPath: "TextFieldContainer",
-    props: {
-      label,
-      InputLabelProps: {
-        shrink: true
-      },
-      placeholder,
-      fullWidth: true,
-      required,
-      iconObj,
-      jsonPath,
-      ...props
-    },
-    gridDefination,
-    required,
-    pattern,
-    jsonPath
-  };
+export const getSelectField = selectScheama => {
+  return getTextField({...selectScheama,props:{select: true}})
 };
 
 export const getDateField = dateScheama => {
-  const {
-    label,
-    placeholder,
-    required,
-    pattern,
-    jsonPath = "",
-    iconObj = {},
-    gridDefination = {
-      xs: 12,
-      sm: 6
-    },
-    props={}
-  } = dateScheama;
-  return {
-    uiFramework: "custom-containers",
-    componentPath: "TextFieldContainer",
-    props: {
-      label,
-      InputLabelProps: {
-        shrink: true
-      },
-      placeholder,
-      fullWidth: true,
-      required,
-      iconObj,
-      jsonPath,
-      type: "date",
-      ...props
-    },
-    gridDefination,
-    required,
-    pattern,
-    jsonPath
-  };
+  return getTextField({...dateScheama,props:{
+    type:"date"
+  }});
 };
 
-export const getSelectField = selectScheama => {
+export const getTimeField = timeScheama => {
+  return getTextField({...timeScheama,props:{
+    type:"time"
+  }});
+};
+
+export const getDateTimeField = dateTimeScheama => {
+  return getTextField({...dateTimeScheama,props:{
+    type:"datetime-local"
+  }});
+};
+
+export const getTextField = textScheama => {
   const {
-    label,
-    placeholder,
-    required,
+    label={},
+    placeholder={},
+    required=false,
     pattern,
     jsonPath = "",
     sourceJsonPath = "",
@@ -264,12 +213,11 @@ export const getSelectField = selectScheama => {
       sm: 6
     },
     props={}
-  } = selectScheama;
+  } = textScheama;
   return {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
     props: {
-      select: true,
       label,
       InputLabelProps: {
         shrink: true

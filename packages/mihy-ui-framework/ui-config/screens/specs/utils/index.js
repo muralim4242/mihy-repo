@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectField = exports.getDateField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getTextField = exports.getDateTimeField = exports.getTimeField = exports.getDateField = exports.getSelectField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -195,15 +195,46 @@ var getLabel = exports.getLabel = function getLabel(label) {
   };
 };
 
+var getSelectField = exports.getSelectField = function getSelectField(selectScheama) {
+  return getTextField((0, _extends3.default)({}, selectScheama, { props: { select: true } }));
+};
+
+var getDateField = exports.getDateField = function getDateField(dateScheama) {
+  return getTextField((0, _extends3.default)({}, dateScheama, { props: {
+      type: "date"
+    } }));
+};
+
+var getTimeField = exports.getTimeField = function getTimeField(timeScheama) {
+  return getTextField((0, _extends3.default)({}, timeScheama, { props: {
+      type: "time"
+    } }));
+};
+
+var getDateTimeField = exports.getDateTimeField = function getDateTimeField(dateTimeScheama) {
+  return getTextField((0, _extends3.default)({}, dateTimeScheama, { props: {
+      type: "datetime-local"
+    } }));
+};
+
 var getTextField = exports.getTextField = function getTextField(textScheama) {
   var _textScheama$label = textScheama.label,
       label = _textScheama$label === undefined ? {} : _textScheama$label,
       _textScheama$placehol = textScheama.placeholder,
       placeholder = _textScheama$placehol === undefined ? {} : _textScheama$placehol,
-      required = textScheama.required,
+      _textScheama$required = textScheama.required,
+      required = _textScheama$required === undefined ? false : _textScheama$required,
       pattern = textScheama.pattern,
       _textScheama$jsonPath = textScheama.jsonPath,
       jsonPath = _textScheama$jsonPath === undefined ? "" : _textScheama$jsonPath,
+      _textScheama$sourceJs = textScheama.sourceJsonPath,
+      sourceJsonPath = _textScheama$sourceJs === undefined ? "" : _textScheama$sourceJs,
+      _textScheama$data = textScheama.data,
+      data = _textScheama$data === undefined ? [] : _textScheama$data,
+      _textScheama$optionVa = textScheama.optionValue,
+      optionValue = _textScheama$optionVa === undefined ? "code" : _textScheama$optionVa,
+      _textScheama$optionLa = textScheama.optionLabel,
+      optionLabel = _textScheama$optionLa === undefined ? "code" : _textScheama$optionLa,
       _textScheama$iconObj = textScheama.iconObj,
       iconObj = _textScheama$iconObj === undefined ? {} : _textScheama$iconObj,
       _textScheama$gridDefi = textScheama.gridDefination,
@@ -218,92 +249,6 @@ var getTextField = exports.getTextField = function getTextField(textScheama) {
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
     props: (0, _extends3.default)({
-      label: label,
-      InputLabelProps: {
-        shrink: true
-      },
-      placeholder: placeholder,
-      fullWidth: true,
-      required: required,
-      iconObj: iconObj,
-      jsonPath: jsonPath
-    }, props),
-    gridDefination: gridDefination,
-    required: required,
-    pattern: pattern,
-    jsonPath: jsonPath
-  };
-};
-
-var getDateField = exports.getDateField = function getDateField(dateScheama) {
-  var label = dateScheama.label,
-      placeholder = dateScheama.placeholder,
-      required = dateScheama.required,
-      pattern = dateScheama.pattern,
-      _dateScheama$jsonPath = dateScheama.jsonPath,
-      jsonPath = _dateScheama$jsonPath === undefined ? "" : _dateScheama$jsonPath,
-      _dateScheama$iconObj = dateScheama.iconObj,
-      iconObj = _dateScheama$iconObj === undefined ? {} : _dateScheama$iconObj,
-      _dateScheama$gridDefi = dateScheama.gridDefination,
-      gridDefination = _dateScheama$gridDefi === undefined ? {
-    xs: 12,
-    sm: 6
-  } : _dateScheama$gridDefi,
-      _dateScheama$props = dateScheama.props,
-      props = _dateScheama$props === undefined ? {} : _dateScheama$props;
-
-  return {
-    uiFramework: "custom-containers",
-    componentPath: "TextFieldContainer",
-    props: (0, _extends3.default)({
-      label: label,
-      InputLabelProps: {
-        shrink: true
-      },
-      placeholder: placeholder,
-      fullWidth: true,
-      required: required,
-      iconObj: iconObj,
-      jsonPath: jsonPath,
-      type: "date"
-    }, props),
-    gridDefination: gridDefination,
-    required: required,
-    pattern: pattern,
-    jsonPath: jsonPath
-  };
-};
-
-var getSelectField = exports.getSelectField = function getSelectField(selectScheama) {
-  var label = selectScheama.label,
-      placeholder = selectScheama.placeholder,
-      required = selectScheama.required,
-      pattern = selectScheama.pattern,
-      _selectScheama$jsonPa = selectScheama.jsonPath,
-      jsonPath = _selectScheama$jsonPa === undefined ? "" : _selectScheama$jsonPa,
-      _selectScheama$source = selectScheama.sourceJsonPath,
-      sourceJsonPath = _selectScheama$source === undefined ? "" : _selectScheama$source,
-      _selectScheama$data = selectScheama.data,
-      data = _selectScheama$data === undefined ? [] : _selectScheama$data,
-      _selectScheama$option = selectScheama.optionValue,
-      optionValue = _selectScheama$option === undefined ? "code" : _selectScheama$option,
-      _selectScheama$option2 = selectScheama.optionLabel,
-      optionLabel = _selectScheama$option2 === undefined ? "code" : _selectScheama$option2,
-      _selectScheama$iconOb = selectScheama.iconObj,
-      iconObj = _selectScheama$iconOb === undefined ? {} : _selectScheama$iconOb,
-      _selectScheama$gridDe = selectScheama.gridDefination,
-      gridDefination = _selectScheama$gridDe === undefined ? {
-    xs: 12,
-    sm: 6
-  } : _selectScheama$gridDe,
-      _selectScheama$props = selectScheama.props,
-      props = _selectScheama$props === undefined ? {} : _selectScheama$props;
-
-  return {
-    uiFramework: "custom-containers",
-    componentPath: "TextFieldContainer",
-    props: (0, _extends3.default)({
-      select: true,
       label: label,
       InputLabelProps: {
         shrink: true
