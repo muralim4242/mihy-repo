@@ -34,25 +34,31 @@ export const getStepperObject = (
   return stepperData;
 };
 
-export const getCommonHeader = (header, props) => {
-  return {
-    componentPath: "Typography",
-    props: {
-      variant: "headline",
-      ...props
-    },
-    children: {
-      [header]: getLabel(header)
-    }
-  };
-};
+// export const getCommonHeader = (header, props) => {
+//   return {
+//     componentPath: "Typography",
+//     props: {
+//       variant: "headline",
+//       ...props
+//     },
+//     children: {
+//       [header]: getLabel(header)
+//     }
+//   };
+// };
 
 export const getCommonTitle = (header, props = {}) => {
-  return getCommonHeader(header, { variant: "title", ...props });
+  return getCommonHeader({
+    textLabel: { label: header, labelKey: "" },
+    props: { variant: "title", ...props }
+  });
 };
 
 export const getCommonSubHeader = (header, props = {}) => {
-  return getCommonHeader(header, { variant: "subheading", ...props });
+  return getCommonHeader({
+    textLabel: { label: header, labelKey: "" },
+    props: { variant: "subheading", ...props }
+  });
 };
 
 export const getCommonParagraph = (paragraph, props = {}) => {
@@ -71,19 +77,19 @@ export const getCommonParagraph = (paragraph, props = {}) => {
       ...props
     },
     children: {
-      [paragraph]: getLabel(paragraph)
+      [paragraph]: getLabel({ label: paragraph, labelKey: "" })
     }
   };
   // getCommonHeader(paragraph, { variant: "body1", ...props });
 };
 
-export const getCommonCaption = (paragraph, props = {}) => {
-  return getCommonHeader(paragraph, { variant: "caption", ...props });
-};
+// export const getCommonCaption = (paragraph, props = {}) => {
+//   return getCommonHeader(paragraph, { variant: "caption", ...props });
+// };
 
-export const getCommonValue = (value, props = {}) => {
-  return getCommonHeader(value, { variant: "body2", ...props });
-};
+// export const getCommonValue = (value, props = {}) => {
+//   return getCommonHeader(value, { variant: "body2", ...props });
+// };
 
 export const getCommonCard = (children, cardProps = {}) => {
   return {
@@ -152,28 +158,17 @@ export const getBreak = (props = {}) => {
   };
 };
 
-// export const getLabel = (label, props = {}) => {
+// export const getLabel = (label, labelKey, props = {}) => {
 //   return {
-//     uiFramework: "custom-atoms",
-//     componentPath: "Label",
+//     uiFramework: "custom-containers",
+//     componentPath: "LabelContainer",
 //     props: {
 //       label,
+//       labelKey,
 //       ...props
 //     }
 //   };
 // };
-
-export const getLabel = (label, labelKey, props = {}) => {
-  return {
-    uiFramework: "custom-containers",
-    componentPath: "LabelContainer",
-    props: {
-      label,
-      labelKey,
-      ...props
-    }
-  };
-};
 
 export const getTextField = textScheama => {
   const {
@@ -187,7 +182,7 @@ export const getTextField = textScheama => {
       xs: 12,
       sm: 6
     },
-    props={}
+    props = {}
   } = textScheama;
   return {
     uiFramework: "custom-containers",
@@ -223,7 +218,7 @@ export const getDateField = dateScheama => {
       xs: 12,
       sm: 6
     },
-    props={}
+    props = {}
   } = dateScheama;
   return {
     uiFramework: "custom-containers",
@@ -264,7 +259,7 @@ export const getSelectField = selectScheama => {
       xs: 12,
       sm: 6
     },
-    props={}
+    props = {}
   } = selectScheama;
   return {
     uiFramework: "custom-containers",
@@ -313,7 +308,7 @@ export const getCheckBoxwithLabel = (
           color: "primary"
         }
       },
-      label: getLabel(label)
+      label: getLabel({ label })
     }
   };
 };
@@ -331,7 +326,7 @@ export const getRadiobuttonwithLabel = (label, props = {}) => {
           color: "primary"
         }
       },
-      label: getLabel(label)
+      label: getLabel({ label })
     }
   };
 };
@@ -408,7 +403,72 @@ export const dispatchMultipleFieldChangeAction = (
 //   };
 // };
 
-export const getLabelWithValue = (label, value, props = {}) => {
+// export const getLabelWithValue = (label, value, props = {}) => {
+//   return {
+//     uiFramework: "custom-atoms",
+//     componentPath: "Div",
+//     gridDefination: {
+//       xs: 6,
+//       sm: 3
+//     },
+//     props: {
+//       style: {
+//         marginBottom: "16px"
+//       },
+//       ...props
+//     },
+//     children: {
+//       label: getCommonCaption(label),
+//       value: getCommonValue(value)
+//     }
+//   };
+// };
+
+export const getLabel = schema => {
+  const { label, labelKey, jsonPath, props = {} } = schema;
+  return {
+    uiFramework: "custom-containers",
+    componentPath: "LabelContainer",
+    props: {
+      label,
+      labelKey,
+      jsonPath,
+      ...props
+    }
+  };
+};
+
+export const getCommonHeader = schema => {
+  const { textLabel = {}, jsonPath, props } = schema;
+  const { label, labelKey } = textLabel;
+  return {
+    componentPath: "Typography",
+    props: {
+      variant: "headline",
+      ...props
+    },
+    children: {
+      [textLabel]: getLabel({ label, labelKey }),
+      [jsonPath]: getLabel({ jsonPath })
+    }
+  };
+};
+
+export const getCommonCaption = textScheama => {
+  let { textLabel = {}, props = {} } = textScheama;
+  return getCommonHeader({
+    textLabel,
+    props: { variant: "caption", ...props }
+  });
+};
+
+export const getCommonValue = textScheama => {
+  let { jsonPath, props = {} } = textScheama;
+  return getCommonHeader({ jsonPath, props: { variant: "body2", ...props } });
+};
+
+export const getLabelWithValue = textScheama => {
+  const { textLabel = {}, jsonPath, props = {} } = textScheama;
   return {
     uiFramework: "custom-atoms",
     componentPath: "Div",
@@ -423,8 +483,8 @@ export const getLabelWithValue = (label, value, props = {}) => {
       ...props
     },
     children: {
-      label: getCommonCaption(label),
-      value: getCommonValue(value)
+      label: getCommonCaption({ textLabel }),
+      value: getCommonValue({ jsonPath })
     }
   };
 };

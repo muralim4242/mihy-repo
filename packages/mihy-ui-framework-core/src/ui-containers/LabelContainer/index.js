@@ -1,6 +1,11 @@
 import React from "react";
-import { Label } from "../../ui-atoms";
-import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
+import { Label } from "mihy-ui-framework/ui-atoms";
+import get from "lodash/get";
+import { connect } from "react-redux";
+import {
+  getTranslatedLabel,
+  transformById
+} from "mihy-ui-framework/ui-utils/commons";
 
 const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   if (labelKey) {
@@ -15,17 +20,31 @@ const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   }
 };
 
+const localizationLabels = JSON.parse(
+  window.localStorage.getItem("localization_en_IN")
+);
+
 class LabelContainer extends React.Component {
   render() {
-    let { label, labelKey, ...rest } = this.props;
-    const localizationLabels = JSON.parse(
-      window.localStorage.getItem("localization_en_IN")
-    );
+    let { label, labelKey, fieldValue, ...rest } = this.props;
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(label, labelKey, transfomedKeys);
-
-    return <Label label={translatedLabel} {...rest} />;
+    return (
+      <Label label={fieldValue ? fieldValue : translatedLabel} {...rest} />
+    );
   }
 }
 
-export default LabelContainer;
+const mapStateToProps = (state, ownprops) => {
+  let fieldValue = "";
+  const { jsonPath } = ownprops;
+  const { screenConfiguration } = state;
+  const { preparedFinalObject } = screenConfiguration;
+  if (jsonPath) {
+    fieldValue = get(preparedFinalObject, jsonPath);
+  }
+
+  return { fieldValue };
+};
+
+export default connect(mapStateToProps)(LabelContainer);
