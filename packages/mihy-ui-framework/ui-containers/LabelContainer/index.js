@@ -32,9 +32,15 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _uiAtoms = require("../../ui-atoms");
+var _uiAtoms = require("mihy-ui-framework/ui-atoms");
 
-var _commons = require("../../ui-utils/commons");
+var _get = require("lodash/get");
+
+var _get2 = _interopRequireDefault(_get);
+
+var _reactRedux = require("react-redux");
+
+var _commons = require("mihy-ui-framework/ui-utils/commons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51,6 +57,8 @@ var getLocaleLabelsforTL = function getLocaleLabelsforTL(label, labelKey, locali
   }
 };
 
+var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
+
 var LabelContainer = function (_React$Component) {
   (0, _inherits3.default)(LabelContainer, _React$Component);
 
@@ -63,18 +71,30 @@ var LabelContainer = function (_React$Component) {
     key: "render",
     value: function render() {
       var _props = this.props,
-          label = _props.label,
+          labelName = _props.labelName,
           labelKey = _props.labelKey,
-          rest = (0, _objectWithoutProperties3.default)(_props, ["label", "labelKey"]);
+          fieldValue = _props.fieldValue,
+          rest = (0, _objectWithoutProperties3.default)(_props, ["labelName", "labelKey", "fieldValue"]);
 
-      var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label, labelKey, transfomedKeys);
-
-      return _react2.default.createElement(_uiAtoms.Label, (0, _extends3.default)({ label: translatedLabel }, rest));
+      return _react2.default.createElement(_uiAtoms.Label, (0, _extends3.default)({ label: fieldValue ? fieldValue : translatedLabel }, rest));
     }
   }]);
   return LabelContainer;
 }(_react2.default.Component);
 
-exports.default = LabelContainer;
+var mapStateToProps = function mapStateToProps(state, ownprops) {
+  var fieldValue = "";
+  var jsonPath = ownprops.jsonPath;
+  var screenConfiguration = state.screenConfiguration;
+  var preparedFinalObject = screenConfiguration.preparedFinalObject;
+
+  if (jsonPath) {
+    fieldValue = (0, _get2.default)(preparedFinalObject, jsonPath);
+  }
+
+  return { fieldValue: fieldValue };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(LabelContainer);
