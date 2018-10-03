@@ -1,0 +1,40 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* z-index: 1; */
+    height: 100%;
+}
+
+
+.map-box {
+    flex: 1 1 auto;
+    position: relative;
+    margin-left: 240px;
+    /* z-index: -1; */
+    padding-top: 65px;
+    padding-bottom: 65px;
+    -webkit-transform: translate3d(0, 0, 0)
+}
+
+@media screen and (max-width: 960px) {
+
+    body {
+        overflow-y: hidden;
+    }
+
+
+    .map-box {
+        width: 100%;
+        padding-top: 57px;
+        margin-left: 0;
+    }
+
+}
