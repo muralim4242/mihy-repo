@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectField = exports.getDateField = exports.getTextField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.getCommonValue = exports.getCommonCaption = exports.getCommonHeader = exports.getLabel = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getSelectField = exports.getDateField = exports.getTextField = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getStepperObject = undefined;
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -51,26 +51,35 @@ var getStepperObject = exports.getStepperObject = function getStepperObject(stpp
   return stepperData;
 };
 
-var getCommonHeader = exports.getCommonHeader = function getCommonHeader(header, props) {
-  return {
-    componentPath: "Typography",
-    props: (0, _extends3.default)({
-      variant: "headline"
-    }, props),
-    children: (0, _defineProperty3.default)({}, header, getLabel(header))
-  };
-};
+// export const getCommonHeader = (header, props) => {
+//   return {
+//     componentPath: "Typography",
+//     props: {
+//       variant: "headline",
+//       ...props
+//     },
+//     children: {
+//       [header]: getLabel(header)
+//     }
+//   };
+// };
 
 var getCommonTitle = exports.getCommonTitle = function getCommonTitle(header) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  return getCommonHeader(header, (0, _extends3.default)({ variant: "title" }, props));
+  return getCommonHeader({
+    textLabel: { label: header, labelKey: "" },
+    props: (0, _extends3.default)({ variant: "title" }, props)
+  });
 };
 
 var getCommonSubHeader = exports.getCommonSubHeader = function getCommonSubHeader(header) {
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  return getCommonHeader(header, (0, _extends3.default)({ variant: "subheading" }, props));
+  return getCommonHeader({
+    textLabel: { label: header, labelKey: "" },
+    props: (0, _extends3.default)({ variant: "subheading" }, props)
+  });
 };
 
 var getCommonParagraph = exports.getCommonParagraph = function getCommonParagraph(paragraph) {
@@ -89,22 +98,18 @@ var getCommonParagraph = exports.getCommonParagraph = function getCommonParagrap
         marginBottom: "12px"
       }
     }, props),
-    children: (0, _defineProperty3.default)({}, paragraph, getLabel(paragraph))
+    children: (0, _defineProperty3.default)({}, paragraph, getLabel({ label: paragraph, labelKey: "" }))
   };
   // getCommonHeader(paragraph, { variant: "body1", ...props });
 };
 
-var getCommonCaption = exports.getCommonCaption = function getCommonCaption(paragraph) {
-  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+// export const getCommonCaption = (paragraph, props = {}) => {
+//   return getCommonHeader(paragraph, { variant: "caption", ...props });
+// };
 
-  return getCommonHeader(paragraph, (0, _extends3.default)({ variant: "caption" }, props));
-};
-
-var getCommonValue = exports.getCommonValue = function getCommonValue(value) {
-  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  return getCommonHeader(value, (0, _extends3.default)({ variant: "body2" }, props));
-};
+// export const getCommonValue = (value, props = {}) => {
+//   return getCommonHeader(value, { variant: "body2", ...props });
+// };
 
 var getCommonCard = exports.getCommonCard = function getCommonCard(children) {
   var cardProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -174,29 +179,17 @@ var getBreak = exports.getBreak = function getBreak() {
   };
 };
 
-// export const getLabel = (label, props = {}) => {
+// export const getLabel = (label, labelKey, props = {}) => {
 //   return {
-//     uiFramework: "custom-atoms",
-//     componentPath: "Label",
+//     uiFramework: "custom-containers",
+//     componentPath: "LabelContainer",
 //     props: {
 //       label,
+//       labelKey,
 //       ...props
 //     }
 //   };
 // };
-
-var getLabel = exports.getLabel = function getLabel(label, labelKey) {
-  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  return {
-    uiFramework: "custom-containers",
-    componentPath: "LabelContainer",
-    props: (0, _extends3.default)({
-      label: label,
-      labelKey: labelKey
-    }, props)
-  };
-};
 
 var getTextField = exports.getTextField = function getTextField(textScheama) {
   var _textScheama$label = textScheama.label,
@@ -347,7 +340,7 @@ var getCheckBoxwithLabel = exports.getCheckBoxwithLabel = function getCheckBoxwi
           color: "primary"
         }
       },
-      label: getLabel(label)
+      label: getLabel({ label: label })
     }
   };
 };
@@ -367,7 +360,7 @@ var getRadiobuttonwithLabel = exports.getRadiobuttonwithLabel = function getRadi
           color: "primary"
         }
       },
-      label: getLabel(label)
+      label: getLabel({ label: label })
     }
   };
 };
@@ -447,8 +440,90 @@ var dispatchMultipleFieldChangeAction = exports.dispatchMultipleFieldChangeActio
 //   };
 // };
 
-var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(label, value) {
-  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+// export const getLabelWithValue = (label, value, props = {}) => {
+//   return {
+//     uiFramework: "custom-atoms",
+//     componentPath: "Div",
+//     gridDefination: {
+//       xs: 6,
+//       sm: 3
+//     },
+//     props: {
+//       style: {
+//         marginBottom: "16px"
+//       },
+//       ...props
+//     },
+//     children: {
+//       label: getCommonCaption(label),
+//       value: getCommonValue(value)
+//     }
+//   };
+// };
+
+var getLabel = exports.getLabel = function getLabel(schema) {
+  var label = schema.label,
+      labelKey = schema.labelKey,
+      jsonPath = schema.jsonPath,
+      _schema$props = schema.props,
+      props = _schema$props === undefined ? {} : _schema$props;
+
+  return {
+    uiFramework: "custom-containers",
+    componentPath: "LabelContainer",
+    props: (0, _extends3.default)({
+      label: label,
+      labelKey: labelKey,
+      jsonPath: jsonPath
+    }, props)
+  };
+};
+
+var getCommonHeader = exports.getCommonHeader = function getCommonHeader(schema) {
+  var _children2;
+
+  var _schema$textLabel = schema.textLabel,
+      textLabel = _schema$textLabel === undefined ? {} : _schema$textLabel,
+      jsonPath = schema.jsonPath,
+      props = schema.props;
+  var label = textLabel.label,
+      labelKey = textLabel.labelKey;
+
+  return {
+    componentPath: "Typography",
+    props: (0, _extends3.default)({
+      variant: "headline"
+    }, props),
+    children: (_children2 = {}, (0, _defineProperty3.default)(_children2, textLabel, getLabel({ label: label, labelKey: labelKey })), (0, _defineProperty3.default)(_children2, jsonPath, getLabel({ jsonPath: jsonPath })), _children2)
+  };
+};
+
+var getCommonCaption = exports.getCommonCaption = function getCommonCaption(textScheama) {
+  var _textScheama$textLabe = textScheama.textLabel,
+      textLabel = _textScheama$textLabe === undefined ? {} : _textScheama$textLabe,
+      _textScheama$props2 = textScheama.props,
+      props = _textScheama$props2 === undefined ? {} : _textScheama$props2;
+
+  return getCommonHeader({
+    textLabel: textLabel,
+    props: (0, _extends3.default)({ variant: "caption" }, props)
+  });
+};
+
+var getCommonValue = exports.getCommonValue = function getCommonValue(textScheama) {
+  var jsonPath = textScheama.jsonPath,
+      _textScheama$props3 = textScheama.props,
+      props = _textScheama$props3 === undefined ? {} : _textScheama$props3;
+
+  return getCommonHeader({ jsonPath: jsonPath, props: (0, _extends3.default)({ variant: "body2" }, props) });
+};
+
+var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(textScheama) {
+  var _textScheama$textLabe2 = textScheama.textLabel,
+      textLabel = _textScheama$textLabe2 === undefined ? {} : _textScheama$textLabe2,
+      jsonPath = textScheama.jsonPath,
+      _textScheama$props4 = textScheama.props,
+      props = _textScheama$props4 === undefined ? {} : _textScheama$props4;
 
   return {
     uiFramework: "custom-atoms",
@@ -463,8 +538,8 @@ var getLabelWithValue = exports.getLabelWithValue = function getLabelWithValue(l
       }
     }, props),
     children: {
-      label: getCommonCaption(label),
-      value: getCommonValue(value)
+      label: getCommonCaption({ textLabel: textLabel }),
+      value: getCommonValue({ jsonPath: jsonPath })
     }
   };
 };
