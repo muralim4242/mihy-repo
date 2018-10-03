@@ -1,6 +1,6 @@
 import React from "react";
 import Div from "../../ui-atoms/HtmlElements/Div";
-import RenderScreen from "../RenderScreen";
+import RenderScreen from "../../ui-molecules/RenderScreen";
 import Container from "../../ui-atoms/Layout/Container";
 import Item from "../../ui-atoms/Layout/Item";
 import Button from "../../ui-atoms/Button";

@@ -1,26 +1,26 @@
 export const bloodGrps=[
   {
-    name: "A+"
+    label: "A+",
   },
   {
-    name: "B+"
+    label: "B+"
   },
   {
-    name: "AB+"
+    label: "AB+"
   },
   {
-    name: "O+"
+    label: "O+"
   },
   {
-    name: "A-"
+    label: "A-"
   },
   {
-    name: "B-"
+    label: "B-"
   },
   {
-    name: "AB-"
+    label: "AB-"
   },
   {
-    name: "O-"
+    label: "O-"
   }
 ];

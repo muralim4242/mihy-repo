@@ -26,7 +26,7 @@ const screenConfig = {
               }
             },
             bloodList: {
-              uiFramework: "custom-molecules-local",
+              uiFramework: "custom-containers-local",
               componentPath: "BloodList",
               props: {
                 bloodGrps
@@ -63,26 +63,26 @@ const screenConfig = {
                     }
                   }
                 },
-                // search: {
-                //   componentPath: "Button",
-                //   props: {
-                //     variant: "fab",
-                //     disabled: true,
-                //     style: {
-                //       marginTop: "16px",
-                //       background: "white"
-                //     }
-                //   },
-                //   children: {
-                //     positionIcon: {
-                //       uiFramework: "custom-atoms",
-                //       componentPath: "Icon",
-                //       props: {
-                //         iconName: "search"
-                //       }
-                //     }
-                //   }
-                // }
+                send: {
+                  componentPath: "Button",
+                  props: {
+                    variant: "fab",
+                    disabled: true,
+                    style: {
+                      marginTop: "16px",
+                      background: "white"
+                    }
+                  },
+                  children: {
+                    positionIcon: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Icon",
+                      props: {
+                        iconName: "send"
+                      }
+                    }
+                  }
+                }
               }
             }
           }

@@ -2,10 +2,11 @@ import {
   getCommonCard,
   getCommonTitle,
   getTextField,
-  getSelectTextField,
+  getSelectField,
   getCommonContainer,
   getCommonParagraph,
   getPattern,
+  getDateField,
   getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
@@ -18,8 +19,14 @@ export const tradeLicenseApplication = getCommonCard({
   ),
   appTradeAndMobNumContainer: getCommonContainer({
     applicationNo: getTextField(
-      "Application No.",
-      "Enter Application No.",
+      {
+        labelName: "Application No.",
+        labelKey: "TL_HOME_SEARCH_RESULTS_APP_NO_LABEL"
+      },
+      {
+        labelName: "Enter Application No.",
+        labelKey: "TL_HOME_SEARCH_RESULTS_APP_NO_PLACEHOLDER"
+      },
       false,
       "",
       "searchScreen.applicationNumber",
@@ -30,8 +37,14 @@ export const tradeLicenseApplication = getCommonCard({
       }
     ),
     tradeLicenseNo: getTextField(
-      "Trade License No.",
-      "Enter Trade License No.",
+      {
+        labelName: "Trade License No.",
+        labelKey: "TL_HOME_SEARCH_RESULTS_TL_NO_LABEL"
+      },
+      {
+        labelName: "Enter Trade License No.",
+        labelKey: "TL_HOME_SEARCH_RESULTS_TL_NO_PLACEHOLDER"
+      },
       false,
       "",
       "searchScreen.licenseNumber",
@@ -42,8 +55,14 @@ export const tradeLicenseApplication = getCommonCard({
       }
     ),
     ownerMobNo: getTextField(
-      "Owner Mobile No.",
-      "Enter your mobile No.",
+      {
+        labelName: "Owner Mobile No.",
+        labelKey: "TL_HOME_SEARCH_RESULTS_OWN_MOB_LABEL"
+      },
+      {
+        labelName: "Enter your mobile No.",
+        labelKey: "TL_HOME_SEARCH_RESULTS_OWN_MOB_PLACEHOLDER"
+      },
       false,
       getPattern("MobileNo"),
       "searchScreen.mobileNumber",
@@ -58,127 +77,61 @@ export const tradeLicenseApplication = getCommonCard({
     )
   }),
   appStatusAndToFromDateContainer: getCommonContainer({
-    applicationNo: getTextField(
+    applicationNo: getSelectField(
       "Application status",
       "Select Application Status",
       false,
       "",
+      "searchScreen.status",
       "",
+      [
+        {
+          code: "INITIATED"
+        },
+        {
+          code: "APPLIED"
+        },
+        {
+          code: "APPROVED"
+        },
+        {
+          code: "PENDING APPROVAL"
+        },
+        {
+          code: "PENDING PAYMENT"
+        },
+        {
+          code: "PENDING APPLICATION"
+        }
+      ],
+      "code",
+      "code",
       {},
       {
         xs: 12,
         sm: 4
       }
     ),
-    // applicationStatus: getSelectTextField(
-    //   "Application status",
-    //   "Select Application Status",
-    //   false,
-    //   "",
-    //   "searchScreen.status",
-    //   {},
-    //   {
-    //     xs: 12,
-    //     sm: 4
-    //   }
-    // ),
-    // tradeLicenseType: {
-    //   ...getSelectTextField(
-    //     "Application status",
-    //     "Select Application Status",
-    //     false,
-    //     "",
-    //     "searchScreen.status",
-    //     {},
-    //     {
-    //       xs: 12,
-    //       sm: 4
-    //     }
-    //   ),
-    //   children: {
-    //     itemOne: {
-    //       componentPath: "MenuItem",
-    //       props: {
-    //         value: "INITIATED"
-    //       },
-    //       children: {
-    //         label: getLabel("INITIATED")
-    //       }
-    //     },
-    //     itemTwo: {
-    //       componentPath: "MenuItem",
-    //       props: {
-    //         value: "APPLIED"
-    //       },
-    //       children: {
-    //         label: getLabel("APPLIED")
-    //       }
-    //     },
-    //     itemThree: {
-    //       componentPath: "MenuItem",
-    //       props: {
-    //         value: "APPROVED"
-    //       },
-    //       children: {
-    //         label: getLabel("APPROVED")
-    //       }
-    //     },
-    //     itemFour: {
-    //       componentPath: "MenuItem",
-    //       props: {
-    //         value: "PENDING APPROVAL"
-    //       },
-    //       children: {
-    //         label: getLabel("PENDING APPROVAL")
-    //       }
-    //     },
-    //     itemFIVE: {
-    //       componentPath: "MenuItem",
-    //       props: {
-    //         value: "PENDING PAYMENT"
-    //       },
-    //       children: {
-    //         label: getLabel("PENDING PAYMENT")
-    //       }
-    //     }
-    //     ,
-    //     itemSIX: {
-    //       componentPath: "MenuItem",
-    //       props: {
-    //         value: "PENDING APPLICATION"
-    //       },
-    //       children: {
-    //         label: getLabel("PENDING APPLICATION")
-    //       }
-    //     }
-    //   }
-    // },
-    fromDate: getTextField(
+    fromDate: getDateField(
       "From Date",
       "From Date",
       false,
       getPattern("Date"),
       "",
-      {
-        position: "end",
-        iconName: "date_range"
-      },
+      {},
 
       {
         xs: 12,
         sm: 4
       }
     ),
-    toDate: getTextField(
+    toDate: getDateField(
       "To Date",
       "To date",
       false,
       getPattern("Date"),
       "",
-      {
-        position: "end",
-        iconName: "date_range"
-      },
+      {},
       {
         xs: 12,
         sm: 4
@@ -190,8 +143,8 @@ export const tradeLicenseApplication = getCommonCard({
     searchButton: {
       componentPath: "Button",
       gridDefination: {
-        xs: "12",
-        sm: "12",
+        xs: 12,
+        sm: 12,
         align: "center"
       },
       props: {

@@ -8,6 +8,7 @@ import {
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import { changeStep } from "./footer";
+import { getLabelWithValueNew } from "../../utils";
 
 export const getReviewTrade = (isEditable = true) => {
   return getCommonGrayCard({
@@ -17,8 +18,8 @@ export const getReviewTrade = (isEditable = true) => {
       children: {
         header: {
           gridDefination: {
-            xs: "12",
-            sm: "10"
+            xs: 12,
+            sm: 10
           },
           ...getCommonSubHeader("Trade Details")
         },
@@ -29,8 +30,8 @@ export const getReviewTrade = (isEditable = true) => {
           },
           visible: isEditable,
           gridDefination: {
-            xs: "12",
-            sm: "2",
+            xs: 12,
+            sm: 2,
             align: "right"
           },
           children: {
@@ -54,7 +55,13 @@ export const getReviewTrade = (isEditable = true) => {
     },
     viewOne: getCommonContainer({
       reviewLicenceType: getLabelWithValue("Licence Type", "Temporary"),
-      reviewTradeName: getLabelWithValue("Trade Name", "Matchbox Packing Unit"),
+      reviewTradeName: getLabelWithValueNew({
+        textLabel: {
+          label: "Trade Name",
+          labelKey: "TL_COMMON_TABLE_COL_TRD_NAME"
+        },
+        jsonPath: "Licenses[0].tenantId"
+      }),
       reviewTradeMobility: getLabelWithValue("Trade Mobility", "Immovable"),
       reviewCommencementDate: getLabelWithValue(
         "Commencement Date",

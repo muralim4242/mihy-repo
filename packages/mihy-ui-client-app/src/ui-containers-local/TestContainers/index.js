@@ -1,5 +1,24 @@
 import React from "react";
+import TestMolecules from "../../ui-molecules-local/TestMolecules";
+import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
+import { connect } from "react-redux";
 
-const TestContainers=()=>(<div>Test Containers</div>)
+class TestMoleculesContainer extends React.Component {
+  render() {
+    return (
+      <Div>
+        <TestMolecules {...this.props} />
+      </Div>
+    );
+  }
+}
 
-export default TestContainers;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return null;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestMoleculesContainer);

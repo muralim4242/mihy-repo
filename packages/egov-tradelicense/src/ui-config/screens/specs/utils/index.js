@@ -8,40 +8,9 @@ import "./index.css";
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import get from "lodash/get";
+import set from "lodash/set";
 
 const queryValue = getQueryArg(window.location.href, "purpose");
-
-export const getTextFieldNew = (
-  label = {},
-  placeholder = {},
-  required,
-  pattern,
-  jsonPath = "",
-  iconObj = {},
-  gridDefination = {
-    xs: 12,
-    sm: 6
-  }
-) => {
-  return {
-    uiFramework: "custom-containers-local",
-    componentPath: "TextFieldContainerNew",
-    props: {
-      label,
-      InputLabelProps: {
-        shrink: true
-      },
-      placeholder,
-      fullWidth: true,
-      required,
-      iconObj
-    },
-    gridDefination,
-    required,
-    pattern,
-    jsonPath
-  };
-};
 
 export const getTooltip = (children, toolTipProps) => {
   return {
@@ -92,7 +61,12 @@ export const getUploadFilesMultiple = () => {
     uiFramework: "custom-molecules-local",
     componentPath: "UploadMultipleFiles",
     props: {
-      maxFiles: 4
+      maxFiles: 4,
+      jsonPath: "Trade[0].files",
+      inputProps: {
+        accept: "image/*, .pdf, .png, .jpeg"
+      },
+      buttonLabel: "UPLOAD FILES"
     }
   };
 };
@@ -195,11 +169,47 @@ export const getTranslatedLabel = (labelKey, localizationLabels) => {
 
 export const getApprovalTextField = () => {
   if (queryValue === "reject") {
-    return getTextField("Comments", "Enter rejection Comments", false, "");
+    return getTextField({
+      label: {
+        labelName: "Comments",
+        labelKey: "TL_APPROVAL_CHECKLIST_COMMENTS_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter Rejection Comments",
+        labelKey: "TL_REJECTION_CHECKLIST_COMMENTS_PLACEHOLDER"
+      },
+      required: false,
+      pattern: "",
+      jsonPath: ""
+    });
   } else if (queryValue === "cancel") {
-    return getTextField("Comments", "Enter Cancellation Comments", false, "");
+    return getTextField({
+      label: {
+        labelName: "Comments",
+        labelKey: "TL_APPROVAL_CHECKLIST_COMMENTS_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter Cancellation Comments",
+        labelKey: "TL_CANCEL_CHECKLIST_COMMENTS_PLACEHOLDER"
+      },
+      required: false,
+      pattern: "",
+      jsonPath: ""
+    });
   } else {
-    return getTextField("Comments", "Enter Approval Comments", false, "");
+    return getTextField({
+      label: {
+        labelName: "Comments",
+        labelKey: "TL_APPROVAL_CHECKLIST_COMMENTS_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter Approval Comments",
+        labelKey: "TL_APPROVAL_CHECKLIST_COMMENTS_PLACEHOLDER_APPR"
+      },
+      required: false,
+      pattern: "",
+      jsonPath: ""
+    });
   }
 };
 
@@ -312,4 +322,111 @@ export const getButtonVisibility = (role, status, button) => {
   )
     return true;
   return false;
+};
+
+export const commonTransform = (object, path) => {
+  let data = get(object, path);
+  let transformedData = {};
+  data.map(a => {
+    const splitList = a.code.split(".");
+    let ipath = "";
+    for (let i = 0; i < splitList.length; i += 1) {
+      if (i != splitList.length - 1) {
+        if (
+          !(
+            splitList[i] in
+            (ipath === "" ? transformedData : get(transformedData, ipath))
+          )
+        ) {
+          set(
+            transformedData,
+            ipath === "" ? splitList[i] : ipath + "." + splitList[i],
+            i < splitList.length - 2 ? {} : []
+          );
+        }
+      } else {
+        get(transformedData, ipath).push(a);
+      }
+      ipath = splitList.slice(0, i + 1).join(".");
+    }
+  });
+  set(object, path, transformedData);
+  return object;
+};
+
+export const objectToDropdown = object => {
+  let dropDown = [];
+  for (var variable in object) {
+    if (object.hasOwnProperty(variable)) {
+      dropDown.push({ code: variable });
+    }
+  }
+  return dropDown;
+};
+
+//Testing
+
+export const getLabelNew = schema => {
+  const { label, labelKey, jsonPath, props = {} } = schema;
+  return {
+    uiFramework: "custom-containers-local",
+    componentPath: "LabelContainer",
+    props: {
+      label,
+      labelKey,
+      jsonPath,
+      ...props
+    }
+  };
+};
+
+export const getCommonHeader = schema => {
+  const { textLabel = {}, jsonPath, props } = schema;
+  const { label, labelKey } = textLabel;
+  return {
+    componentPath: "Typography",
+    props: {
+      variant: "headline",
+      ...props
+    },
+    children: {
+      [textLabel]: getLabelNew({ label, labelKey }),
+      [jsonPath]: getLabelNew({ jsonPath })
+    }
+  };
+};
+
+export const getCommonCaption = textScheama => {
+  let { textLabel = {}, props = {} } = textScheama;
+  return getCommonHeader({
+    textLabel,
+    props: { variant: "caption", ...props }
+  });
+};
+
+export const getCommonValue = textScheama => {
+  let { jsonPath, props = {} } = textScheama;
+  return getCommonHeader({ jsonPath, props: { variant: "body2", ...props } });
+};
+
+export const getLabelWithValueNew = textScheama => {
+  const { textLabel = {}, jsonPath, props = {} } = textScheama;
+  return {
+    uiFramework: "custom-atoms",
+    componentPath: "Div",
+    gridDefination: {
+      xs: 6,
+      sm: 3
+    },
+    props: {
+      style: {
+        marginBottom: "16px"
+      },
+      ...props
+    },
+    children: {
+      label: getCommonCaption({ textLabel }),
+      value: getCommonValue({ jsonPath })
+    }
+  };
 };

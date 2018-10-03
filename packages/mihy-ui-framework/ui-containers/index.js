@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LabelContainer = exports.TextFieldContainer = undefined;
+exports.MultiItem = exports.LabelContainer = exports.TextFieldContainer = undefined;
 
 var _react = require("react");
 
@@ -41,5 +41,15 @@ var TextFieldContainer = (0, _reactLoadable2.default)({
   }
 });
 
+var MultiItem = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import("./MultiItem");
+  },
+  loading: function loading() {
+    return _react2.default.createElement(Loading, null);
+  }
+});
+
 exports.TextFieldContainer = TextFieldContainer;
 exports.LabelContainer = LabelContainer;
+exports.MultiItem = MultiItem;

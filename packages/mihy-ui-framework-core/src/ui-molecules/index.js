@@ -64,10 +64,6 @@ const Stepper = Loadable({
   loading: () => <Loading />
 });
 
-const MultiItem = Loadable({
-  loader: () => import("./MultiItem"),
-  loading: () => <Loading />
-});
 
 const Carousel = Loadable({
   loader: () => import("./Carousel"),
@@ -131,7 +127,6 @@ export {
   AppCarosel,
   AppSubOption,
   Stepper,
-  MultiItem,
   Carousel,
   StepperStaticVertical,
   TextfieldWithIcon,

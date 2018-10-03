@@ -19,7 +19,6 @@ import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 
 const role = getQueryArg(window.location.href, "role");
 const status = getQueryArg(window.location.href, "status");
-const tradeLicenseNo = getQueryArg(window.location.href, "licenseNo");
 
 let headerSideText = "";
 let titleText = "";
@@ -142,8 +141,8 @@ const screenConfig = {
           children: {
             header1: {
               gridDefination: {
-                xs: "12",
-                sm: "9"
+                xs: 12,
+                sm: 9
               },
               ...headerrow
             },
@@ -154,8 +153,8 @@ const screenConfig = {
                 color: "primary"
               },
               gridDefination: {
-                xs: "12",
-                sm: "3",
+                xs: 12,
+                sm: 3,
                 align: "right"
               },
               children: {

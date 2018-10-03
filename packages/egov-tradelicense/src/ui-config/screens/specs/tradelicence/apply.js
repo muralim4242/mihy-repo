@@ -8,6 +8,10 @@ import {
   getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
+import get from "lodash/get";
+import set from "lodash/set";
+
+import { commonTransform, objectToDropdown } from "../utils";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 import { footer } from "./applyResource/footer";
@@ -29,7 +33,8 @@ const header = getCommonContainer({
     componentPath: "ApplicationNoContainer",
     props: {
       number: 5434
-    }
+    },
+    visible: false
   }
 });
 
@@ -38,7 +43,7 @@ const tradeDocumentDetails = getCommonCard({
     "Please Upload the Required Documents for Verification"
   ),
   paragraph: getCommonParagraph(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+    "Only one file can be uploaded for one document. If multiple files need to be uploaded then please combine all files in a pdf and then upload"
   ),
   documentList
 });
@@ -69,7 +74,10 @@ const getMdmsData = async (action, state, dispatch) => {
       moduleDetails: [
         {
           moduleName: "TradeLicense",
-          masterDetails: [{ name: "TradeType" }, { name: "AccessoriesCategory" }]
+          masterDetails: [
+            { name: "TradeType" },
+            { name: "AccessoriesCategory" }
+          ]
         },
         {
           moduleName: "common-masters",
@@ -77,14 +85,24 @@ const getMdmsData = async (action, state, dispatch) => {
             { name: "StructureType" },
             { name: "OwnerType" },
             { name: "OwnerShipCategory" },
-            { name: "DocumentType" }
+            { name: "DocumentType" },
+            {name:"UOM"}
+          ]
+        },
+        {
+          moduleName: "tenant",
+          masterDetails: [
+            {
+              name: "tenants"
+            }
           ]
         }
       ]
     }
-  }
+  };
   try {
-    const payload = await httpRequest(
+    let payload = null;
+    payload = await httpRequest(
       "post",
       "/egov-mdms-service/v1/_search",
       "_search",
@@ -92,6 +110,29 @@ const getMdmsData = async (action, state, dispatch) => {
       mdmsBody
     );
     console.log("payload...", payload);
+    payload = commonTransform(payload, "MdmsRes.TradeLicense.TradeType");
+    payload = commonTransform(
+      payload,
+      "MdmsRes.common-masters.OwnerShipCategory"
+    );
+    payload = commonTransform(payload, "MdmsRes.common-masters.StructureType");
+    set(
+      payload,
+      "MdmsRes.TradeLicense.TradeTypeTransformed",
+      objectToDropdown(get(payload, "MdmsRes.TradeLicense.TradeType", []))
+    );
+    set(
+      payload,
+      "MdmsRes.common-masters.StructureTypeTransformed",
+      objectToDropdown(get(payload, "MdmsRes.common-masters.StructureType", []))
+    );
+    set(
+      payload,
+      "MdmsRes.common-masters.OwnerShipCategoryTransformed",
+      objectToDropdown(
+        get(payload, "MdmsRes.common-masters.OwnerShipCategory", [])
+      )
+    );
     dispatch(prepareFinalObject("applyScreenMdmsData", payload.MdmsRes));
   } catch (e) {
     console.log(e);
@@ -122,25 +163,25 @@ const screenConfig = {
           children: {
             header: {
               gridDefination: {
-                xs: "12",
-                sm: "10"
+                xs: 12,
+                sm: 10
               },
               ...header
             },
-            helpSection: {
-              componentPath: "Button",
-              props: {
-                color: "primary"
-              },
-              gridDefination: {
-                xs: "12",
-                sm: "2",
-                align: "right"
-              },
-              children: {
-                buttonLabel: getLabel("help ?")
-              }
-            }
+            // helpSection: {
+            //   componentPath: "Button",
+            //   props: {
+            //     color: "primary"
+            //   },
+            //   gridDefination: {
+            //     xs: 12,
+            //     sm: 2,
+            //     align: "right"
+            //   },
+            //   children: {
+            //     buttonLabel: getLabel("help ?")
+            //   }
+            // }
           }
         },
         stepper,

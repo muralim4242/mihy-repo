@@ -13,7 +13,13 @@ const TextFieldContainer = Loadable({
   loading: () => <Loading />
 });
 
+const MultiItem = Loadable({
+  loader: () => import("./MultiItem"),
+  loading: () => <Loading />
+});
+
 export {
   TextFieldContainer,
-  LabelContainer
+  LabelContainer,
+  MultiItem
 };

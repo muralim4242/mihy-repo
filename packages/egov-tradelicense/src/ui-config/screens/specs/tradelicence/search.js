@@ -7,11 +7,13 @@ import React from "react";
 import { tradeLicenseApplication } from "./searchResource/tradeLicenseApplication";
 
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
+import store from "ui-redux/store";
+import { setRoute } from "mihy-ui-framework/ui-redux/app/actions";
 
 const hasButton = getQueryArg(window.location.href, "hasButton");
 const hasApproval = getQueryArg(window.location.href, "hasApproval");
 let enableInbox,
-  enableButton = true;
+enableButton = true;
 enableInbox = hasApproval && hasApproval === "false" ? false : true;
 enableButton = hasButton && hasButton === "false" ? false : true;
 
@@ -34,16 +36,16 @@ const tradeLicenseSearchAndResult = {
           children: {
             header: {
               gridDefination: {
-                xs: "12",
-                sm: "6"
+                xs: 12,
+                sm: 6
               },
               ...header
             },
             newApplicationButton: {
               componentPath: "Button",
               gridDefination: {
-                xs: "12",
-                sm: "6",
+                xs: 12,
+                sm: 6,
                 align: "right"
               },
               visible: enableButton,
@@ -154,7 +156,7 @@ const tradeLicenseSearchAndResult = {
                 title: "Pending for your Approval (4)",
                 options: {
                   filterType: "dropdown",
-                  responsive: "scroll",
+                  responsive: "stacked",
                   selectableRows: false
                 }
               }
@@ -163,6 +165,20 @@ const tradeLicenseSearchAndResult = {
         },
         tradeLicenseApplication,
         breakAfterSearch: getBreak(),
+        progressStatus: {
+          uiFramework: "custom-atoms",
+          componentPath: "Div",
+          props: {
+            style: {display: "flex", justifyContent: "center"}
+          },
+          visible:false,
+          children: {
+            progress:{
+              uiFramework: "material-ui",
+              componentPath: "CircularProgress",
+            }
+          }
+        },
         searchResults: {
           uiFramework: "custom-molecules-local",
           componentPath: "Table",
@@ -204,8 +220,36 @@ const tradeLicenseSearchAndResult = {
             title: "Search Results for Trade License Applications",
             options: {
               filterType: "dropdown",
-              responsive: "scroll",
-              selectableRows: false
+              responsive: "stacked",
+              selectableRows: false,
+              hover: true,
+              onRowClick: (rowData, rowMetadata) => {
+                switch (rowData[5].props.children) {
+                  case "APPLIED":
+                    store.dispatch(
+                      setRoute(
+                        "/landing/mihy-ui-framework/tradelicence/search-preview?status=pending_payment&role=employee"
+                      )
+                    );
+                    break;
+                  case "APPROVED":
+                    store.dispatch(
+                      setRoute(
+                        "/landing/mihy-ui-framework/tradelicence/search-preview?status=approved&role=employee"
+                      )
+                    );
+                    break;
+                  case "INITIATED":
+                    store.dispatch(
+                      setRoute(
+                        "/landing/mihy-ui-framework/tradelicence/apply"
+                      )
+                    );
+                    break;
+                  default:
+                    break;
+                }
+              }
             }
           }
         }

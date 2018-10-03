@@ -24,16 +24,18 @@ const styles = theme => ({
   }
 });
 
-function SingleLineGridList(props) {
-  const { classes, bloodGrps } = props;
+const SingleLineGridList=(props)=> {
+  const { classes, bloodGrps,onClickOnBloodGrp,selectedBloodGrp } = props;
 
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={5.5} cellHeight={56}>
         {bloodGrps.map((item, itemKey) => (
           <GridListTile key={itemKey}>
-            <Button color="primary" variant="fab">
-              {item.name}
+            <Button onClick={(e)=>{
+              onClickOnBloodGrp(item.label)
+            }} color={selectedBloodGrp===item.label?"secondary":"primary"} variant="fab">
+              {item.label}
             </Button>
           </GridListTile>
         ))}
