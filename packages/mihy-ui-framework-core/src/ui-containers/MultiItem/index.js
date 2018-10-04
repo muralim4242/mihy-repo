@@ -20,10 +20,11 @@ class MultiItem extends React.Component {
   };
 
   addItem = () => {
-    const { onFieldChange: addItem,screenKey, scheama, componentJsonpath,headerName, headerJsonPath,screenConfig} = this.props;
+    const { onFieldChange: addItem,screenKey, scheama,sourceJsonPath,objectSorce componentJsonpath,headerName, headerJsonPath,screenConfig} = this.props;
     const items=get(screenConfig,`${screenKey}.${componentJsonpath}.props.items`);
     const itemsLength=items.length;
-    set(scheama,headerJsonPath,`${headerName} - ${itemsLength+1}`)
+    set(scheama,headerJsonPath,`${headerName} - ${itemsLength+1}`);
+
     addItem(screenKey, componentJsonpath, `props.items[${itemsLength}]`, JSON.parse(JSON.stringify(addComponentJsonpath({[`item${itemsLength}`]:scheama},`${componentJsonpath}.props.items[${itemsLength}]`))));
   };
 

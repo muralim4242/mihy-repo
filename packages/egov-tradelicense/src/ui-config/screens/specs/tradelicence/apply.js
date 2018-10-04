@@ -27,7 +27,7 @@ const stepper = getStepperObject({ props: { activeStep: 0 } }, stepsData);
 const queryValue = getQueryArg(window.location.href, "number");
 
 const header = getCommonContainer({
-  header: getCommonHeader("Payment for New Trade License (2018-2019)"),
+  header: getCommonHeader("Apply for New Trade License (2018-2019)"),
   applicationNumber: {
     uiFramework: "custom-atoms-local",
     componentPath: "ApplicationNoContainer",
@@ -86,7 +86,7 @@ const getMdmsData = async (action, state, dispatch) => {
             { name: "OwnerType" },
             { name: "OwnerShipCategory" },
             { name: "DocumentType" },
-            {name:"UOM"}
+            { name: "UOM" }
           ]
         },
         {
@@ -167,7 +167,7 @@ const screenConfig = {
                 sm: 10
               },
               ...header
-            },
+            }
             // helpSection: {
             //   componentPath: "Button",
             //   props: {

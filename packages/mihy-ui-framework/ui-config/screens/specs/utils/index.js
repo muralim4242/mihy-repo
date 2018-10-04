@@ -185,8 +185,8 @@ var getBreak = exports.getBreak = function getBreak() {
 //   };
 // };
 
-var getLabel = exports.getLabel = function getLabel(label) {
-  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+var getLabel = exports.getLabel = function getLabel(label, labelKey) {
+  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
     uiFramework: "custom-containers",

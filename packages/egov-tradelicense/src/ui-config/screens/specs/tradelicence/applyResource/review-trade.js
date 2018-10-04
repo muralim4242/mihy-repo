@@ -8,7 +8,6 @@ import {
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
 import { changeStep } from "./footer";
-import { getLabelWithValueNew } from "../../utils";
 
 export const getReviewTrade = (isEditable = true) => {
   return getCommonGrayCard({
@@ -55,7 +54,7 @@ export const getReviewTrade = (isEditable = true) => {
     },
     viewOne: getCommonContainer({
       reviewLicenceType: getLabelWithValue("Licence Type", "Temporary"),
-      reviewTradeName: getLabelWithValueNew({
+      reviewTradeName: getLabelWithValue({
         textLabel: {
           label: "Trade Name",
           labelKey: "TL_COMMON_TABLE_COL_TRD_NAME"

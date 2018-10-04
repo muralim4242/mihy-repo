@@ -206,7 +206,8 @@ const accessoriesCard = {
     headerName: "Accessory",
     headerJsonPath:
       "children.cardContent.children.header.children.head.children.Accessories.props.label",
-    objectJsonPath: "Licenses[0].accessories"
+    sourceJsonPath: "Licenses[0].tradeLicenseDetail.accessories",
+    prefixSourceJsonPath:"children.cardContent.children.header.children.accessoriesCardContainer"
   },
   type: "array"
 };

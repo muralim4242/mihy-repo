@@ -163,7 +163,7 @@ export const getBreak = (props = {}) => {
 //   };
 // };
 
-export const getLabel = (label, props = {}) => {
+export const getLabel = (label, labelKey, props = {}) => {
   return {
     uiFramework: "custom-containers",
     componentPath: "LabelContainer",
