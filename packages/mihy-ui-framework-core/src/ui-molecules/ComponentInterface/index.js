@@ -3,6 +3,9 @@ import LinearProgress from "../../ui-atoms/LinearSpinner";
 import Loadable from "react-loadable";
 import Item from "../../ui-atoms/Layout/Item";
 
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
+
 class ComponentInterface extends React.Component {
   constructor(props) {
     super(props);
@@ -76,18 +79,36 @@ class ComponentInterface extends React.Component {
 
   render() {
     const { module: Component } = this.state; // Assigning to new variable names @see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-    const {
+    let {
       id,
       uiFramework,
       props,
       children,
       gridDefination,
-      visible
+      visible = true,
+      rolesDefination = {}
     } = this.props;
+    if (visible && !isEmpty(rolesDefination)) {
+      const splitList = get(rolesDefination, "rolePath").split(".");
+      const localdata = JSON.parse(localStorage.getItem(splitList[0]));
+      const localRoles = get(
+        localdata,
+        splitList.slice(1).join("."),
+        localdata
+      );
+
+      const roleCodes = localRoles.map(elem => {
+        return get(elem, "code");
+      });
+      const roles = get(rolesDefination, "roles");
+      let found = roles.some(elem => roleCodes.includes(elem));
+      visible = found;
+    }
+
     if (gridDefination) {
       return (
         Component &&
-        visible !== false && (
+        visible && (
           <Item {...gridDefination}>
             <Component id={`${uiFramework}-${id}`} {...props}>
               {children && children}
@@ -98,7 +119,7 @@ class ComponentInterface extends React.Component {
     } else {
       return (
         Component &&
-        visible !== false && (
+        visible && (
           <Component id={`${uiFramework}-${id}`} {...props}>
             {children && children}
           </Component>

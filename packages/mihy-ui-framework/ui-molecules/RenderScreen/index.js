@@ -68,7 +68,7 @@ var RenderScreen = function RenderScreen(_ref) {
       // } else {
       return _react2.default.createElement(
         _ComponentInterface2.default,
-        {
+        (0, _extends3.default)({
           key: componentKey,
           id: componentKey,
           uiFramework: uiFramework || rootFramework,
@@ -76,12 +76,18 @@ var RenderScreen = function RenderScreen(_ref) {
           props: (0, _extends3.default)({}, props, extraProps),
           gridDefination: gridDefination,
           visible: visible
-        },
-        _react2.default.createElement(RenderScreen, { components: components[componentKey].children, onFieldChange: onFieldChange, onComponentClick: onComponentClick, uiFramework: rootFramework, screenKey: screenKey })
+        }, components[componentKey]),
+        _react2.default.createElement(RenderScreen, {
+          components: components[componentKey].children,
+          onFieldChange: onFieldChange,
+          onComponentClick: onComponentClick,
+          uiFramework: rootFramework,
+          screenKey: screenKey
+        })
       );
       // }
     } else {
-      return _react2.default.createElement(_ComponentInterface2.default, {
+      return _react2.default.createElement(_ComponentInterface2.default, (0, _extends3.default)({
         key: componentKey,
         id: componentKey,
         uiFramework: uiFramework || rootFramework,
@@ -89,7 +95,7 @@ var RenderScreen = function RenderScreen(_ref) {
         props: (0, _extends3.default)({}, props, extraProps),
         gridDefination: gridDefination,
         visible: visible
-      });
+      }, components[componentKey]));
     }
   }) : null;
 };

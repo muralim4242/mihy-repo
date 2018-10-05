@@ -1,8 +1,14 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
-import ComponentInterface  from "../ComponentInterface";
+import ComponentInterface from "../ComponentInterface";
 
-const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onComponentClick,screenKey }) => {
+const RenderScreen = ({
+  components,
+  uiFramework: rootFramework,
+  onFieldChange,
+  onComponentClick,
+  screenKey
+}) => {
   return components
     ? Object.keys(components).map(componentKey => {
         const {
@@ -19,56 +25,69 @@ const RenderScreen = ({ components,uiFramework:rootFramework,onFieldChange,onCom
         let extraProps = jsonPath
           ? {
               onChange: e => {
-                onFieldChange(screenKey, componentJsonpath, "props.value", e.target.value);
+                onFieldChange(
+                  screenKey,
+                  componentJsonpath,
+                  "props.value",
+                  e.target.value
+                );
               }
             }
           : {};
         if (onClickDefination) {
-          extraProps={
+          extraProps = {
             ...extraProps,
-            onClick:e =>{
-              onComponentClick(onClickDefination,componentJsonpath);
+            onClick: e => {
+              onComponentClick(onClickDefination, componentJsonpath);
             }
-          }
+          };
         }
-        if (type && type==="array") {
-          extraProps={
+        if (type && type === "array") {
+          extraProps = {
             ...extraProps,
             onFieldChange,
             onComponentClick,
-            uiFramework:rootFramework,
+            uiFramework: rootFramework,
             componentJsonpath,
             screenKey
-          }
+          };
         }
         if (!isEmpty(components[componentKey].children)) {
           // if (typeof components[componentKey].children==="string") {
           //   return (<span>{components[componentKey].children}</span>);
           // } else {
-            return (
-              <ComponentInterface
-                key={componentKey}
-                id={componentKey}
-                uiFramework={uiFramework || rootFramework}
-                componentPath={componentPath}
-                props={{ ...props, ...extraProps }}
-                gridDefination={gridDefination}
-                visible={visible}
-              >
-                <RenderScreen components={components[componentKey].children} onFieldChange={onFieldChange} onComponentClick={onComponentClick} uiFramework={rootFramework} screenKey={screenKey}/>
-              </ComponentInterface>
-            );
+          return (
+            <ComponentInterface
+              key={componentKey}
+              id={componentKey}
+              uiFramework={uiFramework || rootFramework}
+              componentPath={componentPath}
+              props={{ ...props, ...extraProps }}
+              gridDefination={gridDefination}
+              visible={visible}
+              {...components[componentKey]}
+            >
+              <RenderScreen
+                components={components[componentKey].children}
+                onFieldChange={onFieldChange}
+                onComponentClick={onComponentClick}
+                uiFramework={rootFramework}
+                screenKey={screenKey}
+              />
+            </ComponentInterface>
+          );
           // }
         } else {
           return (
             <ComponentInterface
               key={componentKey}
               id={componentKey}
-              uiFramework={uiFramework|| rootFramework}
+              uiFramework={uiFramework || rootFramework}
               componentPath={componentPath}
               props={{ ...props, ...extraProps }}
               gridDefination={gridDefination}
               visible={visible}
+              {...components[componentKey]}
             />
           );
         }

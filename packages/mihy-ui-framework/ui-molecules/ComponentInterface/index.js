@@ -40,6 +40,14 @@ var _Item = require("../../ui-atoms/Layout/Item");
 
 var _Item2 = _interopRequireDefault(_Item);
 
+var _get = require("lodash/get");
+
+var _get2 = _interopRequireDefault(_get);
+
+var _isEmpty = require("lodash/isEmpty");
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ComponentInterface = function (_React$Component) {
@@ -170,10 +178,31 @@ var ComponentInterface = function (_React$Component) {
           props = _props2.props,
           children = _props2.children,
           gridDefination = _props2.gridDefination,
-          visible = _props2.visible;
+          _props2$visible = _props2.visible,
+          visible = _props2$visible === undefined ? true : _props2$visible,
+          _props2$rolesDefinati = _props2.rolesDefination,
+          rolesDefination = _props2$rolesDefinati === undefined ? {} : _props2$rolesDefinati;
+
+      console.log(rolesDefination, visible, id);
+      if (visible && !(0, _isEmpty2.default)(rolesDefination)) {
+        console.log("123...", rolesDefination);
+
+        var splitList = (0, _get2.default)(rolesDefination, "rolePath").split(".");
+        var localdata = JSON.parse(localStorage.getItem(splitList[0]));
+        var localRoles = (0, _get2.default)(localdata, splitList.slice(1).join("."), localdata);
+
+        var roleCodes = localRoles.map(function (elem) {
+          return (0, _get2.default)(elem, "code");
+        });
+        var roles = (0, _get2.default)(rolesDefination, "roles");
+        var found = roles.some(function (elem) {
+          return roleCodes.includes(elem);
+        });
+        visible = found;
+      }
 
       if (gridDefination) {
-        return Component && visible !== false && _react2.default.createElement(
+        return Component && visible && _react2.default.createElement(
           _Item2.default,
           gridDefination,
           _react2.default.createElement(
@@ -183,7 +212,7 @@ var ComponentInterface = function (_React$Component) {
           )
         );
       } else {
-        return Component && visible !== false && _react2.default.createElement(
+        return Component && visible && _react2.default.createElement(
           Component,
           (0, _extends3.default)({ id: uiFramework + "-" + id }, props),
           children && children
