@@ -66,6 +66,10 @@ var _set = require("lodash/set");
 
 var _set2 = _interopRequireDefault(_set);
 
+var _cloneDeep = require("lodash/cloneDeep");
+
+var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
+
 var _uiUtils = require("../../ui-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -85,31 +89,57 @@ var MultiItem = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MultiItem.__proto__ || Object.getPrototypeOf(MultiItem)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
-      var items = _this.props.items;
+      var _this$props = _this.props,
+          items = _this$props.items,
+          sourceJsonPath = _this$props.sourceJsonPath,
+          preparedFinalObject = _this$props.preparedFinalObject;
 
-      if (!items.length) {
+      var editItems = (0, _get2.default)(preparedFinalObject, sourceJsonPath, []);
+      if (!items.length && !editItems.length) {
         _this.addItem();
+      } else {
+        for (var i = 0; i < editItems.length; i++) {
+          _this.addItem();
+        }
       }
     }, _this.addItem = function () {
-      var _this$props = _this.props,
-          addItem = _this$props.onFieldChange,
-          screenKey = _this$props.screenKey,
-          scheama = _this$props.scheama,
-          componentJsonpath = _this$props.componentJsonpath,
-          headerName = _this$props.headerName,
-          headerJsonPath = _this$props.headerJsonPath,
-          screenConfig = _this$props.screenConfig;
+      var _this$props2 = _this.props,
+          addItemToState = _this$props2.onFieldChange,
+          screenKey = _this$props2.screenKey,
+          scheama = _this$props2.scheama,
+          sourceJsonPath = _this$props2.sourceJsonPath,
+          prefixSourceJsonPath = _this$props2.prefixSourceJsonPath,
+          componentJsonpath = _this$props2.componentJsonpath,
+          headerName = _this$props2.headerName,
+          headerJsonPath = _this$props2.headerJsonPath,
+          screenConfig = _this$props2.screenConfig;
 
-      var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
+      var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items", []);
       var itemsLength = items.length;
       (0, _set2.default)(scheama, headerJsonPath, headerName + " - " + (itemsLength + 1));
-      addItem(screenKey, componentJsonpath, "props.items[" + itemsLength + "]", JSON.parse(JSON.stringify((0, _uiUtils.addComponentJsonpath)((0, _defineProperty3.default)({}, "item" + itemsLength, scheama), componentJsonpath + ".props.items[" + itemsLength + "]"))));
+      if (sourceJsonPath) {
+        var multiItemContent = (0, _get2.default)(scheama, prefixSourceJsonPath, {});
+        for (var variable in multiItemContent) {
+          if (multiItemContent.hasOwnProperty(variable) && multiItemContent[variable].props && multiItemContent[variable].props.jsonPath) {
+            var splitedJsonPath = multiItemContent[variable].props.jsonPath.split(sourceJsonPath);
+            if (splitedJsonPath.length > 1) {
+              var propertyName = splitedJsonPath[1].split("]");
+              if (propertyName.length > 1) {
+                multiItemContent[variable].jsonPath = sourceJsonPath + "[" + itemsLength + "]" + propertyName[1];
+                multiItemContent[variable].props.jsonPath = sourceJsonPath + "[" + itemsLength + "]" + propertyName[1];
+              }
+            }
+          }
+        }
+        (0, _set2.default)(scheama, prefixSourceJsonPath, multiItemContent);
+      }
+      addItemToState(screenKey, componentJsonpath, "props.items[" + itemsLength + "]", (0, _cloneDeep2.default)((0, _uiUtils.addComponentJsonpath)((0, _defineProperty3.default)({}, "item" + itemsLength, scheama), componentJsonpath + ".props.items[" + itemsLength + "]")));
     }, _this.removeItem = function (index) {
-      var _this$props2 = _this.props,
-          removeItem = _this$props2.onFieldChange,
-          screenKey = _this$props2.screenKey,
-          componentJsonpath = _this$props2.componentJsonpath,
-          screenConfig = _this$props2.screenConfig;
+      var _this$props3 = _this.props,
+          removeItem = _this$props3.onFieldChange,
+          screenKey = _this$props3.screenKey,
+          componentJsonpath = _this$props3.componentJsonpath,
+          screenConfig = _this$props3.screenConfig;
 
       var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
       items.splice(index, 1);
@@ -138,7 +168,6 @@ var MultiItem = function (_React$Component) {
         _Div2.default,
         null,
         items.length > 0 && items.map(function (item, key) {
-          console.log(item);
           return _react2.default.createElement(
             _Div2.default,
             { key: key },

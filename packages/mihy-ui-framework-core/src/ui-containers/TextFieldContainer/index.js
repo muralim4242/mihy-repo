@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { TextfieldWithIcon } from "../../ui-molecules";
 import MenuItem from "@material-ui/core/MenuItem";
 import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
 
 const localizationLabels = JSON.parse(
@@ -35,8 +36,13 @@ class TextFieldContainer extends React.Component {
       optionValue="code",
       optionLabel="code",
       sourceJsonPath,
+      state,
+      dispatch,
       ...rest
     } = this.props;
+    if (!isEmpty(iconObj)) {
+      iconObj.onClick=()=>iconObj.onClickOnIcon(state,dipatch);
+    }
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(
       label.labelName,
@@ -112,10 +118,9 @@ const mapStateToProps = (state, ownprops) => {
       );
     }
   }
-  return { value: fieldValue, dropdownData };
+  return { value: fieldValue, dropdownData ,state};
 };
 
 export default connect(
-  mapStateToProps,
-  {}
+  mapStateToProps
 )(TextFieldContainer);

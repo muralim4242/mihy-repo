@@ -44,6 +44,10 @@ var _get = require("lodash/get");
 
 var _get2 = _interopRequireDefault(_get);
 
+var _isEmpty = require("lodash/isEmpty");
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
 var _commons = require("../../ui-utils/commons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -91,8 +95,15 @@ var TextFieldContainer = function (_React$Component) {
           _props$optionLabel = _props.optionLabel,
           optionLabel = _props$optionLabel === undefined ? "code" : _props$optionLabel,
           sourceJsonPath = _props.sourceJsonPath,
-          rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath"]);
+          state = _props.state,
+          dispatch = _props.dispatch,
+          rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath", "state", "dispatch"]);
 
+      if (!(0, _isEmpty2.default)(iconObj)) {
+        iconObj.onClick = function () {
+          return iconObj.onClickOnIcon(state, dipatch);
+        };
+      }
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);
       var translatedPlaceholder = getLocaleLabelsforTL(placeholder.labelName, placeholder.labelKey, transfomedKeys);
@@ -159,7 +170,7 @@ var mapStateToProps = function mapStateToProps(state, ownprops) {
       dropdownData = constructDropdown((0, _get2.default)(preparedFinalObject, sourceJsonPath, []));
     }
   }
-  return { value: fieldValue, dropdownData: dropdownData };
+  return { value: fieldValue, dropdownData: dropdownData, state: state };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(TextFieldContainer);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(TextFieldContainer);

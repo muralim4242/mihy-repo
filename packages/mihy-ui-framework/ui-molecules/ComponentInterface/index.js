@@ -183,10 +183,7 @@ var ComponentInterface = function (_React$Component) {
           _props2$rolesDefinati = _props2.rolesDefination,
           rolesDefination = _props2$rolesDefinati === undefined ? {} : _props2$rolesDefinati;
 
-      console.log(rolesDefination, visible, id);
       if (visible && !(0, _isEmpty2.default)(rolesDefination)) {
-        console.log("123...", rolesDefination);
-
         var splitList = (0, _get2.default)(rolesDefination, "rolePath").split(".");
         var localdata = JSON.parse(localStorage.getItem(splitList[0]));
         var localRoles = (0, _get2.default)(localdata, splitList.slice(1).join("."), localdata);

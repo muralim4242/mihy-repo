@@ -230,6 +230,7 @@ export const getTextField = textScheama => {
       optionLabel,
       sourceJsonPath,
       jsonPath,
+      iconObj,
       ...props
     },
     gridDefination,

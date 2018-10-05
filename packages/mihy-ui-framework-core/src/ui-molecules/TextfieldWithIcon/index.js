@@ -10,8 +10,10 @@ function InputWithIcon(props) {
   const { label,iconObj,...rest } = props;
   const extraProps = !isEmpty(iconObj) &&(iconObj.position === "end"?  {InputProps :{
       endAdornment: (
-        <InputAdornment position="end">
-          <span style={{color:iconObj.color?iconObj.color:"rgba(0, 0, 0, 0.60"}}>{iconObj.iconName &&<Icon iconName={iconObj.iconName} />}<span style={iconObj.iconName?{position: "relative",top: "-7px"}:{}}>{iconObj.label && iconObj.label}</span> </span>
+        <InputAdornment  position="end">
+          <span onClick={()=>{
+            if(iconObj.onClick) iconObj.onClick;
+          }} style={{color:iconObj.color?iconObj.color:"rgba(0, 0, 0, 0.60"}}>{iconObj.iconName &&<Icon iconName={iconObj.iconName} />}<span style={iconObj.iconName?{position: "relative",top: "-7px"}:{}}>{iconObj.label && iconObj.label}</span> </span>
         </InputAdornment>
       ),
   }}:
@@ -19,7 +21,9 @@ function InputWithIcon(props) {
       InputProps: {
         startAdornment: (
           <InputAdornment position="start">
-              <span style={{color:iconObj.color?iconObj.color:"rgba(0, 0, 0, 0.60"}}>{iconObj.iconName &&<Icon iconName={iconObj.iconName} />}<span style={iconObj.iconName?{position: "relative",top: "-7px"}:{}}>{iconObj.label && iconObj.label}</span> </span>
+              <span onClick={()=>{
+                if(iconObj.onClick) iconObj.onClick;
+              }} style={{color:iconObj.color?iconObj.color:"rgba(0, 0, 0, 0.60"}}>{iconObj.iconName &&<Icon iconName={iconObj.iconName} />}<span style={iconObj.iconName?{position: "relative",top: "-7px"}:{}}>{iconObj.label && iconObj.label}</span> </span>
           </InputAdornment>
         ),
       }

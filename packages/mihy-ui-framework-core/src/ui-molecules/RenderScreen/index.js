@@ -20,7 +20,8 @@ const RenderScreen = ({
           onClickDefination,
           gridDefination,
           visible,
-          type
+          type,
+          roleDefination
         } = components[componentKey];
         let extraProps = jsonPath
           ? {
@@ -65,7 +66,7 @@ const RenderScreen = ({
               props={{ ...props, ...extraProps }}
               gridDefination={gridDefination}
               visible={visible}
-              {...components[componentKey]}
+              roleDefination={roleDefination}
             >
               <RenderScreen
                 components={components[componentKey].children}
@@ -87,7 +88,7 @@ const RenderScreen = ({
               props={{ ...props, ...extraProps }}
               gridDefination={gridDefination}
               visible={visible}
-              {...components[componentKey]}
+              roleDefination={roleDefination}
             />
           );
         }

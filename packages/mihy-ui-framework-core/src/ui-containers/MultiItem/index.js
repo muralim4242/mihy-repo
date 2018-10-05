@@ -9,23 +9,45 @@ import Icon from "../../ui-atoms/Icon";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import set from "lodash/set";
+import cloneDeep from "lodash/cloneDeep"
 import {addComponentJsonpath} from "../../ui-utils";
 
 class MultiItem extends React.Component {
   componentDidMount = () => {
-    const { items } = this.props;
-    if (!items.length) {
+    const { items,sourceJsonPath,preparedFinalObject } = this.props;
+    const editItems=get(preparedFinalObject,sourceJsonPath,[])
+    if (!items.length && !editItems.length) {
       this.addItem();
+    }
+    else {
+      for (var i = 0; i < editItems.length; i++) {
+        this.addItem()
+      }
     }
   };
 
   addItem = () => {
-    const { onFieldChange: addItem,screenKey, scheama,sourceJsonPath,objectSorce componentJsonpath,headerName, headerJsonPath,screenConfig} = this.props;
-    const items=get(screenConfig,`${screenKey}.${componentJsonpath}.props.items`);
+    const { onFieldChange: addItemToState,screenKey, scheama,sourceJsonPath,prefixSourceJsonPath, componentJsonpath,headerName, headerJsonPath,screenConfig} = this.props;
+    const items=get(screenConfig,`${screenKey}.${componentJsonpath}.props.items`,[]);
     const itemsLength=items.length;
     set(scheama,headerJsonPath,`${headerName} - ${itemsLength+1}`);
-
-    addItem(screenKey, componentJsonpath, `props.items[${itemsLength}]`, JSON.parse(JSON.stringify(addComponentJsonpath({[`item${itemsLength}`]:scheama},`${componentJsonpath}.props.items[${itemsLength}]`))));
+    if (sourceJsonPath) {
+      let multiItemContent=get(scheama,prefixSourceJsonPath,{});
+      for (var variable in multiItemContent) {
+        if (multiItemContent.hasOwnProperty(variable) && multiItemContent[variable].props && multiItemContent[variable].props.jsonPath) {
+          let splitedJsonPath=multiItemContent[variable].props.jsonPath.split(sourceJsonPath);
+          if (splitedJsonPath.length>1) {
+            let propertyName=splitedJsonPath[1].split("]");
+            if (propertyName.length>1) {
+              multiItemContent[variable].jsonPath=`${sourceJsonPath}[${itemsLength}]${propertyName[1]}`;
+              multiItemContent[variable].props.jsonPath=`${sourceJsonPath}[${itemsLength}]${propertyName[1]}`;
+            }
+          }
+        }
+      }
+      set(scheama,prefixSourceJsonPath,multiItemContent)
+    }
+    addItemToState(screenKey, componentJsonpath, `props.items[${itemsLength}]`, cloneDeep(addComponentJsonpath({[`item${itemsLength}`]:scheama},`${componentJsonpath}.props.items[${itemsLength}]`)));
   };
 
   removeItem = (index) => {
@@ -53,7 +75,6 @@ class MultiItem extends React.Component {
       <Div>
         {items.length > 0 &&
           items.map((item, key) => {
-            console.log(item);
             return (
               <Div key={key}>
                 {items.length>1 && <Container>

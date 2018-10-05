@@ -260,7 +260,8 @@ var getTextField = exports.getTextField = function getTextField(textScheama) {
       optionValue: optionValue,
       optionLabel: optionLabel,
       sourceJsonPath: sourceJsonPath,
-      jsonPath: jsonPath
+      jsonPath: jsonPath,
+      iconObj: iconObj
     }, props),
     gridDefination: gridDefination,
     required: required,

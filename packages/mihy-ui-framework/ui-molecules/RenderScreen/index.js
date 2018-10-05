@@ -39,7 +39,8 @@ var RenderScreen = function RenderScreen(_ref) {
         onClickDefination = _components$component.onClickDefination,
         gridDefination = _components$component.gridDefination,
         visible = _components$component.visible,
-        type = _components$component.type;
+        type = _components$component.type,
+        roleDefination = _components$component.roleDefination;
 
     var extraProps = jsonPath ? {
       onChange: function onChange(e) {
@@ -68,15 +69,16 @@ var RenderScreen = function RenderScreen(_ref) {
       // } else {
       return _react2.default.createElement(
         _ComponentInterface2.default,
-        (0, _extends3.default)({
+        {
           key: componentKey,
           id: componentKey,
           uiFramework: uiFramework || rootFramework,
           componentPath: componentPath,
           props: (0, _extends3.default)({}, props, extraProps),
           gridDefination: gridDefination,
-          visible: visible
-        }, components[componentKey]),
+          visible: visible,
+          roleDefination: roleDefination
+        },
         _react2.default.createElement(RenderScreen, {
           components: components[componentKey].children,
           onFieldChange: onFieldChange,
@@ -87,15 +89,16 @@ var RenderScreen = function RenderScreen(_ref) {
       );
       // }
     } else {
-      return _react2.default.createElement(_ComponentInterface2.default, (0, _extends3.default)({
+      return _react2.default.createElement(_ComponentInterface2.default, {
         key: componentKey,
         id: componentKey,
         uiFramework: uiFramework || rootFramework,
         componentPath: componentPath,
         props: (0, _extends3.default)({}, props, extraProps),
         gridDefination: gridDefination,
-        visible: visible
-      }, components[componentKey]));
+        visible: visible,
+        roleDefination: roleDefination
+      });
     }
   }) : null;
 };
