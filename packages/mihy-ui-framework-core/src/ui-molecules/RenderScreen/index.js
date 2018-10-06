@@ -54,9 +54,6 @@ const RenderScreen = ({
           };
         }
         if (!isEmpty(components[componentKey].children)) {
-          // if (typeof components[componentKey].children==="string") {
-          //   return (<span>{components[componentKey].children}</span>);
-          // } else {
           return (
             <ComponentInterface
               key={componentKey}
@@ -77,7 +74,6 @@ const RenderScreen = ({
               />
             </ComponentInterface>
           );
-          // }
         } else {
           return (
             <ComponentInterface
