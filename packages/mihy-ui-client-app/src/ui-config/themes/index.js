@@ -5,10 +5,7 @@ const themeObject = {
     },
     secondary: {
       main: "#8e24aa"
-    },
-    // background:{
-    //   default:"#eee"
-    // }
+    }
   },
   overrides: {
     MuiCard: {
@@ -30,10 +27,7 @@ const themeObject = {
       root: {
         marginBottom: "8px",
         marginTop:"8px"
-      },
-      // fullWidth: {
-      //   width: "95% !important"
-      // }
+      }
     },
   }
 };
