@@ -1,11 +1,15 @@
 {
   "name": "mihy-ui-framework",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "murali",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muralim4242/mihy-ui-framework-boilerplate.git"
+  }
 }
