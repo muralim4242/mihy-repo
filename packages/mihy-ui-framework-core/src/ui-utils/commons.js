@@ -183,6 +183,33 @@ export const updateTradeDetails = async requestBody => {
   }
 };
 
+export const transformById = (payload, id) => {
+  return (
+    payload &&
+    payload.reduce((result, item) => {
+      result[item[id]] = {
+        ...item
+      };
+
+      return result;
+    }, {})
+  );
+};
+
+export const getTranslatedLabel = (labelKey, localizationLabels) => {
+  let translatedLabel = null;
+  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
+    translatedLabel = localizationLabels[labelKey];
+    if (
+      translatedLabel &&
+      typeof translatedLabel === "object" &&
+      translatedLabel.hasOwnProperty("message")
+    )
+      translatedLabel = translatedLabel.message;
+  }
+  return translatedLabel || labelKey;
+};
+
 export const getSearchResults = async queryObject => {
   try {
     const response = await httpRequest(

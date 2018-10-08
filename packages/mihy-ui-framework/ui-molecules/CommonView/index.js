@@ -28,6 +28,10 @@ var _RenderScreen = require("../RenderScreen");
 
 var _RenderScreen2 = _interopRequireDefault(_RenderScreen);
 
+var _reactRedux = require("react-redux");
+
+var _uiContainers = require("../../ui-containers");
+
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,20 +54,38 @@ var CommonView = function (_React$Component) {
           onComponentClick = _props.onComponentClick,
           preparedFinalObject = _props.preparedFinalObject,
           screenKey = _props.screenKey;
+      var toast = this.props.toast;
+      var errorType = toast.errorType,
+          message = toast.message,
+          open = toast.open;
 
-      return _react2.default.createElement(_RenderScreen2.default, {
-        components: components,
-        uiFramework: uiFramework,
-        onFieldChange: onFieldChange,
-        onComponentClick: onComponentClick,
-        preparedFinalObject: preparedFinalObject,
-        screenKey: screenKey
-      });
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(_RenderScreen2.default, {
+          components: components,
+          uiFramework: uiFramework,
+          onFieldChange: onFieldChange,
+          onComponentClick: onComponentClick,
+          preparedFinalObject: preparedFinalObject,
+          screenKey: screenKey
+        }),
+        open && _react2.default.createElement(_uiContainers.SnackbarContainer, {
+          variant: errorType,
+          message: message,
+          open: open
+        })
+      );
     }
   }]);
   return CommonView;
 }(_react2.default.Component);
-// import Container from "../../ui-atoms/Layout/Container";
 
+var mapStateToProps = function mapStateToProps(state, ownprops) {
+  var app = state.app;
+  var toast = app.toast;
 
-exports.default = CommonView;
+  return { toast: toast };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(CommonView);

@@ -23,7 +23,7 @@ var initialState = {
   toast: {
     message: "",
     open: false,
-    error: true
+    errorType: ""
   },
   spinner: false
 };
@@ -43,7 +43,7 @@ var appReducer = function appReducer() {
         toast: {
           message: action.message,
           open: action.open,
-          error: action.error
+          errorType: action.errorType
         }
       });
     case actionTypes.TOGGLE_SPINNER:
