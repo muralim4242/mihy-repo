@@ -20,7 +20,7 @@ var Label = function Label(_ref) {
   return _react2.default.createElement(
     "span",
     rest,
-    label
+    label ? label : "NA"
   );
 };
 

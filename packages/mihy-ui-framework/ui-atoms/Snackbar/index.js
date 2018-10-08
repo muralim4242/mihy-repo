@@ -132,7 +132,6 @@ var MySnackbarContent = function MySnackbarContent(props) {
       other = (0, _objectWithoutProperties3.default)(props, ["classes", "className", "message", "onClose", "variant"]);
 
   var Icon = variantIcon[variant];
-  console.log("Sample....", message, variant);
   return _react2.default.createElement(_SnackbarContent2.default, (0, _extends3.default)({
     className: (0, _classnames2.default)(classes[variant], className),
     "aria-describedby": "client-snackbar",
@@ -192,7 +191,6 @@ var CustomizedSnackbars = function (_React$Component) {
           variant = _props.variant,
           onClose = _props.onClose;
 
-      console.log("Inside render....", message, variant, open);
       return _react2.default.createElement(
         "div",
         null,
