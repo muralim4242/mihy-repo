@@ -1,4 +1,9 @@
-import { getReceiptData, getSearchResults, getMdmsData } from "../utils";
+import {
+  getReceiptData,
+  getSearchResults,
+  getMdmsData,
+  getUserDataFromUuid
+} from "../utils";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import store from "ui-redux/store";
 
@@ -14,6 +19,18 @@ const createAddress = (doorNo, buildingName, street, locality) => {
   address += street !== "" ? street + ", " : "";
   address += locality;
   return address;
+};
+
+const epochToDate = et => {
+  if (!et) return null;
+  var date = new Date(Math.round(Number(et)));
+  var formattedDate =
+    date.getUTCDate() +
+    "/" +
+    (date.getUTCMonth() + 1) +
+    "/" +
+    date.getUTCFullYear();
+  return formattedDate;
 };
 
 export const loadUlbLogo = tenantid => {
@@ -43,7 +60,6 @@ export const loadApplicationData = async applicationNumber => {
     data.applicationNumber = handleNull(response.Licenses[0].applicationNumber);
     data.licenseNumber = handleNull(response.Licenses[0].licenseNumber);
     data.financialYear = handleNull(response.Licenses[0].financialYear);
-    data.paymentDate = handleNull(response.Licenses[0].receiptDate);
     data.tradeName = handleNull(response.Licenses[0].tradeName);
     data.doorNo = handleNull(
       response.Licenses[0].tradeLicenseDetail.address.doorNo
@@ -80,6 +96,10 @@ export const loadApplicationData = async applicationNumber => {
       data.streetName,
       data.locality
     );
+    data.accessories = handleNull(
+      response.Licenses[0].tradeLicenseDetail.accessories.length
+    );
+    loadUserNameData(response.Licenses[0].auditDetails.lastModifiedBy);
   }
   store.dispatch(prepareFinalObject("applicationDataForReceipt", data));
 };
@@ -117,6 +137,34 @@ export const loadReceiptData = async consumerCode => {
     );
     data.bankName = handleNull(response.Receipt[0].instrument.bank.name);
     data.branchName = handleNull(response.Receipt[0].instrument.branchName);
+    data.bankAndBranch =
+      data.bankName && data.branchName
+        ? data.bankName + ", " + data.branchName
+        : handleNull(data.bankName);
+    data.paymentDate = handleNull(
+      epochToDate(response.Receipt[0].Bill[0].billDetails[0].receiptDate)
+    );
+    data.g8ReceiptNo = handleNull(
+      response.Receipt[0].Bill[0].billDetails[0].manualReceiptNumber
+    );
+    data.g8ReceiptDate = handleNull(
+      epochToDate(response.Receipt[0].Bill[0].billDetails[0].manualReceiptDate)
+    );
+    /** START TL Fee, Adhoc Penalty/Rebate Calculation */
+    var tlAdhocPenalty = 0,
+      tlAdhocRebate = 0;
+    response.Receipt[0].Bill[0].billDetails[0].billAccountDetails.map(item => {
+      let desc = item.accountDescription ? item.accountDescription : "";
+      if (desc.startsWith("TL_TAX")) {
+        data.tlFee = item.crAmountToBePaid;
+      } else if (desc.startsWith("TL_ADHOC_PENALTY")) {
+        tlAdhocPenalty = item.crAmountToBePaid;
+      } else if (desc.startsWith("TL_ADHOC_REBATE")) {
+        tlAdhocRebate = item.crAmountToBePaid;
+      }
+    });
+    data.tlAdhocPenaltyRebate = tlAdhocPenalty - tlAdhocRebate;
+    /** END */
   }
   store.dispatch(prepareFinalObject("receiptDataForReceipt", data));
 };
@@ -166,4 +214,17 @@ export const loadMdmsData = async tenantid => {
     data.corporationEmail = handleNull(ulbData.emailId);
   }
   store.dispatch(prepareFinalObject("mdmsDataForReceipt", data));
+};
+
+export const loadUserNameData = async uuid => {
+  let data = {};
+  let bodyObject = {
+    uuid: [uuid]
+  };
+  let response = await getUserDataFromUuid(bodyObject);
+
+  if (response && response.user && response.user.length > 0) {
+    data.auditorName = handleNull(response.user[0].name);
+  }
+  store.dispatch(prepareFinalObject("userDataForReceipt", data));
 };

@@ -110,6 +110,10 @@ const RadioGroup = Loadable({
   loading: () => <Loading />
 });
 
+const CustomTab = Loadable({
+  loader: () => import("./CustomTab"),
+  loading: () => <Loading />
+});
 
 
 export {
@@ -135,5 +139,6 @@ export {
   DocumentList,
   FeesEstimateCard,
   MultiDownloadCard,
-  RadioGroup
+  RadioGroup,
+  CustomTab
 };

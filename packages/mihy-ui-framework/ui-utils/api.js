@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logoutRequest = exports.loginRequest = exports.httpRequest = undefined;
+exports.uploadFile = exports.prepareForm = exports.logoutRequest = exports.loginRequest = exports.httpRequest = undefined;
 
 var _regenerator = require("babel-runtime/regenerator");
 
@@ -202,5 +202,78 @@ var logoutRequest = exports.logoutRequest = function () {
 
   return function logoutRequest() {
     return _ref3.apply(this, arguments);
+  };
+}();
+
+var prepareForm = exports.prepareForm = function prepareForm(params) {
+  var formData = new FormData();
+  for (var k in params) {
+    formData.append(k, params[k]);
+  }
+  return formData;
+};
+
+var uploadFile = exports.uploadFile = function () {
+  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(endPoint, module, file, ulbLevel) {
+    var tenantId, uploadInstance, requestParams, requestBody, response, responseStatus, fileStoreIds, responseData, files;
+    return _regenerator2.default.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            // Bad idea to fetch from local storage, change as feasible
+            tenantId = (0, _commons.fetchFromLocalStorage)("tenant-id") ? ulbLevel ? (0, _commons.fetchFromLocalStorage)("tenant-id").split(".")[0] : (0, _commons.fetchFromLocalStorage)("tenant-id").split(".")[0] : "";
+            uploadInstance = _axios2.default.create({
+              baseURL: window.location.origin,
+              headers: {
+                "Content-Type": "multipart/form-data"
+              }
+            });
+            requestParams = {
+              tenantId: tenantId,
+              module: module,
+              file: file
+            };
+            requestBody = prepareForm(requestParams);
+            _context4.prev = 4;
+            _context4.next = 7;
+            return uploadInstance.post(endPoint, requestBody);
+
+          case 7:
+            response = _context4.sent;
+            responseStatus = parseInt(response.status, 10);
+            fileStoreIds = [];
+
+            if (!(responseStatus === 201)) {
+              _context4.next = 15;
+              break;
+            }
+
+            responseData = response.data;
+            files = responseData.files || [];
+
+            fileStoreIds = files.map(function (f) {
+              return f.fileStoreId;
+            });
+            return _context4.abrupt("return", fileStoreIds[0]);
+
+          case 15:
+            _context4.next = 20;
+            break;
+
+          case 17:
+            _context4.prev = 17;
+            _context4.t0 = _context4["catch"](4);
+            throw new Error(_context4.t0);
+
+          case 20:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, undefined, [[4, 17]]);
+  }));
+
+  return function uploadFile(_x7, _x8, _x9, _x10) {
+    return _ref4.apply(this, arguments);
   };
 }();

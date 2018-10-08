@@ -64,9 +64,6 @@ var RenderScreen = function RenderScreen(_ref) {
       });
     }
     if (!(0, _isEmpty2.default)(components[componentKey].children)) {
-      // if (typeof components[componentKey].children==="string") {
-      //   return (<span>{components[componentKey].children}</span>);
-      // } else {
       return _react2.default.createElement(
         _ComponentInterface2.default,
         {
@@ -87,7 +84,6 @@ var RenderScreen = function RenderScreen(_ref) {
           screenKey: screenKey
         })
       );
-      // }
     } else {
       return _react2.default.createElement(_ComponentInterface2.default, {
         key: componentKey,

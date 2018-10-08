@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MultiItem = exports.LabelContainer = exports.TextFieldContainer = undefined;
+exports.CustomTabContainer = exports.MultiItemm = exports.LabelContainer = exports.TextFieldContainer = undefined;
 
 var _react = require("react");
 
@@ -50,6 +50,16 @@ var MultiItem = (0, _reactLoadable2.default)({
   }
 });
 
+var CustomTabContainer = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import("./CustomTabContainer");
+  },
+  loading: function loading() {
+    return _react2.default.createElement(Loading, null);
+  }
+});
+
 exports.TextFieldContainer = TextFieldContainer;
 exports.LabelContainer = LabelContainer;
-exports.MultiItem = MultiItem;
+exports.MultiItemm = MultiItemm;
+exports.CustomTabContainer = CustomTabContainer;

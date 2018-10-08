@@ -3,10 +3,12 @@ import {
   getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import "./index.css";
+import isEmpty from "lodash/isEmpty";
 
 const appOptionCardIconBoxStyle = (
   colorOne = "#ffa726",
-  colorTwo = "#fb8c00"
+  colorTwo = "#fb8c00",
+  borderRadius="3px"
 ) => {
   return {
     color: "#FFFFFF",
@@ -19,48 +21,70 @@ const appOptionCardIconBoxStyle = (
     padding: "15px",
     marginTop: "-36px",
     marginRight: "15px",
-    borderRadius: "3px",
+    borderRadius,
     background: `linear-gradient(60deg,${colorOne} ,${colorTwo} )`,
     boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.14)"
   };
 };
 
-export const getFormCommonCard=({iconName="",header="",iconColorOne="",iconColorTwo="",children={},gridDefination={ xs: 12, sm:12 },cardProps})=>{
+export const getFormCommonCard = ({
+  iconName = "",
+  header = "",
+  iconColorOne = "",
+  iconColorTwo = "",
+  children = {},
+  gridDefination = { xs: 12, sm: 12 },
+  avatar = {},
+  cardProps,
+  iconRadius
+}) => {
   return {
-    ...getCommonCard({
-      iconDiv: {
-        uiFramework: "custom-atoms",
-        componentPath: "Div",
-        props: {
-          style: appOptionCardIconBoxStyle(iconColorOne, iconColorTwo)
-        },
-        children: {
-          icon: {
-            uiFramework: "custom-atoms",
-            componentPath: "Icon",
-            props: {
-              iconName,
-              size: "36px"
+    ...getCommonCard(
+      {
+        iconDiv: {
+          uiFramework: "custom-atoms",
+          componentPath: "Div",
+          props: {
+            style: appOptionCardIconBoxStyle(iconColorOne, iconColorTwo, iconRadius?iconRadius:"3px")
+          },
+          children:isEmpty(avatar)? {
+            icon: {
+              uiFramework: "custom-atoms",
+              componentPath: "Icon",
+              props: {
+                iconName,
+                size: "36px"
+              }
             }
+          }:{
+            avatar:{
+              componentPath:"Avatar",
+              props:{
+                src:avatar.src?require(avatar.src):"",
+                style:avatar.style,
+                className:avatar.className
+              }
+            }
+          },
+          gridDefination: {
+            xs: 4,
+            align: "left"
           }
         },
-        gridDefination: {
-          xs: 4,
-          align: "left"
-        }
+        ...children
       },
-      ...children
-    },cardProps),
+      cardProps
+    ),
     gridDefination
-  }
-}
+  };
+};
 
 export const appOptionCardWithIcon = (
   label,
   iconName,
   iconColorOne,
   iconColorTwo,
-  onClickDefination={},
+  onClickDefination = {},
   gridDefination = { xs: 12, sm: 6 }
 ) => {
   return {
@@ -128,7 +152,13 @@ export const appOptionsCardsWithIcons = apps => {
     uiFramework: "custom-atoms",
     componentPath: "Container",
     children: apps.reduce((acc, obj, index) => {
-      const { displayLabel, iconName, iconColorOne, iconColorTwo,onClickDefination } = obj;
+      const {
+        displayLabel,
+        iconName,
+        iconColorOne,
+        iconColorTwo,
+        onClickDefination
+      } = obj;
       acc[`app${index}`] = appOptionCardWithIcon(
         displayLabel,
         iconName,
@@ -157,14 +187,14 @@ const appCardIconBoxStyle = (colorOne = "#ffa726", colorTwo = "#fb8c00") => {
 };
 
 export const getApps = app => {
-  const {name,onClickDefination}=app;
+  const { name, onClickDefination } = app;
   return {
     componentPath: "Button",
     props: {
       variant: "contained",
-      color:"primary"
+      color: "primary"
     },
-    children: {[name]:getLabel(name)},
+    children: { [name]: getLabel(name) },
     onClickDefination
   };
 };
