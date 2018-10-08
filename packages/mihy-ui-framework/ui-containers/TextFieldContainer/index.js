@@ -107,6 +107,7 @@ var TextFieldContainer = function (_React$Component) {
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);
       var translatedPlaceholder = getLocaleLabelsforTL(placeholder.labelName, placeholder.labelKey, transfomedKeys);
+
       if (dropdownData.length > 0) {
         return _react2.default.createElement(
           _uiMolecules.TextfieldWithIcon,
@@ -125,7 +126,7 @@ var TextFieldContainer = function (_React$Component) {
             return _react2.default.createElement(
               _MenuItem2.default,
               { key: key, value: option.value },
-              option.label
+              getLocaleLabelsforTL(option.value, "TL_" + option.value, transfomedKeys)
             );
           })
         );

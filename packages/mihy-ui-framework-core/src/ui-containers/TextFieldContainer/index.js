@@ -26,22 +26,22 @@ const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
 class TextFieldContainer extends React.Component {
   render() {
     let {
-      label={},
-      placeholder={},
+      label = {},
+      placeholder = {},
       jsonPath,
-      iconObj={},
+      iconObj = {},
       value,
       dropdownData,
-      data=[],
-      optionValue="code",
-      optionLabel="code",
+      data = [],
+      optionValue = "code",
+      optionLabel = "code",
       sourceJsonPath,
       state,
       dispatch,
       ...rest
     } = this.props;
     if (!isEmpty(iconObj)) {
-      iconObj.onClick=()=>iconObj.onClickOnIcon(state,dipatch);
+      iconObj.onClick = () => iconObj.onClickOnIcon(state, dipatch);
     }
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(
@@ -54,6 +54,7 @@ class TextFieldContainer extends React.Component {
       placeholder.labelKey,
       transfomedKeys
     );
+
     if (dropdownData.length > 0) {
       return (
         <TextfieldWithIcon
@@ -68,7 +69,11 @@ class TextFieldContainer extends React.Component {
           </MenuItem>
           {dropdownData.map((option, key) => (
             <MenuItem key={key} value={option.value}>
-              {option.label}
+              {getLocaleLabelsforTL(
+                option.value,
+                `TL_${option.value}`,
+                transfomedKeys
+              )}
             </MenuItem>
           ))}
         </TextfieldWithIcon>
@@ -99,7 +104,8 @@ const mapStateToProps = (state, ownprops) => {
   } = ownprops;
   const { screenConfiguration } = state;
   const { preparedFinalObject } = screenConfiguration;
-  const fieldValue = value===undefined ? get(preparedFinalObject, jsonPath):value;
+  const fieldValue =
+    value === undefined ? get(preparedFinalObject, jsonPath) : value;
   let dropdownData = [];
   if (select) {
     const constructDropdown = dt => {
@@ -118,9 +124,7 @@ const mapStateToProps = (state, ownprops) => {
       );
     }
   }
-  return { value: fieldValue, dropdownData ,state};
+  return { value: fieldValue, dropdownData, state };
 };
 
-export default connect(
-  mapStateToProps
-)(TextFieldContainer);
+export default connect(mapStateToProps)(TextFieldContainer);
