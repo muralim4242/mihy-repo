@@ -1,5 +1,7 @@
 import axios from "axios";
 import { fetchFromLocalStorage, addQueryArg, getDateInEpoch } from "./commons";
+import { toggleSpinner } from "mihy-ui-framework/ui-redux/app/actions";
+import store from "mihy-ui-framework/ui-redux/store";
 
 const instance = axios.create({
   baseURL: window.location.origin,
@@ -38,6 +40,7 @@ export const httpRequest = async (
   requestBody = {},
   headers = []
 ) => {
+  store.dispatch(toggleSpinner());
   let apiError = "Api Error";
 
   if (headers)
@@ -62,6 +65,7 @@ export const httpRequest = async (
     if (responseStatus === 200 || responseStatus === 201) {
       return response.data;
     }
+    store.dispatch(toggleSpinner());
   } catch (error) {
     const { data, status } = error.response;
     if (status === 400 && data === "") {
@@ -79,6 +83,7 @@ export const httpRequest = async (
         (data.hasOwnProperty("error_description") && data.error_description) ||
         apiError;
     }
+    store.dispatch(toggleSpinner());
   }
   // unhandled error
   throw new Error(apiError);

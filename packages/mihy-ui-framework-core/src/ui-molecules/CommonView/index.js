@@ -2,6 +2,7 @@ import React from "react";
 import RenderScreen from "../RenderScreen";
 import { connect } from "react-redux";
 import { SnackbarContainer } from "../../ui-containers";
+import LoadingIndicator from "../../ui-molecules/LoadingIndicator";
 import "./index.css";
 
 class CommonView extends React.Component {
@@ -14,7 +15,7 @@ class CommonView extends React.Component {
       preparedFinalObject,
       screenKey
     } = this.props;
-    const { toast } = this.props;
+    const { toast, spinner } = this.props;
     const { errorType, message, open } = toast;
     return (
       <div>
@@ -33,14 +34,18 @@ class CommonView extends React.Component {
             open={open}
           />
         )}
+        {spinner && <LoadingIndicator />}
       </div>
     );
   }
 }
-const mapStateToProps = (state, ownprops) => {
+const mapStateToProps = state => {
   const { app } = state;
-  const { toast } = app;
-  return { toast };
+  const { toast, spinner } = app;
+  return {
+    toast,
+    spinner
+  };
 };
 
 export default connect(
