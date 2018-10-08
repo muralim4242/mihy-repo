@@ -3,7 +3,8 @@ import {
   getCommonContainer,
   getCommonParagraph,
   getCommonSubHeader,
-  getCommonHeader
+  getCommonHeader,
+  getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 import {
@@ -17,8 +18,13 @@ import {
 import { footerApprove } from "./approveResource/footer";
 import { updatePFOforSearchResults } from "ui-utils/commons";
 import set from "lodash/set";
+import { toggleSnackbarAndSetText } from "mihy-ui-framework/ui-redux/app/actions";
 
 const radioButtonLabels = ["Yes", "No", "Not Applicable"];
+
+const searchCall = (state, dispatch) => {
+  dispatch(toggleSnackbarAndSetText(true, "This is error message", "error"));
+};
 
 const header = getCommonContainer({
   header: getCommonHeader({

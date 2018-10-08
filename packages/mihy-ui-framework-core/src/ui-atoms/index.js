@@ -94,6 +94,11 @@ const Iframe = Loadable({
   loading: () => <Loading />
 });
 
+const Snackbar = Loadable({
+  loader: () => import("./Snackbar"),
+  loading: () => <Loading />
+});
+
 export {
   Div,
   Main,
@@ -118,5 +123,6 @@ export {
   ListItemText,
   Label,
   LinearProgress,
-  Iframe
+  Iframe,
+  Snackbar
 };

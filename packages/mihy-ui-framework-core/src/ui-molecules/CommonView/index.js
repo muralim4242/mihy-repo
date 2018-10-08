@@ -1,6 +1,7 @@
 import React from "react";
 import RenderScreen from "../RenderScreen";
-// import Container from "../../ui-atoms/Layout/Container";
+import { connect } from "react-redux";
+import { SnackbarContainer } from "../../ui-containers";
 import "./index.css";
 
 class CommonView extends React.Component {
@@ -13,7 +14,10 @@ class CommonView extends React.Component {
       preparedFinalObject,
       screenKey
     } = this.props;
+    const { toast } = this.props;
+    const { errorType, message, open } = toast;
     return (
+      <div>
         <RenderScreen
           components={components}
           uiFramework={uiFramework}
@@ -22,8 +26,24 @@ class CommonView extends React.Component {
           preparedFinalObject={preparedFinalObject}
           screenKey={screenKey}
         />
+        {open && (
+          <SnackbarContainer
+            variant={errorType}
+            message={message}
+            open={open}
+          />
+        )}
+      </div>
     );
   }
 }
+const mapStateToProps = (state, ownprops) => {
+  const { app } = state;
+  const { toast } = app;
+  return { toast };
+};
 
-export default CommonView;
+export default connect(
+  mapStateToProps,
+  {}
+)(CommonView);

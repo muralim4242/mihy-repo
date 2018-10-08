@@ -15,12 +15,12 @@ var setRoute = exports.setRoute = function setRoute(route) {
   return { type: actionTypes.SET_ROUTE, route: route };
 };
 
-var toggleSnackbarAndSetText = exports.toggleSnackbarAndSetText = function toggleSnackbarAndSetText(open, message, error) {
+var toggleSnackbarAndSetText = exports.toggleSnackbarAndSetText = function toggleSnackbarAndSetText(open, message, errorType) {
   return {
     type: actionTypes.SHOW_TOAST,
     open: open,
     message: message,
-    error: error
+    errorType: errorType
   };
 };
 

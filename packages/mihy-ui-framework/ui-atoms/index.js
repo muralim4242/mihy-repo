@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Iframe = exports.LinearProgress = exports.Label = exports.ListItemText = exports.ListItemIcon = exports.ListItem = exports.List = exports.Toolbar = exports.Drawer = exports.InputAdornment = exports.Icon = exports.Break = exports.Button = exports.Text = exports.Phonenumber = exports.CardMedia = exports.CardContent = exports.Card = exports.Item = exports.Container = exports.Typegraphy = exports.AppBar = exports.Main = exports.Div = undefined;
+exports.Snackbar = exports.Iframe = exports.LinearProgress = exports.Label = exports.ListItemText = exports.ListItemIcon = exports.ListItem = exports.List = exports.Toolbar = exports.Drawer = exports.InputAdornment = exports.Icon = exports.Break = exports.Button = exports.Text = exports.Phonenumber = exports.CardMedia = exports.CardContent = exports.Card = exports.Item = exports.Container = exports.Typegraphy = exports.AppBar = exports.Main = exports.Div = undefined;
 
 var _react = require("react");
 
@@ -205,6 +205,15 @@ var Iframe = (0, _reactLoadable2.default)({
   }
 });
 
+var Snackbar = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import("./Snackbar");
+  },
+  loading: function loading() {
+    return _react2.default.createElement(Loading, null);
+  }
+});
+
 exports.Div = Div;
 exports.Main = Main;
 exports.AppBar = _Appbar2.default;
@@ -229,3 +238,4 @@ exports.ListItemText = ListItemText;
 exports.Label = Label;
 exports.LinearProgress = _LinearSpinner2.default;
 exports.Iframe = Iframe;
+exports.Snackbar = Snackbar;
