@@ -24,7 +24,9 @@ class NavPills extends React.Component {
     };
   }
   handleChange = (event, active) => {
+    const {handleClick}=this.props;
     this.setState({ active });
+    handleClick(active)
   };
   handleChangeIndex = index => {
     this.setState({ active: index });

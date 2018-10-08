@@ -28,10 +28,6 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Div = require("../../ui-atoms/HtmlElements/Div");
-
-var _Div2 = _interopRequireDefault(_Div);
-
 var _RenderScreen = require("../../ui-molecules/RenderScreen");
 
 var _RenderScreen2 = _interopRequireDefault(_RenderScreen);
@@ -42,89 +38,24 @@ var _CustomTab2 = _interopRequireDefault(_CustomTab);
 
 var _reactRedux = require("react-redux");
 
-var _get = require("lodash/get");
-
-var _get2 = _interopRequireDefault(_get);
-
-var _set = require("lodash/set");
-
-var _set2 = _interopRequireDefault(_set);
-
-var _uiUtils = require("../../ui-utils");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var MultiItem = function (_React$Component) {
-  (0, _inherits3.default)(MultiItem, _React$Component);
+var CustomTabContainer = function (_React$Component) {
+  (0, _inherits3.default)(CustomTabContainer, _React$Component);
 
-  function MultiItem() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    (0, _classCallCheck3.default)(this, MultiItem);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MultiItem.__proto__ || Object.getPrototypeOf(MultiItem)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
-      // const { items } = this.props;
-      // if (!items.length) {
-      //   this.addItem();
-      // }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  function CustomTabContainer() {
+    (0, _classCallCheck3.default)(this, CustomTabContainer);
+    return (0, _possibleConstructorReturn3.default)(this, (CustomTabContainer.__proto__ || Object.getPrototypeOf(CustomTabContainer)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(MultiItem, [{
+  (0, _createClass3.default)(CustomTabContainer, [{
     key: "render",
-
-
-    // addItem = () => {
-    //   const {
-    //     onFieldChange: addItem,
-    //     screenKey,
-    //     scheama,
-    //     componentJsonpath,
-    //     headerName,
-    //     headerJsonPath,
-    //     screenConfig
-    //   } = this.props;
-    //   const items = get(
-    //     screenConfig,
-    //     `${screenKey}.${componentJsonpath}.props.items`
-    //   );
-    //   const itemsLength = items.length;
-    //   set(scheama, headerJsonPath, `${headerName} - ${itemsLength + 1}`);
-    //   addItem(
-    //     screenKey,
-    //     componentJsonpath,
-    //     `props.items[${itemsLength}]`,
-    //     JSON.parse(
-    //       JSON.stringify(
-    //         addComponentJsonpath(
-    //           { [`item${itemsLength}`]: scheama },
-    //           `${componentJsonpath}.props.items[${itemsLength}]`
-    //         )
-    //       )
-    //     )
-    //   );
-    // };
-
     value: function render() {
-      console.log(this.props);
       var _props = this.props,
-          items = _props.items,
-          scheama = _props.scheama,
-          addItemLabel = _props.addItemLabel,
-          id = _props.id,
           uiFramework = _props.uiFramework,
           onFieldChange = _props.onFieldChange,
           onComponentClick = _props.onComponentClick,
-          hasAddItem = _props.hasAddItem,
           screenKey = _props.screenKey;
-      var addItem = this.addItem,
-          removeItem = this.removeItem;
 
       console.log(this.props);
       var transFormedProps = (0, _extends3.default)({}, this.props, {
@@ -141,15 +72,10 @@ var MultiItem = function (_React$Component) {
           });
         })
       });
-      console.log(transFormedProps);
-      return _react2.default.createElement(
-        _Div2.default,
-        null,
-        _react2.default.createElement(_CustomTab2.default, transFormedProps)
-      );
+      return _react2.default.createElement(_CustomTab2.default, transFormedProps);
     }
   }]);
-  return MultiItem;
+  return CustomTabContainer;
 }(_react2.default.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -164,4 +90,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return null;
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MultiItem);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CustomTabContainer);

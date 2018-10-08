@@ -14,9 +14,15 @@ const styles = theme => ({
     justifyContent: "left"
   },
   avatar: {
+    marginTop: "-45px",
     width: 60,
     height: 60,
     marginRight: "8px"
+  },
+  nameSection:{
+    textAlign:"right",
+    marginTop:"-12px",
+    width:"100%"
   }
 });
 
@@ -28,15 +34,17 @@ function MediaControlCard(props) {
       {searchResult.map((result, key) => {
         return (
           <Card key={key}>
-            <CardContent className={classes.details}>
-              <Avatar className={classes.avatar}>{result.avatar}</Avatar>
-              <div>
-                <Typography variant="title">{result.name}</Typography>
-                <Typography variant="subheading" color="primary">
-                  {result.bloodGrp}
-                </Typography>
-                <Typography variant="caption">{result.address}</Typography>
+            <CardContent>
+              <div className={classes.details}>
+                <Avatar className={classes.avatar}>{result.avatar}</Avatar>
+                <div className={classes.nameSection}>
+                  <Typography variant="title">{result.name}</Typography>
+                  <Typography variant="subheading" color="primary">
+                    {result.bloodGrp}
+                  </Typography>
+                </div>
               </div>
+              <Typography variant="caption">{result.address}</Typography>
             </CardContent>
           </Card>
         );

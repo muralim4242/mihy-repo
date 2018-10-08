@@ -18,9 +18,16 @@ const MultiItem = Loadable({
   loading: () => <Loading />
 });
 
+
 const SnackbarContainer = Loadable({
   loader: () => import("./SnackbarContainer"),
   loading: () => <Loading />
 });
 
-export { TextFieldContainer, LabelContainer, MultiItem, SnackbarContainer };
+const CustomTabContainer = Loadable({
+  loader: () => import("./CustomTabContainer"),
+  loading: () => <Loading />
+});
+
+export { TextFieldContainer, LabelContainer, MultiItem, SnackbarContainer,CustomTabContainer };
+

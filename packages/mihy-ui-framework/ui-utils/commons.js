@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updatePFOforSearchResults = exports.getSearchResults = exports.getTranslatedLabel = exports.transformById = exports.updateTradeDetails = exports.handleFileUpload = exports.acceptedFiles = exports.isFileValid = exports.getFileSize = exports.getImageUrlByFile = exports.getDateInEpoch = exports.trimObj = exports.fetchFromLocalStorage = exports.persistInLocalStorage = exports.slugify = exports.isFieldEmpty = exports.addQueryArg = exports.getQueryArg = exports.addComponentJsonpath = undefined;
+
 
 var _extends2 = require("babel-runtime/helpers/extends");
 
@@ -262,6 +262,70 @@ var updateTradeDetails = exports.updateTradeDetails = function () {
 
   return function updateTradeDetails(_x5) {
     return _ref2.apply(this, arguments);
+  };
+}();
+
+
+var getSearchResults = exports.getSearchResults = function () {
+  var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(queryObject) {
+    var response;
+    return _regenerator2.default.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return (0, _api.httpRequest)("post", "/tl-services/v1/_search", "", queryObject);
+
+          case 3:
+            response = _context3.sent;
+            return _context3.abrupt("return", response);
+
+          case 7:
+            _context3.prev = 7;
+            _context3.t0 = _context3["catch"](0);
+
+            console.log(_context3.t0);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, undefined, [[0, 7]]);
+  }));
+
+  return function getSearchResults(_x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var updatePFOforSearchResults = exports.updatePFOforSearchResults = function () {
+  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(action, state, dispatch, queryValue) {
+    var queryObject, payload;
+    return _regenerator2.default.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            queryObject = [{ key: "tenantId", value: "pb.amritsar" }, { key: "applicationNumber", value: queryValue }];
+            _context4.next = 3;
+            return getSearchResults(queryObject);
+
+          case 3:
+            payload = _context4.sent;
+
+            dispatch((0, _actions.prepareFinalObject)("Licenses[0]", payload.Licenses[0]));
+
+          case 5:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, undefined);
+  }));
+
+  return function updatePFOforSearchResults(_x7, _x8, _x9, _x10) {
+    return _ref4.apply(this, arguments);
   };
 }();
 

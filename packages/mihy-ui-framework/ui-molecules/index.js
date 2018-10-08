@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RadioGroup = exports.MultiDownloadCard = exports.FeesEstimateCard = exports.DocumentList = exports.TooltipWithChildren = exports.StepperStaticVerticalWithTab = exports.TextfieldWithIcon = exports.StepperStaticVertical = exports.Carousel = exports.Stepper = exports.AppSubOption = exports.AppCarosel = exports.AppCards = exports.AppCard = exports.CommonView = exports.LoadingIndicator = exports.AppliedRoute = exports.RenderScreen = exports.CardWithMedia = exports.StepperNonLinearWithoutAction = exports.ComponentInterface = exports.Map = exports.RenderRoutes = undefined;
+exports.CustomTab = exports.RadioGroup = exports.MultiDownloadCard = exports.FeesEstimateCard = exports.DocumentList = exports.TooltipWithChildren = exports.StepperStaticVerticalWithTab = exports.TextfieldWithIcon = exports.StepperStaticVertical = exports.Carousel = exports.Stepper = exports.AppSubOption = exports.AppCarosel = exports.AppCards = exports.AppCard = exports.CommonView = exports.LoadingIndicator = exports.AppliedRoute = exports.RenderScreen = exports.CardWithMedia = exports.StepperNonLinearWithoutAction = exports.ComponentInterface = exports.Map = exports.RenderRoutes = undefined;
 
 var _react = require("react");
 
@@ -221,6 +221,15 @@ var RadioGroup = (0, _reactLoadable2.default)({
   }
 });
 
+var CustomTab = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import("./CustomTab");
+  },
+  loading: function loading() {
+    return _react2.default.createElement(Loading, null);
+  }
+});
+
 exports.RenderRoutes = RenderRoutes;
 exports.Map = Map;
 exports.ComponentInterface = ComponentInterface;
@@ -244,3 +253,4 @@ exports.DocumentList = DocumentList;
 exports.FeesEstimateCard = FeesEstimateCard;
 exports.MultiDownloadCard = MultiDownloadCard;
 exports.RadioGroup = RadioGroup;
+exports.CustomTab = CustomTab;

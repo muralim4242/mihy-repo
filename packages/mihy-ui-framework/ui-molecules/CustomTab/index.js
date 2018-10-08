@@ -8,10 +8,6 @@ var _extends2 = require("babel-runtime/helpers/extends");
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
 var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -31,10 +27,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _classnames = require("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
 
 var _propTypes = require("prop-types");
 
@@ -68,14 +60,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // @material-ui/core components
 
+// nodejs library that concatenates classes
+// import classNames from "classnames";
 // nodejs library to set properties for components
-var NavPills = function (_React$Component) {
-  (0, _inherits3.default)(NavPills, _React$Component);
+var CustomTab = function (_React$Component) {
+  (0, _inherits3.default)(CustomTab, _React$Component);
 
-  function NavPills(props) {
-    (0, _classCallCheck3.default)(this, NavPills);
+  function CustomTab(props) {
+    (0, _classCallCheck3.default)(this, CustomTab);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (NavPills.__proto__ || Object.getPrototypeOf(NavPills)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (CustomTab.__proto__ || Object.getPrototypeOf(CustomTab)).call(this, props));
 
     _this.handleChange = function (event, active) {
       _this.setState({ active: active });
@@ -91,52 +85,32 @@ var NavPills = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(NavPills, [{
+  (0, _createClass3.default)(CustomTab, [{
     key: "render",
     value: function render() {
-      var _classNames;
-
       var _props = this.props,
           classes = _props.classes,
           tabs = _props.tabs,
           direction = _props.direction,
-          color = _props.color,
           horizontal = _props.horizontal,
           alignCenter = _props.alignCenter;
 
-      var flexContainerClasses = (0, _classnames2.default)((_classNames = {}, (0, _defineProperty3.default)(_classNames, classes.flexContainer, true), (0, _defineProperty3.default)(_classNames, classes.horizontalDisplay, horizontal !== undefined), _classNames));
       var tabButtons = _react2.default.createElement(
         _Tabs2.default,
         {
-          classes: {
-            root: classes.root,
-            fixed: classes.fixed,
-            flexContainer: flexContainerClasses,
-            indicator: classes.displayNone
-          },
+          classes: { root: classes.tabsRoot, indicator: classes.tabsIndicator },
           value: this.state.active,
           onChange: this.handleChange,
-          centered: alignCenter
+          centered: alignCenter,
+          scrollable: true,
+          scrollButtons: "off"
         },
         tabs.map(function (prop, key) {
-          var _classNames2;
-
-          var icon = {};
-          if (prop.tabIcon !== undefined) {
-            icon["icon"] = _react2.default.createElement(prop.tabIcon, { className: classes.tabIcon });
-          }
-          var pillsClasses = (0, _classnames2.default)((_classNames2 = {}, (0, _defineProperty3.default)(_classNames2, classes.pills, true), (0, _defineProperty3.default)(_classNames2, classes.horizontalPills, horizontal !== undefined), (0, _defineProperty3.default)(_classNames2, classes.pillsWithIcons, prop.tabIcon !== undefined), _classNames2));
-          return _react2.default.createElement(_Tab2.default, (0, _extends3.default)({
+          return _react2.default.createElement(_Tab2.default, {
             label: prop.tabButton,
-            key: key
-          }, icon, {
-            classes: {
-              root: pillsClasses,
-              labelContainer: classes.labelContainer,
-              label: classes.label,
-              selected: classes[color]
-            }
-          }));
+            key: key,
+            classes: { root: classes.tabRoot, selected: classes.tabSelected }
+          });
         })
       );
       var tabContent = _react2.default.createElement(
@@ -159,40 +133,42 @@ var NavPills = function (_React$Component) {
         )
       );
       return horizontal !== undefined ? _react2.default.createElement(
-        _Grid2.default,
-        { container: true },
+        "div",
+        { className: classes.root },
         _react2.default.createElement(
           _Grid2.default,
-          (0, _extends3.default)({ item: true }, horizontal.tabsGrid),
-          tabButtons
-        ),
-        _react2.default.createElement(
-          _Grid2.default,
-          (0, _extends3.default)({ item: true }, horizontal.contentGrid),
-          tabContent
+          { container: true },
+          _react2.default.createElement(
+            _Grid2.default,
+            (0, _extends3.default)({ item: true }, horizontal.tabsGrid),
+            tabButtons
+          ),
+          _react2.default.createElement(
+            _Grid2.default,
+            (0, _extends3.default)({ item: true }, horizontal.contentGrid),
+            tabContent
+          )
         )
       ) : _react2.default.createElement(
         "div",
-        null,
+        { className: classes.root },
         tabButtons,
         tabContent
       );
     }
   }]);
-  return NavPills;
+  return CustomTab;
 }(_react2.default.Component);
 
 // core components
 
-// nodejs library that concatenates classes
 
-
-NavPills.defaultProps = {
+CustomTab.defaultProps = {
   active: 0,
   color: "primary"
 };
 
-NavPills.propTypes = {
+CustomTab.propTypes = {
   classes: _propTypes2.default.object.isRequired,
   // index of the default active pill
   active: _propTypes2.default.number,
@@ -210,4 +186,4 @@ NavPills.propTypes = {
   alignCenter: _propTypes2.default.bool
 };
 
-exports.default = (0, _withStyles2.default)(_css2.default)(NavPills);
+exports.default = (0, _withStyles2.default)(_css2.default)(CustomTab);

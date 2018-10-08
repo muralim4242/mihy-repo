@@ -69,13 +69,33 @@ const screenConfig = {
                     }
                   }
                 },
+                list: {
+                  componentPath: "Button",
+                  props: {
+                    variant: "fab",
+                    disabled: true,
+                    style: {
+                      marginTop: "8px",
+                      background: "white"
+                    }
+                  },
+                  children: {
+                    positionIcon: {
+                      uiFramework: "custom-atoms",
+                      componentPath: "Icon",
+                      props: {
+                        iconName: "list_alt"
+                      }
+                    }
+                  }
+                },
                 send: {
                   componentPath: "Button",
                   props: {
                     variant: "fab",
                     disabled: true,
                     style: {
-                      marginTop: "16px",
+                      marginTop: "8px",
                       background: "white"
                     }
                   },

@@ -1,6 +1,6 @@
 import React from "react";
 // nodejs library that concatenates classes
-import classNames from "classnames";
+// import classNames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -16,7 +16,7 @@ import GridItem from "@material-ui/core/Grid";
 
 import navPillsStyle from "./css.js";
 
-class NavPills extends React.Component {
+class CustomTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,51 +30,22 @@ class NavPills extends React.Component {
     this.setState({ active: index });
   };
   render() {
-    const {
-      classes,
-      tabs,
-      direction,
-      color,
-      horizontal,
-      alignCenter
-    } = this.props;
-    const flexContainerClasses = classNames({
-      [classes.flexContainer]: true,
-      [classes.horizontalDisplay]: horizontal !== undefined
-    });
+    const { classes, tabs, direction, horizontal, alignCenter } = this.props;
     const tabButtons = (
       <Tabs
-        classes={{
-          root: classes.root,
-          fixed: classes.fixed,
-          flexContainer: flexContainerClasses,
-          indicator: classes.displayNone
-        }}
+        classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
         value={this.state.active}
         onChange={this.handleChange}
         centered={alignCenter}
+        scrollable
+        scrollButtons="off"
       >
         {tabs.map((prop, key) => {
-          var icon = {};
-          if (prop.tabIcon !== undefined) {
-            icon["icon"] = <prop.tabIcon className={classes.tabIcon} />;
-          }
-          const pillsClasses = classNames({
-            [classes.pills]: true,
-            [classes.horizontalPills]: horizontal !== undefined,
-            [classes.pillsWithIcons]: prop.tabIcon !== undefined
-          });
           return (
             <Tab
               label={prop.tabButton}
               key={key}
-              {...icon}
-              classes={{
-                root: pillsClasses,
-                labelContainer: classes.labelContainer,
-                label: classes.label,
-                selected: classes[color]
-              }}
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
             />
           );
         })}
@@ -98,12 +69,18 @@ class NavPills extends React.Component {
       </div>
     );
     return horizontal !== undefined ? (
-      <GridContainer container>
-        <GridItem item {...horizontal.tabsGrid}>{tabButtons}</GridItem>
-        <GridItem item {...horizontal.contentGrid}>{tabContent}</GridItem>
-      </GridContainer>
+      <div className={classes.root}>
+        <GridContainer container>
+          <GridItem item {...horizontal.tabsGrid}>
+            {tabButtons}
+          </GridItem>
+          <GridItem item {...horizontal.contentGrid}>
+            {tabContent}
+          </GridItem>
+        </GridContainer>
+      </div>
     ) : (
-      <div>
+      <div className={classes.root}>
         {tabButtons}
         {tabContent}
       </div>
@@ -111,12 +88,12 @@ class NavPills extends React.Component {
   }
 }
 
-NavPills.defaultProps = {
+CustomTab.defaultProps = {
   active: 0,
   color: "primary"
 };
 
-NavPills.propTypes = {
+CustomTab.propTypes = {
   classes: PropTypes.object.isRequired,
   // index of the default active pill
   active: PropTypes.number,
@@ -143,4 +120,4 @@ NavPills.propTypes = {
   alignCenter: PropTypes.bool
 };
 
-export default withStyles(navPillsStyle)(NavPills);
+export default withStyles(navPillsStyle)(CustomTab);
