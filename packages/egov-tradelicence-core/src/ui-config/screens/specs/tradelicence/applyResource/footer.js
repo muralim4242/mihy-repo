@@ -6,16 +6,128 @@ import { applyTradeLicense } from "../../../../../ui-utils/commons";
 import get from "lodash/get";
 
 import { getButtonVisibility, getCommonApplyFooter } from "../../utils";
+import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import { setRoute } from "mihy-ui-framework/ui-redux/app/actions";
+import { getBill } from "../../utils";
+
+const getTaxValue = item => {
+  return item
+    ? item.debitAmount
+      ? -Math.abs(item.debitAmount)
+      : item.crAmountToBePaid
+        ? item.crAmountToBePaid
+        : 0
+    : 0;
+};
+
+const getEstimateData = Bill => {
+  if (Bill && Bill.length) {
+    const extraData = ["Rebate", "Penalty"].map(item => {
+      return {
+        name: {
+          labelName: item,
+          labelKey: item
+        },
+        value: null,
+        info: {
+          labelName: `Information about ${item}`,
+          labelKey: `Information about ${item}`
+        }
+      };
+    });
+    const { billAccountDetails } = Bill[0].billDetails[0];
+    const transformedData = billAccountDetails.map(item => {
+      return {
+        name: {
+          labelName: "Default Label",
+          labelKey: item.taxHeadCode
+        },
+        value: getTaxValue(item),
+        info: {
+          labelName: "Information about NA",
+          labelKey: `Information about ${item.taxHeadCode}`
+        }
+      };
+    });
+    return [...transformedData, ...extraData];
+  }
+};
+
+const createEstimateData = async (LicenseData, dispatch) => {
+  const applicationNo = get(LicenseData, "applicationNumber");
+  const tenantId = get(LicenseData, "tenantId");
+  const businessService = "TL";
+  const queryObj = [
+    { key: "tenantId", value: tenantId },
+    {
+      key: "consumerCode",
+      value: applicationNo
+    },
+    {
+      key: "businessService",
+      value: businessService
+    }
+  ];
+  const payload = await getBill(queryObj);
+  const estimateData = getEstimateData(payload.Bill);
+  dispatch(
+    prepareFinalObject("LicensesTemp[0].estimateCardData", estimateData)
+  );
+};
+
+const moveToSuccess = (LicenseData, dispatch) => {
+  const applicationNo = get(LicenseData, "applicationNumber");
+  const tenantId = get(LicenseData, "tenantId");
+  const purpose = "apply";
+  const status = "success";
+  dispatch(
+    setRoute(
+      `/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=${purpose}&status=${status}&applicationNumber=${applicationNo}&tenantId=${tenantId}`
+    )
+  );
+};
 
 export const callBackForNext = (state, dispatch) => {
-  changeStep(state, dispatch);
   let activeStep = get(
     state.screenConfiguration.screenConfig["apply"],
     "components.div.children.stepper.props.activeStep",
     0
   );
   console.log(activeStep);
-  if (activeStep === 2) applyTradeLicense(state, dispatch);
+  if (activeStep === 1) applyTradeLicense(state, dispatch);
+  if (activeStep === 2) {
+    const LicenseData = get(
+      state.screenConfiguration.preparedFinalObject,
+      "Licenses[0]"
+    );
+    const uploadedDocData = get(
+      state.screenConfiguration.preparedFinalObject,
+      "Licenses[0].tradeLicenseDetail.applicationDocuments"
+    );
+    console.log(uploadedDocData);
+    const reviewDocData = uploadedDocData.map(item => {
+      return {
+        title: item.name,
+        link: item.fileUrl,
+        linkText: "View",
+        name: item.fileName
+      };
+    });
+    const estimateCardData = createEstimateData(LicenseData, dispatch); //no need for assignment
+    console.log(reviewDocData);
+    dispatch(
+      prepareFinalObject("LicensesTemp[0].reviewDocData", reviewDocData)
+    );
+  }
+  if (activeStep === 3) {
+    const LicenseData = get(
+      state.screenConfiguration.preparedFinalObject,
+      "Licenses[0]"
+    );
+    applyTradeLicense(state, dispatch);
+    moveToSuccess(LicenseData, dispatch);
+  }
+  changeStep(state, dispatch);
 };
 
 export const changeStep = (
@@ -242,9 +354,8 @@ export const footer = getCommonApplyFooter({
       }
     },
     onClickDefination: {
-      action: "page_change",
-      path:
-        "/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=apply&status=success&number=12345"
+      action: "condition",
+      callBack: callBackForNext
     },
     visible: false
   }
@@ -432,12 +543,17 @@ export const footerReview = (role, status) =>
                   labelKey: "TL_COMMON_BUTTON_CANCEL_LICENSE"
                 })
               },
+              rolesDefination:
+              {
+                rolePath:"user-info.roles",
+                roles:['CITIZENn']
+              },
               onClickDefination: {
                 action: "page_change",
                 path:
                   "/landing/mihy-ui-framework/tradelicence/approve?purpose=cancel"
               },
-              visible: getButtonVisibility(role, status, "CANCEL TRADE LICENSE")
+              // visible: getButtonVisibility(role, status, "CANCEL TRADE LICENSE")
             }
           },
           gridDefination: {

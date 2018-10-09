@@ -10,8 +10,13 @@ import {
   getCommonContainer,
   getPattern
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
-import { getIconStyle, objectToDropdown } from "../../utils";
+import {
+  getIconStyle,
+  objectToDropdown,
+  prepareDocumentTypeObj
+} from "../../utils";
 import { prepareFinalObject as pFO } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import get from "lodash/get";
 import filter from "lodash/filter";
 
@@ -89,42 +94,67 @@ const multipleTradeUnitCard = getCommonGrayCard({
         }
       }
     },
-    tradeSubType: {...getSelectField({
-      label: { labelName: "Trade Sub-Type" },
-      placeholder: { labelName: "Select Trade Sub-Type" },
-      required: true,
-      jsonPath: "Licenses[0].tradeLicenseDetail.tradeUnits[0].tradeType",
-      sourceJsonPath:
-        "applyScreenMdmsData.TradeLicense.TradeSubCategoryTransformed",
-      gridDefination: {
-        xs: 12,
-        sm: 4
+    tradeSubType: {
+      ...getSelectField({
+        label: { labelName: "Trade Sub-Type" },
+        placeholder: { labelName: "Select Trade Sub-Type" },
+        required: true,
+        jsonPath: "Licenses[0].tradeLicenseDetail.tradeUnits[0].tradeType",
+        sourceJsonPath:
+          "applyScreenMdmsData.TradeLicense.TradeSubCategoryTransformed",
+        gridDefination: {
+          xs: 12,
+          sm: 4
+        }
+      }),
+      beforeFieldChange: (action, state, dispatch) => {
+        try {
+          let tradeType = get(
+            state.screenConfiguration.preparedFinalObject,
+            "LicensesTemp[0].tradeType",
+            ""
+          );
+          let tradeCategory = get(
+            state.screenConfiguration.preparedFinalObject,
+            "LicensesTemp[0].tradeSubType",
+            ""
+          );
+          let tradeSubCategories = get(
+            state.screenConfiguration.preparedFinalObject,
+            `applyScreenMdmsData.TradeLicense.TradeType.${tradeType}.${tradeCategory}`,
+            []
+          );
+          let currentObject = filter(tradeSubCategories, {
+            code: action.value
+          });
+          console.log(currentObject);
+          const applicationDocument = prepareDocumentTypeObj(
+            currentObject[0].applicationDocument
+          );
+          dispatch(
+            pFO("LicensesTemp[0].applicationDocuments", applicationDocument)
+          );
+          if (currentObject[0].uom !== null) {
+            dispatch(
+              pFO(
+                "Licenses[0].tradeLicenseDetail.tradeUnits[0].uom",
+                currentObject[0].uom
+              )
+            );
+            dispatch(
+              handleField(
+                "apply",
+                "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.multipleTradeUnitCard.children.cardContent.children.tradeUnitCardContainer.children.tradeUOMValue",
+                "props.disabled",
+                false
+              )
+            );
+          }
+        } catch (e) {
+          console.log(e);
+        }
       }
-    }),
-    beforeFieldChange: (action, state, dispatch) => {
-      try {
-        let tradeType = get(
-          state.screenConfiguration.preparedFinalObject,
-          "LicensesTemp[0].tradeType",
-          ""
-        );
-        let tradeCategory = get(
-          state.screenConfiguration.preparedFinalObject,
-          "LicensesTemp[0].tradeSubType",
-          ""
-        );
-        let tradeSubCategories=get(
-          state.screenConfiguration.preparedFinalObject,
-          `applyScreenMdmsData.TradeLicense.TradeType.${tradeType}.${tradeCategory}`,
-          []
-        );
-        let currentObject=filter(tradeSubCategories,{code:action.value});
-        console.log(currentObject);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  },
+    },
     tradeUOM: getTextField({
       label: {
         labelName: "UOM (Unit of Measurement)",
@@ -135,6 +165,9 @@ const multipleTradeUnitCard = getCommonGrayCard({
         labelKey: "TL_NEW_TRADE_DETAILS_UOM_UOM_PLACEHOLDER"
       },
       required: true,
+      props: {
+        disabled: true
+      },
       jsonPath: "Licenses[0].tradeLicenseDetail.tradeUnits[0].uom",
       gridDefination: {
         xs: 12,
@@ -151,6 +184,9 @@ const multipleTradeUnitCard = getCommonGrayCard({
         labelKey: "TL_NEW_TRADE_DETAILS_UOM_VALUE_PLACEHOLDER"
       },
       required: true,
+      props: {
+        disabled: true
+      },
       pattern: getPattern("UOMValue"),
       jsonPath: "Licenses[0].tradeLicenseDetail.tradeUnits[0].uomValue",
       gridDefination: {
@@ -185,18 +221,51 @@ const accessoriesCard = {
         }
       },
       accessoriesCardContainer: getCommonContainer({
-        accessoriesName: getSelectField({
-          label: { labelName: "Accessories" },
-          placeholder: { labelName: "Select Accessories" },
-          jsonPath:
-            "Licenses[0].tradeLicenseDetail.accessories[0].accessoryCategory",
-          sourceJsonPath:
-            "applyScreenMdmsData.TradeLicense.AccessoriesCategory",
-          gridDefination: {
-            xs: 12,
-            sm: 4
+        accessoriesName: {
+          ...getSelectField({
+            label: { labelName: "Accessories" },
+            placeholder: { labelName: "Select Accessories" },
+            jsonPath:
+              "Licenses[0].tradeLicenseDetail.accessories[0].accessoryCategory",
+            sourceJsonPath:
+              "applyScreenMdmsData.TradeLicense.AccessoriesCategory",
+            gridDefination: {
+              xs: 12,
+              sm: 4
+            }
+          }),
+          beforeFieldChange: (action, state, dispatch) => {
+            try {
+              console.log(action.value);
+              let accessories = get(
+                state.screenConfiguration.preparedFinalObject,
+                `applyScreenMdmsData.TradeLicense.AccessoriesCategory`,
+                []
+              );
+              let currentObject = filter(accessories, {
+                code: action.value
+              });
+              if (currentObject[0].uom) {
+                dispatch(
+                  pFO(
+                    "Licenses[0].tradeLicenseDetail.accessories[0].uom",
+                    currentObject[0].uom
+                  )
+                );
+                dispatch(
+                  handleField(
+                    "apply",
+                    "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.accessoriesCard.props.items[0].item0.children.cardContent.children.accessoriesCardContainer.children.accessoriesUOMValue",
+                    "props.disabled",
+                    false
+                  )
+                );
+              }
+            } catch (e) {
+              console.log(e);
+            }
           }
-        }),
+        },
         accessoriesUOM: getTextField({
           label: {
             labelName: "UOM (Unit of Measurement)",
@@ -207,6 +276,9 @@ const accessoriesCard = {
             labelKey: "TL_NEW_TRADE_DETAILS_UOM_UOM_PLACEHOLDER"
           },
           required: true,
+          props: {
+            disabled: true
+          },
           jsonPath: "Licenses[0].tradeLicenseDetail.accessories[0].uom",
           gridDefination: {
             xs: 12,
@@ -223,6 +295,9 @@ const accessoriesCard = {
             labelKey: "TL_NEW_TRADE_DETAILS_UOM_VALUE_PLACEHOLDER"
           },
           pattern: getPattern("UOMValue"),
+          props: {
+            disabled: true
+          },
           jsonPath: "Licenses[0].tradeLicenseDetail.accessories[0].uomValue",
           gridDefination: {
             xs: 12,
@@ -237,8 +312,9 @@ const accessoriesCard = {
     headerName: "Accessory",
     headerJsonPath:
       "children.cardContent.children.header.children.head.children.Accessories.props.label",
-      sourceJsonPath: "Licenses[0].tradeLicenseDetail.accessories",
-      prefixSourceJsonPath:"children.cardContent.children.accessoriesCardContainer.children"
+    sourceJsonPath: "Licenses[0].tradeLicenseDetail.accessories",
+    prefixSourceJsonPath:
+      "children.cardContent.children.accessoriesCardContainer.children"
   },
   type: "array"
 };
@@ -253,20 +329,61 @@ export const tradeDetails = getCommonCard({
   //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
   // }),
   tradeDetailsConatiner: getCommonContainer({
-    tradeLicenseType: getSelectField({
-      label: { labelName: "License Type" },
-      placeholder: { labelName: "Select License Type" },
-      required: true,
-      jsonPath: "Licenses[0].licenseType",
-      data: [
-        {
-          code: "TEMPORARY"
-        },
-        {
-          code: "PERMANENT"
+    tradeLicenseType: {
+      ...getSelectField({
+        label: { labelName: "License Type" },
+        placeholder: { labelName: "Select License Type" },
+        required: true,
+        jsonPath: "Licenses[0].licenseType",
+        data: [
+          {
+            code: "TEMPORARY"
+          },
+          {
+            code: "PERMANENT"
+          }
+        ]
+      }),
+      beforeFieldChange: (action, state, dispatch) => {
+        if (action.value === "TEMPORARY") {
+          dispatch(
+            handleField(
+              "apply",
+              "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeToDate",
+              "visible",
+              true
+            )
+          );
+          dispatch(
+            handleField(
+              "apply",
+              "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeFromDate",
+              "visible",
+              true
+            )
+          );
+        } else {
+          dispatch(
+            handleField(
+              "apply",
+              "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeToDate",
+              "visible",
+              false
+            )
+          );
+          dispatch(
+            handleField(
+              "apply",
+              "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeFromDate",
+              "visible",
+              false
+            )
+          );
+          dispatch(pFO("Licenses[0].validFrom", null));
+          dispatch(pFO("Licenses[0].validTo", null));
         }
-      ]
-    }),
+      }
+    },
     tradeName: getTextField({
       label: {
         labelName: "Name of Trade",
@@ -280,20 +397,26 @@ export const tradeDetails = getCommonCard({
       pattern: getPattern("TradeName"),
       jsonPath: "Licenses[0].tradeName"
     }),
-    tradeFromDate: getDateField({
-      label: { labelName: "From Date" },
-      placeholder: { labelName: "Trade License From Date" },
-      required: true,
-      pattern: getPattern("Date"),
-      jsonPath: "Licenses[0].validFrom"
-    }),
-    tradeToDate: getDateField({
-      label: { labelName: "To Date" },
-      placeholder: { labelName: "Trade License From Date" },
-      required: true,
-      pattern: getPattern("Date"),
-      jsonPath: "Licenses[0].validTo"
-    }),
+    tradeFromDate: {
+      ...getDateField({
+        label: { labelName: "From Date" },
+        placeholder: { labelName: "Trade License From Date" },
+        required: true,
+        pattern: getPattern("Date"),
+        jsonPath: "Licenses[0].validFrom"
+      }),
+      visible: false
+    },
+    tradeToDate: {
+      ...getDateField({
+        label: { labelName: "To Date" },
+        placeholder: { labelName: "Trade License From Date" },
+        required: true,
+        pattern: getPattern("Date"),
+        jsonPath: "Licenses[0].validTo"
+      }),
+      visible: false
+    },
     tradeStructureType: {
       ...getSelectField({
         label: { labelName: "Structure Type" },

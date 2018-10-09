@@ -5,14 +5,11 @@ import {
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import "./index.css";
 
-import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import get from "lodash/get";
 import set from "lodash/set";
 import { httpRequest } from "../../../../ui-utils/api";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
-
-const queryValue = getQueryArg(window.location.href, "purpose");
 
 export const getCommonApplyFooter = children => {
   return {
@@ -191,7 +188,7 @@ export const getTranslatedLabel = (labelKey, localizationLabels) => {
   return translatedLabel || labelKey;
 };
 
-export const getApprovalTextField = () => {
+export const getApprovalTextField = queryValue => {
   if (queryValue === "reject") {
     return getTextField({
       label: {
@@ -204,7 +201,12 @@ export const getApprovalTextField = () => {
       },
       required: false,
       pattern: "",
-      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments"
+      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments",
+      props: {
+        style: {
+          paddingBottom: 5
+        }
+      }
     });
   } else if (queryValue === "cancel") {
     return getTextField({
@@ -218,7 +220,12 @@ export const getApprovalTextField = () => {
       },
       required: false,
       pattern: "",
-      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments"
+      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments",
+      props: {
+        style: {
+          paddingBottom: 5
+        }
+      }
     });
   } else {
     return getTextField({
@@ -232,12 +239,17 @@ export const getApprovalTextField = () => {
       },
       required: false,
       pattern: "",
-      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments"
+      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments",
+      props: {
+        style: {
+          paddingBottom: 5
+        }
+      }
     });
   }
 };
 
-export const getSubHeaderLabel = () => {
+export const getSubHeaderLabel = queryValue => {
   if (queryValue === "reject") {
     return getCommonSubHeader({
       labelName: "Rejection CheckList",
@@ -253,7 +265,7 @@ export const getSubHeaderLabel = () => {
   }
 };
 
-export const getFooterButtons = () => {
+export const getFooterButtons = queryValue => {
   if (queryValue === "reject") {
     return getLabel({
       labelName: "REJECT APPLICATION",
@@ -272,7 +284,7 @@ export const getFooterButtons = () => {
   }
 };
 
-export const onClickNextButton = (applicationNumber, tlNumber) => {
+export const onClickNextButton = (applicationNumber, tlNumber, queryValue) => {
   switch (queryValue) {
     case "reject":
       return `/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=application&status=rejected&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}`;
@@ -283,7 +295,7 @@ export const onClickNextButton = (applicationNumber, tlNumber) => {
   }
 };
 
-export const onClickPreviousButton = () => {
+export const onClickPreviousButton = queryValue => {
   switch (queryValue) {
     case "reject":
       return "/landing/mihy-ui-framework/tradelicence/search-preview?role=approver&status=pending_approval";
@@ -293,16 +305,17 @@ export const onClickPreviousButton = () => {
       return "/landing/mihy-ui-framework/tradelicence/search-preview?role=approver&status=pending_approval";
   }
 };
-export const getFeesEstimateCard = (header, fees, extra) => {
+export const getFeesEstimateCard = () => {
   return {
-    uiFramework: "custom-molecules",
-    componentPath: "FeesEstimateCard",
+    uiFramework: "custom-containers-local",
+    componentPath: "EstimateCardContainer",
     props: {
-      estimate: {
-        header,
-        fees,
-        extra
-      }
+      // estimate: {
+      //   header,
+      //   fees,
+      //   extra
+      // }
+      sourceJsonPath: "LicensesTemp[0].estimateCardData"
     }
   };
 };
@@ -437,14 +450,18 @@ export const convertEpochToDate = dateEpoch => {
 };
 
 export const convertDateToEpoch = (dateString, dayStartOrEnd) => {
-  const parts = dateString.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
-  const DateObj = new Date(Date.UTC(parts[1], parts[2] - 1, parts[3]));
-  DateObj.setMinutes(DateObj.getMinutes() + DateObj.getTimezoneOffset());
-  if (dayStartOrEnd === "dayend") {
-    DateObj.setHours(DateObj.getHours() + 24);
-    DateObj.setSeconds(DateObj.getSeconds() - 1);
+  try {
+    const parts = dateString.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+    const DateObj = new Date(Date.UTC(parts[1], parts[2] - 1, parts[3]));
+    DateObj.setMinutes(DateObj.getMinutes() + DateObj.getTimezoneOffset());
+    if (dayStartOrEnd === "dayend") {
+      DateObj.setHours(DateObj.getHours() + 24);
+      DateObj.setSeconds(DateObj.getSeconds() - 1);
+    }
+    return DateObj.getTime();
+  } catch (e) {
+    return dateString;
   }
-  return DateObj.getTime();
 };
 
 export const getReceiptData = async queryObject => {
@@ -565,20 +582,34 @@ export const getMdmsData = async queryObject => {
 
 export const getDetailsFromProperty = async (state, dispatch) => {
   try {
-    let payload = await httpRequest(
-      "post",
-      "/pt-services-v2/property/_search?tenantId=pb.amritsar&ids=PT-107-001890",
-      "_search",
-      [],
-      {}
+    const propertyId = get(
+      state.screenConfiguration.preparedFinalObject,
+      "Licenses[0].propertyId",
+      ""
     );
-    console.log(payload);
-    dispatch(
-      prepareFinalObject(
-        "Licenses[0].tradeLicenseDetail.address",
-        payload.Properties[0].address
-      )
-    );
+    if (propertyId) {
+      let payload = await httpRequest(
+        "post",
+        `/pt-services-v2/property/_search?tenantId=pb.amritsar&ids=${propertyId}`,
+        "_search",
+        [],
+        {}
+      );
+      dispatch(
+        prepareFinalObject(
+          "Licenses[0].tradeLicenseDetail.address",
+          payload.Properties[0].address
+        )
+      );
+      dispatch(
+        handleField(
+          "apply",
+          "components.div.children.formwizardFirstStep.children.tradeLocationDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeLocCity.children.cityDropdown",
+          "props.value",
+          payload.Properties[0].address.tenantId
+        )
+      );
+    }
   } catch (e) {
     console.log(e);
   }
@@ -586,6 +617,11 @@ export const getDetailsFromProperty = async (state, dispatch) => {
 
 export const getDetailsForOwner = async (state, dispatch) => {
   try {
+    const ownerNo = get(
+      state.screenConfiguration.preparedFinalObject,
+      "Licenses[0].tradeLicenseDetail.owners[0].mobileNumber",
+      ""
+    );
     let payload = await httpRequest(
       "post",
       "/user/_search?tenantId=pb",
@@ -593,10 +629,9 @@ export const getDetailsForOwner = async (state, dispatch) => {
       [],
       {
         tenantId: "pb",
-        userName: "8050579149"
+        userName: `${ownerNo}`
       }
     );
-    console.log(payload);
     dispatch(
       prepareFinalObject(
         "Licenses[0].tradeLicenseDetail.owners[0]",
@@ -623,4 +658,19 @@ export const getUserDataFromUuid = async bodyObject => {
     console.log(error);
     return {};
   }
+};
+
+export const prepareDocumentTypeObj = documents => {
+  let documentsArr =
+    documents.length > 0
+      ? documents.reduce((documentsArr, item, ind) => {
+          documentsArr.push({
+            name: item,
+            required: true,
+            jsonPath: `Licenses[0].tradeLicenseDetail.applicationDocuments[${ind}]`
+          });
+          return documentsArr;
+        }, [])
+      : [];
+  return documentsArr;
 };

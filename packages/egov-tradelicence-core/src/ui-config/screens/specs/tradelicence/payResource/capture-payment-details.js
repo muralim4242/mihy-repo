@@ -42,12 +42,7 @@ const capturePaymentDetails = getCommonGrayCard({
           tabIcon: "Schedule",
           tabContent: { card }
         }
-      ],
-      onTabClick:(tabName,store,dispatch)=>{
-        console.log(tabName);
-        console.log(store);
-        console.log(dispatch);
-      }
+      ]
     },
     type: "array"
   }

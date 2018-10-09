@@ -3,8 +3,7 @@ import {
   getCommonContainer,
   getCommonParagraph,
   getCommonSubHeader,
-  getCommonHeader,
-  getLabel
+  getCommonHeader
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 import {
@@ -16,15 +15,11 @@ import {
   getUploadFilesMultiple
 } from "../utils";
 import { footerApprove } from "./approveResource/footer";
-import { updatePFOforSearchResults } from "ui-utils/commons";
+import { updatePFOforSearchResults } from "mihy-ui-framework/ui-utils/commons";
 import set from "lodash/set";
-import { toggleSnackbarAndSetText } from "mihy-ui-framework/ui-redux/app/actions";
 
 const radioButtonLabels = ["Yes", "No", "Not Applicable"];
-
-const searchCall = (state, dispatch) => {
-  dispatch(toggleSnackbarAndSetText(true, "This is error message", "error"));
-};
+const queryValueAN = getQueryArg(window.location.href, "applicationNumber");
 
 const header = getCommonContainer({
   header: getCommonHeader({
@@ -35,7 +30,7 @@ const header = getCommonContainer({
     uiFramework: "custom-atoms-local",
     componentPath: "ApplicationNoContainer",
     props: {
-      number: 5434
+      number: queryValueAN
     }
   }
 });
@@ -50,14 +45,14 @@ const getApproveCard = queryValuePurpose => {
           })
         : getCommonSubHeader({
             labelName:
-              "Please provide the following details on the basis of your field verification",
+              "Please provide the following details on the basis of field verification",
             labelKey: "TL_APPROVAL_CHECKLIST_HEAD"
           }),
     paragraphOne: getContainerWithElement({
       children: {
         paragraph: getCommonParagraph({
           labelName:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
+            "Please provide the following details on the basis of your field verification."
         })
       },
       props: {
@@ -68,7 +63,7 @@ const getApproveCard = queryValuePurpose => {
     }),
     headerTwo: getContainerWithElement({
       children: {
-        subHeader: getSubHeaderLabel()
+        subHeader: getSubHeaderLabel(queryValuePurpose)
       },
       props: {
         style: {
@@ -108,19 +103,35 @@ const getApproveCard = queryValuePurpose => {
 
     commentSection: getContainerWithElement({
       children: {
-        childrenomment: getApprovalTextField()
+        childrenomment: getApprovalTextField(queryValuePurpose)
       },
       props: {
         style: {
-          marginTop: "20px"
+          marginTop: 20
         }
       }
     }),
-
-    uploadFileHeader: getCommonSubHeader({
-      labelName: "Upload Document",
-      labelKey: "TL_APPROVAL_UPLOAD_HEAD"
-    }),
+    commentInfo: getCommonParagraph(
+      {
+        labelName: "Max. Character Limit 500*"
+      },
+      {
+        style: {
+          fontSize: 12,
+          marginBottom: 0,
+          color: "rgba(0, 0, 0, 0.6000000238418579)"
+        }
+      }
+    ),
+    uploadFileHeader: getCommonSubHeader(
+      {
+        labelName: "Upload Document",
+        labelKey: "TL_APPROVAL_UPLOAD_HEAD"
+      },
+      {
+        style: { marginTop: 15 }
+      }
+    ),
     uploadFileInfo: getCommonParagraph(
       {
         labelName: "Only .jpg and .pdf files. 5MB max file size."
@@ -138,7 +149,7 @@ const getApproveCard = queryValuePurpose => {
       "Licenses[0].tradeLicenseDetail.verificationDocuments"
     ),
     checkBoxContainer: getCheckbox(
-      "All information in the application are true upto best of my knowledge",
+      "All information provided above is true up to the best of my knowledge.",
       "Licenses[0].tradeLicenseDetail.additionalDetail.approveCheck"
     )
   });
@@ -172,7 +183,7 @@ const screenConfig = {
   },
   beforeInitScreen: (action, state, dispatch) => {
     const queryValuePurpose = getQueryArg(window.location.href, "purpose");
-    const queryValueAN = getQueryArg(window.location.href, "applicationNumber");
+
     if (queryValueAN) {
       updatePFOforSearchResults(action, state, dispatch, queryValueAN);
     }

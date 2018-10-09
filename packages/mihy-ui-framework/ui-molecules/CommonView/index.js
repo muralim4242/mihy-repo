@@ -28,8 +28,6 @@ var _RenderScreen = require("../RenderScreen");
 
 var _RenderScreen2 = _interopRequireDefault(_RenderScreen);
 
-var _reactRedux = require("react-redux");
-
 var _uiContainers = require("../../ui-containers");
 
 require("./index.css");
@@ -53,8 +51,8 @@ var CommonView = function (_React$Component) {
           onFieldChange = _props.onFieldChange,
           onComponentClick = _props.onComponentClick,
           preparedFinalObject = _props.preparedFinalObject,
-          screenKey = _props.screenKey;
-      var toast = this.props.toast;
+          screenKey = _props.screenKey,
+          toast = _props.toast;
       var errorType = toast.errorType,
           message = toast.message,
           open = toast.open;
@@ -81,11 +79,4 @@ var CommonView = function (_React$Component) {
   return CommonView;
 }(_react2.default.Component);
 
-var mapStateToProps = function mapStateToProps(state, ownprops) {
-  var app = state.app;
-  var toast = app.toast;
-
-  return { toast: toast };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(CommonView);
+exports.default = CommonView;

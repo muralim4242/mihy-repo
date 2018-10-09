@@ -153,7 +153,9 @@ var screenHoc = function screenHoc(_ref) {
       (0, _createClass3.default)(ScreenWrapper, [{
         key: "render",
         value: function render() {
-          var screenConfig = this.props.screenConfig;
+          var _props = this.props,
+              screenConfig = _props.screenConfig,
+              toast = _props.toast;
           var currentScreenConfig = screenConfig[screenKey],
               preparedFinalObject = screenConfig.preparedFinalObject;
 
@@ -170,7 +172,7 @@ var screenHoc = function screenHoc(_ref) {
               uiFramework: uiFramework,
               screenKey: screenKey,
               components: components
-            }, (0, _defineProperty3.default)(_React$createElement, "screenKey", name), (0, _defineProperty3.default)(_React$createElement, "onFieldChange", _handleScreenConfigurationFieldChange), (0, _defineProperty3.default)(_React$createElement, "onComponentClick", onClick), (0, _defineProperty3.default)(_React$createElement, "preparedFinalObject", preparedFinalObject), _React$createElement));
+            }, (0, _defineProperty3.default)(_React$createElement, "screenKey", name), (0, _defineProperty3.default)(_React$createElement, "onFieldChange", _handleScreenConfigurationFieldChange), (0, _defineProperty3.default)(_React$createElement, "onComponentClick", onClick), (0, _defineProperty3.default)(_React$createElement, "preparedFinalObject", preparedFinalObject), (0, _defineProperty3.default)(_React$createElement, "toast", toast), _React$createElement));
           } else {
             return null;
           }
@@ -180,11 +182,13 @@ var screenHoc = function screenHoc(_ref) {
     }(_react2.default.Component);
 
     var mapStateToProps = function mapStateToProps(state) {
-      var screenConfiguration = state.screenConfiguration;
+      var screenConfiguration = state.screenConfiguration,
+          app = state.app;
+      var toast = app.toast;
       var screenConfig = screenConfiguration.screenConfig,
           preparedFinalObject = screenConfiguration.preparedFinalObject;
 
-      return { screenConfig: screenConfig, preparedFinalObject: preparedFinalObject, state: state };
+      return { screenConfig: screenConfig, preparedFinalObject: preparedFinalObject, state: state, toast: toast };
     };
 
     var mapDispatchToProps = function mapDispatchToProps(dispatch) {

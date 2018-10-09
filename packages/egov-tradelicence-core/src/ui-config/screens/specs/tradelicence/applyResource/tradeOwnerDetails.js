@@ -3,34 +3,73 @@ import {
   getCommonGrayCard,
   getCommonTitle,
   getCommonSubHeader,
-  getCommonParagraph,
   getTextField,
   getSelectField,
   getCommonContainer,
+  getContainerWithElement,
   getDateField,
-  getPattern
+  getPattern,
+  getLabel
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import { getDetailsForOwner } from "../../utils";
+import { prepareFinalObject as pFO } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import get from "lodash/get";
+import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 
-export const getOwnerMobNoField = getTextField({
-  label: {
-    labelName: "Mobile No.",
-    labelKey: "TL_NEW_OWNER_DETAILS_MOB_NO_LABEL"
+export const getOwnerMobNoField = {
+  uiFramework: "custom-atoms",
+  componentPath: "Container",
+  gridDefination: {
+    xs: 12,
+    sm: 12
   },
-  placeholder: {
-    labelName: "Enter Mobile No.",
-    labelKey: "TL_NEW_OWNER_DETAILS_MOB_NO_PLACEHOLDER"
-  },
-  required: true,
-  pattern: getPattern("MobileNo"),
-  jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].mobileNumber",
-  iconObj: {
-    iconName: "search",
-    position: "end",
-    color: "#FE7A51",
-    label: "SEARCH"
+  children: {
+    txt: getTextField({
+      label: {
+        labelName: "Mobile No.",
+        labelKey: "TL_NEW_OWNER_DETAILS_MOB_NO_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter Mobile No.",
+        labelKey: "TL_NEW_OWNER_DETAILS_MOB_NO_PLACEHOLDER"
+      },
+      required: true,
+      pattern: getPattern("MobileNo"),
+      jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].mobileNumber"
+      // iconObj: {
+      //   iconName: "search",
+      //   position: "end",
+      //   color: "#FE7A51",
+      //   label: "SEARCH"
+      // }
+    }),
+    button: {
+      componentPath: "Button",
+      props: {
+        variant: "outlined",
+        color: "primary",
+        style: {
+          width: 25,
+          height: 4,
+          border: "none",
+          marginTop: 18,
+          left: 704,
+          position: "absolute"
+        }
+      },
+      children: {
+        downloadReceiptButtonLabel: getLabel({
+          labelName: "SEARCH",
+          labelKey: "TL_CONFIRMATION_BUTTON_DOWN_REPT"
+        })
+      },
+      onClickDefination: {
+        action: "condition",
+        callBack: getDetailsForOwner
+      }
+    }
   }
-});
+};
 
 export const getOwnerGenderField = getSelectField({
   label: {
@@ -87,6 +126,90 @@ export const getFatherNameField = getTextField({
   pattern: getPattern("Name"),
   jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].fatherOrHusbandName"
 });
+
+export const ownerInfoInstitutional = {
+  uiFramework: "custom-containers",
+  componentPath: "MultiItem",
+  props: {
+    scheama: getCommonGrayCard({
+      header: getCommonSubHeader({
+        labelName: "Owner Information",
+        labelKey: "TL_NEW_OWNER_DETAILS_HEADER_OWNER_INFO"
+      }),
+      tradeUnitCardContainer: getCommonContainer({
+        getOwnerMobNoField,
+        offTelephone: getTextField({
+          label: {
+            labelName: "Official Telephone No.",
+            labelKey: "TL_NEW_OWNER_PHONE_LABEL"
+          },
+          placeholder: {
+            labelName: "Enter Official Telephone No.",
+            labelKey: "TL_NEW_OWNER_PHONE_PLACEHOLDER"
+          },
+          required: true,
+          jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].altContactNumber"
+        }),
+
+        authPerson: getTextField({
+          label: {
+            labelName: "Name of Authorised Person",
+            labelKey: "TL_NEW_OWNER_AUTH_PER_LABEL"
+          },
+          placeholder: {
+            labelName: "Enter Name of Authorised Person",
+            labelKey: "TL_NEW_OWNER_AUTH_PER_PLACEHOLDER"
+          },
+          pattern: getPattern("Name"),
+          required: true,
+          jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].name"
+        }),
+
+        designation: getTextField({
+          label: {
+            labelName: "Designation",
+            labelKey: "TL_NEW_OWNER_DESIG_LABEL"
+          },
+          placeholder: {
+            labelName: "Enter Designation",
+            labelKey: "TL_NEW_OWNER_DESIG_PLACEHOLDER"
+          },
+          pattern: getPattern("Name"),
+          required: true,
+          jsonPath: "Licenses[0].tradeLicenseDetail.institution.designation"
+        }),
+        getFatherNameField,
+        getOwnerGenderField,
+        getOwnerDOBField,
+        getOwnerEmailField,
+        ownerAddress: getTextField({
+          label: {
+            labelName: "Official Corrospondence Address",
+            labelKey: "TL_NEW_OWNER_OFF_ADDR_LABEL"
+          },
+          placeholder: {
+            labelName: "Enter Official Corrospondence Address",
+            labelKey: "TL_NEW_OWNER_OFF_ADDR_PLACEHOLDER"
+          },
+          required: true,
+          pattern: getPattern("Address"),
+          jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].permanentAddress"
+        })
+      })
+    }),
+    items: [],
+    addItemLabel: "ADD OWNER",
+    headerName: "Owner Information",
+    hasAddItem: false,
+    headerJsonPath:
+      "children.cardContent.children.header.children.Owner Information.props.label",
+    sourceJsonPath: "Licenses[0].tradeLicenseDetail.accessories",
+    prefixSourceJsonPath:
+      "children.cardContent.children.accessoriesCardContainer.children"
+  },
+  visible: false,
+  type: "array"
+};
 
 const OwnerInfoCard = {
   uiFramework: "custom-containers",
@@ -165,6 +288,7 @@ const OwnerInfoCard = {
     prefixSourceJsonPath:
       "children.cardContent.children.accessoriesCardContainer.children"
   },
+
   type: "array"
 };
 
@@ -173,16 +297,77 @@ export const tradeOwnerDetails = getCommonCard({
     labelName: "Please Provide Trade Owner Details",
     labelKey: "TL_NEW_OWNER_DETAILS_HEADER"
   }),
-  // paragraph: getCommonParagraph({
-  //   labelName:
-  //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-  // }),
-  ownership: getSelectField({
-    label: { labelName: "Type of ownership" },
-    placeholder: { labelName: "Select Type of Ownership" },
-    jsonPath: "Licenses[0].tradeLicenseDetail.owners[0].ownerType",
-    sourceJsonPath:
-      "applyScreenMdmsData.common-masters.OwnerShipCategoryTransformed"
+  ownershipType: getCommonContainer({
+    ownership: {
+      ...getSelectField({
+        label: { labelName: "Type of ownership" },
+        placeholder: { labelName: "Select Type of Ownership" },
+        jsonPath: "LicensesTemp[0].tradeLicenseDetail.ownerShipCategory",
+        sourceJsonPath:
+          "applyScreenMdmsData.common-masters.OwnerShipCategoryTransformed"
+      }),
+      beforeFieldChange: (action, state, dispatch) => {
+        try {
+          dispatch(
+            pFO(
+              "applyScreenMdmsData.common-masters.subOwnerShipCategoryTransformed",
+              get(
+                state.screenConfiguration.preparedFinalObject,
+                `applyScreenMdmsData.common-masters.OwnerShipCategory.${
+                  action.value
+                }`,
+                []
+              )
+            )
+          );
+          if (action.value === "INDIVIDUAL") {
+            dispatch(
+              handleField(
+                "apply",
+                "components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.OwnerInfoCard",
+                "visible",
+                true
+              )
+            );
+            dispatch(
+              handleField(
+                "apply",
+                "components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.ownerInfoInstitutional",
+                "visible",
+                false
+              )
+            );
+          } else {
+            dispatch(
+              handleField(
+                "apply",
+                "components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.OwnerInfoCard",
+                "visible",
+                false
+              )
+            );
+            dispatch(
+              handleField(
+                "apply",
+                "components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.ownerInfoInstitutional",
+                "visible",
+                true
+              )
+            );
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    },
+    subOwnership: getSelectField({
+      label: { labelName: "Type of sub-ownership" },
+      placeholder: { labelName: "Select Type of Ownership" },
+      jsonPath: "Licenses[0].tradeLicenseDetail.subOwnerShipCategory",
+      sourceJsonPath:
+        "applyScreenMdmsData.common-masters.subOwnerShipCategoryTransformed"
+    })
   }),
-  OwnerInfoCard
+  OwnerInfoCard,
+  ownerInfoInstitutional
 });

@@ -18,19 +18,57 @@ import {
 import set from "lodash/set";
 
 /** Data used for creation of receipt is generated and stored in local storage here */
-const loadReceiptGenerationData = () => {
+const loadReceiptGenerationData = (applicationNumber, tenant) => {
   /** Logo loaded and stored in local storage in base64 */
-  loadUlbLogo("pb.amritsar");
-  loadApplicationData("PB-TL-2018-09-27-000004");
-  loadReceiptData("PT-107-001330:AS-2018-08-29-001426");
-  loadMdmsData("pb.amritsar");
+  loadUlbLogo(tenant);
+  loadApplicationData(applicationNumber); //PB-TL-2018-09-27-000004
+  loadReceiptData(applicationNumber); //PT-107-001330:AS-2018-08-29-001426
+  loadMdmsData(tenant);
 };
+
+// const suggestions = [
+//   { label: "Afghanistan" },
+//   { label: "Aland Islands" },
+//   { label: "Albania" },
+//   { label: "Algeria" },
+//   { label: "American Samoa" },
+//   { label: "Andorra" },
+//   { label: "Angola" },
+//   { label: "Anguilla" },
+//   { label: "Antarctica" },
+//   { label: "Antigua and Barbuda" },
+//   { label: "Argentina" },
+//   { label: "Armenia" },
+//   { label: "Aruba" },
+//   { label: "Australia" },
+//   { label: "Austria" },
+//   { label: "Azerbaijan" },
+//   { label: "Bahamas" },
+//   { label: "Bahrain" },
+//   { label: "Bangladesh" },
+//   { label: "Barbados" },
+//   { label: "Belarus" },
+//   { label: "Belgium" },
+//   { label: "Belize" },
+//   { label: "Benin" },
+//   { label: "Bermuda" },
+//   { label: "Bhutan" },
+//   { label: "Bolivia, Plurinational State of" },
+//   { label: "Bonaire, Sint Eustatius and Saba" },
+//   { label: "Bosnia and Herzegovina" },
+//   { label: "Botswana" },
+//   { label: "Bouvet Island" },
+//   { label: "Brazil" },
+//   { label: "British Indian Ocean Territory" },
+//   { label: "Brunei Darussalam" }
+// ];
 
 const getAcknowledgementCard = (
   purpose,
   status,
   applicationNumber,
-  tlNumber
+  tlNumber,
+  tenant
 ) => {
   if (purpose === "apply" && status === "success") {
     return {
@@ -65,10 +103,13 @@ const getAcknowledgementCard = (
           }
         }
       },
-      applicationSuccessFooter
+      applicationSuccessFooter: applicationSuccessFooter(
+        applicationNumber,
+        tenant
+      )
     };
   } else if (purpose === "pay" && status === "success") {
-    loadReceiptGenerationData();
+    loadReceiptGenerationData(applicationNumber, tenant);
     return {
       header: getCommonContainer({
         header: getCommonHeader({
@@ -101,7 +142,7 @@ const getAcknowledgementCard = (
       paymentSuccessFooter
     };
   } else if (purpose === "approve" && status === "success") {
-    loadReceiptGenerationData();
+    loadReceiptGenerationData(applicationNumber, tenant);
     return {
       header: getCommonContainer({
         header: getCommonHeader({
@@ -193,6 +234,20 @@ const getAcknowledgementCard = (
           })
         }
       },
+      // asdasdasd: {
+      //   uiFramework: "custom-atoms-local",
+      //   componentPath: "AutoSuggest",
+      //   props: {
+      //     suggestions: suggestions,
+      //     label: "Mohalla",
+      //     placeholder: "Select Mohalla",
+      //     fullwidth: false,
+      //     required: true,
+      //     inputLabelProps: {
+      //       shrink: true
+      //     }
+      //   }
+      // },
       gotoHomeFooter
     };
   }
@@ -215,7 +270,14 @@ const screenConfig = {
     const status = getQueryArg(window.location.href, "status");
     const number = getQueryArg(window.location.href, "applicationNumber");
     const tlNumber = getQueryArg(window.location.href, "tlNumber");
-    const data = getAcknowledgementCard(purpose, status, number, tlNumber);
+    const tenant = getQueryArg(window.location.href, "tenantId");
+    const data = getAcknowledgementCard(
+      purpose,
+      status,
+      number,
+      tlNumber,
+      tenant
+    );
     set(action, "screenConfig.components.div.children", data);
     return action;
   }

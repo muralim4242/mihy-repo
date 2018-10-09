@@ -48,7 +48,8 @@ const styles = {
     fontWeight: 400,
     lineHeight: "19px",
     letterSpacing: 0.67,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    marginBottom: 16
   }
 };
 
@@ -101,7 +102,13 @@ function FeesEstimateCard(props) {
                   />
                 </Grid>
               ) : (
-                <Grid xs={4} />
+                <Grid xs={4} align="right">
+                  <LabelContainer
+                    labelName={0}
+                    labelKey={0}
+                    style={styles.taxStyles}
+                  />
+                </Grid>
               );
               return (
                 <Grid container>
@@ -111,7 +118,7 @@ function FeesEstimateCard(props) {
               );
             })}
           </Grid>
-          <Divider style={{ margin: 0 }} />
+          <Divider style={{ marginBottom: 16 }} />
           <Grid container>
             <Grid item xs={6}>
               <Typography variant="body2">Total</Typography>
@@ -129,37 +136,40 @@ function FeesEstimateCard(props) {
         <Typography className={classes.bigheader} align="right">
           Rs {total}
         </Typography>
-        <Card className={classes.whiteCard}>
-          {estimate.extra.map((item, key) => {
-            let textLeft, textRight;
-            let colLeft = item.textRight ? 6 : 12;
-            let colRight = item.textLeft ? 6 : 12;
-            if (item.textLeft) {
-              textLeft = (
-                <Grid xs={colLeft}>
-                  <Typography>{item.textLeft}</Typography>
-                </Grid>
-              );
-            } else {
-              textLeft = <Grid xs={colLeft} />;
-            }
-            if (item.textRight) {
-              textRight = (
-                <Grid xs={colRight}>
-                  <Typography>{item.textRight}</Typography>
-                </Grid>
-              );
-            } else {
-              textRight = <Grid xs={colRight} />;
-            }
-            return (
-              <Grid container>
-                {textLeft}
-                {textRight}
-              </Grid>
-            );
-          })}
-        </Card>
+        {estimate.extra &&
+          estimate.extra.length > 0 && (
+            <Card className={classes.whiteCard}>
+              {estimate.extra.map((item, key) => {
+                let textLeft, textRight;
+                let colLeft = item.textRight ? 6 : 12;
+                let colRight = item.textLeft ? 6 : 12;
+                if (item.textLeft) {
+                  textLeft = (
+                    <Grid xs={colLeft}>
+                      <Typography>{item.textLeft}</Typography>
+                    </Grid>
+                  );
+                } else {
+                  textLeft = <Grid xs={colLeft} />;
+                }
+                if (item.textRight) {
+                  textRight = (
+                    <Grid xs={colRight}>
+                      <Typography>{item.textRight}</Typography>
+                    </Grid>
+                  );
+                } else {
+                  textRight = <Grid xs={colRight} />;
+                }
+                return (
+                  <Grid container>
+                    {textLeft}
+                    {textRight}
+                  </Grid>
+                );
+              })}
+            </Card>
+          )}
       </Grid>
     </Grid>
   );
