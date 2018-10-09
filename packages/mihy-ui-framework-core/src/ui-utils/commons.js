@@ -1,6 +1,7 @@
 import isEmpty from "lodash/isEmpty";
 import { uploadFile, httpRequest } from "ui-utils/api";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import { toggleSpinner } from "mihy-ui-framework/ui-redux/app/actions";
 
 export const addComponentJsonpath = (components, jsonPath = "components") => {
   for (var componentKey in components) {
@@ -220,11 +221,11 @@ export const updatePFOforSearchResults = async (
     { key: "tenantId", value: "pb.amritsar" },
     { key: "applicationNumber", value: queryValue }
   ];
+  dispatch(toggleSpinner());
   const payload = await getSearchResults(queryObject);
+  dispatch(toggleSpinner());
   dispatch(prepareFinalObject("Licenses[0]", payload.Licenses[0]));
 };
-
-
 
 export const getTranslatedLabel = (labelKey, localizationLabels) => {
   let translatedLabel = null;

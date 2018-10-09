@@ -32,6 +32,10 @@ var _reactRedux = require("react-redux");
 
 var _uiContainers = require("../../ui-containers");
 
+var _LoadingIndicator = require("../../ui-molecules/LoadingIndicator");
+
+var _LoadingIndicator2 = _interopRequireDefault(_LoadingIndicator);
+
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54,7 +58,9 @@ var CommonView = function (_React$Component) {
           onComponentClick = _props.onComponentClick,
           preparedFinalObject = _props.preparedFinalObject,
           screenKey = _props.screenKey;
-      var toast = this.props.toast;
+      var _props2 = this.props,
+          toast = _props2.toast,
+          spinner = _props2.spinner;
       var errorType = toast.errorType,
           message = toast.message,
           open = toast.open;
@@ -74,18 +80,23 @@ var CommonView = function (_React$Component) {
           variant: errorType,
           message: message,
           open: open
-        })
+        }),
+        spinner && _react2.default.createElement(_LoadingIndicator2.default, null)
       );
     }
   }]);
   return CommonView;
 }(_react2.default.Component);
 
-var mapStateToProps = function mapStateToProps(state, ownprops) {
+var mapStateToProps = function mapStateToProps(state) {
   var app = state.app;
-  var toast = app.toast;
+  var toast = app.toast,
+      spinner = app.spinner;
 
-  return { toast: toast };
+  return {
+    toast: toast,
+    spinner: spinner
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(CommonView);

@@ -29,6 +29,8 @@ var _api = require("ui-utils/api");
 
 var _actions = require("mihy-ui-framework/ui-redux/screen-configuration/actions");
 
+var _actions2 = require("mihy-ui-framework/ui-redux/app/actions");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var addComponentJsonpath = exports.addComponentJsonpath = function addComponentJsonpath(components) {
@@ -315,15 +317,18 @@ var updatePFOforSearchResults = exports.updatePFOforSearchResults = function () 
         switch (_context4.prev = _context4.next) {
           case 0:
             queryObject = [{ key: "tenantId", value: "pb.amritsar" }, { key: "applicationNumber", value: queryValue }];
-            _context4.next = 3;
+
+            dispatch((0, _actions2.toggleSpinner)());
+            _context4.next = 4;
             return getSearchResults(queryObject);
 
-          case 3:
+          case 4:
             payload = _context4.sent;
 
+            dispatch((0, _actions2.toggleSpinner)());
             dispatch((0, _actions.prepareFinalObject)("Licenses[0]", payload.Licenses[0]));
 
-          case 5:
+          case 7:
           case "end":
             return _context4.stop();
         }
