@@ -10,7 +10,7 @@ import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import { addComponentJsonpath } from "../ui-utils";
 import $ from "jquery";
-import cloneDeep from "lodash/cloneDeep"
+import cloneDeep from "lodash/cloneDeep";
 
 const screenHoc = ({
   path = "",
@@ -108,7 +108,7 @@ const screenHoc = ({
     };
 
     render() {
-      const { screenConfig,toast } = this.props;
+      const { screenConfig, toast, spinner } = this.props;
       const {
         [screenKey]: currentScreenConfig,
         preparedFinalObject
@@ -126,6 +126,7 @@ const screenHoc = ({
             onComponentClick={onClick}
             preparedFinalObject={preparedFinalObject}
             toast={toast}
+            spinner={spinner}
           />
         );
       } else {
@@ -134,11 +135,11 @@ const screenHoc = ({
     }
   }
 
-  const mapStateToProps = (state) => {
-    const { screenConfiguration ,app} = state;
-    const {toast} =app;
+  const mapStateToProps = state => {
+    const { screenConfiguration, app } = state;
+    const { toast, spinner } = app;
     const { screenConfig, preparedFinalObject } = screenConfiguration;
-    return { screenConfig, preparedFinalObject, state,toast };
+    return { screenConfig, preparedFinalObject, state, toast, spinner };
   };
 
   const mapDispatchToProps = dispatch => {
@@ -182,7 +183,10 @@ const screenHoc = ({
     };
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(ScreenWrapper);
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ScreenWrapper);
 };
 
 export default screenHoc;

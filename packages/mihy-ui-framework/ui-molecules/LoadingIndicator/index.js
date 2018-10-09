@@ -42,7 +42,7 @@ var style = {
     left: 0,
     right: 0,
     transform: "none",
-    color: "#FF9800"
+    color: "#FE7A51"
   }
 };
 
@@ -53,7 +53,10 @@ var LoadingIndicator = function LoadingIndicator(_ref) {
 
   return _react2.default.createElement(
     "div",
-    { id: "loading-indicator", style: status === "hide" ? style.containerHide : style.container },
+    {
+      id: "loading-indicator",
+      style: status === "hide" ? style.containerHide : style.container
+    },
     _react2.default.createElement(_CircularProgress2.default, { style: style.refresh, size: 50 })
   );
 };

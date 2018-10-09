@@ -30,6 +30,10 @@ var _RenderScreen2 = _interopRequireDefault(_RenderScreen);
 
 var _uiContainers = require("../../ui-containers");
 
+var _LoadingIndicator = require("../../ui-molecules/LoadingIndicator");
+
+var _LoadingIndicator2 = _interopRequireDefault(_LoadingIndicator);
+
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,7 +56,8 @@ var CommonView = function (_React$Component) {
           onComponentClick = _props.onComponentClick,
           preparedFinalObject = _props.preparedFinalObject,
           screenKey = _props.screenKey,
-          toast = _props.toast;
+          toast = _props.toast,
+          spinner = _props.spinner;
       var errorType = toast.errorType,
           message = toast.message,
           open = toast.open;
@@ -72,7 +77,8 @@ var CommonView = function (_React$Component) {
           variant: errorType,
           message: message,
           open: open
-        })
+        }),
+        spinner && _react2.default.createElement(_LoadingIndicator2.default, null)
       );
     }
   }]);

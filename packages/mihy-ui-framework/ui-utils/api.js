@@ -19,6 +19,12 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _commons = require("./commons");
 
+var _actions = require("mihy-ui-framework/ui-redux/app/actions");
+
+var _store = require("mihy-ui-framework/ui-redux/store");
+
+var _store2 = _interopRequireDefault(_store);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var instance = _axios2.default.create({
@@ -61,6 +67,7 @@ var httpRequest = exports.httpRequest = function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            _store2.default.dispatch((0, _actions.toggleSpinner)());
             apiError = "Api Error";
 
 
@@ -69,43 +76,44 @@ var httpRequest = exports.httpRequest = function () {
             });
 
             endPoint = (0, _commons.addQueryArg)(endPoint, queryObject);
-            _context.prev = 3;
+            _context.prev = 4;
             _context.t0 = method;
-            _context.next = _context.t0 === "post" ? 7 : 11;
+            _context.next = _context.t0 === "post" ? 8 : 12;
             break;
 
-          case 7:
-            _context.next = 9;
+          case 8:
+            _context.next = 10;
             return instance.post(endPoint, wrapRequestBody(requestBody, action));
 
-          case 9:
+          case 10:
             response = _context.sent;
-            return _context.abrupt("break", 14);
+            return _context.abrupt("break", 15);
 
-          case 11:
-            _context.next = 13;
+          case 12:
+            _context.next = 14;
             return instance.get(endPoint);
 
-          case 13:
+          case 14:
             response = _context.sent;
 
-          case 14:
+          case 15:
             responseStatus = parseInt(response.status, 10);
 
             if (!(responseStatus === 200 || responseStatus === 201)) {
-              _context.next = 17;
+              _context.next = 18;
               break;
             }
 
             return _context.abrupt("return", response.data);
 
-          case 17:
-            _context.next = 23;
+          case 18:
+            _store2.default.dispatch((0, _actions.toggleSpinner)());
+            _context.next = 26;
             break;
 
-          case 19:
-            _context.prev = 19;
-            _context.t1 = _context["catch"](3);
+          case 21:
+            _context.prev = 21;
+            _context.t1 = _context["catch"](4);
             _error$response = _context.t1.response, data = _error$response.data, status = _error$response.status;
 
             if (status === 400 && data === "") {
@@ -113,16 +121,17 @@ var httpRequest = exports.httpRequest = function () {
             } else {
               apiError = data.hasOwnProperty("Errors") && data.Errors && data.Errors.length && data.Errors[0].message || data.hasOwnProperty("error") && data.error.fields && data.error.fields.length && data.error.fields[0].message || data.hasOwnProperty("error_description") && data.error_description || apiError;
             }
+            _store2.default.dispatch((0, _actions.toggleSpinner)());
 
-          case 23:
+          case 26:
             throw new Error(apiError);
 
-          case 24:
+          case 27:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, undefined, [[3, 19]]);
+    }, _callee, undefined, [[4, 21]]);
   }));
 
   return function httpRequest() {

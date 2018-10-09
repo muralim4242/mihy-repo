@@ -16,7 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Label = function Label(_ref) {
   var label = _ref.label,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ["label"]);
+      jsonPath = _ref.jsonPath,
+      rest = (0, _objectWithoutProperties3.default)(_ref, ["label", "jsonPath"]);
   return _react2.default.createElement(
     "span",
     rest,
