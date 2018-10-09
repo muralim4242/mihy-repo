@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const style = {
   container: {
@@ -10,11 +10,11 @@ const style = {
     backgroundColor: "rgba(189,189,189,0.5)",
     zIndex: 9998,
     left: 0,
-    top: 0,
+    top: 0
   },
   containerHide: {
     display: "none",
-    position: "relative",
+    position: "relative"
   },
   refresh: {
     display: "block",
@@ -26,14 +26,17 @@ const style = {
     left: 0,
     right: 0,
     transform: "none",
-    color: "#FF9800",
-  },
+    color: "#FE7A51"
+  }
 };
 
-const LoadingIndicator = ({ status = "loading", loadingColor}) => {
+const LoadingIndicator = ({ status = "loading", loadingColor }) => {
   return (
-    <div id="loading-indicator" style={status === "hide" ? style.containerHide : style.container}>
-      <CircularProgress  style={style.refresh}  size={50}/>
+    <div
+      id="loading-indicator"
+      style={status === "hide" ? style.containerHide : style.container}
+    >
+      <CircularProgress style={style.refresh} size={50} />
     </div>
   );
 };
@@ -41,7 +44,7 @@ const LoadingIndicator = ({ status = "loading", loadingColor}) => {
 LoadingIndicator.propTypes = {
   status: PropTypes.string,
   loadingColor: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.object
 };
 
 export default LoadingIndicator;

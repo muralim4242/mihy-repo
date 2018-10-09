@@ -1,6 +1,6 @@
 import React from "react";
 
-const Label = ({ label, ...rest }) => (
+const Label = ({ label, jsonPath, ...rest }) => (
   <span {...rest}>{label ? label : "NA"}</span>
 );
 

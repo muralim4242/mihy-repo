@@ -1,5 +1,5 @@
 import isEmpty from "lodash/isEmpty";
-import { uploadFile, httpRequest } from "ui-utils/api";
+import { uploadFile, httpRequest } from "mihy-ui-framework/ui-utils/api";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 
 export const addComponentJsonpath = (components, jsonPath = "components") => {
@@ -223,8 +223,6 @@ export const updatePFOforSearchResults = async (
   const payload = await getSearchResults(queryObject);
   dispatch(prepareFinalObject("Licenses[0]", payload.Licenses[0]));
 };
-
-
 
 export const getTranslatedLabel = (labelKey, localizationLabels) => {
   let translatedLabel = null;

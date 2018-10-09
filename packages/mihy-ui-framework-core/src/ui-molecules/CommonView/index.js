@@ -1,6 +1,7 @@
 import React from "react";
 import RenderScreen from "../RenderScreen";
 import { SnackbarContainer } from "../../ui-containers";
+import LoadingIndicator from "../../ui-molecules/LoadingIndicator";
 import "./index.css";
 
 class CommonView extends React.Component {
@@ -12,7 +13,8 @@ class CommonView extends React.Component {
       onComponentClick,
       preparedFinalObject,
       screenKey,
-      toast
+      toast,
+      spinner
     } = this.props;
     const { errorType, message, open } = toast;
     return (
@@ -32,10 +34,10 @@ class CommonView extends React.Component {
             open={open}
           />
         )}
+        {spinner && <LoadingIndicator />}
       </div>
     );
   }
 }
-
 
 export default CommonView;
