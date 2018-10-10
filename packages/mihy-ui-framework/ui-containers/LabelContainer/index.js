@@ -78,7 +78,8 @@ var LabelContainer = function (_React$Component) {
 
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(labelName, labelKey, transfomedKeys);
-      return _react2.default.createElement(_uiAtoms.Label, (0, _extends3.default)({ label: fieldValue ? fieldValue : translatedLabel }, rest));
+      var fieldLabel = getLocaleLabelsforTL(fieldValue, "TL_" + fieldValue, transfomedKeys);
+      return _react2.default.createElement(_uiAtoms.Label, (0, _extends3.default)({ label: fieldValue ? fieldLabel : translatedLabel }, rest));
     }
   }]);
   return LabelContainer;

@@ -2,10 +2,7 @@ import React from "react";
 import { Label } from "mihy-ui-framework/ui-atoms";
 import get from "lodash/get";
 import { connect } from "react-redux";
-import {
-  getTranslatedLabel,
-  transformById
-} from "../../ui-utils/commons";
+import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
 
 const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   if (labelKey) {
@@ -33,8 +30,13 @@ class LabelContainer extends React.Component {
       labelKey,
       transfomedKeys
     );
+    let fieldLabel = getLocaleLabelsforTL(
+      fieldValue,
+      `TL_${fieldValue}`,
+      transfomedKeys
+    );
     return (
-      <Label label={fieldValue ? fieldValue : translatedLabel} {...rest} />
+      <Label label={fieldValue ? fieldLabel : translatedLabel} {...rest} />
     );
   }
 }
@@ -51,4 +53,7 @@ const mapStateToProps = (state, ownprops) => {
   return { fieldValue };
 };
 
-export default connect(mapStateToProps,{})(LabelContainer);
+export default connect(
+  mapStateToProps,
+  {}
+)(LabelContainer);
