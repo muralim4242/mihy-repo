@@ -8,8 +8,9 @@ import "./index.css";
 import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import get from "lodash/get";
 import set from "lodash/set";
-import { httpRequest } from "../../../../ui-utils/api";
+import { httpRequest } from "mihy-ui-framework/ui-utils/api";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 
 export const getCommonApplyFooter = children => {
   return {
@@ -287,25 +288,26 @@ export const getFooterButtons = queryValue => {
 export const onClickNextButton = (applicationNumber, tlNumber, queryValue) => {
   switch (queryValue) {
     case "reject":
-      return `/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=application&status=rejected&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}`;
+      return `/mihy-ui-framework/tradelicence/acknowledgement?purpose=application&status=rejected&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}&tenantId=pb.amritsar`;
     case "cancel":
-      return `/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=application&status=cancelled&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}`;
+      return `/mihy-ui-framework/tradelicence/acknowledgement?purpose=application&status=cancelled&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}&tenantId=pb.amritsar`;
     default:
-      return `/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=approve&status=success&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}`;
+      return `/mihy-ui-framework/tradelicence/acknowledgement?purpose=approve&status=success&applicationNumber=${applicationNumber}&tlNumber=${tlNumber}&tenantId=pb.amritsar`;
   }
 };
 
 export const onClickPreviousButton = queryValue => {
   switch (queryValue) {
     case "reject":
-      return "/landing/mihy-ui-framework/tradelicence/search-preview?role=approver&status=pending_approval";
+      return "/mihy-ui-framework/tradelicence/search-preview?role=approver&status=pending_approval";
     case "cancel":
-      return "/landing/mihy-ui-framework/tradelicence/search-preview?role=approver&status=approved";
+      return "/mihy-ui-framework/tradelicence/search-preview?role=approver&status=approved";
     default:
-      return "/landing/mihy-ui-framework/tradelicence/search-preview?role=approver&status=pending_approval";
+      return "/mihy-ui-framework/tradelicence/search-preview?role=approver&status=pending_approval";
   }
 };
-export const getFeesEstimateCard = () => {
+export const getFeesEstimateCard = props => {
+  const { sourceJsonPath } = props;
   return {
     uiFramework: "custom-containers-local",
     componentPath: "EstimateCardContainer",
@@ -315,7 +317,7 @@ export const getFeesEstimateCard = () => {
       //   fees,
       //   extra
       // }
-      sourceJsonPath: "LicensesTemp[0].estimateCardData"
+      sourceJsonPath
     }
   };
 };
@@ -345,27 +347,12 @@ export const showHideAdhocPopup = (state, dispatch) => {
   dispatch(handleField("pay", "components.adhocDialog", "props.open", !toggle));
 };
 
-export const getButtonVisibility = (role, status, button) => {
+export const getButtonVisibility = (status, button) => {
   if (status === "pending_payment" && button === "PROCEED TO PAYMENT")
     return true;
-  if (
-    status === "pending_approval" &&
-    role === "approver" &&
-    button === "APPROVE"
-  )
-    return true;
-  if (
-    status === "pending_approval" &&
-    role === "approver" &&
-    button === "REJECT"
-  )
-    return true;
-  if (
-    status === "approved" &&
-    role === "approver" &&
-    button === "CANCEL TRADE LICENSE"
-  )
-    return true;
+  if (status === "pending_approval" && button === "APPROVE") return true;
+  if (status === "pending_approval" && button === "REJECT") return true;
+  if (status === "approved" && button === "CANCEL TRADE LICENSE") return true;
   return false;
 };
 
@@ -450,6 +437,7 @@ export const convertEpochToDate = dateEpoch => {
 };
 
 export const convertDateToEpoch = (dateString, dayStartOrEnd) => {
+  //example input format : "2018-10-02"
   try {
     const parts = dateString.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
     const DateObj = new Date(Date.UTC(parts[1], parts[2] - 1, parts[3]));
@@ -461,6 +449,18 @@ export const convertDateToEpoch = (dateString, dayStartOrEnd) => {
     return DateObj.getTime();
   } catch (e) {
     return dateString;
+  }
+};
+
+export const convertDateTimeToEpoch = dateTimeString => {
+  //example input format : "26-07-2018 17:43:21"
+  try {
+    const parts = dateTimeString.match(
+      /(\d{2})\-(\d{2})\-(\d{4}) (\d{2}):(\d{2}):(\d{2})/
+    );
+    return Date.UTC(+parts[3], parts[2] - 1, +parts[1], +parts[4], +parts[5]);
+  } catch (e) {
+    return dateTimeString;
   }
 };
 
@@ -632,11 +632,19 @@ export const getDetailsForOwner = async (state, dispatch) => {
         userName: `${ownerNo}`
       }
     );
+    const userInfo =
+      payload.user &&
+      payload.user[0] &&
+      JSON.parse(JSON.stringify(payload.user[0]));
+    if (userInfo && userInfo.createdDate) {
+      userInfo.createdDate = convertDateTimeToEpoch(userInfo.createdDate);
+      userInfo.lastModifiedDate = convertDateTimeToEpoch(
+        userInfo.lastModifiedDate
+      );
+      userInfo.pwdExpiryDate = convertDateTimeToEpoch(userInfo.pwdExpiryDate);
+    }
     dispatch(
-      prepareFinalObject(
-        "Licenses[0].tradeLicenseDetail.owners[0]",
-        payload.user[0]
-      )
+      prepareFinalObject("Licenses[0].tradeLicenseDetail.owners[0]", userInfo)
     );
   } catch (e) {
     console.log(e);
@@ -673,4 +681,92 @@ export const prepareDocumentTypeObj = documents => {
         }, [])
       : [];
   return documentsArr;
+};
+
+//Common functions for Estimate card
+
+const getTaxValue = item => {
+  return item
+    ? item.debitAmount
+      ? -Math.abs(item.debitAmount)
+      : item.crAmountToBePaid
+        ? item.crAmountToBePaid
+        : 0
+    : 0;
+};
+
+const getEstimateData = Bill => {
+  if (Bill && Bill.length) {
+    const extraData = ["Rebate", "Penalty"].map(item => {
+      return {
+        name: {
+          labelName: item,
+          labelKey: item
+        },
+        value: null,
+        info: {
+          labelName: `Information about ${item}`,
+          labelKey: `Information about ${item}`
+        }
+      };
+    });
+    const { billAccountDetails } = Bill[0].billDetails[0];
+    const transformedData = billAccountDetails.map(item => {
+      return {
+        name: {
+          labelName: "Default Label",
+          labelKey: item.taxHeadCode
+        },
+        value: getTaxValue(item),
+        info: {
+          labelName: "Information about NA",
+          labelKey: `Information about ${item.taxHeadCode}`
+        }
+      };
+    });
+    return [...transformedData, ...extraData];
+  }
+};
+
+export const createEstimateData = async (
+  LicenseData,
+  jsonPath,
+  dispatch,
+  href = {}
+) => {
+  const applicationNo =
+    get(LicenseData, "applicationNumber") ||
+    getQueryArg(href, "applicationNumber");
+  const tenantId =
+    get(LicenseData, "tenantId") || getQueryArg(href, "tenantId");
+  const businessService = "TL"; //Hardcoding Alert
+  const queryObj = [
+    { key: "tenantId", value: tenantId },
+    {
+      key: "consumerCode",
+      value: applicationNo
+    },
+    {
+      key: "businessService",
+      value: businessService
+    }
+  ];
+  const payload = await getBill(queryObj);
+  const estimateData = getEstimateData(payload.Bill);
+  dispatch(prepareFinalObject(jsonPath, estimateData));
+  return payload;
+};
+
+export const getCurrentFinancialYear = () => {
+  var today = new Date();
+  var curMonth = today.getMonth();
+  var fiscalYr = "";
+  if (curMonth > 3) {
+    var nextYr1 = (today.getFullYear() + 1).toString();
+    fiscalYr = today.getFullYear().toString() + "-" + nextYr1;
+  } else {
+    var nextYr2 = today.getFullYear().toString();
+    fiscalYr = (today.getFullYear() - 1).toString() + "-" + nextYr2;
+  }
+  return fiscalYr;
 };

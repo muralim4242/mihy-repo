@@ -99,10 +99,13 @@ var TextFieldContainer = function (_React$Component) {
           dispatch = _props.dispatch,
           rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath", "state", "dispatch"]);
 
-      if (!(0, _isEmpty2.default)(iconObj)) {
-        iconObj.onClick = function () {
-          return iconObj.onClickOnIcon(state, dipatch);
-        };
+
+      if (!(0, _isEmpty2.default)(iconObj) && iconObj.onClickDefination) {
+        iconObj = (0, _extends3.default)({}, iconObj, {
+          onClick: function onClick() {
+            return iconObj.onClickDefination.callBack(state, dispatch);
+          }
+        });
       }
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);

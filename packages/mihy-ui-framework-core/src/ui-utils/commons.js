@@ -128,3 +128,18 @@ export const transformById = (payload, id) => {
     }, {})
   );
 };
+
+
+export const getTranslatedLabel = (labelKey, localizationLabels) => {
+  let translatedLabel = null;
+  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
+    translatedLabel = localizationLabels[labelKey];
+    if (
+      translatedLabel &&
+      typeof translatedLabel === "object" &&
+      translatedLabel.hasOwnProperty("message")
+    )
+      translatedLabel = translatedLabel.message;
+  }
+  return translatedLabel || labelKey;
+};

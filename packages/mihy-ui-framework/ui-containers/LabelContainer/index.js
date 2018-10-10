@@ -40,7 +40,7 @@ var _get2 = _interopRequireDefault(_get);
 
 var _reactRedux = require("react-redux");
 
-var _commons = require("mihy-ui-framework/ui-utils/commons");
+var _commons = require("../../ui-utils/commons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

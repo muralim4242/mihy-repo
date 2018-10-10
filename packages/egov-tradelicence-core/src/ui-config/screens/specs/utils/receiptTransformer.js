@@ -48,10 +48,10 @@ export const loadUlbLogo = tenantid => {
   img.src = `https://s3.ap-south-1.amazonaws.com/pb-egov-assets/${tenantid}/logo.png`;
 };
 
-export const loadApplicationData = async applicationNumber => {
+export const loadApplicationData = async (applicationNumber, tenant) => {
   let data = {};
   let queryObject = [
-    { key: "tenantId", value: "pb.amritsar" },
+    { key: "tenantId", value: tenant },
     { key: "applicationNumber", value: applicationNumber }
   ];
   let response = await getSearchResults(queryObject);
@@ -96,20 +96,21 @@ export const loadApplicationData = async applicationNumber => {
       data.streetName,
       data.locality
     );
-    data.accessories = handleNull(
-      response.Licenses[0].tradeLicenseDetail.accessories.length
-    );
+    let accessories = response.Licenses[0].tradeLicenseDetail.accessories
+      ? response.Licenses[0].tradeLicenseDetail.accessories.length
+      : 0;
+    data.accessories = handleNull(accessories);
     loadUserNameData(response.Licenses[0].auditDetails.lastModifiedBy);
   }
   store.dispatch(prepareFinalObject("applicationDataForReceipt", data));
 };
 
-export const loadReceiptData = async consumerCode => {
+export const loadReceiptData = async (consumerCode, tenant) => {
   let data = {};
   let queryObject = [
     {
       key: "tenantId",
-      value: "pb.amritsar"
+      value: tenant
     },
     {
       key: "consumerCode",
@@ -187,7 +188,11 @@ export const loadMdmsData = async tenantid => {
   ];
   let response = await getMdmsData(queryObject);
 
-  if (response && response.MdmsRes.tenant.tenants.length > 0) {
+  if (
+    response &&
+    response.MdmsRes &&
+    response.MdmsRes.tenant.tenants.length > 0
+  ) {
     let ulbData = response.MdmsRes.tenant.tenants.find(item => {
       return item.code == tenantid;
     });

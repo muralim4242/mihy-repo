@@ -20,48 +20,11 @@ import set from "lodash/set";
 /** Data used for creation of receipt is generated and stored in local storage here */
 const loadReceiptGenerationData = (applicationNumber, tenant) => {
   /** Logo loaded and stored in local storage in base64 */
-  loadUlbLogo(tenant);
-  loadApplicationData(applicationNumber); //PB-TL-2018-09-27-000004
-  loadReceiptData(applicationNumber); //PT-107-001330:AS-2018-08-29-001426
+  loadUlbLogo(tenant); //pb.amritsar
+  loadApplicationData(applicationNumber, tenant); //PB-TL-2018-09-27-000004
+  loadReceiptData(applicationNumber, tenant); //PT-107-001330:AS-2018-08-29-001426     //PT consumerCode
   loadMdmsData(tenant);
 };
-
-// const suggestions = [
-//   { label: "Afghanistan" },
-//   { label: "Aland Islands" },
-//   { label: "Albania" },
-//   { label: "Algeria" },
-//   { label: "American Samoa" },
-//   { label: "Andorra" },
-//   { label: "Angola" },
-//   { label: "Anguilla" },
-//   { label: "Antarctica" },
-//   { label: "Antigua and Barbuda" },
-//   { label: "Argentina" },
-//   { label: "Armenia" },
-//   { label: "Aruba" },
-//   { label: "Australia" },
-//   { label: "Austria" },
-//   { label: "Azerbaijan" },
-//   { label: "Bahamas" },
-//   { label: "Bahrain" },
-//   { label: "Bangladesh" },
-//   { label: "Barbados" },
-//   { label: "Belarus" },
-//   { label: "Belgium" },
-//   { label: "Belize" },
-//   { label: "Benin" },
-//   { label: "Bermuda" },
-//   { label: "Bhutan" },
-//   { label: "Bolivia, Plurinational State of" },
-//   { label: "Bonaire, Sint Eustatius and Saba" },
-//   { label: "Bosnia and Herzegovina" },
-//   { label: "Botswana" },
-//   { label: "Bouvet Island" },
-//   { label: "Brazil" },
-//   { label: "British Indian Ocean Territory" },
-//   { label: "Brunei Darussalam" }
-// ];
 
 const getAcknowledgementCard = (
   purpose,
@@ -234,20 +197,6 @@ const getAcknowledgementCard = (
           })
         }
       },
-      // asdasdasd: {
-      //   uiFramework: "custom-atoms-local",
-      //   componentPath: "AutoSuggest",
-      //   props: {
-      //     suggestions: suggestions,
-      //     label: "Mohalla",
-      //     placeholder: "Select Mohalla",
-      //     fullwidth: false,
-      //     required: true,
-      //     inputLabelProps: {
-      //       shrink: true
-      //     }
-      //   }
-      // },
       gotoHomeFooter
     };
   }

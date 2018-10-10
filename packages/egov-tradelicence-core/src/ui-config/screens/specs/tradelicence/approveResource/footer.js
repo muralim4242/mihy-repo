@@ -1,4 +1,5 @@
 import { getLabel } from "mihy-ui-framework/ui-config/screens/specs/utils";
+import { toggleSnackbarAndSetText } from "mihy-ui-framework/ui-redux/app/actions";
 import get from "lodash/get";
 import set from "lodash/set";
 import {
@@ -25,11 +26,11 @@ const onNextButtonClick = async (state, dispatch) => {
           set(Licenses[0], "action", "CANCEL");
         }
       case "reject":
-        if (status === "APPLIED") {
+        if (status === "PAID") {
           set(Licenses[0], "action", "REJECT");
         }
       default:
-        if (status === "APPLIED") {
+        if (status === "PAID") {
           set(Licenses[0], "action", "APPROVE");
         }
     }
@@ -40,6 +41,10 @@ const onNextButtonClick = async (state, dispatch) => {
     const tlNumber = get(response, "Licenses[0].licenseNumber");
     const route = onClickNextButton(applicationNumber, tlNumber, queryValue);
     dispatch(setRoute(route));
+  } else {
+    dispatch(
+      toggleSnackbarAndSetText(true, "Update TL retuned error", "error")
+    );
   }
 };
 

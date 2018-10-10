@@ -8,72 +8,7 @@ import get from "lodash/get";
 import { getButtonVisibility, getCommonApplyFooter } from "../../utils";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import { setRoute } from "mihy-ui-framework/ui-redux/app/actions";
-import { getBill } from "../../utils";
-
-const getTaxValue = item => {
-  return item
-    ? item.debitAmount
-      ? -Math.abs(item.debitAmount)
-      : item.crAmountToBePaid
-        ? item.crAmountToBePaid
-        : 0
-    : 0;
-};
-
-const getEstimateData = Bill => {
-  if (Bill && Bill.length) {
-    const extraData = ["Rebate", "Penalty"].map(item => {
-      return {
-        name: {
-          labelName: item,
-          labelKey: item
-        },
-        value: null,
-        info: {
-          labelName: `Information about ${item}`,
-          labelKey: `Information about ${item}`
-        }
-      };
-    });
-    const { billAccountDetails } = Bill[0].billDetails[0];
-    const transformedData = billAccountDetails.map(item => {
-      return {
-        name: {
-          labelName: "Default Label",
-          labelKey: item.taxHeadCode
-        },
-        value: getTaxValue(item),
-        info: {
-          labelName: "Information about NA",
-          labelKey: `Information about ${item.taxHeadCode}`
-        }
-      };
-    });
-    return [...transformedData, ...extraData];
-  }
-};
-
-const createEstimateData = async (LicenseData, dispatch) => {
-  const applicationNo = get(LicenseData, "applicationNumber");
-  const tenantId = get(LicenseData, "tenantId");
-  const businessService = "TL";
-  const queryObj = [
-    { key: "tenantId", value: tenantId },
-    {
-      key: "consumerCode",
-      value: applicationNo
-    },
-    {
-      key: "businessService",
-      value: businessService
-    }
-  ];
-  const payload = await getBill(queryObj);
-  const estimateData = getEstimateData(payload.Bill);
-  dispatch(
-    prepareFinalObject("LicensesTemp[0].estimateCardData", estimateData)
-  );
-};
+import { createEstimateData } from "../../utils";
 
 const moveToSuccess = (LicenseData, dispatch) => {
   const applicationNo = get(LicenseData, "applicationNumber");
@@ -82,7 +17,7 @@ const moveToSuccess = (LicenseData, dispatch) => {
   const status = "success";
   dispatch(
     setRoute(
-      `/landing/mihy-ui-framework/tradelicence/acknowledgement?purpose=${purpose}&status=${status}&applicationNumber=${applicationNo}&tenantId=${tenantId}`
+      `/mihy-ui-framework/tradelicence/acknowledgement?purpose=${purpose}&status=${status}&applicationNumber=${applicationNo}&tenantId=${tenantId}`
     )
   );
 };
@@ -107,13 +42,17 @@ export const callBackForNext = (state, dispatch) => {
     console.log(uploadedDocData);
     const reviewDocData = uploadedDocData.map(item => {
       return {
-        title: item.name,
-        link: item.fileUrl,
+        title: item.documentType,
+        link: item.fileUrl.split(",")[0],
         linkText: "View",
         name: item.fileName
       };
     });
-    const estimateCardData = createEstimateData(LicenseData, dispatch); //no need for assignment
+    createEstimateData(
+      LicenseData,
+      "LicensesTemp[0].estimateCardData",
+      dispatch
+    ); //get bill and populate estimate card
     console.log(reviewDocData);
     dispatch(
       prepareFinalObject("LicensesTemp[0].reviewDocData", reviewDocData)
@@ -361,8 +300,8 @@ export const footer = getCommonApplyFooter({
   }
 });
 
-export const footerReview = (role, status) =>
-  getCommonApplyFooter({
+export const footerReview = (status, applicationNumber) => {
+  return getCommonApplyFooter({
     container: {
       uiFramework: "custom-atoms",
       componentPath: "Container",
@@ -475,10 +414,13 @@ export const footerReview = (role, status) =>
               },
               onClickDefination: {
                 action: "page_change",
-                path:
-                  "/landing/mihy-ui-framework/tradelicence/approve?purpose=reject"
+                path: `/mihy-ui-framework/tradelicence/approve?purpose=reject&applicationNumber=${applicationNumber}`
               },
-              visible: getButtonVisibility(role, status, "REJECT")
+              visible: getButtonVisibility(status, "REJECT"),
+              rolesDefination: {
+                rolePath: "user-info.roles",
+                roles: ["TL_APPROVER"]
+              }
             },
             approveButton: {
               componentPath: "Button",
@@ -499,9 +441,13 @@ export const footerReview = (role, status) =>
               },
               onClickDefination: {
                 action: "page_change",
-                path: "/landing/mihy-ui-framework/tradelicence/approve"
+                path: `/mihy-ui-framework/tradelicence/approve?applicationNumber=${applicationNumber}`
               },
-              visible: getButtonVisibility(role, status, "APPROVE")
+              visible: getButtonVisibility(status, "APPROVE"),
+              rolesDefination: {
+                rolePath: "user-info.roles",
+                roles: ["TL_APPROVER"]
+              }
             },
             proceedPayButton: {
               componentPath: "Button",
@@ -524,7 +470,11 @@ export const footerReview = (role, status) =>
                 action: "page_change",
                 path: "./pay"
               },
-              visible: getButtonVisibility(role, status, "PROCEED TO PAYMENT")
+              visible: getButtonVisibility(status, "PROCEED TO PAYMENT"),
+              rolesDefination: {
+                rolePath: "user-info.roles",
+                roles: ["TL_CEMP"]
+              }
             },
             cancelButton: {
               componentPath: "Button",
@@ -543,24 +493,23 @@ export const footerReview = (role, status) =>
                   labelKey: "TL_COMMON_BUTTON_CANCEL_LICENSE"
                 })
               },
-              rolesDefination:
-              {
-                rolePath:"user-info.roles",
-                roles:['CITIZENn']
-              },
               onClickDefination: {
                 action: "page_change",
-                path:
-                  "/landing/mihy-ui-framework/tradelicence/approve?purpose=cancel"
+                path: `/mihy-ui-framework/tradelicence/approve?purpose=cancel&applicationNumber=${applicationNumber}`
               },
-              // visible: getButtonVisibility(role, status, "CANCEL TRADE LICENSE")
+              visible: getButtonVisibility(status, "CANCEL TRADE LICENSE")
             }
           },
           gridDefination: {
             xs: 12,
             sm: 6
+          },
+          rolesDefination: {
+            rolePath: "user-info.roles",
+            roles: ["TL_APPROVER"]
           }
         }
       }
     }
   });
+};

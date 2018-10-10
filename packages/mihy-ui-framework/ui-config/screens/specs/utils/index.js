@@ -200,21 +200,27 @@ var getSelectField = exports.getSelectField = function getSelectField(selectSche
 };
 
 var getDateField = exports.getDateField = function getDateField(dateScheama) {
-  return getTextField((0, _extends3.default)({}, dateScheama, { props: {
+  return getTextField((0, _extends3.default)({}, dateScheama, {
+    props: {
       type: "date"
-    } }));
+    }
+  }));
 };
 
 var getTimeField = exports.getTimeField = function getTimeField(timeScheama) {
-  return getTextField((0, _extends3.default)({}, timeScheama, { props: {
+  return getTextField((0, _extends3.default)({}, timeScheama, {
+    props: {
       type: "time"
-    } }));
+    }
+  }));
 };
 
 var getDateTimeField = exports.getDateTimeField = function getDateTimeField(dateTimeScheama) {
-  return getTextField((0, _extends3.default)({}, dateTimeScheama, { props: {
+  return getTextField((0, _extends3.default)({}, dateTimeScheama, {
+    props: {
       type: "datetime-local"
-    } }));
+    }
+  }));
 };
 
 var getTextField = exports.getTextField = function getTextField(textScheama) {
@@ -452,7 +458,8 @@ var getPattern = exports.getPattern = function getPattern(type) {
       return (/^[<>()\-+_\|\[\]\\.,;:\s$*@'"\/#%& 0-9A-Za-z]{1,500}$/i
       );
     case "PAN":
-      return "/^[A-Za-z]{5}d{4}[A-Za-z]{1}$/i";
+      return (/^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/i
+      );
     case "TradeName":
       return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
       );
@@ -460,16 +467,16 @@ var getPattern = exports.getPattern = function getPattern(type) {
       return (/^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/i
       );
     case "UOMValue":
-      return (/^[1-9][0-9]{0,3}$/i
+      return (/^(0)*[1-9][0-9]{0,3}$/i
       );
     case "OperationalArea":
-      return (/^[1-9][0-9]{0,6}$/i
+      return (/^(0)*[1-9][0-9]{0,6}$/i
       );
     case "NoOfEmp":
-      return (/^[1-9][0-9]{0,2}$/i
+      return (/^(0)*[1-9][0-9]{0,2}$/i
       );
     case "GSTNo":
-      return (/^d{2}[A-Z]{5}d{4}[A-Z]{1}d[Z]{1}[A-Zd]{1}$/i
+      return (/^\d{2}[A-Z]{5}\d{4}[A-Z]{1}\d[Z]{1}[A-Z\d]{1}$/i
       );
     case "DoorHouseNo":
       return (/^[a-zA-Z0-9\s]{1,10}$/i

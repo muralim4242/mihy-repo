@@ -10,7 +10,11 @@ import {
 import get from "lodash/get";
 import set from "lodash/set";
 
-import { commonTransform, objectToDropdown } from "../utils";
+import {
+  commonTransform,
+  objectToDropdown,
+  getCurrentFinancialYear
+} from "../utils";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import { getQueryArg } from "mihy-ui-framework/ui-utils/commons";
 import { footer } from "./applyResource/footer";
@@ -19,8 +23,10 @@ import { tradeDetails } from "./applyResource/tradeDetails";
 import { tradeLocationDetails } from "./applyResource/tradeLocationDetails";
 import { tradeOwnerDetails } from "./applyResource/tradeOwnerDetails";
 import { documentList } from "./applyResource/documentList";
-import { httpRequest } from "mihy-ui-framework/ui-utils";
-import { updatePFOforSearchResults } from "mihy-ui-framework/ui-utils/commons";
+// import { httpRequest } from "mihy-ui-framework/ui-utils";
+// import { updatePFOforSearchResults } from "mihy-ui-framework/ui-utils/commons";
+import { httpRequest } from "../../../../ui-utils";
+import { updatePFOforSearchResults } from "../../../../ui-utils/commons";
 
 const stepsData = ["Trade Details", "Owner Details", "Documents", "Summary"];
 const stepper = getStepperObject({ props: { activeStep: 0 } }, stepsData);
@@ -28,7 +34,7 @@ const queryValue = getQueryArg(window.location.href, "applicationNumber");
 
 const header = getCommonContainer({
   header: getCommonHeader({
-    labelName: "Apply for New Trade License (2018-2019)",
+    labelName: `Apply for New Trade License (${getCurrentFinancialYear()})`,
     labelKey: "TL_COMMON_PAYMENT_NEW_LIC"
   }),
   applicationNumber: {

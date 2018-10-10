@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   getTranslatedLabel,
   transformById
-} from "mihy-ui-framework/ui-utils/commons";
+} from "../../ui-utils/commons";
 
 const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
   if (labelKey) {

@@ -24,6 +24,7 @@ const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
 };
 
 class TextFieldContainer extends React.Component {
+
   render() {
     let {
       label = {},
@@ -40,8 +41,12 @@ class TextFieldContainer extends React.Component {
       dispatch,
       ...rest
     } = this.props;
-    if (!isEmpty(iconObj)) {
-      iconObj.onClick = () => iconObj.onClickOnIcon(state, dipatch);
+
+    if (!isEmpty(iconObj) && iconObj.onClickDefination) {
+      iconObj={
+        ...iconObj,
+        onClick : () => iconObj.onClickDefination.callBack(state, dispatch)
+      }
     }
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(
