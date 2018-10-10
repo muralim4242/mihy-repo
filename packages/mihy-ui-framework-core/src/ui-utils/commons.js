@@ -113,9 +113,6 @@ export const isFileValid = (file, acceptedFiles) => {
   );
 };
 
-
-
-
 export const transformById = (payload, id) => {
   return (
     payload &&
@@ -128,7 +125,6 @@ export const transformById = (payload, id) => {
     }, {})
   );
 };
-
 
 export const getTranslatedLabel = (labelKey, localizationLabels) => {
   let translatedLabel = null;

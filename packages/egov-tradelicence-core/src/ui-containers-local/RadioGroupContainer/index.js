@@ -34,13 +34,14 @@ class RadioButtonsGroup extends React.Component {
 
   handleChange = event => {
     const { jsonPath, approveCheck } = this.props;
-    this.setState({ value: event.target.value });
-    approveCheck(jsonPath, this.state.value);
+    this.setState({ value: event.target.value }, () => {
+      approveCheck(jsonPath, this.state.value);
+    });
   };
 
   render() {
     const { classes, buttons } = this.props;
-
+    console.log("Button is.....3", this.state.value);
     return (
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>

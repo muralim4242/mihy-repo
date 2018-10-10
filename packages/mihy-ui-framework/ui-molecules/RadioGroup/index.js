@@ -86,7 +86,9 @@ var RadioButtonsGroup = function (_React$Component) {
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RadioButtonsGroup.__proto__ || Object.getPrototypeOf(RadioButtonsGroup)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       value: "No"
     }, _this.handleChange = function (event) {
-      _this.setState({ value: event.target.value });
+      _this.setState({ value: event.target.value }, function () {
+        approveCheck(jsonPath, _this.state.value);
+      });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
