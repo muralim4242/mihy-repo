@@ -113,75 +113,8 @@ export const isFileValid = (file, acceptedFiles) => {
   );
 };
 
-export const acceptedFiles = acceptedExt => {
-  const splitExtByName = acceptedExt.split(",");
-  const acceptedFileTypes = splitExtByName.reduce((result, curr) => {
-    if (curr.includes("image")) {
-      result.push("image");
-    } else {
-      result.push(curr.split(".")[1]);
-    }
-    return result;
-  }, []);
-  return acceptedFileTypes;
-};
 
-export const handleFileUpload = (event, handleDocument, props) => {
-  const S3_BUCKET = {
-    endPoint: "filestore/v1/files"
-  };
-  const { inputProps, maxFileSize } = props;
-  const input = event.target;
-  if (input.files && input.files.length > 0) {
-    const files = input.files;
-    Object.keys(files).forEach(async (key, index) => {
-      const file = files[key];
-      const fileValid = isFileValid(file, acceptedFiles(inputProps.accept));
-      const isSizeValid = getFileSize(file) <= maxFileSize;
-      if (!fileValid) {
-        alert(`Only image or pdf files can be uploaded`);
-        return;
-      }
-      if (!isSizeValid) {
-        alert(`Maximum file size can be ${5} MB`);
-        return;
-      }
-      if (file.type.match(/^image\//)) {
-        const imageUri = await getImageUrlByFile(file);
-        const fileStoreId = await uploadFile(
-          S3_BUCKET.endPoint,
-          "rainmaker-pgr",
-          file,
-          "pb"
-        );
-        handleDocument(file, fileStoreId);
-      } else {
-        const fileStoreId = await uploadFile(
-          S3_BUCKET.endPoint,
-          "RAINMAKER-PGR",
-          file,
-          "pb"
-        );
-        handleDocument(file, fileStoreId);
-      }
-    });
-  }
-};
 
-export const updateTradeDetails = async requestBody => {
-  try {
-    const payload = await httpRequest(
-      "post",
-      "/tl-services/v1/_update",
-      "",
-      [],
-      requestBody
-    );
-    return payload;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const transformById = (payload, id) => {
   return (
@@ -194,46 +127,4 @@ export const transformById = (payload, id) => {
       return result;
     }, {})
   );
-};
-
-export const getSearchResults = async queryObject => {
-  try {
-    const response = await httpRequest(
-      "post",
-      "/tl-services/v1/_search",
-      "",
-      queryObject
-    );
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const updatePFOforSearchResults = async (
-  action,
-  state,
-  dispatch,
-  queryValue
-) => {
-  let queryObject = [
-    { key: "tenantId", value: "pb.amritsar" },
-    { key: "applicationNumber", value: queryValue }
-  ];
-  const payload = await getSearchResults(queryObject);
-  dispatch(prepareFinalObject("Licenses[0]", payload.Licenses[0]));
-};
-
-export const getTranslatedLabel = (labelKey, localizationLabels) => {
-  let translatedLabel = null;
-  if (localizationLabels && localizationLabels.hasOwnProperty(labelKey)) {
-    translatedLabel = localizationLabels[labelKey];
-    if (
-      translatedLabel &&
-      typeof translatedLabel === "object" &&
-      translatedLabel.hasOwnProperty("message")
-    )
-      translatedLabel = translatedLabel.message;
-  }
-  return translatedLabel || labelKey;
 };
