@@ -53,14 +53,11 @@ export const tradeLocationDetails = getCommonCard({
             iconName: "search",
             position: "end",
             color: "#FE7A51",
-            // downloadReceiptButtonLabel: getLabel({
-            //   labelName: "SEARCH",
-            //   labelKey: "TL_CONFIRMATION_BUTTON_DOWN_REPT"
-            // }),
             onClickDefination: {
               action: "condition",
-              callBack: (state, dispatch) => {
-                getDetailsFromProperty(state, dispatch);
+              callBack: (state,dispatch)=>{
+                console.log(state);
+                console.log(dispatch);
               }
             }
           },
@@ -70,6 +67,31 @@ export const tradeLocationDetails = getCommonCard({
           },
           jsonPath: "Licenses[0].propertyId"
         }),
+        button: {
+          componentPath: "Button",
+          props: {
+            variant: "outlined",
+            color: "primary",
+            style: {
+              width: 25,
+              height: 4,
+              border: "none",
+              marginTop: 18,
+              left: 407,
+              position: "absolute"
+            }
+          },
+          children: {
+            downloadReceiptButtonLabel: getLabel({
+              labelName: "SEARCH",
+              labelKey: "TL_CONFIRMATION_BUTTON_DOWN_REPT"
+            })
+          },
+          onClickDefination: {
+            action: "condition",
+            callBack: getDetailsFromProperty
+          }
+        },
         ico: {
           uiFramework: "custom-molecules-local",
           componentPath: "Tooltip",
@@ -91,7 +113,10 @@ export const tradeLocationDetails = getCommonCard({
             sourceJsonPath: "applyScreenMdmsData.tenant.tenants",
             jsonPath: "Licenses[0].tradeLicenseDetail.address.tenantId",
             gridDefination: { sm: 12 },
-            required: true
+            required: true,
+            props:{
+              disabled:true
+            }
           }),
           beforeFieldChange: async (action, state, dispatch) => {
             try {
@@ -236,7 +261,14 @@ export const tradeLocationDetails = getCommonCard({
             },
             iconObj: {
               iconName: "gps_fixed",
-              position: "end"
+              position: "end",
+              onClickDefination: {
+                action: "condition",
+                callBack: (state,dispatch)=>{
+                  console.log(state);
+                  console.log(dispatch);
+                }
+              }
             },
             gridDefination: {
               xs: 12,

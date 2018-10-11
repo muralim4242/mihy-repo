@@ -196,30 +196,30 @@ var getLabel = exports.getLabel = function getLabel(label, labelKey) {
 };
 
 var getSelectField = exports.getSelectField = function getSelectField(selectScheama) {
-  return getTextField((0, _extends3.default)({}, selectScheama, { props: { select: true } }));
+  return getTextField((0, _extends3.default)({}, selectScheama, { props: (0, _extends3.default)({ select: true }, selectScheama.props) }));
 };
 
 var getDateField = exports.getDateField = function getDateField(dateScheama) {
   return getTextField((0, _extends3.default)({}, dateScheama, {
-    props: {
+    props: (0, _extends3.default)({
       type: "date"
-    }
+    }, dateScheama.props)
   }));
 };
 
 var getTimeField = exports.getTimeField = function getTimeField(timeScheama) {
   return getTextField((0, _extends3.default)({}, timeScheama, {
-    props: {
+    props: (0, _extends3.default)({
       type: "time"
-    }
+    }, timeScheama.props)
   }));
 };
 
 var getDateTimeField = exports.getDateTimeField = function getDateTimeField(dateTimeScheama) {
   return getTextField((0, _extends3.default)({}, dateTimeScheama, {
-    props: {
+    props: (0, _extends3.default)({
       type: "datetime-local"
-    }
+    }, dateTimeScheama.props)
   }));
 };
 

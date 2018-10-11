@@ -72,7 +72,21 @@ var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
 
 var _uiUtils = require("../../ui-utils");
 
+var _actions = require("../../ui-redux/screen-configuration/actions");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var checkActiveItems = function checkActiveItems(items) {
+  var count = 0;
+  for (var i = 0; i < items.length; i++) {
+    if (checkActiveItem(items[i])) count++;
+  }
+  return count;
+};
+
+var checkActiveItem = function checkActiveItem(item) {
+  return item && (item.active === undefined || item.active !== false);
+};
 
 var MultiItem = function (_React$Component) {
   (0, _inherits3.default)(MultiItem, _React$Component);
@@ -99,10 +113,13 @@ var MultiItem = function (_React$Component) {
         _this.addItem();
       } else {
         for (var i = 0; i < editItems.length; i++) {
-          _this.addItem();
+          if (checkActiveItem(editItems[i])) {
+            _this.addItem(true);
+          }
         }
       }
     }, _this.addItem = function () {
+      var isNew = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var _this$props2 = _this.props,
           addItemToState = _this$props2.onFieldChange,
           screenKey = _this$props2.screenKey,
@@ -114,7 +131,7 @@ var MultiItem = function (_React$Component) {
           headerJsonPath = _this$props2.headerJsonPath,
           screenConfig = _this$props2.screenConfig;
 
-      var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items", []);
+      var items = isNew ? [] : (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items", []);
       var itemsLength = items.length;
       (0, _set2.default)(scheama, headerJsonPath, headerName + " - " + (itemsLength + 1));
       if (sourceJsonPath) {
@@ -139,10 +156,14 @@ var MultiItem = function (_React$Component) {
           removeItem = _this$props3.onFieldChange,
           screenKey = _this$props3.screenKey,
           componentJsonpath = _this$props3.componentJsonpath,
-          screenConfig = _this$props3.screenConfig;
+          screenConfig = _this$props3.screenConfig,
+          updatePreparedFormObject = _this$props3.updatePreparedFormObject,
+          sourceJsonPath = _this$props3.sourceJsonPath;
 
       var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
-      items.splice(index, 1);
+      updatePreparedFormObject(sourceJsonPath + "[" + index + "].active", false);
+      items[index].active = false;
+      // items.splice(index,1);
       removeItem(screenKey, componentJsonpath, "props.items", items);
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
@@ -150,7 +171,6 @@ var MultiItem = function (_React$Component) {
   (0, _createClass3.default)(MultiItem, [{
     key: "render",
     value: function render() {
-      console.log(this.props);
       var _props = this.props,
           items = _props.items,
           scheama = _props.scheama,
@@ -168,32 +188,42 @@ var MultiItem = function (_React$Component) {
         _Div2.default,
         null,
         items.length > 0 && items.map(function (item, key) {
-          return _react2.default.createElement(
-            _Div2.default,
-            { key: key },
-            items.length > 1 && _react2.default.createElement(
-              _Container2.default,
-              null,
-              _react2.default.createElement(
-                _Item2.default,
-                { xs: 12, align: "right" },
+          if (checkActiveItem(item)) {
+            return _react2.default.createElement(
+              _Div2.default,
+              { key: key },
+              checkActiveItems(items) > 1 && _react2.default.createElement(
+                _Container2.default,
+                null,
                 _react2.default.createElement(
-                  _IconButton2.default,
-                  { style: { marginBottom: "-105px", width: "40px", height: "40px" }, onClick: function onClick(e) {
-                      return removeItem(key);
-                    }, "aria-label": "Remove" },
-                  _react2.default.createElement(_Icon2.default, { iconName: "clear" })
+                  _Item2.default,
+                  { xs: 12, align: "right" },
+                  _react2.default.createElement(
+                    _IconButton2.default,
+                    {
+                      style: {
+                        marginBottom: "-105px",
+                        width: "40px",
+                        height: "40px"
+                      },
+                      onClick: function onClick(e) {
+                        return removeItem(key);
+                      },
+                      "aria-label": "Remove"
+                    },
+                    _react2.default.createElement(_Icon2.default, { iconName: "clear" })
+                  )
                 )
-              )
-            ),
-            _react2.default.createElement(_RenderScreen2.default, {
-              screenKey: screenKey,
-              components: item,
-              uiFramework: uiFramework,
-              onFieldChange: onFieldChange,
-              onComponentClick: onComponentClick
-            })
-          );
+              ),
+              _react2.default.createElement(_RenderScreen2.default, {
+                screenKey: screenKey,
+                components: item,
+                uiFramework: uiFramework,
+                onFieldChange: onFieldChange,
+                onComponentClick: onComponentClick
+              })
+            );
+          }
         }),
         hasAddItem !== false && _react2.default.createElement(
           _Container2.default,
@@ -226,7 +256,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    updatePreparedFormObject: function updatePreparedFormObject(jsonPath, value) {
+      return dispatch((0, _actions.prepareFinalObject)(jsonPath, value));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MultiItem);

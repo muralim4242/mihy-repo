@@ -175,14 +175,15 @@ export const getLabel = (label, labelKey, props = {}) => {
 };
 
 export const getSelectField = selectScheama => {
-  return getTextField({ ...selectScheama, props: { select: true } });
+  return getTextField({ ...selectScheama, props: { select: true ,...selectScheama.props} });
 };
 
 export const getDateField = dateScheama => {
   return getTextField({
     ...dateScheama,
     props: {
-      type: "date"
+      type: "date",
+      ...dateScheama.props
     }
   });
 };
@@ -191,7 +192,8 @@ export const getTimeField = timeScheama => {
   return getTextField({
     ...timeScheama,
     props: {
-      type: "time"
+      type: "time",
+      ...timeScheama.props
     }
   });
 };
@@ -200,7 +202,8 @@ export const getDateTimeField = dateTimeScheama => {
   return getTextField({
     ...dateTimeScheama,
     props: {
-      type: "datetime-local"
+      type: "datetime-local",
+      ...dateTimeScheama.props
     }
   });
 };
