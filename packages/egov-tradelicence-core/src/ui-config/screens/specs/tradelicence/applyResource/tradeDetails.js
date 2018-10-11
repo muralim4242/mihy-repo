@@ -207,14 +207,14 @@ const accessoriesCard = {
         componentPath: "Container",
         children: {
           head: getCommonSubHeader({
-            labelName: "Accessory",
+            labelName: "Accessories",
             labelKey: "TL_NEW_TRADE_DETAILS_HEADER_ACC"
           }),
           ico: {
             uiFramework: "custom-molecules-local",
             componentPath: "Tooltip",
             props: {
-              val: "Accessory Information",
+              val: "Accessories Information",
               style: getIconStyle("headerIcon")
             }
           }
@@ -307,11 +307,12 @@ const accessoriesCard = {
         })
       })
     }),
+
     items: [],
     addItemLabel: "ADD ACCESSORIES",
     headerName: "Accessory",
     headerJsonPath:
-      "children.cardContent.children.header.children.head.children.Accessory.props.label",
+      "children.cardContent.children.header.children.head.children.Accessories.props.label",
     sourceJsonPath: "Licenses[0].tradeLicenseDetail.accessories",
     prefixSourceJsonPath:
       "children.cardContent.children.accessoriesCardContainer.children"
