@@ -21,12 +21,12 @@ const styles = theme => ({
   },
   nameSection:{
     textAlign:"right",
-    marginTop:"-12px",
+    marginTop:"-6px",
     width:"100%"
   }
 });
 
-function MediaControlCard(props) {
+function SearchResult(props) {
   const { classes, searchResult = [] } = props;
 
   return (
@@ -53,8 +53,8 @@ function MediaControlCard(props) {
   );
 }
 
-MediaControlCard.propTypes = {
+SearchResult.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(MediaControlCard);
+export default withStyles(styles, { withTheme: true })(SearchResult);
