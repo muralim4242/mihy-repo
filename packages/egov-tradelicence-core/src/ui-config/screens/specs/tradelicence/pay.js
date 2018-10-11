@@ -30,40 +30,43 @@ const header = getCommonContainer({
     uiFramework: "custom-atoms-local",
     componentPath: "ApplicationNoContainer",
     props: {
-      number: 5434
+      number: getQueryArg(window.location.href, "applicationNumber")
     }
   }
 });
 
 const fetchBill = async (action, state, dispatch) => {
-  // localStorage.setItem("token", "d8d7ffac-46c7-4a37-990b-e64520529676");
+  //get bill and populate estimate card
   const payload = await createEstimateData(
     [],
     "LicensesTemp[0].estimateCardData",
     dispatch,
     window.location.href
-  ); //get bill and populate estimate card
+  );
 
   //initiate receipt object
-  dispatch(prepareFinalObject("ReceiptTemp[0].Bill[0]", payload.Bill[0]));
+  payload &&
+    dispatch(prepareFinalObject("ReceiptTemp[0].Bill[0]", payload.Bill[0]));
 
   //set amount paid as total amount from bill
-  dispatch(
-    prepareFinalObject(
-      "ReceiptTemp[0].Bill[0].billDetails[0].amountPaid",
-      payload.Bill[0].billDetails[0].totalAmount
-    )
-  );
+  payload &&
+    dispatch(
+      prepareFinalObject(
+        "ReceiptTemp[0].Bill[0].billDetails[0].amountPaid",
+        payload.Bill[0].billDetails[0].totalAmount
+      )
+    );
 
   //set total amount in instrument
-  dispatch(
-    prepareFinalObject(
-      "ReceiptTemp[0].instrument.amount",
-      payload.Bill[0].billDetails[0].totalAmount
-    )
-  );
+  payload &&
+    dispatch(
+      prepareFinalObject(
+        "ReceiptTemp[0].instrument.amount",
+        payload.Bill[0].billDetails[0].totalAmount
+      )
+    );
 
-  //Initially select instrument type as text
+  //Initially select instrument type as Cash
   dispatch(
     prepareFinalObject("ReceiptTemp[0].instrument.instrumentType.name", "Cash")
   );
@@ -115,10 +118,9 @@ const screenConfig = {
                   "Review your estimated fees and enter the payment collection details",
                 labelKey: "TL_PAYMENT_HEAD"
               }),
-              paragraph: getCommonParagraph({
-                labelName:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard Lorem Ipsum has been the industry's standard."
-              }),
+              // paragraph: getCommonParagraph({
+              //   labelName: ""
+              // }),
               estimateDetails,
               addPenaltyRebateButton: {
                 componentPath: "Button",

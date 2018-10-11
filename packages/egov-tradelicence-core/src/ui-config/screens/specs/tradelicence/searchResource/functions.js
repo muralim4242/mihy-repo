@@ -1,10 +1,12 @@
 import get from "lodash/get";
 import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
-import { getSearchResults } from "ui-utils/commons";
+import { getSearchResults } from "../../../../..//ui-utils/commons";
 import { convertEpochToDate, convertDateToEpoch } from "../../utils/index";
 import { toggleSnackbarAndSetText } from "mihy-ui-framework/ui-redux/app/actions";
 
 export const searchApiCall = async (state, dispatch) => {
+
+  showHideTable(false, dispatch);
   let queryObject = [
     { key: "tenantId", value: "pb.amritsar" },
     { key: "limit", value: "200" },
@@ -37,7 +39,6 @@ export const searchApiCall = async (state, dispatch) => {
       toggleSnackbarAndSetText(true, "Please fill From Date", "warning")
     );
   } else {
-    showHideTable(false, dispatch);
     showHideProgress(true, dispatch);
     for (var key in searchScreenObject) {
       if (
@@ -120,5 +121,3 @@ const showHideTable = (booleanHideOrShow, dispatch) => {
     )
   );
 };
-
-

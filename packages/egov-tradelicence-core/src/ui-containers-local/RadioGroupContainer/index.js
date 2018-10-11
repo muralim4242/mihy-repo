@@ -41,7 +41,7 @@ class RadioButtonsGroup extends React.Component {
 
   render() {
     const { classes, buttons } = this.props;
-    console.log("Button is.....3", this.state.value);
+
     return (
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>
