@@ -420,7 +420,7 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 path: `/mihy-ui-framework/tradelicence/approve?purpose=reject&applicationNumber=${applicationNumber}&tenantId=${tenantId}`
               },
               visible: getButtonVisibility(status, "REJECT"),
-              rolesDefination: {
+              roleDefination: {
                 rolePath: "user-info.roles",
                 roles: ["TL_APPROVER"]
               }
@@ -447,7 +447,7 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 path: `/mihy-ui-framework/tradelicence/approve?applicationNumber=${applicationNumber}&tenantId=${tenantId}`
               },
               visible: getButtonVisibility(status, "APPROVE"),
-              rolesDefination: {
+              roleDefination: {
                 rolePath: "user-info.roles",
                 roles: ["TL_APPROVER"]
               }
@@ -474,7 +474,7 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 path: `/mihy-ui-framework/tradelicence/pay?applicationNumber=${applicationNumber}&tenantId=${tenantId}&businessService=TL`
               },
               visible: getButtonVisibility(status, "PROCEED TO PAYMENT"),
-              rolesDefination: {
+              roleDefination: {
                 rolePath: "user-info.roles",
                 roles: ["TL_CEMP"]
               }
@@ -500,16 +500,16 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 action: "page_change",
                 path: `/mihy-ui-framework/tradelicence/approve?purpose=cancel&applicationNumber=${applicationNumber}&tenantId=${tenantId}`
               },
-              visible: getButtonVisibility(status, "CANCEL TRADE LICENSE")
+              visible: getButtonVisibility(status, "CANCEL TRADE LICENSE"),
+              roleDefination: {
+                rolePath: "user-info.roles",
+                roles: ["TL_APPROVER"]
+              }
+            },
+            gridDefination: {
+              xs: 12,
+              sm: 6
             }
-          },
-          gridDefination: {
-            xs: 12,
-            sm: 6
-          },
-          rolesDefination: {
-            rolePath: "user-info.roles",
-            roles: ["TL_APPROVER"]
           }
         }
       }

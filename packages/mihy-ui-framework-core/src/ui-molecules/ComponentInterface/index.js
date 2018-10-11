@@ -86,10 +86,11 @@ class ComponentInterface extends React.Component {
       children,
       gridDefination,
       visible = true,
-      rolesDefination = {}
+      roleDefination = {}
     } = this.props;
-    if (visible && !isEmpty(rolesDefination)) {
-      const splitList = get(rolesDefination, "rolePath").split(".");
+
+    if (visible && !isEmpty(roleDefination)) {
+      const splitList = get(roleDefination, "rolePath").split(".");
       const localdata = JSON.parse(localStorage.getItem(splitList[0]));
       const localRoles = get(
         localdata,
@@ -100,7 +101,7 @@ class ComponentInterface extends React.Component {
       const roleCodes = localRoles.map(elem => {
         return get(elem, "code");
       });
-      const roles = get(rolesDefination, "roles");
+      const roles = get(roleDefination, "roles");
       let found = roles.some(elem => roleCodes.includes(elem));
       visible = found;
     }

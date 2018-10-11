@@ -180,18 +180,19 @@ var ComponentInterface = function (_React$Component) {
           gridDefination = _props2.gridDefination,
           _props2$visible = _props2.visible,
           visible = _props2$visible === undefined ? true : _props2$visible,
-          _props2$rolesDefinati = _props2.rolesDefination,
-          rolesDefination = _props2$rolesDefinati === undefined ? {} : _props2$rolesDefinati;
+          _props2$roleDefinatio = _props2.roleDefination,
+          roleDefination = _props2$roleDefinatio === undefined ? {} : _props2$roleDefinatio;
 
-      if (visible && !(0, _isEmpty2.default)(rolesDefination)) {
-        var splitList = (0, _get2.default)(rolesDefination, "rolePath").split(".");
+
+      if (visible && !(0, _isEmpty2.default)(roleDefination)) {
+        var splitList = (0, _get2.default)(roleDefination, "rolePath").split(".");
         var localdata = JSON.parse(localStorage.getItem(splitList[0]));
         var localRoles = (0, _get2.default)(localdata, splitList.slice(1).join("."), localdata);
 
         var roleCodes = localRoles.map(function (elem) {
           return (0, _get2.default)(elem, "code");
         });
-        var roles = (0, _get2.default)(rolesDefination, "roles");
+        var roles = (0, _get2.default)(roleDefination, "roles");
         var found = roles.some(function (elem) {
           return roleCodes.includes(elem);
         });
