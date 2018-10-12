@@ -268,44 +268,52 @@ const getReceiptData = (transformedData, ulbLogo) => {
               {
                 text: "Trade License Fee",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               },
               {
                 text: "Rebate/ Penalty",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               },
               {
                 text: "Adhoc Penalty/Rebate",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               },
               {
                 text: "Total",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               }
             ],
             [
               {
                 text: transformedData.tlFee,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               },
               {
-                text: "NA",
+                text: transformedData.tlRebatePenalty,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               },
               {
                 text: transformedData.tlAdhocPenaltyRebate,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               },
               {
                 text: transformedData.totalAmount,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               }
             ]
           ]
@@ -348,34 +356,40 @@ const getReceiptData = (transformedData, ulbLogo) => {
               {
                 text: "Payment Mode",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               },
               {
                 text: "Transaction ID/ Cheque/ DD No.",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               },
               {
                 text: "Bank Name & Branch",
                 border: payableAmountBorderKey,
-                style: "receipt-table-key"
+                style: "receipt-table-key",
+                alignment: "center"
               }
             ],
             [
               {
                 text: transformedData.paymentMode,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               },
               {
                 text: transformedData.transactionNumber,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               },
               {
                 text: transformedData.bankAndBranch,
                 border: payableAmountBorderKey,
-                style: "receipt-table-value"
+                style: "receipt-table-value",
+                alignment: "center"
               }
             ]
           ]
@@ -409,7 +423,7 @@ const getReceiptData = (transformedData, ulbLogo) => {
         layout: tableborder
       },
       {
-        style: "pt-reciept-citizen-subheader",
+        style: "receipt-approver",
         columns: [
           {
             text: [
@@ -508,7 +522,13 @@ const getReceiptData = (transformedData, ulbLogo) => {
       "receipt-no": {
         color: "#484848",
         fontSize: 10
-      }
+      },
+      "receipt-approver": {
+        fontSize: 10,
+        bold: true,
+        margin: [0, 60, 0, 8], //left top right bottom
+        color: "#484848"
+      },
     }
   };
   return receiptData;
@@ -563,24 +583,11 @@ const getCertificateData = (transformedData, ulbLogo) => {
         columns: [
           {
             width: 160,
-            text: "Trade License No."
+            text: "Trade License Number"
           },
           {
             width: "*",
             text: transformedData.licenseNumber
-          }
-        ]
-      },
-      {
-        style: "tl-certificate-data-2",
-        columns: [
-          {
-            width: 160,
-            text: "Financial Year"
-          },
-          {
-            width: "*",
-            text: transformedData.financialYear
           }
         ]
       },
@@ -607,6 +614,19 @@ const getCertificateData = (transformedData, ulbLogo) => {
           {
             width: "*",
             text: transformedData.receiptNumber
+          }
+        ]
+      },
+      {
+        style: "tl-certificate-data-2",
+        columns: [
+          {
+            width: 160,
+            text: "Financial Year"
+          },
+          {
+            width: "*",
+            text: transformedData.financialYear
           }
         ]
       },
@@ -671,7 +691,7 @@ const getCertificateData = (transformedData, ulbLogo) => {
           },
           {
             width: "*",
-            text: transformedData.totalAmount
+            text: `Rs. ${transformedData.totalAmount}`
           }
         ]
       },
@@ -702,7 +722,7 @@ const getCertificateData = (transformedData, ulbLogo) => {
         ]
       },
       {
-        style: "tl-certificate-data",
+        style: "tl-certificate-footer",
         columns: [
           {
             text: [
@@ -804,7 +824,12 @@ const getCertificateData = (transformedData, ulbLogo) => {
       "receipt-no": {
         color: "#484848",
         fontSize: 10
-      }
+      },
+      "tl-certificate-footer": {
+        fontSize: 14,
+        margin: [0, 80, 0, 0], //left top right bottom
+        color: "#1E1E1E"
+      },
     }
   };
   return tlCertificateData;

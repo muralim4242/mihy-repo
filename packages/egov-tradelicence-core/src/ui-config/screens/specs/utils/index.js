@@ -3,6 +3,7 @@ import {
   getTextField,
   getCommonSubHeader
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
+import { toggleSnackbarAndSetText } from "mihy-ui-framework/ui-redux/app/actions";
 import "./index.css";
 
 import { handleScreenConfigurationFieldChange as handleField } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
@@ -217,7 +218,8 @@ export const getApprovalTextField = queryValue => {
       },
       required: false,
       pattern: "",
-      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments",
+      jsonPath:
+        "Licenses[0].tradeLicenseDetail.additionalDetail.rejectComments",
       props: {
         style: {
           paddingBottom: 5
@@ -236,7 +238,8 @@ export const getApprovalTextField = queryValue => {
       },
       required: false,
       pattern: "",
-      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments",
+      jsonPath:
+        "Licenses[0].tradeLicenseDetail.additionalDetail.cancelComments",
       props: {
         style: {
           paddingBottom: 5
@@ -255,7 +258,8 @@ export const getApprovalTextField = queryValue => {
       },
       required: false,
       pattern: "",
-      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.comments",
+      jsonPath:
+        "Licenses[0].tradeLicenseDetail.additionalDetail.approvalComments",
       props: {
         style: {
           paddingBottom: 5
@@ -619,20 +623,36 @@ export const getDetailsFromProperty = async (state, dispatch) => {
         [],
         {}
       );
-      dispatch(
-        prepareFinalObject(
-          "Licenses[0].tradeLicenseDetail.address",
-          payload.Properties[0].address
-        )
-      );
-      dispatch(
-        handleField(
-          "apply",
-          "components.div.children.formwizardFirstStep.children.tradeLocationDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeLocCity.children.cityDropdown",
-          "props.value",
-          payload.Properties[0].address.tenantId
-        )
-      );
+      if (
+        payload &&
+        payload.Properties &&
+        payload.Properties.hasOwnProperty("length")
+      ) {
+        if (payload.Properties.length === 0) {
+          dispatch(
+            toggleSnackbarAndSetText(
+              true,
+              "Property is not found with this Property Id",
+              "info"
+            )
+          );
+        } else {
+          dispatch(
+            prepareFinalObject(
+              "Licenses[0].tradeLicenseDetail.address",
+              payload.Properties[0].address
+            )
+          );
+          dispatch(
+            handleField(
+              "apply",
+              "components.div.children.formwizardFirstStep.children.tradeLocationDetails.children.cardContent.children.tradeDetailsConatiner.children.tradeLocCity.children.cityDropdown",
+              "props.value",
+              payload.Properties[0].address.tenantId
+            )
+          );
+        }
+      }
     }
   } catch (e) {
     console.log(e);
@@ -656,20 +676,37 @@ export const getDetailsForOwner = async (state, dispatch) => {
         userName: `${ownerNo}`
       }
     );
-    const userInfo =
-      payload.user &&
-      payload.user[0] &&
-      JSON.parse(JSON.stringify(payload.user[0]));
-    if (userInfo && userInfo.createdDate) {
-      userInfo.createdDate = convertDateTimeToEpoch(userInfo.createdDate);
-      userInfo.lastModifiedDate = convertDateTimeToEpoch(
-        userInfo.lastModifiedDate
-      );
-      userInfo.pwdExpiryDate = convertDateTimeToEpoch(userInfo.pwdExpiryDate);
+    if (payload && payload.user && payload.user.hasOwnProperty("length")) {
+      if (payload.user.length === 0) {
+        dispatch(
+          toggleSnackbarAndSetText(
+            true,
+            "Owner is not found with this user id !",
+            "info"
+          )
+        );
+      } else {
+        const userInfo =
+          payload.user &&
+          payload.user[0] &&
+          JSON.parse(JSON.stringify(payload.user[0]));
+        if (userInfo && userInfo.createdDate) {
+          userInfo.createdDate = convertDateTimeToEpoch(userInfo.createdDate);
+          userInfo.lastModifiedDate = convertDateTimeToEpoch(
+            userInfo.lastModifiedDate
+          );
+          userInfo.pwdExpiryDate = convertDateTimeToEpoch(
+            userInfo.pwdExpiryDate
+          );
+        }
+        dispatch(
+          prepareFinalObject(
+            "Licenses[0].tradeLicenseDetail.owners[0]",
+            userInfo
+          )
+        );
+      }
     }
-    dispatch(
-      prepareFinalObject("Licenses[0].tradeLicenseDetail.owners[0]", userInfo)
-    );
   } catch (e) {
     console.log(e);
   }

@@ -4,11 +4,18 @@ import {
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 import { applyTradeLicense } from "../../../../../ui-utils/commons";
 import get from "lodash/get";
+import some from "lodash/some";
+
 
 import { getButtonVisibility, getCommonApplyFooter } from "../../utils";
 import { prepareFinalObject } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import { validate } from "mihy-ui-framework/ui-redux/screen-configuration/utils";
 import { setRoute } from "mihy-ui-framework/ui-redux/app/actions";
 import { createEstimateData } from "../../utils";
+import "./index.css"
+
+import html2canvas from "html2canvas";
+import pdfMake from "pdfmake/build/pdfmake";
 
 const moveToSuccess = (LicenseData, dispatch) => {
   const applicationNo = get(LicenseData, "applicationNumber");
@@ -22,41 +29,124 @@ const moveToSuccess = (LicenseData, dispatch) => {
   );
 };
 
+const generatePdfFromDiv = (action, applicationNumber) => {
+  let target = document.querySelector("#custom-atoms-div");
+  html2canvas(target, {
+    onclone: function(clonedDoc) {
+      // clonedDoc.getElementById("custom-atoms-footer").style = "width: 900px"; //Not Working
+      clonedDoc.getElementById("custom-atoms-footer")[
+        "data-html2canvas-ignore"
+      ] = "true";
+    }
+  }).then(canvas => {
+    var data = canvas.toDataURL();
+    var docDefinition = {
+      content: [
+        {
+          image: data,
+          width: 500
+        }
+      ]
+    };
+    if (action === "download") {
+      pdfMake
+        .createPdf(docDefinition)
+        .download(`preview-${applicationNumber}.pdf`);
+    } else if (action === "print") {
+      pdfMake.createPdf(docDefinition).print();
+    }
+  });
+};
+
 export const callBackForNext = (state, dispatch) => {
   let activeStep = get(
     state.screenConfiguration.screenConfig["apply"],
     "components.div.children.stepper.props.activeStep",
     0
   );
-  console.log(activeStep);
-  if (activeStep === 1) applyTradeLicense(state, dispatch);
+  // console.log(activeStep);
+  let isFormValid = true;
+  if (activeStep === 0) {
+    const isTradeDetailsValid = validateFields(
+      "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.tradeDetailsConatiner.children",
+      state,
+      dispatch
+    );
+    const isTradeLocationValid=validateFields("components.div.children.formwizardFirstStep.children.tradeLocationDetails.children.cardContent.children.tradeDetailsConatiner.children",state,dispatch);
+    let accessoriesJsonPath="components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.accessoriesCard.props.items";
+    let accessories=get(state.screenConfiguration.screenConfig.apply,accessoriesJsonPath,[]);
+    let isAccessoriesValid=true;
+    for (var i = 0; i < accessories.length; i++) {
+      if(!validateFields(`${accessoriesJsonPath}[${i}].item${i}.children.cardContent.children.accessoriesCardContainer.children`,state,dispatch)) isAccessoriesValid=false;
+    }
+    const isTradeUnitValid=validateFields("components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.multipleTradeUnitCard.children.cardContent.children.tradeUnitCardContainer.children",state,dispatch);
+    if (!isTradeDetailsValid || !isTradeLocationValid || !isAccessoriesValid || !isTradeUnitValid) {
+      isFormValid=false;
+    }
+  }
+  if (activeStep === 1) {
+    let ownership=get(state.screenConfiguration.preparedFinalObject,"LicensesTemp[0].tradeLicenseDetail.ownerShipCategory","INDIVIDUAL");
+    if (ownership==="INDIVIDUAL") {
+      let ownersJsonPath="components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.OwnerInfoCard.props.items";
+      let owners=get(state.screenConfiguration.screenConfig.apply,ownersJsonPath,[])
+      for (var i = 0; i < owners.length; i++) {
+        if(!validateFields(`${ownersJsonPath}[${i}].item${i}.children.cardContent.children.tradeUnitCardContainer.children`,state,dispatch)) isFormValid=false;
+      }
+    } else {
+      let ownersJsonPath="components.div.children.formwizardSecondStep.children.tradeOwnerDetails.children.cardContent.children.ownerInfoInstitutional.props.items";
+      let owners=get(state.screenConfiguration.screenConfig.apply,ownersJsonPath,[])
+      for (var i = 0; i < owners.length; i++) {
+        if(!validateFields(`${ownersJsonPath}[${i}].item${i}.children.cardContent.children.tradeUnitCardContainer.children`,state,dispatch)) isFormValid=false;
+      }
+    }
+    if (isFormValid) {
+      applyTradeLicense(state, dispatch);
+    }
+  }
   if (activeStep === 2) {
     const LicenseData = get(
       state.screenConfiguration.preparedFinalObject,
-      "Licenses[0]"
+      "Licenses[0]",{}
     );
+
     const uploadedDocData = get(
-      state.screenConfiguration.preparedFinalObject,
-      "Licenses[0].tradeLicenseDetail.applicationDocuments"
-    );
-    console.log(uploadedDocData);
-    const reviewDocData = uploadedDocData.map(item => {
-      return {
-        title: item.documentType,
-        link: item.fileUrl.split(",")[0],
-        linkText: "View",
-        name: item.fileName
-      };
-    });
-    createEstimateData(
       LicenseData,
-      "LicensesTemp[0].estimateCardData",
-      dispatch
-    ); //get bill and populate estimate card
-    console.log(reviewDocData);
-    dispatch(
-      prepareFinalObject("LicensesTemp[0].reviewDocData", reviewDocData)
+      "tradeLicenseDetail.applicationDocuments",[]
     );
+
+    const uploadedTempDocData= get(
+      state.screenConfiguration.preparedFinalObject,
+      "LicensesTemp[0].applicationDocuments",[]
+    );
+
+    for (var i = 0; i < uploadedTempDocData.length; i++) {
+      if (uploadedTempDocData[i].required && !some(uploadedDocData,{documentType:uploadedTempDocData[i].name})) {
+        isFormValid=false;
+      }
+    }
+    // console.log(uploadedDocData);
+    if (isFormValid) {
+      const reviewDocData = uploadedDocData.map(item => {
+        return {
+          title: item.documentType,
+          link: item.fileUrl.split(",")[0],
+          linkText: "View",
+          name: item.fileName
+        };
+      });
+      createEstimateData(
+        LicenseData,
+        "LicensesTemp[0].estimateCardData",
+        dispatch
+      ); //get bill and populate estimate card
+      console.log(reviewDocData);
+      dispatch(
+        prepareFinalObject("LicensesTemp[0].reviewDocData", reviewDocData)
+      );
+    }
+    else {
+      alert("please upload requied documents");
+    }
   }
   if (activeStep === 3) {
     const LicenseData = get(
@@ -66,7 +156,28 @@ export const callBackForNext = (state, dispatch) => {
     applyTradeLicense(state, dispatch);
     moveToSuccess(LicenseData, dispatch);
   }
-  changeStep(state, dispatch);
+  if (isFormValid) {
+    changeStep(state, dispatch);
+  }
+};
+
+export const validateFields = (objectJsonPath, state, dispatch) => {
+  console.log(
+    get(state.screenConfiguration.screenConfig.apply, objectJsonPath,{})
+  );
+  const fields = get(
+    state.screenConfiguration.screenConfig.apply,
+    objectJsonPath,{}
+  );
+  let isFormValid = true;
+  for (var variable in fields) {
+    if (fields.hasOwnProperty(variable)) {
+      if (fields[variable] && fields[variable].props && (fields[variable].props.disabled===undefined || !fields[variable].props.disabled) && !validate("apply", {...fields[variable],value:fields[variable].props.value}, dispatch)) {
+        isFormValid = false;
+      }
+    }
+  }
+  return isFormValid;
 };
 
 export const changeStep = (
@@ -319,8 +430,10 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 variant: "outlined",
                 style: {
                   width: "200px",
-                  height: "48px",
-                  marginLeft: "24px"
+                  height: "40px",
+                  marginLeft: "24px",
+                  border: "none",
+                  backgroundColor: "#F2F2F2"
                 }
               },
               children: {
@@ -333,22 +446,28 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 },
                 nextButtonLabel: getLabel({
                   labelName: "Download",
-                  labelKey: "TL_COMMON_DOWNLOAD"
-                }),
-                dropdown: {
-                  uiFramework: "custom-atoms",
-                  componentPath: "Icon",
-                  props: {
-                    style: {
-                      float: "right"
-                    },
-                    iconName: "arrow_drop_down"
+                  labelKey: "TL_COMMON_DOWNLOAD",
+                  style: {
+                    marginLeft: "10px",
+                    marginRight: "10px"
                   }
-                }
+                })
+                // dropdown: {
+                //   uiFramework: "custom-atoms",
+                //   componentPath: "Icon",
+                //   props: {
+                //     style: {
+                //       float: "right"
+                //     },
+                //     iconName: "arrow_drop_down"
+                //   }
+                // }
               },
               onClickDefination: {
                 action: "condition",
-                callBack: callBackForPrevious
+                callBack: () => {
+                  generatePdfFromDiv("download", applicationNumber);
+                }
               },
               visible: true
             },
@@ -358,8 +477,10 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 variant: "outlined",
                 style: {
                   width: "200px",
-                  height: "48px",
-                  marginRight: "16px"
+                  height: "40px",
+                  marginLeft: "16px",
+                  border: "none",
+                  backgroundColor: "#F2F2F2"
                 }
               },
               children: {
@@ -372,19 +493,25 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 },
                 nextButtonLabel: getLabel({
                   labelName: "Print",
-                  labelKey: "TL_COMMON_PRINT"
-                }),
-                dropdown: {
-                  uiFramework: "custom-atoms",
-                  componentPath: "Icon",
-                  props: {
-                    iconName: "arrow_drop_down"
+                  labelKey: "TL_COMMON_PRINT",
+                  style: {
+                    marginLeft: "10px",
+                    marginRight: "10px"
                   }
-                }
+                })
+                // dropdown: {
+                //   uiFramework: "custom-atoms",
+                //   componentPath: "Icon",
+                //   props: {
+                //     iconName: "arrow_drop_down"
+                //   }
+                // }
               },
               onClickDefination: {
                 action: "condition",
-                callBack: callBackForPrevious
+                callBack: () => {
+                  generatePdfFromDiv("print", applicationNumber);
+                }
               },
               visible: true
             }
@@ -420,7 +547,7 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 path: `/mihy-ui-framework/tradelicence/approve?purpose=reject&applicationNumber=${applicationNumber}&tenantId=${tenantId}`
               },
               visible: getButtonVisibility(status, "REJECT"),
-              rolesDefination: {
+              roleDefination: {
                 rolePath: "user-info.roles",
                 roles: ["TL_APPROVER"]
               }
@@ -447,7 +574,7 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 path: `/mihy-ui-framework/tradelicence/approve?applicationNumber=${applicationNumber}&tenantId=${tenantId}`
               },
               visible: getButtonVisibility(status, "APPROVE"),
-              rolesDefination: {
+              roleDefination: {
                 rolePath: "user-info.roles",
                 roles: ["TL_APPROVER"]
               }
@@ -474,7 +601,7 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 path: `/mihy-ui-framework/tradelicence/pay?applicationNumber=${applicationNumber}&tenantId=${tenantId}&businessService=TL`
               },
               visible: getButtonVisibility(status, "PROCEED TO PAYMENT"),
-              rolesDefination: {
+              roleDefination: {
                 rolePath: "user-info.roles",
                 roles: ["TL_CEMP"]
               }
@@ -500,16 +627,16 @@ export const footerReview = (status, applicationNumber, tenantId) => {
                 action: "page_change",
                 path: `/mihy-ui-framework/tradelicence/approve?purpose=cancel&applicationNumber=${applicationNumber}&tenantId=${tenantId}`
               },
-              visible: getButtonVisibility(status, "CANCEL TRADE LICENSE")
+              visible: getButtonVisibility(status, "CANCEL TRADE LICENSE"),
+              roleDefination: {
+                rolePath: "user-info.roles",
+                roles: ["TL_APPROVER"]
+              }
             }
           },
           gridDefination: {
             xs: 12,
             sm: 6
-          },
-          rolesDefination: {
-            rolePath: "user-info.roles",
-            roles: ["TL_APPROVER"]
           }
         }
       }

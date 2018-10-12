@@ -6,7 +6,7 @@ import isEmpty from "lodash/isEmpty";
 export const validateField = (field) => {
   const { required, pattern, minLength, maxLength, minValue, maxValue,visible } = field;
 
-  if (visible) {
+  if (visible!==undefined && !visible) {
     return { isFieldValid:true, errorText:"" };
   }
 

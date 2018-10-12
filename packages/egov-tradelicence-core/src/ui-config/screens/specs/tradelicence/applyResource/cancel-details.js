@@ -5,8 +5,8 @@ import {
   getLabelWithValue
 } from "mihy-ui-framework/ui-config/screens/specs/utils";
 
-export const getCancelDetails = (isEditable = true) => {
-  return getCommonGrayCard({
+export const getCancelDetails = () =>
+  getCommonGrayCard({
     header: getCommonSubHeader({
       labelName: "Cancellation Details",
       labelKey: "TL_EMP_APPLICATION_CANC_DET"
@@ -17,15 +17,20 @@ export const getCancelDetails = (isEditable = true) => {
           labelName: "Cancelled By",
           labelKey: "TL_EMP_APPLICATION_CANC_BY"
         },
-        { jsonPath: "Sukhwinder Singh" }
+        {
+          jsonPath:
+            "Licenses[0].tradeLicenseDetail.additionalDetail.cancelledBy"
+        }
       ),
       Comments: getLabelWithValue(
         {
           labelName: "Cancellation Comments",
           labelKey: "TL_EMP_APPLICATION_CANC_COM"
         },
-        { jsonPath: "lorel Ispum" }
+        {
+          jsonPath:
+            "Licenses[0].tradeLicenseDetail.additionalDetail.cancelComments"
+        }
       )
     })
   });
-};

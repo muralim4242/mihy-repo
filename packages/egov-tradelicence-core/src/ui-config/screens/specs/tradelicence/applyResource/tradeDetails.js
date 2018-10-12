@@ -214,7 +214,10 @@ const accessoriesCard = {
             uiFramework: "custom-molecules-local",
             componentPath: "Tooltip",
             props: {
-              val: "Accessories Information",
+              val: {
+                value: "Accessories Information",
+                key: "TL_ACCESSORIES_TOOLTIP_MESSAGE"
+              },
               style: getIconStyle("headerIcon")
             }
           }
@@ -236,7 +239,6 @@ const accessoriesCard = {
           }),
           beforeFieldChange: (action, state, dispatch) => {
             try {
-              console.log(action.value);
               let accessories = get(
                 state.screenConfiguration.preparedFinalObject,
                 `applyScreenMdmsData.TradeLicense.AccessoriesCategory`,
@@ -245,17 +247,25 @@ const accessoriesCard = {
               let currentObject = filter(accessories, {
                 code: action.value
               });
+              const currentUOMField = get(
+                state.screenConfiguration.screenConfig.apply,
+                action.componentJsonpath,
+                []
+              );
+              var jsonArr = currentUOMField.jsonPath.split(".");
+              jsonArr.pop();
+
               if (currentObject[0].uom) {
-                dispatch(
-                  pFO(
-                    "Licenses[0].tradeLicenseDetail.accessories[0].uom",
-                    currentObject[0].uom
-                  )
+                dispatch(pFO(`${jsonArr.join(".")}.uom`, currentObject[0].uom));
+                let currentUOMValueFieldPath = action.componentJsonpath.split(
+                  "."
                 );
+                currentUOMValueFieldPath.pop();
+                currentUOMValueFieldPath = currentUOMValueFieldPath.join(".");
                 dispatch(
                   handleField(
                     "apply",
-                    "components.div.children.formwizardFirstStep.children.tradeDetails.children.cardContent.children.accessoriesCard.props.items[0].item0.children.cardContent.children.accessoriesCardContainer.children.accessoriesUOMValue",
+                    `${currentUOMValueFieldPath}.accessoriesUOMValue`,
                     "props.disabled",
                     false
                   )
@@ -475,7 +485,8 @@ export const tradeDetails = getCommonCard({
         labelName: "Enter Trade GST No.",
         labelKey: "TL_NEW_TRADE_DETAILS_TRADE_GST_NO_PLACEHOLDER"
       },
-      pattern: getPattern("GSTNo")
+      pattern: getPattern("GSTNo"),
+      jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.gstNo"
     }),
     tradeOperationalArea: getTextField({
       label: {

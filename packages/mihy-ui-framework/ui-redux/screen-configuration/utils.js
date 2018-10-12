@@ -39,7 +39,7 @@ var validateField = exports.validateField = function validateField(field) {
       visible = field.visible;
 
 
-  if (visible) {
+  if (visible !== undefined && !visible) {
     return { isFieldValid: true, errorText: "" };
   }
 
