@@ -148,7 +148,6 @@ var epochToYmd = exports.epochToYmd = function epochToYmd(et) {
   if (!et) return null;
   // Return the same format if et is already a string (boundary case)
   if (typeof et === "string") return et;
-  var date = new Date(Math.round(Number(et)));
-  var formattedDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-  return formattedDate;
+  var formatted_date = new Date(et).toISOString().substr(0, 10);
+  return formatted_date;
 };
