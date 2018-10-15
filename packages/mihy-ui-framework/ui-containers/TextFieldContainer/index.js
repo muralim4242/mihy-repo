@@ -99,13 +99,10 @@ var TextFieldContainer = function (_React$Component) {
           dispatch = _props.dispatch,
           rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath", "state", "dispatch"]);
 
-
-      if (!(0, _isEmpty2.default)(iconObj) && iconObj.onClickDefination) {
-        iconObj = (0, _extends3.default)({}, iconObj, {
-          onClick: function onClick() {
-            return iconObj.onClickDefination.callBack(state, dispatch);
-          }
-        });
+      if (!(0, _isEmpty2.default)(iconObj)) {
+        iconObj.onClick = function () {
+          return iconObj.onClickOnIcon(state, dipatch);
+        };
       }
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
       var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);
@@ -158,6 +155,8 @@ var mapStateToProps = function mapStateToProps(state, ownprops) {
   var preparedFinalObject = screenConfiguration.preparedFinalObject;
 
   var fieldValue = value === undefined ? (0, _get2.default)(preparedFinalObject, jsonPath) : value;
+  // Convert epoch to YYYY-MM-DD and set date picker value
+  if (ownprops.type && ownprops.type === "date") fieldValue = (0, _commons.epochToYmd)(fieldValue);
   var dropdownData = [];
   if (select) {
     var constructDropdown = function constructDropdown(dt) {

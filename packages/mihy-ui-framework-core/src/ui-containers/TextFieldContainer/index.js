@@ -4,7 +4,7 @@ import { TextfieldWithIcon } from "../../ui-molecules";
 import MenuItem from "@material-ui/core/MenuItem";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
+import { getTranslatedLabel, transformById, epochToYmd } from "../../ui-utils/commons";
 
 const localizationLabels = JSON.parse(
   window.localStorage.getItem("localization_en_IN")
@@ -24,7 +24,6 @@ const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
 };
 
 class TextFieldContainer extends React.Component {
-
   render() {
     let {
       label = {},
@@ -41,12 +40,8 @@ class TextFieldContainer extends React.Component {
       dispatch,
       ...rest
     } = this.props;
-
-    if (!isEmpty(iconObj) && iconObj.onClickDefination) {
-      iconObj={
-        ...iconObj,
-        onClick : () => iconObj.onClickDefination.callBack(state, dispatch)
-      }
+    if (!isEmpty(iconObj)) {
+      iconObj.onClick = () => iconObj.onClickOnIcon(state, dipatch);
     }
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(
@@ -109,8 +104,10 @@ const mapStateToProps = (state, ownprops) => {
   } = ownprops;
   const { screenConfiguration } = state;
   const { preparedFinalObject } = screenConfiguration;
-  const fieldValue =
+  let fieldValue =
     value === undefined ? get(preparedFinalObject, jsonPath) : value;
+  // Convert epoch to YYYY-MM-DD and set date picker value
+  if (ownprops.type && ownprops.type === "date") fieldValue = epochToYmd(fieldValue);
   let dropdownData = [];
   if (select) {
     const constructDropdown = dt => {
