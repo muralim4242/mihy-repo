@@ -79,9 +79,9 @@ export const tradeLocationDetails = getCommonCard({
           gridDefination: { xs: 1 }
         }
       },
-      gridDefination:{
-        xs:12,
-        sm:6
+      gridDefination: {
+        xs: 12,
+        sm: 6
       }
     },
     tradeLocCity: {
@@ -167,6 +167,7 @@ export const tradeLocationDetails = getCommonCard({
     tradeLocMohalla: {
       uiFramework: "custom-containers-local",
       componentPath: "AutosuggestContainer",
+      jsonPath: "Licenses[0].tradeLicenseDetail.address.locality.code",
       props: {
         suggestions: [],
         label: "Mohalla",
@@ -185,7 +186,7 @@ export const tradeLocationDetails = getCommonCard({
         jsonPath: "Licenses[0].tradeLicenseDetail.address.locality.code",
         sourceJsonPath: "applyScreenMdmsData.tenant.localities",
         fullwidth: true,
-        required: true,
+        required: false,
         inputLabelProps: {
           shrink: true
         }
@@ -193,8 +194,8 @@ export const tradeLocationDetails = getCommonCard({
       gridDefination: {
         xs: 12,
         sm: 6
-      },
-      required: true
+      }
+      // required: true
     },
     tradeLocPincode: getTextField({
       label: {
@@ -217,6 +218,7 @@ export const tradeLocationDetails = getCommonCard({
           width: "100%"
         }
       },
+      jsonPath: "Licenses[0].tradeLicenseDetail.address.latitude",
       onClickDefination: {
         action: "condition",
         callBack: showHideMapPopup
@@ -259,7 +261,7 @@ export const tradeLocationDetails = getCommonCard({
       },
       pattern: getPattern("ElectricityConnNo"),
       jsonPath:
-        "Licenses[0].tradeLicenseDetail.additionalDetail.electricityConnNo"
+        "Licenses[0].tradeLicenseDetail.additionalDetail.electricityConnectionNo"
     })
   }),
   mapsDialog: {

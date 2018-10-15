@@ -24,6 +24,10 @@ var _isEmpty = require("lodash/isEmpty");
 
 var _isEmpty2 = _interopRequireDefault(_isEmpty);
 
+var _get = require("lodash/get");
+
+var _get2 = _interopRequireDefault(_get);
+
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -87,16 +91,18 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
   componentWillMount: function componentWillMount() {
     var _this = this;
 
+    var setLocation = this.props.setLocation;
+
     this.setState({
-      bounds: null,
+      // bounds: null,
       center: { lat: 21.7679, lng: 78.8718 },
-      markers: [],
+      // markers: [],
       onMapMounted: function onMapMounted(ref) {
         gMap.map = ref;
       },
       onBoundsChanged: function onBoundsChanged() {
         _this.setState({
-          bounds: gMap.map.getBounds(),
+          // bounds: gMap.map.getBounds(),
           center: gMap.map.getCenter()
         });
       },
@@ -119,13 +125,16 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
             position: place.geometry.location
           };
         });
-        var nextCenter = _.get(nextMarkers, "0.position", _this.state.center);
+        var nextCenter = (0, _get2.default)(nextMarkers, "0.position", _this.state.center);
+
+        // console.log(nextMarkers);
+        setLocation(nextMarkers);
 
         _this.setState({
-          center: nextCenter,
-          markers: nextMarkers
+          center: nextCenter
+          // markers: nextMarkers
         });
-        // gMap.map.fitBounds(bounds);
+        gMap.map.fitBounds(bounds);
       }
     });
   },
@@ -140,10 +149,20 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
   reRender: function reRender(props, rndBool) {
     var _this2 = this;
 
-    if (props.isDirectionShown) {
+    var dontZoomFar = function dontZoomFar() {
+      // Don't zoom in too far on only one marker
+      if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+        var extendPoint1 = new window.google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+        var extendPoint2 = new window.google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+        bounds.extend(extendPoint1);
+        bounds.extend(extendPoint2);
+      }
+    };
+    if (props.isDirectionShown && (0, _get2.default)(window, "google.maps", undefined)) {
       var DirectionsService = new window.google.maps.DirectionsService();
       bounds = new window.google.maps.LatLngBounds();
       var waypts = [];
+
       var fitBound = function fitBound() {
         // Create bounds from markers
         if (gMap.map) {
@@ -152,14 +171,8 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
             var latlng = new window.google.maps.LatLng(waypts[index].location.lat(), waypts[index].location.lng());
             bounds.extend(latlng);
           }
-          // Don't zoom in too far on only one marker
-          if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-            var extendPoint1 = new window.google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-            var extendPoint2 = new window.google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-            bounds.extend(extendPoint1);
-            bounds.extend(extendPoint2);
-          }
 
+          dontZoomFar();
           gMap.map.fitBounds(bounds);
         }
         // Adjusting zoom here doesn't work :/
@@ -183,6 +196,21 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
         });
       };
       getDestinationDirection();
+    } else if (props.currLoc && (0, _get2.default)(window, "google.maps", undefined)) {
+      var currLoc = props.currLoc;
+
+      bounds = new window.google.maps.LatLngBounds();
+      bounds.extend(new window.google.maps.LatLng(currLoc.lat, currLoc.lng));
+      if (props.entityTypes && props.entityTypes.length > 0) {
+        var entityTypes = props.entityTypes;
+
+        for (var index in entityTypes) {
+          var latlng = new window.google.maps.LatLng(entityTypes[index].position.lat, entityTypes[index].position.lng);
+          bounds.extend(latlng);
+        }
+      }
+      dontZoomFar();
+      gMap.map.fitBounds(bounds);
     }
   }
 }), _reactGoogleMaps.withScriptjs, _reactGoogleMaps.withGoogleMap)(function (props) {
@@ -191,7 +219,7 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
     _reactGoogleMaps.GoogleMap,
     {
       ref: props.onMapMounted,
-      defaultZoom: props.zoomLevel,
+      defaultZoom: props.zoomLevel ? props.zoomLevel : 10,
       defaultCenter: (0, _isEmpty2.default)(props.defaultCenter) ? { lat: 21.7679, lng: 78.8718 } : props.defaultCenter
       // center={props.defaultCenter}
       , options: {
@@ -235,9 +263,9 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
         }
       })
     ),
-    props.markers.map(function (marker, index) {
-      return _react2.default.createElement(_reactGoogleMaps.Marker, { key: index, position: marker.position });
-    }),
+    props.currLoc && _react2.default.createElement(_reactGoogleMaps.Marker, { position: props.currLoc, draggable: true, onDragEnd: function onDragEnd(e) {
+        props.onMarkerChanged(e.latLng.lat(), e.latLng.lng());
+      }, icon: props.currentLocationIcon }),
     props.isDirectionShown && props.directions && _react2.default.createElement(_reactGoogleMaps.DirectionsRenderer, {
       directions: props.directions,
       options: {
@@ -294,7 +322,7 @@ var MyMapComponent = (0, _recompose.compose)((0, _recompose.withProps)({
         return _react2.default.createElement(_reactGoogleMaps.Marker, {
           position: (0, _extends3.default)({}, entity.position),
           key: entityKey,
-          icon: entity.icon,
+          icon: entity.icon ? entity.icon : props.entityIcon,
           onClick: function onClick() {
             return props.onInfoBoxToggle(entity.id);
           }

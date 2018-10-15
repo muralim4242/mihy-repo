@@ -150,7 +150,9 @@ export const getReviewTrade = (isEditable = true) => {
           labelName: "GST No.",
           labelKey: "TL_NEW_TRADE_DETAILS_TRADE_GST_NO_LABEL"
         },
-        { jsonPath: "Licenses[0].tradeName" }
+        {
+          jsonPath: "Licenses[0].tradeLicenseDetail.additionalDetail.gstNo"
+        }
       ),
       reviewOperationalArea: getLabelWithValue(
         {
@@ -265,7 +267,10 @@ export const getReviewTrade = (isEditable = true) => {
           labelName: "Electricity Connection No.",
           labelKey: "TL_NEW_TRADE_DETAILS_ELEC_CON_NO_LABEL"
         },
-        { jsonPath: "Licences[0].propertyId" }
+        {
+          jsonPath:
+            "Licenses[0].tradeLicenseDetail.additionalDetail.electricityConnectionNo"
+        }
       )
     })
   });

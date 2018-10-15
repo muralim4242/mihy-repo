@@ -3,7 +3,13 @@ import {
   bloodGrps,
   toggleSearchList,
   toggleSearchCriteria,
-  toggleSendListButton
+  toggleSendListButton,
+  currLoc,
+  currentLocationIcon,
+  getMyLocation,
+  isEntityTypeShown,
+  donorLocations as entityTypes,
+  donorsLocationIcon as entityIcon
 } from "./search-donar-resources/utils";
 import {
   getSelectField,
@@ -17,6 +23,8 @@ import {
   prepareFinalObject as pFO,
   handleScreenConfigurationFieldChange as handleField
 } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
+import store from "../../../../ui-redux/store";
+const dDispatch = store.dispatch;
 
 const gridDefination = {
   xs: 12
@@ -44,7 +52,38 @@ const screenConfig = {
               uiFramework: "custom-molecules",
               componentPath: "Map",
               props: {
-                zoomLevel: 5
+                zoomLevel: 5,
+                // isMarkerShown:true,
+                currLoc,
+                // currentLocationIcon,
+                onMarkerChanged: (lat, lng) => {
+                  dDispatch(
+                    handleField(
+                      "search-donar",
+                      "components.mihySearchDonorSection.children.mapWapper.children.map",
+                      "props.currLoc",
+                      { lat, lng }
+                    )
+                  );
+                },
+                setLocation: location => {
+                  if (location && location.length > 0 && location[0].position) {
+                    const lat = location[0].position.lat();
+                    const lng = location[0].position.lng();
+                    dDispatch(
+                      handleField(
+                        "search-donar",
+                        "components.mihySearchDonorSection.children.mapWapper.children.map",
+                        "props.currLoc",
+                        { lat, lng }
+                      )
+                    );
+                  }
+                },
+                // isEntityTypeShown,
+                // entityTypes,
+                // onMarkerChanged={bloodStore.handleRequesterLocationChanged}
+                // entityIcon
               }
             },
             bloodList: {
@@ -83,6 +122,24 @@ const screenConfig = {
                         iconName: "my_location"
                       }
                     }
+                  },
+                  onClickDefination: {
+                    action: "condition",
+                    callBack: (state, dispatch) => {
+                      console.log("fired");
+                      getMyLocation({
+                        callBack: position => {
+                          dispatch(
+                            handleField(
+                              "search-donar",
+                              "components.mihySearchDonorSection.children.mapWapper.children.map",
+                              "props.currLoc",
+                              position
+                            )
+                          );
+                        }
+                      });
+                    }
                   }
                 },
                 list: {
@@ -104,8 +161,11 @@ const screenConfig = {
                       }
                     }
                   },
-                  onClickDefination: (state, dispatch) => {
-                    toggleSearchList({ state, dispatch });
+                  onClickDefination: {
+                    action: "condition",
+                    callBack: (state, dispatch) => {
+                      toggleSearchList({ state, dispatch });
+                    }
                   }
                 },
                 send: {
@@ -127,11 +187,14 @@ const screenConfig = {
                       }
                     }
                   },
-                  onClickDefination: (state, dispatch) => {
-                    toggleSendListButton({
-                      state,
-                      dispatch
-                    });
+                  onClickDefination: {
+                    action: "condition",
+                    callBack: (state, dispatch) => {
+                      toggleSendListButton({
+                        state,
+                        dispatch
+                      });
+                    }
                   }
                 }
               }
@@ -246,7 +309,11 @@ const screenConfig = {
                 onClickDefination: {
                   action: "condition",
                   callBack: (state, dispatch) => {
-                    toggleSearchCriteria({ state, dispatch });
+                    toggleSearchCriteria({
+                      state,
+                      dispatch,
+                      showSearchCreteria: false
+                    });
                     toggleSendListButton({
                       state,
                       dispatch
@@ -280,6 +347,16 @@ const screenConfig = {
                       state,
                       dispatch
                     });
+                    // api call for user and user location
+                    // dispatch(
+                    //   handleField(
+                    //     "search-donar",
+                    //     "components.mihySearchDonorSection.children.mapWapper.children.map",
+                    //     "props.currLoc",
+                    //     position
+                    //   )
+                    // );
+
                   }
                 }
               }
@@ -387,6 +464,18 @@ const screenConfig = {
   },
   beforeInitScreen: (action, state, dispatch) => {
     dispatch(pFO("searchCriteria.urgency", "Emergency"));
+    getMyLocation({
+      callBack: position => {
+        dDispatch(
+          handleField(
+            "search-donar",
+            "components.mihySearchDonorSection.children.mapWapper.children.map",
+            "props.currLoc",
+            position
+          )
+        );
+      }
+    });
     return action;
   }
 };

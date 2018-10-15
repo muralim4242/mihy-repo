@@ -92,10 +92,14 @@ var validateForm = exports.validateForm = function validateForm(screenKey, compo
 };
 
 var validate = exports.validate = function validate(screenKey, componentObject, dispatch) {
+  var skipPrepareFormData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
   var validatedObject = validateField(componentObject);
   var isFormValid = true;
   if (componentObject.jsonPath && validatedObject.isFieldValid) {
-    dispatch((0, _actions.prepareFinalObject)(componentObject.jsonPath, componentObject.value));
+    if (!skipPrepareFormData) {
+      dispatch((0, _actions.prepareFinalObject)(componentObject.jsonPath, componentObject.value));
+    }
     if (!componentObject.isFieldValid) {
       isFormValid = true;
       dispatch((0, _actions.handleScreenConfigurationFieldChange)(screenKey, componentObject.componentJsonpath + ".props", "error", false));

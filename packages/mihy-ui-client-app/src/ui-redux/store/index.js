@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development") {
 
 const store = createStore(combineReducers({
   ...rootReducer
-}), compose(
+}),compose(
    applyMiddleware(...middlewares),
    window.devToolsExtension ? window.devToolsExtension() : f => f
  ))

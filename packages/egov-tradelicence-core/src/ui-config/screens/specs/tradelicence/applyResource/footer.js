@@ -172,7 +172,7 @@ export const validateFields = (objectJsonPath, state, dispatch) => {
   let isFormValid = true;
   for (var variable in fields) {
     if (fields.hasOwnProperty(variable)) {
-      if (fields[variable] && fields[variable].props && (fields[variable].props.disabled===undefined || !fields[variable].props.disabled) && !validate("apply", {...fields[variable],value:fields[variable].props.value}, dispatch)) {
+      if (fields[variable] && fields[variable].props && (fields[variable].props.disabled===undefined || !fields[variable].props.disabled) && !validate("apply", {...fields[variable],value:get(state.screenConfiguration.preparedFinalObject,fields[variable].jsonPath)}, dispatch,true)) {
         isFormValid = false;
       }
     }

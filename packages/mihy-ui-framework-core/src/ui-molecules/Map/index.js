@@ -9,6 +9,7 @@ import {
 } from "react-google-maps";
 import isEqual from "lodash/isEqual";
 import isEmpty from "lodash/isEmpty";
+import get from "lodash/get";
 // import InputAdornment from '@material-ui/core/InputAdornment';
 // import TextField from '@material-ui/core/TextField';
 // import Icon from '@material-ui/core/Icon';
@@ -67,16 +68,17 @@ const MyMapComponent = compose(
   }),
   lifecycle({
     componentWillMount() {
+      const {setLocation}=this.props;
       this.setState({
-        bounds: null,
+        // bounds: null,
         center: { lat: 21.7679, lng: 78.8718 },
-        markers: [],
+        // markers: [],
         onMapMounted: ref => {
           gMap.map = ref;
         },
         onBoundsChanged: () => {
           this.setState({
-            bounds: gMap.map.getBounds(),
+            // bounds: gMap.map.getBounds(),
             center: gMap.map.getCenter()
           });
         },
@@ -97,17 +99,20 @@ const MyMapComponent = compose(
           const nextMarkers = places.map(place => ({
             position: place.geometry.location
           }));
-          const nextCenter = _.get(
+          const nextCenter = get(
             nextMarkers,
             "0.position",
             this.state.center
           );
 
+          // console.log(nextMarkers);
+          setLocation(nextMarkers)
+
           this.setState({
             center: nextCenter,
-            markers: nextMarkers
+            // markers: nextMarkers
           });
-          // gMap.map.fitBounds(bounds);
+          gMap.map.fitBounds(bounds);
         }
       });
     },
@@ -121,10 +126,26 @@ const MyMapComponent = compose(
       }
     },
     reRender(props, rndBool) {
-      if (props.isDirectionShown) {
+      const dontZoomFar=() =>{
+        // Don't zoom in too far on only one marker
+        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+          var extendPoint1 = new window.google.maps.LatLng(
+            bounds.getNorthEast().lat() + 0.01,
+            bounds.getNorthEast().lng() + 0.01
+          );
+          var extendPoint2 = new window.google.maps.LatLng(
+            bounds.getNorthEast().lat() - 0.01,
+            bounds.getNorthEast().lng() - 0.01
+          );
+          bounds.extend(extendPoint1);
+          bounds.extend(extendPoint2);
+        }
+      }
+      if (props.isDirectionShown && get(window,"google.maps",undefined)) {
         const DirectionsService = new window.google.maps.DirectionsService();
         bounds = new window.google.maps.LatLngBounds();
         let waypts = [];
+
         const fitBound = () => {
           // Create bounds from markers
           if (gMap.map) {
@@ -141,20 +162,8 @@ const MyMapComponent = compose(
               );
               bounds.extend(latlng);
             }
-            // Don't zoom in too far on only one marker
-            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-              var extendPoint1 = new window.google.maps.LatLng(
-                bounds.getNorthEast().lat() + 0.01,
-                bounds.getNorthEast().lng() + 0.01
-              );
-              var extendPoint2 = new window.google.maps.LatLng(
-                bounds.getNorthEast().lat() - 0.01,
-                bounds.getNorthEast().lng() - 0.01
-              );
-              bounds.extend(extendPoint1);
-              bounds.extend(extendPoint2);
-            }
 
+            dontZoomFar();
             gMap.map.fitBounds(bounds);
           }
           // Adjusting zoom here doesn't work :/
@@ -188,6 +197,28 @@ const MyMapComponent = compose(
         };
         getDestinationDirection();
       }
+      else if (props.currLoc && get(window,"google.maps",undefined)) {
+        const {currLoc}=props;
+        bounds = new window.google.maps.LatLngBounds();
+        bounds.extend(
+          new window.google.maps.LatLng(
+            currLoc.lat,
+            currLoc.lng
+          )
+        );
+        if (props.entityTypes && props.entityTypes.length>0) {
+          const {entityTypes}=props;
+          for (var index in entityTypes) {
+            var latlng = new window.google.maps.LatLng(
+              entityTypes[index].position.lat,
+              entityTypes[index].position.lng
+            );
+            bounds.extend(latlng);
+          }
+        }
+        dontZoomFar()
+        gMap.map.fitBounds(bounds);
+      }
     }
   }),
   withScriptjs,
@@ -197,7 +228,7 @@ const MyMapComponent = compose(
   return (
     <GoogleMap
       ref={props.onMapMounted}
-      defaultZoom={props.zoomLevel}
+      defaultZoom={props.zoomLevel?props.zoomLevel:10}
       defaultCenter={
         isEmpty(props.defaultCenter)
           ? { lat: 21.7679, lng: 78.8718 }
@@ -243,9 +274,11 @@ const MyMapComponent = compose(
           }}
         />
       </SearchBox>
-      {props.markers.map((marker, index) => (
+      {props.currLoc && <Marker position={props.currLoc} draggable={true} onDragEnd={(e)=>{props.onMarkerChanged(e.latLng.lat(),e.latLng.lng())}} icon={props.currentLocationIcon}/>}
+
+      {/*props.markers.map((marker, index) => (
         <Marker key={index} position={marker.position} />
-      ))}
+      ))*/}
       {props.isDirectionShown &&
         props.directions && (
           <DirectionsRenderer
@@ -303,7 +336,7 @@ const MyMapComponent = compose(
               <Marker
                 position={{ ...entity.position }}
                 key={entityKey}
-                icon={entity.icon}
+                icon={entity.icon?entity.icon:props.entityIcon}
                 onClick={() => props.onInfoBoxToggle(entity.id)}
               />
             );

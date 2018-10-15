@@ -60,11 +60,13 @@ export const validateForm = (screenKey,components,dispatch) => {
 };
 
 
-export const validate=(screenKey,componentObject,dispatch)=>{
+export const validate=(screenKey,componentObject,dispatch,skipPrepareFormData=false)=>{
   const validatedObject=validateField(componentObject);
   let isFormValid=true;
   if (componentObject.jsonPath && validatedObject.isFieldValid) {
-    dispatch(prepareFO(componentObject.jsonPath,componentObject.value));
+    if (!skipPrepareFormData) {
+      dispatch(prepareFO(componentObject.jsonPath,componentObject.value));
+    }
     if (!componentObject.isFieldValid) {
       isFormValid=true;
       dispatch(handleField(screenKey,`${componentObject.componentJsonpath}.props`, "error", false));
