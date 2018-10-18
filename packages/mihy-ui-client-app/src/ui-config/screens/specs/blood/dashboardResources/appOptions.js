@@ -16,7 +16,7 @@ export const appOptions = [
     iconColorTwo:"#43a047",
     onClickDefination:{
       action:"page_change",
-      path:"/landing/mihy-ui-framework/blood/registor"
+      path:"/landing/mihy-ui-framework/blood/register"
     }
   },
   {
