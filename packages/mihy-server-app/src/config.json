@@ -1,5 +1,7 @@
 {
 	"port": 8080,
 	"bodyLimit": "100kb",
-	"corsHeaders": ["Link"]
+	"corsHeaders": ["Link"],
+	"secret": "supersecret",
+	"expiresIn":86400 
 }
