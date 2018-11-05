@@ -3,5 +3,6 @@
 	"bodyLimit": "100kb",
 	"corsHeaders": ["Link"],
 	"secret": "supersecret",
-	"expiresIn":86400 
+	"expiresIn":2678400,
+	"resultLimit":100
 }

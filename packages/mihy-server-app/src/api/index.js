@@ -2,7 +2,7 @@ import { version } from '../../package.json';
 import { Router } from 'express';
 import facets from './facets';
 import auth from './auth';
-import coreWithAuth from './coreWithAuth';
+import mdms from './mdms';
 import {verifyToken} from '../lib/util';
 // import blood from './blood';
 
@@ -17,7 +17,7 @@ export default ({ config, db }) => {
 	api.use('/facets', facets({ config, db }));
 
 
-	api.use('/core-with-auth',verifyToken,coreWithAuth({config,db}));
+	api.use('/mdms',verifyToken,mdms({config,db}));
 
 
 	// api.use('./blood',blood({config,db}));

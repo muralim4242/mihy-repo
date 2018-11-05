@@ -42,6 +42,7 @@ initializeDb(db => {
 
   //error handling middleware
   app.use((err, req, res) => {
+    console.log("error midddleware");
     if (err instanceof expressValidation.ValidationError) {
       res.status(err.status).json(err);
     } else {
