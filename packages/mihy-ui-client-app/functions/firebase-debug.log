@@ -1,0 +1,30 @@
+[debug] [2018-11-11T16:45:30.718Z] ----------------------------------------------------------------------
+[debug] [2018-11-11T16:45:30.720Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
+[debug] [2018-11-11T16:45:30.720Z] CLI Version:   6.0.1
+[debug] [2018-11-11T16:45:30.720Z] Platform:      darwin
+[debug] [2018-11-11T16:45:30.720Z] Node Version:  v8.4.0
+[debug] [2018-11-11T16:45:30.721Z] Time:          Sun Nov 11 2018 22:15:30 GMT+0530 (IST)
+[debug] [2018-11-11T16:45:30.721Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-11-11T16:45:30.733Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-11-11T16:45:30.733Z] > authorizing via signed-in user
+[debug] [2018-11-11T16:45:30.733Z] [iam] checking project mihy-all for permissions ["firebase.projects.get"]
+[debug] [2018-11-11T16:45:30.735Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/mihy-all:testIamPermissions  
+
+[debug] [2018-11-11T16:45:32.357Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-11T16:45:32.358Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/mihy-all  
+ 
+[debug] [2018-11-11T16:45:34.257Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-client-app'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-11-11T16:45:34.958Z] Fetching environment
+[debug] [2018-11-11T16:45:34.960Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/734387907524:getServerAppConfig  
+ 
+[debug] [2018-11-11T16:45:36.581Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-11T16:45:36.582Z] Starting @google-cloud/functions-emulator
+[debug] [2018-11-11T16:45:36.641Z] Parsing function triggers
+[info] ✔  functions: mdms: http://localhost:8010/mihy-all/us-central1/mdms
+[info] ✔  functions: test: http://localhost:8010/mihy-all/us-central1/test
+[info] ✔  functions: auth: http://localhost:8010/mihy-all/us-central1/auth
