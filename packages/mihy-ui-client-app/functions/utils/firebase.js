@@ -41,10 +41,14 @@ try {
   console.log(e);
 }
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://mihy-all.firebaseio.com"
-});
+try {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://mihy-all.firebaseio.com"
+  });
+} catch (e) {
+  console.log(e);
+}
 
 
 module.exports = {

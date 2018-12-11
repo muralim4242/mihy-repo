@@ -8,10 +8,10 @@ const TestMolecules = Loadable({
   loading: () => <Loading />
 });
 
-const BloodList = Loadable({
-  loader: () => import("./BloodList"),
-  loading: () => <Loading />
-});
+// const BloodList = Loadable({
+//   loader: () => import("./BloodList"),
+//   loading: () => <Loading />
+// });
 
 const SearchResult = Loadable({
   loader: () => import("./SearchResult"),
@@ -20,6 +20,6 @@ const SearchResult = Loadable({
 
 export {
   TestMolecules,
-  BloodList,
+  // BloodList,
   SearchResult
 }

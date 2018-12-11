@@ -5,7 +5,6 @@ const app = require("./express-instance");
 // when decoded successfully, the ID Token content will be added as `req.user`.
 const validateFirebaseIdToken = async (req, res, next) => {
   console.log("Check if request is authorized with Firebase ID token");
-
   if (
     (!req.headers.authorization ||
       !req.headers.authorization.startsWith("Bearer ")) &&
