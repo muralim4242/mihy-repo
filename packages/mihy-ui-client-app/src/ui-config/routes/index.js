@@ -25,6 +25,11 @@ const Catalog=Loadable({
   loading:Loading
 })
 
+const Home=Loadable({
+  loader:()=>import ('../../ui-views/Home'),
+  loading:Loading
+})
+
 const mainRoutes = [
   {
     path: mainRouteConstants.LANDING,
@@ -41,6 +46,10 @@ const mainRoutes = [
   {
     path: mainRouteConstants.CATALOG,
     component: Catalog
+  },
+  {
+    path: mainRouteConstants.HOME,
+    component: Home
   },
   {
     isRedirect:true,
