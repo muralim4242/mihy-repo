@@ -4,8 +4,7 @@ const app = require("../utils/express-instance");
 // const app = require("../utils/authorized-express-instance");
 // const errorHandler=require("../utils/middlewares/error-handler");
 const { fA } = firebase;
-const db = fA.database();
-const mdmsRef = db.ref("admin/mdms");
+const db = fA.firestore();
 
 const create=require("./create");
 const search=require("./search");
@@ -15,16 +14,16 @@ const remove=require("./delete");
 
 
 //create routes
-app.use("/",search({mdmsRef}));
+app.use("/",search({db}));
 
 //search route
-app.use("/",create({mdmsRef}));
+app.use("/",create({db}));
 
 //update route
-app.use("/",update({mdmsRef}));
+app.use("/",update({db}));
 
 //remove route
-app.use("/",remove({mdmsRef}));
+app.use("/",remove({db}));
 
 
 // app.use(errorHandler);

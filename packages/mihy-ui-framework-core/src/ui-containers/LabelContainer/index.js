@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "mihy-ui-framework/ui-atoms";
+import { Label } from "../..//ui-atoms";
 import get from "lodash/get";
 import { connect } from "react-redux";
 import { getTranslatedLabel, transformById } from "../../ui-utils/commons";
@@ -27,7 +27,11 @@ class LabelContainer extends React.Component {
     let transfomedKeys = transformById(localizationLabels, "code");
     let translatedLabel = getLocaleLabelsforTL(
       labelName,
-      labelKey,
+      labelKey && typeof labelKey === "string"
+        ? labelKey.startsWith("TL_")
+          ? labelKey
+          : `TL_${labelKey}`
+        : labelKey,
       transfomedKeys
     );
     let fieldLabel = getLocaleLabelsforTL(
@@ -43,13 +47,15 @@ class LabelContainer extends React.Component {
 
 const mapStateToProps = (state, ownprops) => {
   let fieldValue = "";
-  const { jsonPath } = ownprops;
+  const { jsonPath, callBack } = ownprops;
   const { screenConfiguration } = state;
   const { preparedFinalObject } = screenConfiguration;
   if (jsonPath) {
     fieldValue = get(preparedFinalObject, jsonPath);
+    if (fieldValue && callBack && typeof callBack === "function") {
+      fieldValue = callBack(fieldValue);
+    }
   }
-
   return { fieldValue };
 };
 

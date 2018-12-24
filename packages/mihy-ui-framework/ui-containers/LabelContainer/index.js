@@ -32,7 +32,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _uiAtoms = require("mihy-ui-framework/ui-atoms");
+var _uiAtoms = require("../..//ui-atoms");
 
 var _get = require("lodash/get");
 
@@ -77,7 +77,7 @@ var LabelContainer = function (_React$Component) {
           rest = (0, _objectWithoutProperties3.default)(_props, ["labelName", "labelKey", "fieldValue"]);
 
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
-      var translatedLabel = getLocaleLabelsforTL(labelName, labelKey, transfomedKeys);
+      var translatedLabel = getLocaleLabelsforTL(labelName, labelKey && typeof labelKey === "string" ? labelKey.startsWith("TL_") ? labelKey : "TL_" + labelKey : labelKey, transfomedKeys);
       var fieldLabel = getLocaleLabelsforTL(fieldValue, "TL_" + fieldValue, transfomedKeys);
       return _react2.default.createElement(_uiAtoms.Label, (0, _extends3.default)({ label: fieldValue ? fieldLabel : translatedLabel }, rest));
     }
@@ -87,14 +87,17 @@ var LabelContainer = function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state, ownprops) {
   var fieldValue = "";
-  var jsonPath = ownprops.jsonPath;
+  var jsonPath = ownprops.jsonPath,
+      callBack = ownprops.callBack;
   var screenConfiguration = state.screenConfiguration;
   var preparedFinalObject = screenConfiguration.preparedFinalObject;
 
   if (jsonPath) {
     fieldValue = (0, _get2.default)(preparedFinalObject, jsonPath);
+    if (fieldValue && callBack && typeof callBack === "function") {
+      fieldValue = callBack(fieldValue);
+    }
   }
-
   return { fieldValue: fieldValue };
 };
 

@@ -1,4 +1,5 @@
 import { handleScreenConfigurationFieldChange as handleField } from "../../../../ui-redux/screen-configuration/actions";
+import { getTranslatedLabel } from "../../../../ui-utils/commons";
 
 const appCardHeaderStyle = (colorOne = "#ec407a", colorTwo = "#d81b60") => {
   return {
@@ -42,7 +43,8 @@ export const getCommonHeader = (header, props) => {
       ...props
     },
     children: {
-      [header]: getLabel(header)
+      // [header]: getLabel(header)
+      key: getLabel(header)
     }
   };
 };
@@ -139,7 +141,8 @@ export const getCommonGrayCard = children => {
     style: {
       backgroundColor: "rgb(242, 242, 242)",
       boxShadow: "none",
-      borderRadius: 0
+      borderRadius: 0,
+      overflow: "visible"
     }
   });
 };
@@ -175,7 +178,10 @@ export const getLabel = (label, labelKey, props = {}) => {
 };
 
 export const getSelectField = selectScheama => {
-  return getTextField({ ...selectScheama, props: { select: true ,...selectScheama.props} });
+  return getTextField({
+    ...selectScheama,
+    props: { select: true, ...selectScheama.props }
+  });
 };
 
 export const getDateField = dateScheama => {
@@ -224,7 +230,16 @@ export const getTextField = textScheama => {
       xs: 12,
       sm: 6
     },
-    props = {}
+    props = {},
+    minLength,
+    maxLength,
+    minValue,
+    maxValue,
+    infoIcon,
+    title = {},
+    errorMessage = "",
+    requiredMessage = "",
+    ...rest
   } = textScheama;
   return {
     uiFramework: "custom-containers",
@@ -243,13 +258,35 @@ export const getTextField = textScheama => {
       sourceJsonPath,
       jsonPath,
       iconObj,
+      title,
+      infoIcon,
       ...props
     },
     gridDefination,
     required,
     pattern,
-    jsonPath
+    jsonPath,
+    minLength,
+    maxLength,
+    minValue,
+    maxValue,
+    errorMessage,
+    requiredMessage,
+    ...rest
   };
+};
+
+export const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
+  if (labelKey) {
+    let translatedLabel = getTranslatedLabel(labelKey, localizationLabels);
+    if (!translatedLabel || labelKey === translatedLabel) {
+      return label;
+    } else {
+      return translatedLabel;
+    }
+  } else {
+    return label;
+  }
 };
 
 export const getCheckBoxwithLabel = (
@@ -426,7 +463,7 @@ export const getPattern = type => {
     case "PAN":
       return /^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/i;
     case "TradeName":
-      return /^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i;
+      return /^[a-zA-Z0-9\s()!-@#&.,?/]{1,100}$/i;
     case "Date":
       return /^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/i;
     case "UOMValue":

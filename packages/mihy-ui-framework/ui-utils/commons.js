@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.epochToYmd = exports.getTranslatedLabel = exports.transformById = exports.isFileValid = exports.getFileSize = exports.getImageUrlByFile = exports.getDateInEpoch = exports.trimObj = exports.fetchFromLocalStorage = exports.persistInLocalStorage = exports.slugify = exports.isFieldEmpty = exports.addQueryArg = exports.getQueryArg = exports.addComponentJsonpath = undefined;
+exports.replaceStrInPath = exports.getLocaleLabels = exports.epochToYmd = exports.getTranslatedLabel = exports.transformById = exports.isFileValid = exports.getFileSize = exports.getImageUrlByFile = exports.getDateInEpoch = exports.trimObj = exports.fetchFromLocalStorage = exports.persistInLocalStorage = exports.slugify = exports.isFieldEmpty = exports.addQueryArg = exports.getQueryArg = exports.addComponentJsonpath = undefined;
 
 var _extends2 = require("babel-runtime/helpers/extends");
 
@@ -17,9 +17,9 @@ var _isEmpty = require("lodash/isEmpty");
 
 var _isEmpty2 = _interopRequireDefault(_isEmpty);
 
-var _api = require("mihy-ui-framework/ui-utils/api");
+var _api = require("../ui-utils/api");
 
-var _actions = require("mihy-ui-framework/ui-redux/screen-configuration/actions");
+var _actions = require("../ui-redux/screen-configuration/actions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -148,6 +148,30 @@ var epochToYmd = exports.epochToYmd = function epochToYmd(et) {
   if (!et) return null;
   // Return the same format if et is already a string (boundary case)
   if (typeof et === "string") return et;
-  var formatted_date = new Date(et).toISOString().substr(0, 10);
+  var date = new Date(et);
+  var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  // date = `${date.getFullYear()}-${month}-${day}`;
+  var formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + day;
   return formatted_date;
+};
+
+var getLocaleLabels = exports.getLocaleLabels = function getLocaleLabels(label, labelKey, localizationLabels) {
+  if (labelKey) {
+    var translatedLabel = getTranslatedLabel(labelKey, localizationLabels);
+    if (!translatedLabel || labelKey === translatedLabel) {
+      return label;
+    } else {
+      return translatedLabel;
+    }
+  } else {
+    return label;
+  }
+};
+
+var replaceStrInPath = exports.replaceStrInPath = function replaceStrInPath(inputString, search, replacement) {
+  String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, "g"), replacement);
+  };
+  return inputString.replaceAll(search, replacement);
 };

@@ -74,6 +74,10 @@ var _uiUtils = require("../../ui-utils");
 
 var _actions = require("../../ui-redux/screen-configuration/actions");
 
+var _isEqual = require("lodash/isEqual");
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkActiveItems = function checkActiveItems(items) {
@@ -85,7 +89,7 @@ var checkActiveItems = function checkActiveItems(items) {
 };
 
 var checkActiveItem = function checkActiveItem(item) {
-  return item && (item.active === undefined || item.active !== false);
+  return item && (item.isDeleted === undefined || item.isDeleted !== false);
 };
 
 var MultiItem = function (_React$Component) {
@@ -103,33 +107,53 @@ var MultiItem = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MultiItem.__proto__ || Object.getPrototypeOf(MultiItem)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
-      var _this$props = _this.props,
-          items = _this$props.items,
-          sourceJsonPath = _this$props.sourceJsonPath,
-          preparedFinalObject = _this$props.preparedFinalObject;
+      _this.initMultiItem(_this.props);
+    }, _this.initMultiItem = function (props) {
+      var items = props.items,
+          sourceJsonPath = props.sourceJsonPath,
+          preparedFinalObject = props.preparedFinalObject;
 
       var editItems = (0, _get2.default)(preparedFinalObject, sourceJsonPath, []);
-      if (!items.length && !editItems.length) {
-        _this.addItem();
-      } else {
-        for (var i = 0; i < editItems.length; i++) {
-          if (checkActiveItem(editItems[i])) {
-            _this.addItem(true);
+      if (editItems) {
+        if (!items.length && !editItems.length) {
+          _this.addItem();
+        } else {
+          if (items.length < editItems.length) {
+            for (var i = 0; i < editItems.length; i++) {
+              if (checkActiveItem(editItems[i])) {
+                if (i) {
+                  _this.addItem();
+                } else {
+                  _this.addItem(true);
+                }
+                // this.addItem(true);
+              }
+            }
           }
         }
       }
+    }, _this.objectToDropdown = function (object) {
+      var dropDown = [];
+      for (var variable in object) {
+        if (object.hasOwnProperty(variable)) {
+          dropDown.push({ code: variable });
+        }
+      }
+      return dropDown;
     }, _this.addItem = function () {
       var isNew = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var _this$props2 = _this.props,
-          addItemToState = _this$props2.onFieldChange,
-          screenKey = _this$props2.screenKey,
-          scheama = _this$props2.scheama,
-          sourceJsonPath = _this$props2.sourceJsonPath,
-          prefixSourceJsonPath = _this$props2.prefixSourceJsonPath,
-          componentJsonpath = _this$props2.componentJsonpath,
-          headerName = _this$props2.headerName,
-          headerJsonPath = _this$props2.headerJsonPath,
-          screenConfig = _this$props2.screenConfig;
+      var _this$props = _this.props,
+          addItemToState = _this$props.onFieldChange,
+          screenKey = _this$props.screenKey,
+          scheama = _this$props.scheama,
+          sourceJsonPath = _this$props.sourceJsonPath,
+          prefixSourceJsonPath = _this$props.prefixSourceJsonPath,
+          afterPrefixJsonPath = _this$props.afterPrefixJsonPath,
+          componentJsonpath = _this$props.componentJsonpath,
+          headerName = _this$props.headerName,
+          headerJsonPath = _this$props.headerJsonPath,
+          screenConfig = _this$props.screenConfig,
+          preparedFinalObject = _this$props.preparedFinalObject;
 
       var items = isNew ? [] : (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items", []);
       var itemsLength = items.length;
@@ -138,37 +162,84 @@ var MultiItem = function (_React$Component) {
         var multiItemContent = (0, _get2.default)(scheama, prefixSourceJsonPath, {});
         for (var variable in multiItemContent) {
           if (multiItemContent.hasOwnProperty(variable) && multiItemContent[variable].props && multiItemContent[variable].props.jsonPath) {
-            var splitedJsonPath = multiItemContent[variable].props.jsonPath.split(sourceJsonPath);
+            var prefixJP = multiItemContent[variable].props.jsonPathUpdatePrefix ? multiItemContent[variable].props.jsonPathUpdatePrefix : sourceJsonPath;
+            var splitedJsonPath = multiItemContent[variable].props.jsonPath.split(prefixJP);
             if (splitedJsonPath.length > 1) {
               var propertyName = splitedJsonPath[1].split("]");
               if (propertyName.length > 1) {
-                multiItemContent[variable].jsonPath = sourceJsonPath + "[" + itemsLength + "]" + propertyName[1];
-                multiItemContent[variable].props.jsonPath = sourceJsonPath + "[" + itemsLength + "]" + propertyName[1];
+                multiItemContent[variable].jsonPath = prefixJP + "[" + itemsLength + "]" + propertyName[1];
+                multiItemContent[variable].props.jsonPath = prefixJP + "[" + itemsLength + "]" + propertyName[1];
+                multiItemContent[variable].index = itemsLength;
+              }
+            }
+            //Temporary fix - For setting trade type - should be generalised
+            var value = (0, _get2.default)(preparedFinalObject, multiItemContent[variable].props.jsonPath);
+            if (multiItemContent[variable].props.setDataInField && value) {
+              if (multiItemContent[variable].props.jsonPath.split(".")[0] === "LicensesTemp" && multiItemContent[variable].props.jsonPath.split(".").pop() === "tradeType") {
+                var tradeTypeData = (0, _get2.default)(preparedFinalObject, "applyScreenMdmsData.TradeLicense.TradeType", []);
+                var tradeTypeDropdownData = tradeTypeData && tradeTypeData.TradeType && Object.keys(tradeTypeData.TradeType).map(function (item) {
+                  return { code: item, active: true };
+                });
+                multiItemContent[variable].props.data = tradeTypeDropdownData;
+                var data = tradeTypeData[value];
+                if (data) {
+                  multiItemContent["tradeType"].props.data = _this.objectToDropdown(data);
+                }
+              } else if (multiItemContent[variable].props.jsonPath.split(".").pop() === "tradeType") {
+                var _data = (0, _get2.default)(preparedFinalObject, "applyScreenMdmsData.TradeLicense.TradeType." + value.split(".")[0] + "." + value.split(".")[1]);
+                if (_data) {
+                  multiItemContent[variable].props.data = _data;
+                }
+              } else if (multiItemContent[variable].props.jsonPath.split(".").pop() === "uomValue" && value > 0) {
+                multiItemContent[variable].props.disabled = false;
+                multiItemContent[variable].props.required = true;
+              }
+            }
+            if (multiItemContent[variable].props.setDataInField && multiItemContent[variable].props.disabled) {
+              if (multiItemContent[variable].props.jsonPath.split(".").pop() === "uomValue") {
+                var disabledValue = (0, _get2.default)(screenConfig[screenKey], multiItemContent[variable].componentJsonpath + ".props.disabled", true);
+                multiItemContent[variable].props.disabled = disabledValue;
+              }
+            }
+          } else if (afterPrefixJsonPath && multiItemContent.hasOwnProperty(variable) && (0, _get2.default)(multiItemContent[variable], afterPrefixJsonPath + ".props") && (0, _get2.default)(multiItemContent[variable], afterPrefixJsonPath + ".props.jsonPath")) {
+            var _splitedJsonPath = (0, _get2.default)(multiItemContent[variable], afterPrefixJsonPath + ".props.jsonPath").split(sourceJsonPath);
+            if (_splitedJsonPath.length > 1) {
+              var _propertyName = _splitedJsonPath[1].split("]");
+              if (_propertyName.length > 1) {
+                (0, _set2.default)(multiItemContent[variable], afterPrefixJsonPath + ".props.jsonPath", sourceJsonPath + "[" + itemsLength + "]" + _propertyName[1]);
               }
             }
           }
         }
         (0, _set2.default)(scheama, prefixSourceJsonPath, multiItemContent);
       }
-      addItemToState(screenKey, componentJsonpath, "props.items[" + itemsLength + "]", (0, _cloneDeep2.default)((0, _uiUtils.addComponentJsonpath)((0, _defineProperty3.default)({}, "item" + itemsLength, scheama), componentJsonpath + ".props.items[" + itemsLength + "]")));
+      items[itemsLength] = (0, _cloneDeep2.default)((0, _uiUtils.addComponentJsonpath)((0, _defineProperty3.default)({}, "item" + itemsLength, scheama), componentJsonpath + ".props.items[" + itemsLength + "]"));
+      addItemToState(screenKey, componentJsonpath, "props.items", items);
     }, _this.removeItem = function (index) {
-      var _this$props3 = _this.props,
-          removeItem = _this$props3.onFieldChange,
-          screenKey = _this$props3.screenKey,
-          componentJsonpath = _this$props3.componentJsonpath,
-          screenConfig = _this$props3.screenConfig,
-          updatePreparedFormObject = _this$props3.updatePreparedFormObject,
-          sourceJsonPath = _this$props3.sourceJsonPath;
+      var _this$props2 = _this.props,
+          removeItem = _this$props2.onFieldChange,
+          screenKey = _this$props2.screenKey,
+          componentJsonpath = _this$props2.componentJsonpath,
+          screenConfig = _this$props2.screenConfig,
+          updatePreparedFormObject = _this$props2.updatePreparedFormObject,
+          sourceJsonPath = _this$props2.sourceJsonPath;
 
       var items = (0, _get2.default)(screenConfig, screenKey + "." + componentJsonpath + ".props.items");
-      updatePreparedFormObject(sourceJsonPath + "[" + index + "].active", false);
-      items[index].active = false;
+      updatePreparedFormObject(sourceJsonPath + "[" + index + "].isDeleted", false);
+      items[index].isDeleted = false;
       // items.splice(index,1);
       removeItem(screenKey, componentJsonpath, "props.items", items);
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(MultiItem, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (!(0, _isEqual2.default)(nextProps, this.props)) {
+        this.initMultiItem(nextProps);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _props = this.props,
@@ -180,7 +251,8 @@ var MultiItem = function (_React$Component) {
           onFieldChange = _props.onFieldChange,
           onComponentClick = _props.onComponentClick,
           hasAddItem = _props.hasAddItem,
-          screenKey = _props.screenKey;
+          screenKey = _props.screenKey,
+          isReviewPage = _props.isReviewPage;
       var addItem = this.addItem,
           removeItem = this.removeItem;
 
@@ -192,7 +264,7 @@ var MultiItem = function (_React$Component) {
             return _react2.default.createElement(
               _Div2.default,
               { key: key },
-              checkActiveItems(items) > 1 && _react2.default.createElement(
+              checkActiveItems(items) > 1 && !isReviewPage && _react2.default.createElement(
                 _Container2.default,
                 null,
                 _react2.default.createElement(

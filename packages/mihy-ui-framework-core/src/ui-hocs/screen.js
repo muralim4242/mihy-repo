@@ -8,7 +8,7 @@ import {
 import { setRoute } from "../ui-redux/app/actions";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
-import { addComponentJsonpath } from "../ui-utils";
+// import { addComponentJsonpath } from "../ui-utils";
 import $ from "jquery";
 import cloneDeep from "lodash/cloneDeep";
 
@@ -44,9 +44,9 @@ const screenHoc = ({
         } else {
           this.screenConfig = getConfig(path, screenKey);
         }
-        if (!isEmpty(this.screenConfig)) {
-          addComponentJsonpath(this.screenConfig.components);
-        }
+        // if (!isEmpty(this.screenConfig)) {
+        //   addComponentJsonpath(this.screenConfig.components);
+        // }
         initScreen(screenKey, cloneDeep(this.screenConfig));
       } catch (error) {
         // the error is assumed to have occured due to absence of config; so ignore it!
@@ -69,7 +69,7 @@ const screenHoc = ({
       );
     };
 
-    onClick = (onClickDefination, componentJsonpath = "") => {
+    onClick = (onClickDefination, componentJsonpath = "",index=-1) => {
       switch (onClickDefination.action) {
         case "submit":
           const { submitForm } = this.props;
@@ -95,7 +95,7 @@ const screenHoc = ({
           const { state, dispatchAction } = this.props;
           const { callBack } = onClickDefination;
           if (typeof callBack === "function") {
-            callBack(state, dispatchAction);
+            callBack(state, dispatchAction,{componentJsonpath,index});
           }
           break;
         case "page_change":

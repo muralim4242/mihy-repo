@@ -10,53 +10,83 @@ import { connect } from "react-redux";
 import get from "lodash/get";
 import set from "lodash/set";
 import cloneDeep from "lodash/cloneDeep";
-import { addComponentJsonpath } from "../../ui-utils";
-import {prepareFinalObject as pFO} from "../../ui-redux/screen-configuration/actions";
+import { addComponentJsonpath, replaceStrInPath } from "../../ui-utils";
+import { prepareFinalObject as pFO } from "../../ui-redux/screen-configuration/actions";
+import isEqual from "lodash/isEqual";
 
-const checkActiveItems=(items)=>{
-  let count=0;
+const checkActiveItems = items => {
+  let count = 0;
   for (var i = 0; i < items.length; i++) {
-    if(checkActiveItem(items[i])) count++
+    if (checkActiveItem(items[i])) count++;
   }
   return count;
-}
+};
 
-const checkActiveItem=(item)=>{
-  return item && (item.active===undefined || item.active!==false)
-}
+const checkActiveItem = item => {
+  return item && (item.isDeleted === undefined || item.isDeleted !== false);
+};
 
 class MultiItem extends React.Component {
   componentDidMount = () => {
-    const { items, sourceJsonPath, preparedFinalObject } = this.props;
+    this.initMultiItem(this.props);
+  };
+
+  initMultiItem = props => {
+    const { items, sourceJsonPath, preparedFinalObject } = props;
     const editItems = get(preparedFinalObject, sourceJsonPath, []);
-    if (!items.length && !editItems.length) {
-      this.addItem();
-    } else {
-      for (var i = 0; i < editItems.length; i++) {
-        if (checkActiveItem(editItems[i])) {
-          this.addItem(true);
+    if (editItems) {
+      if (!items.length && !editItems.length) {
+        this.addItem();
+      } else {
+        if (items.length<editItems.length) {
+          for (var i = 0; i < editItems.length; i++) {
+            if (checkActiveItem(editItems[i])) {
+              if (i) {
+                this.addItem();
+              } else {
+                this.addItem(true);
+              }
+              // this.addItem(true);
+            }
+          }
         }
       }
     }
   };
 
-  addItem = (isNew=false) => {
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(nextProps, this.props)) {
+      this.initMultiItem(nextProps);
+    }
+  }
+
+  objectToDropdown = object => {
+    let dropDown = [];
+    for (var variable in object) {
+      if (object.hasOwnProperty(variable)) {
+        dropDown.push({ code: variable });
+      }
+    }
+    return dropDown;
+  };
+
+  addItem = (isNew = false) => {
     const {
       onFieldChange: addItemToState,
       screenKey,
       scheama,
       sourceJsonPath,
       prefixSourceJsonPath,
+      afterPrefixJsonPath,
       componentJsonpath,
       headerName,
       headerJsonPath,
-      screenConfig
-    } = this.props;
-    const items = isNew?[]:get(
       screenConfig,
-      `${screenKey}.${componentJsonpath}.props.items`,
-      []
-    );
+      preparedFinalObject
+    } = this.props;
+    const items = isNew
+      ? []
+      : get(screenConfig, `${screenKey}.${componentJsonpath}.props.items`, []);
     const itemsLength = items.length;
     set(scheama, headerJsonPath, `${headerName} - ${itemsLength + 1}`);
     if (sourceJsonPath) {
@@ -67,39 +97,130 @@ class MultiItem extends React.Component {
           multiItemContent[variable].props &&
           multiItemContent[variable].props.jsonPath
         ) {
+          let prefixJP = multiItemContent[variable].props.jsonPathUpdatePrefix
+            ? multiItemContent[variable].props.jsonPathUpdatePrefix
+            : sourceJsonPath;
           let splitedJsonPath = multiItemContent[variable].props.jsonPath.split(
-            sourceJsonPath
+            prefixJP
           );
           if (splitedJsonPath.length > 1) {
             let propertyName = splitedJsonPath[1].split("]");
             if (propertyName.length > 1) {
               multiItemContent[
                 variable
-              ].jsonPath = `${sourceJsonPath}[${itemsLength}]${
-                propertyName[1]
-              }`;
+              ].jsonPath = `${prefixJP}[${itemsLength}]${propertyName[1]}`;
               multiItemContent[
                 variable
-              ].props.jsonPath = `${sourceJsonPath}[${itemsLength}]${
+              ].props.jsonPath = `${prefixJP}[${itemsLength}]${
                 propertyName[1]
               }`;
+              multiItemContent[variable].index = itemsLength;
+            }
+          }
+          //Temporary fix - For setting trade type - should be generalised
+          const value = get(
+            preparedFinalObject,
+            multiItemContent[variable].props.jsonPath
+          );
+          if (multiItemContent[variable].props.setDataInField && value) {
+            if (
+              multiItemContent[variable].props.jsonPath.split(".")[0] ===
+                "LicensesTemp" &&
+              multiItemContent[variable].props.jsonPath.split(".").pop() ===
+                "tradeType"
+            ) {
+              const tradeTypeData = get(
+                preparedFinalObject,
+                `applyScreenMdmsData.TradeLicense.TradeType`,
+                []
+              );
+              const tradeTypeDropdownData =
+                tradeTypeData &&
+                tradeTypeData.TradeType &&
+                Object.keys(tradeTypeData.TradeType).map(item => {
+                  return { code: item, active: true };
+                });
+              multiItemContent[variable].props.data = tradeTypeDropdownData;
+              const data = tradeTypeData[value];
+              if (data) {
+                multiItemContent[
+                  "tradeType"
+                ].props.data = this.objectToDropdown(data);
+              }
+            } else if (
+              multiItemContent[variable].props.jsonPath.split(".").pop() ===
+              "tradeType"
+            ) {
+              const data = get(
+                preparedFinalObject,
+                `applyScreenMdmsData.TradeLicense.TradeType.${
+                  value.split(".")[0]
+                }.${value.split(".")[1]}`
+              );
+              if (data) {
+                multiItemContent[variable].props.data = data;
+              }
+            } else if (
+              multiItemContent[variable].props.jsonPath.split(".").pop() ===
+                "uomValue" &&
+              value > 0
+            ) {
+              multiItemContent[variable].props.disabled = false;
+              multiItemContent[variable].props.required = true;
+            }
+          }
+          if (
+            multiItemContent[variable].props.setDataInField &&
+            multiItemContent[variable].props.disabled
+          ) {
+            if (
+              multiItemContent[variable].props.jsonPath.split(".").pop() ===
+              "uomValue"
+            ) {
+              const disabledValue = get(
+                screenConfig[screenKey],
+                `${
+                  multiItemContent[variable].componentJsonpath
+                }.props.disabled`,
+                true
+              );
+              multiItemContent[variable].props.disabled = disabledValue;
+            }
+          }
+        } else if (
+          afterPrefixJsonPath &&
+          multiItemContent.hasOwnProperty(variable) &&
+          get(multiItemContent[variable], `${afterPrefixJsonPath}.props`) &&
+          get(
+            multiItemContent[variable],
+            `${afterPrefixJsonPath}.props.jsonPath`
+          )
+        ) {
+          let splitedJsonPath = get(
+            multiItemContent[variable],
+            `${afterPrefixJsonPath}.props.jsonPath`
+          ).split(sourceJsonPath);
+          if (splitedJsonPath.length > 1) {
+            let propertyName = splitedJsonPath[1].split("]");
+            if (propertyName.length > 1) {
+              set(
+                multiItemContent[variable],
+                `${afterPrefixJsonPath}.props.jsonPath`,
+                `${sourceJsonPath}[${itemsLength}]${propertyName[1]}`
+              );
             }
           }
         }
       }
       set(scheama, prefixSourceJsonPath, multiItemContent);
     }
-    addItemToState(
-      screenKey,
-      componentJsonpath,
-      `props.items[${itemsLength}]`,
-      cloneDeep(
-        addComponentJsonpath(
-          { [`item${itemsLength}`]: scheama },
-          `${componentJsonpath}.props.items[${itemsLength}]`
-        )
+    items[itemsLength] = cloneDeep(
+      addComponentJsonpath(
+        { [`item${itemsLength}`]: scheama },
+        `${componentJsonpath}.props.items[${itemsLength}]`
       )
     );
+    addItemToState(screenKey, componentJsonpath, `props.items`, items);
   };
 
   removeItem = index => {
@@ -115,8 +236,8 @@ class MultiItem extends React.Component {
       screenConfig,
       `${screenKey}.${componentJsonpath}.props.items`
     );
-    updatePreparedFormObject(`${sourceJsonPath}[${index}].active`,false);
-    items[index].active=false;
+    updatePreparedFormObject(`${sourceJsonPath}[${index}].isDeleted`, false);
+    items[index].isDeleted = false;
     // items.splice(index,1);
     removeItem(screenKey, componentJsonpath, `props.items`, items);
   };
@@ -131,7 +252,8 @@ class MultiItem extends React.Component {
       onFieldChange,
       onComponentClick,
       hasAddItem,
-      screenKey
+      screenKey,
+      isReviewPage
     } = this.props;
     const { addItem, removeItem } = this;
     return (
@@ -141,7 +263,7 @@ class MultiItem extends React.Component {
             if (checkActiveItem(item)) {
               return (
                 <Div key={key}>
-                  {checkActiveItems(items) > 1 && (
+                  {checkActiveItems(items) > 1 && !isReviewPage && (
                     <Container>
                       <Item xs={12} align="right">
                         <IconButton
@@ -192,8 +314,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updatePreparedFormObject:(jsonPath,value)=>dispatch(pFO(jsonPath,value))
+    updatePreparedFormObject: (jsonPath, value) =>
+      dispatch(pFO(jsonPath, value))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MultiItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MultiItem);

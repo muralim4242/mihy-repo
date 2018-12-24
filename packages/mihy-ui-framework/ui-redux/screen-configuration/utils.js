@@ -36,7 +36,8 @@ var validateField = exports.validateField = function validateField(field) {
       maxLength = field.maxLength,
       minValue = field.minValue,
       maxValue = field.maxValue,
-      visible = field.visible;
+      visible = field.visible,
+      isDOB = field.isDOB;
 
 
   if (visible !== undefined && !visible) {
@@ -50,7 +51,7 @@ var validateField = exports.validateField = function validateField(field) {
 
   if (required && !value) {
     isFieldValid = false;
-    errorText = field.requiredmessage || "Required";
+    errorText = field.requiredMessage || "Required";
   }
 
   if (value) {
@@ -65,6 +66,16 @@ var validateField = exports.validateField = function validateField(field) {
   }
   if (isFieldValid && minValue && maxValue && !(value >= minValue && value <= maxValue)) {
     isFieldValid = false;
+  }
+
+  if (isDOB) {
+    if (value) {
+      var currentDate = new Date().getTime();
+      var ownerDOB = new Date(value).getTime();
+      if (ownerDOB > currentDate) {
+        isFieldValid = false;
+      }
+    }
   }
 
   errorText = !isFieldValid ? errorText.length ? errorText : field.errorMessage || "Invalid field" : "";
@@ -96,10 +107,10 @@ var validate = exports.validate = function validate(screenKey, componentObject, 
 
   var validatedObject = validateField(componentObject);
   var isFormValid = true;
+  if (!skipPrepareFormData) {
+    dispatch((0, _actions.prepareFinalObject)(componentObject.jsonPath, componentObject.value));
+  }
   if (componentObject.jsonPath && validatedObject.isFieldValid) {
-    if (!skipPrepareFormData) {
-      dispatch((0, _actions.prepareFinalObject)(componentObject.jsonPath, componentObject.value));
-    }
     if (!componentObject.isFieldValid) {
       isFormValid = true;
       dispatch((0, _actions.handleScreenConfigurationFieldChange)(screenKey, componentObject.componentJsonpath + ".props", "error", false));

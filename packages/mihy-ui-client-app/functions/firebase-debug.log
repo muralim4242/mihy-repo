@@ -1,0 +1,26 @@
+[debug] [2018-12-11T18:56:31.185Z] ----------------------------------------------------------------------
+[debug] [2018-12-11T18:56:31.187Z] Command:       /usr/local/bin/node /usr/local/bin/firebase functions:shell
+[debug] [2018-12-11T18:56:31.187Z] CLI Version:   6.0.1
+[debug] [2018-12-11T18:56:31.187Z] Platform:      darwin
+[debug] [2018-12-11T18:56:31.187Z] Node Version:  v8.4.0
+[debug] [2018-12-11T18:56:31.188Z] Time:          Wed Dec 12 2018 00:26:31 GMT+0530 (IST)
+[debug] [2018-12-11T18:56:31.188Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-12-11T18:56:31.199Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-12-11T18:56:31.199Z] > authorizing via signed-in user
+[debug] [2018-12-11T18:56:31.200Z] [iam] checking project mihy-all for permissions ["firebase.projects.get"]
+[debug] [2018-12-11T18:56:31.202Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/mihy-all:testIamPermissions  
+
+[debug] [2018-12-11T18:56:33.146Z] <<< HTTP RESPONSE 200
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-12-11T18:56:33.917Z] Fetching environment
+[debug] [2018-12-11T18:56:33.921Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/mihy-all  
+ 
+[debug] [2018-12-11T18:56:35.859Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-11T18:56:35.860Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/734387907524:getServerAppConfig  
+ 
+[debug] [2018-12-11T18:56:36.663Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-11T18:56:36.663Z] Starting @google-cloud/functions-emulator
+[debug] [2018-12-11T18:56:38.307Z] Parsing function triggers
+[info] ✔  functions: mdms
+[info] ✔  functions: auth

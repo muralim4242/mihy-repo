@@ -50,22 +50,11 @@ var _isEmpty2 = _interopRequireDefault(_isEmpty);
 
 var _commons = require("../../ui-utils/commons");
 
+var _utils = require("../../ui-config/screens/specs/utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var localizationLabels = JSON.parse(window.localStorage.getItem("localization_en_IN"));
-
-var getLocaleLabelsforTL = function getLocaleLabelsforTL(label, labelKey, localizationLabels) {
-  if (labelKey) {
-    var translatedLabel = (0, _commons.getTranslatedLabel)(labelKey, localizationLabels);
-    if (!translatedLabel || labelKey === translatedLabel) {
-      return label;
-    } else {
-      return translatedLabel;
-    }
-  } else {
-    return label;
-  }
-};
 
 var TextFieldContainer = function (_React$Component) {
   (0, _inherits3.default)(TextFieldContainer, _React$Component);
@@ -76,37 +65,59 @@ var TextFieldContainer = function (_React$Component) {
   }
 
   (0, _createClass3.default)(TextFieldContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _props = this.props,
+          hasDependant = _props.hasDependant,
+          onChange = _props.onChange,
+          value = _props.value;
+
+      if (hasDependant && value) {
+        onChange({ target: { value: value } });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _props = this.props,
-          _props$label = _props.label,
-          label = _props$label === undefined ? {} : _props$label,
-          _props$placeholder = _props.placeholder,
-          placeholder = _props$placeholder === undefined ? {} : _props$placeholder,
-          jsonPath = _props.jsonPath,
-          _props$iconObj = _props.iconObj,
-          iconObj = _props$iconObj === undefined ? {} : _props$iconObj,
-          value = _props.value,
-          dropdownData = _props.dropdownData,
-          _props$data = _props.data,
-          data = _props$data === undefined ? [] : _props$data,
-          _props$optionValue = _props.optionValue,
-          optionValue = _props$optionValue === undefined ? "code" : _props$optionValue,
-          _props$optionLabel = _props.optionLabel,
-          optionLabel = _props$optionLabel === undefined ? "code" : _props$optionLabel,
-          sourceJsonPath = _props.sourceJsonPath,
-          state = _props.state,
-          dispatch = _props.dispatch,
-          rest = (0, _objectWithoutProperties3.default)(_props, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath", "state", "dispatch"]);
+      var _props2 = this.props,
+          _props2$label = _props2.label,
+          label = _props2$label === undefined ? {} : _props2$label,
+          _props2$placeholder = _props2.placeholder,
+          placeholder = _props2$placeholder === undefined ? {} : _props2$placeholder,
+          jsonPath = _props2.jsonPath,
+          _props2$iconObj = _props2.iconObj,
+          iconObj = _props2$iconObj === undefined ? {} : _props2$iconObj,
+          value = _props2.value,
+          dropdownData = _props2.dropdownData,
+          _props2$data = _props2.data,
+          data = _props2$data === undefined ? [] : _props2$data,
+          _props2$optionValue = _props2.optionValue,
+          optionValue = _props2$optionValue === undefined ? "code" : _props2$optionValue,
+          _props2$optionLabel = _props2.optionLabel,
+          optionLabel = _props2$optionLabel === undefined ? "code" : _props2$optionLabel,
+          sourceJsonPath = _props2.sourceJsonPath,
+          index = _props2.index,
+          componentJsonpath = _props2.componentJsonpath,
+          state = _props2.state,
+          infoIcon = _props2.infoIcon,
+          dispatch = _props2.dispatch,
+          title = _props2.title,
+          rest = (0, _objectWithoutProperties3.default)(_props2, ["label", "placeholder", "jsonPath", "iconObj", "value", "dropdownData", "data", "optionValue", "optionLabel", "sourceJsonPath", "index", "componentJsonpath", "state", "infoIcon", "dispatch", "title"]);
 
-      if (!(0, _isEmpty2.default)(iconObj)) {
-        iconObj.onClick = function () {
-          return iconObj.onClickOnIcon(state, dipatch);
-        };
+
+      if (!(0, _isEmpty2.default)(iconObj) && iconObj.onClickDefination) {
+        iconObj = (0, _extends3.default)({}, iconObj, {
+          onClick: function onClick() {
+            return iconObj.onClickDefination.callBack(state, dispatch, {
+              index: index,
+              componentJsonpath: componentJsonpath
+            });
+          }
+        });
       }
       var transfomedKeys = (0, _commons.transformById)(localizationLabels, "code");
-      var translatedLabel = getLocaleLabelsforTL(label.labelName, label.labelKey, transfomedKeys);
-      var translatedPlaceholder = getLocaleLabelsforTL(placeholder.labelName, placeholder.labelKey, transfomedKeys);
+      var translatedLabel = (0, _commons.getLocaleLabels)(label.labelName, label.labelKey, transfomedKeys);
+      var translatedPlaceholder = (0, _commons.getLocaleLabels)(placeholder.labelName, placeholder.labelKey, transfomedKeys);
 
       if (dropdownData.length > 0) {
         return _react2.default.createElement(
@@ -120,23 +131,54 @@ var TextFieldContainer = function (_React$Component) {
           _react2.default.createElement(
             _MenuItem2.default,
             { value: translatedPlaceholder, disabled: true },
-            translatedPlaceholder
+            _react2.default.createElement(
+              "div",
+              { className: "select-field-placeholder" },
+              translatedPlaceholder
+            )
           ),
           dropdownData.map(function (option, key) {
             return _react2.default.createElement(
               _MenuItem2.default,
               { key: key, value: option.value },
-              getLocaleLabelsforTL(option.value, "TL_" + option.value, transfomedKeys)
+              (0, _commons.getLocaleLabels)(option.value, "TL_" + option.value, transfomedKeys)
             );
           })
         );
       } else {
-        return _react2.default.createElement(_uiMolecules.TextfieldWithIcon, (0, _extends3.default)({
-          label: translatedLabel,
-          placeholder: translatedPlaceholder,
-          iconObj: iconObj,
-          value: value
-        }, rest));
+        return this.props.select ? _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(
+            _uiMolecules.TextfieldWithIcon,
+            (0, _extends3.default)({
+              label: translatedLabel,
+              placeholder: translatedPlaceholder,
+              iconObj: iconObj,
+              value: value ? value : translatedPlaceholder
+            }, rest),
+            _react2.default.createElement(
+              _MenuItem2.default,
+              { value: translatedPlaceholder, disabled: true },
+              _react2.default.createElement(
+                "div",
+                { className: "select-field-placeholder" },
+                translatedPlaceholder
+              )
+            )
+          ),
+          title && !(0, _isEmpty2.default)(title) && infoIcon && _react2.default.createElement(_uiMolecules.Tooltip, { val: title, icon: infoIcon })
+        ) : _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(_uiMolecules.TextfieldWithIcon, (0, _extends3.default)({
+            label: translatedLabel,
+            placeholder: translatedPlaceholder,
+            iconObj: iconObj,
+            value: this.props.type === "date" && !value ? translatedPlaceholder : value
+          }, rest)),
+          title && !(0, _isEmpty2.default)(title) && infoIcon && _react2.default.createElement(_uiMolecules.Tooltip, { val: title, icon: infoIcon })
+        );
       }
     }
   }]);

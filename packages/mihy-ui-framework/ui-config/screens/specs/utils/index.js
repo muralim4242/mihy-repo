@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getTextField = exports.getDateTimeField = exports.getTimeField = exports.getDateField = exports.getSelectField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+exports.getPattern = exports.getTab = exports.getTabs = exports.getLabelWithValue = exports.dispatchMultipleFieldChangeAction = exports.getDivider = exports.getCommonContainer = exports.getRadiobuttonGroup = exports.getRadiobuttonwithLabel = exports.getCheckBoxwithLabel = exports.getLocaleLabelsforTL = exports.getTextField = exports.getDateTimeField = exports.getTimeField = exports.getDateField = exports.getSelectField = exports.getLabel = exports.getBreak = exports.getCommonGrayCard = exports.getCommonCardWithHeader = exports.getCommonCard = exports.getCommonValue = exports.getCommonCaption = exports.getCommonParagraph = exports.getCommonSubHeader = exports.getCommonTitle = exports.getCommonHeader = exports.getStepperObject = undefined;
+
+var _objectWithoutProperties2 = require("babel-runtime/helpers/objectWithoutProperties");
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
 var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
 
@@ -14,6 +18,8 @@ var _extends2 = require("babel-runtime/helpers/extends");
 var _extends3 = _interopRequireDefault(_extends2);
 
 var _actions = require("../../../../ui-redux/screen-configuration/actions");
+
+var _commons = require("../../../../ui-utils/commons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,7 +63,10 @@ var getCommonHeader = exports.getCommonHeader = function getCommonHeader(header,
     props: (0, _extends3.default)({
       variant: "headline"
     }, props),
-    children: (0, _defineProperty3.default)({}, header, getLabel(header))
+    children: {
+      // [header]: getLabel(header)
+      key: getLabel(header)
+    }
   };
 };
 
@@ -159,7 +168,8 @@ var getCommonGrayCard = exports.getCommonGrayCard = function getCommonGrayCard(c
     style: {
       backgroundColor: "rgb(242, 242, 242)",
       boxShadow: "none",
-      borderRadius: 0
+      borderRadius: 0,
+      overflow: "visible"
     }
   });
 };
@@ -196,7 +206,9 @@ var getLabel = exports.getLabel = function getLabel(label, labelKey) {
 };
 
 var getSelectField = exports.getSelectField = function getSelectField(selectScheama) {
-  return getTextField((0, _extends3.default)({}, selectScheama, { props: (0, _extends3.default)({ select: true }, selectScheama.props) }));
+  return getTextField((0, _extends3.default)({}, selectScheama, {
+    props: (0, _extends3.default)({ select: true }, selectScheama.props)
+  }));
 };
 
 var getDateField = exports.getDateField = function getDateField(dateScheama) {
@@ -223,7 +235,7 @@ var getDateTimeField = exports.getDateTimeField = function getDateTimeField(date
   }));
 };
 
-var getTextField = exports.getTextField = function getTextField(textScheama) {
+var getTextField = function getTextField(textScheama) {
   var _textScheama$label = textScheama.label,
       label = _textScheama$label === undefined ? {} : _textScheama$label,
       _textScheama$placehol = textScheama.placeholder,
@@ -249,9 +261,21 @@ var getTextField = exports.getTextField = function getTextField(textScheama) {
     sm: 6
   } : _textScheama$gridDefi,
       _textScheama$props = textScheama.props,
-      props = _textScheama$props === undefined ? {} : _textScheama$props;
+      props = _textScheama$props === undefined ? {} : _textScheama$props,
+      minLength = textScheama.minLength,
+      maxLength = textScheama.maxLength,
+      minValue = textScheama.minValue,
+      maxValue = textScheama.maxValue,
+      infoIcon = textScheama.infoIcon,
+      _textScheama$title = textScheama.title,
+      title = _textScheama$title === undefined ? {} : _textScheama$title,
+      _textScheama$errorMes = textScheama.errorMessage,
+      errorMessage = _textScheama$errorMes === undefined ? "" : _textScheama$errorMes,
+      _textScheama$required2 = textScheama.requiredMessage,
+      requiredMessage = _textScheama$required2 === undefined ? "" : _textScheama$required2,
+      rest = (0, _objectWithoutProperties3.default)(textScheama, ["label", "placeholder", "required", "pattern", "jsonPath", "sourceJsonPath", "data", "optionValue", "optionLabel", "iconObj", "gridDefination", "props", "minLength", "maxLength", "minValue", "maxValue", "infoIcon", "title", "errorMessage", "requiredMessage"]);
 
-  return {
+  return (0, _extends3.default)({
     uiFramework: "custom-containers",
     componentPath: "TextFieldContainer",
     props: (0, _extends3.default)({
@@ -267,13 +291,35 @@ var getTextField = exports.getTextField = function getTextField(textScheama) {
       optionLabel: optionLabel,
       sourceJsonPath: sourceJsonPath,
       jsonPath: jsonPath,
-      iconObj: iconObj
+      iconObj: iconObj,
+      title: title,
+      infoIcon: infoIcon
     }, props),
     gridDefination: gridDefination,
     required: required,
     pattern: pattern,
-    jsonPath: jsonPath
-  };
+    jsonPath: jsonPath,
+    minLength: minLength,
+    maxLength: maxLength,
+    minValue: minValue,
+    maxValue: maxValue,
+    errorMessage: errorMessage,
+    requiredMessage: requiredMessage
+  }, rest);
+};
+
+exports.getTextField = getTextField;
+var getLocaleLabelsforTL = exports.getLocaleLabelsforTL = function getLocaleLabelsforTL(label, labelKey, localizationLabels) {
+  if (labelKey) {
+    var translatedLabel = (0, _commons.getTranslatedLabel)(labelKey, localizationLabels);
+    if (!translatedLabel || labelKey === translatedLabel) {
+      return label;
+    } else {
+      return translatedLabel;
+    }
+  } else {
+    return label;
+  }
 };
 
 var getCheckBoxwithLabel = exports.getCheckBoxwithLabel = function getCheckBoxwithLabel(label) {
@@ -461,7 +507,7 @@ var getPattern = exports.getPattern = function getPattern(type) {
       return (/^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/i
       );
     case "TradeName":
-      return (/^[a-zA-Z0-9\s()-@#&.,?/]{1,100}$/i
+      return (/^[a-zA-Z0-9\s()!-@#&.,?/]{1,100}$/i
       );
     case "Date":
       return (/^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/i

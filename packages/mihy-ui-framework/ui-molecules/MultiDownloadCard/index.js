@@ -4,6 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require("babel-runtime/helpers/extends");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = require("babel-runtime/helpers/objectWithoutProperties");
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -26,6 +34,8 @@ var _Button = require("@material-ui/core/Button");
 
 var _Button2 = _interopRequireDefault(_Button);
 
+var _uiContainers = require("../../ui-containers");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
@@ -44,13 +54,23 @@ var styles = {
   }
 };
 
+var documentTitle = {
+  color: "rgba(0, 0, 0, 0.87)",
+  fontFamily: "Roboto",
+  fontSize: "16px",
+  fontWeight: 400,
+  letterSpacing: "0.67px",
+  lineHeight: "19px"
+};
+
 function MultiCardDownloadGrid(props) {
   var classes = props.classes,
-      data = props.data;
+      data = props.data,
+      rest = (0, _objectWithoutProperties3.default)(props, ["classes", "data"]);
 
   return _react2.default.createElement(
     _Grid2.default,
-    { container: true },
+    (0, _extends3.default)({ container: true }, rest),
     data.map(function (item, key) {
       return _react2.default.createElement(
         _Grid2.default,
@@ -58,11 +78,11 @@ function MultiCardDownloadGrid(props) {
         _react2.default.createElement(
           _Grid2.default,
           { xs: 12 },
-          _react2.default.createElement(
-            _Typography2.default,
-            { variant: "subheading" },
-            item.title
-          )
+          _react2.default.createElement(_uiContainers.LabelContainer, {
+            labelName: item.title,
+            labelKey: item.title,
+            style: documentTitle
+          })
         ),
         _react2.default.createElement(
           _Grid2.default,

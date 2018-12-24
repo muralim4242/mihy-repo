@@ -40,7 +40,9 @@ var RenderScreen = function RenderScreen(_ref) {
         gridDefination = _components$component.gridDefination,
         visible = _components$component.visible,
         type = _components$component.type,
-        roleDefination = _components$component.roleDefination;
+        roleDefination = _components$component.roleDefination,
+        index = _components$component.index,
+        beforeFieldChange = _components$component.beforeFieldChange;
 
     var extraProps = jsonPath ? {
       onChange: function onChange(e) {
@@ -50,7 +52,7 @@ var RenderScreen = function RenderScreen(_ref) {
     if (onClickDefination) {
       extraProps = (0, _extends3.default)({}, extraProps, {
         onClick: function onClick(e) {
-          onComponentClick(onClickDefination, componentJsonpath);
+          onComponentClick(onClickDefination, componentJsonpath, index);
         }
       });
     }
@@ -61,6 +63,17 @@ var RenderScreen = function RenderScreen(_ref) {
         uiFramework: rootFramework,
         componentJsonpath: componentJsonpath,
         screenKey: screenKey
+      });
+    }
+    if (index) {
+      extraProps = (0, _extends3.default)({}, extraProps, {
+        componentJsonpath: componentJsonpath,
+        index: index
+      });
+    }
+    if (beforeFieldChange && typeof beforeFieldChange === "function") {
+      extraProps = (0, _extends3.default)({}, extraProps, {
+        hasDependant: true
       });
     }
     if (!(0, _isEmpty2.default)(components[componentKey].children)) {

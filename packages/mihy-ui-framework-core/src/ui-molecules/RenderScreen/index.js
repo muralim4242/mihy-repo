@@ -21,7 +21,9 @@ const RenderScreen = ({
           gridDefination,
           visible,
           type,
-          roleDefination
+          roleDefination,
+          index,
+          beforeFieldChange
         } = components[componentKey];
         let extraProps = jsonPath
           ? {
@@ -39,7 +41,7 @@ const RenderScreen = ({
           extraProps = {
             ...extraProps,
             onClick: e => {
-              onComponentClick(onClickDefination, componentJsonpath);
+              onComponentClick(onClickDefination, componentJsonpath, index);
             }
           };
         }
@@ -52,6 +54,19 @@ const RenderScreen = ({
             componentJsonpath,
             screenKey
           };
+        }
+        if (index) {
+          extraProps = {
+            ...extraProps,
+            componentJsonpath,
+            index
+          };
+        }
+        if (beforeFieldChange && typeof beforeFieldChange === "function") {
+          extraProps={
+            ...extraProps,
+            hasDependant:true
+          }
         }
         if (!isEmpty(components[componentKey].children)) {
           return (

@@ -1,29 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
-import { TextfieldWithIcon } from "../../ui-molecules";
+import { TextfieldWithIcon, Tooltip } from "../../ui-molecules";
 import MenuItem from "@material-ui/core/MenuItem";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import { getTranslatedLabel, transformById, epochToYmd } from "../../ui-utils/commons";
+import {
+  transformById,
+  epochToYmd,
+  getLocaleLabels
+} from "../../ui-utils/commons";
+import { getLocaleLabelsforTL } from "../../ui-config/screens/specs/utils";
 
 const localizationLabels = JSON.parse(
   window.localStorage.getItem("localization_en_IN")
 );
 
-const getLocaleLabelsforTL = (label, labelKey, localizationLabels) => {
-  if (labelKey) {
-    let translatedLabel = getTranslatedLabel(labelKey, localizationLabels);
-    if (!translatedLabel || labelKey === translatedLabel) {
-      return label;
-    } else {
-      return translatedLabel;
-    }
-  } else {
-    return label;
-  }
-};
-
 class TextFieldContainer extends React.Component {
+  componentDidMount() {
+    const { hasDependant, onChange, value } = this.props;
+    if (hasDependant && value) {
+      onChange({ target: { value } });
+    }
+  }
+
   render() {
     let {
       label = {},
@@ -36,20 +35,32 @@ class TextFieldContainer extends React.Component {
       optionValue = "code",
       optionLabel = "code",
       sourceJsonPath,
+      index,
+      componentJsonpath,
       state,
+      infoIcon,
       dispatch,
+      title,
       ...rest
     } = this.props;
-    if (!isEmpty(iconObj)) {
-      iconObj.onClick = () => iconObj.onClickOnIcon(state, dipatch);
+
+    if (!isEmpty(iconObj) && iconObj.onClickDefination) {
+      iconObj = {
+        ...iconObj,
+        onClick: () =>
+          iconObj.onClickDefination.callBack(state, dispatch, {
+            index,
+            componentJsonpath
+          })
+      };
     }
     let transfomedKeys = transformById(localizationLabels, "code");
-    let translatedLabel = getLocaleLabelsforTL(
+    let translatedLabel = getLocaleLabels(
       label.labelName,
       label.labelKey,
       transfomedKeys
     );
-    let translatedPlaceholder = getLocaleLabelsforTL(
+    let translatedPlaceholder = getLocaleLabels(
       placeholder.labelName,
       placeholder.labelKey,
       transfomedKeys
@@ -65,11 +76,13 @@ class TextFieldContainer extends React.Component {
           {...rest}
         >
           <MenuItem value={translatedPlaceholder} disabled>
-            {translatedPlaceholder}
+            <div className="select-field-placeholder">
+              {translatedPlaceholder}
+            </div>
           </MenuItem>
           {dropdownData.map((option, key) => (
             <MenuItem key={key} value={option.value}>
-              {getLocaleLabelsforTL(
+              {getLocaleLabels(
                 option.value,
                 `TL_${option.value}`,
                 transfomedKeys
@@ -79,14 +92,42 @@ class TextFieldContainer extends React.Component {
         </TextfieldWithIcon>
       );
     } else {
-      return (
-        <TextfieldWithIcon
-          label={translatedLabel}
-          placeholder={translatedPlaceholder}
-          iconObj={iconObj}
-          value={value}
-          {...rest}
-        />
+      return this.props.select ? (
+        <div>
+          <TextfieldWithIcon
+            label={translatedLabel}
+            placeholder={translatedPlaceholder}
+            iconObj={iconObj}
+            value={value ? value : translatedPlaceholder}
+            {...rest}
+          >
+            <MenuItem value={translatedPlaceholder} disabled>
+              <div className="select-field-placeholder">
+                {translatedPlaceholder}
+              </div>
+            </MenuItem>
+          </TextfieldWithIcon>
+          {title &&
+            !isEmpty(title) &&
+            infoIcon && <Tooltip val={title} icon={infoIcon} />}
+        </div>
+      ) : (
+        <div>
+          <TextfieldWithIcon
+            label={translatedLabel}
+            placeholder={translatedPlaceholder}
+            iconObj={iconObj}
+            value={
+              this.props.type === "date" && !value
+                ? translatedPlaceholder
+                : value
+            }
+            {...rest}
+          />
+          {title &&
+            !isEmpty(title) &&
+            infoIcon && <Tooltip val={title} icon={infoIcon} />}
+        </div>
       );
     }
   }
@@ -107,7 +148,8 @@ const mapStateToProps = (state, ownprops) => {
   let fieldValue =
     value === undefined ? get(preparedFinalObject, jsonPath) : value;
   // Convert epoch to YYYY-MM-DD and set date picker value
-  if (ownprops.type && ownprops.type === "date") fieldValue = epochToYmd(fieldValue);
+  if (ownprops.type && ownprops.type === "date")
+    fieldValue = epochToYmd(fieldValue);
   let dropdownData = [];
   if (select) {
     const constructDropdown = dt => {
