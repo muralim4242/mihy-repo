@@ -1,6 +1,6 @@
 {
   "name": "mihy-ui-client-app",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "private": true,
   "proxy": "https://egov-micro-dev.egovernments.org/",
   "dependencies": {
@@ -13,7 +13,7 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
     "marker-animate-unobtrusive": "^0.2.8",
-    "mihy-ui-framework": "^0.1.41",
+    "mihy-ui-framework": "^0.1.42",
     "pdfmake": "^0.1.38",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
