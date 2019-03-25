@@ -1,0 +1,32 @@
+/**
+ * cssanimation.css
+ * https://www.cssanimatio.io
+ * Created and maintained by: Pavel
+ * Find me at: https://www.linkedin.com/in/yesiamrocks/
+ * Email: hello@cssanimation.io
+ * Github: https://github.com/yesiamrocks/cssanimation.io
+ * Title: A CSS Animation Library for Developers and Ninjas
+ * Copyright (c) 2017 Pavel
+ * License: cssanimation.io is licensed under the MIT license
+ **/
+
+
+h1 {
+    /* font-size: 4.3em;
+    letter-spacing: -4px;
+    font-weight: 700;
+    text-align: center; */
+}
+
+.cssanimation, .cssanimation span {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.cssanimation span { display: inline-block }
+
+.pepe { animation-name: pepe; animation-iteration-count: infinite }
+@keyframes pepe {
+    from, 33%, 66%, to { transform: rotate(4deg) }
+    16%, 50%, 83% { transform: rotate(-4deg) }
+}

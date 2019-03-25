@@ -6,9 +6,17 @@ import MainRoutes from "../../ui-routes";
 import LoadingIndicator from "mihy-ui-framework/ui-molecules/LoadingIndicator";
 import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
 import { setRoute } from "../../ui-redux/app/actions";
+import { loadCSS } from 'fg-loadcss/src/loadCSS';
 import "./index.css";
 
 class App extends React.Component {
+  componentDidMount()
+  {
+    loadCSS(
+     'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
+     document.querySelector('#insertion-point-jss'),
+   );
+  }
   componentWillReceiveProps(nextProps) {
     const { route: nextRoute } = nextProps;
     const { route: currentRoute, history, setRoute } = this.props;

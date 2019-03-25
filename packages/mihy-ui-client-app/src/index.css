@@ -38,3 +38,66 @@ body {
 span[class^="MuiFormLabel-asterisk"] {
     color:#E54D42;
 }
+
+
+.cssanimation, .cssanimation span {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.cssanimation span { display: inline-block }
+
+.pepe { animation-name: pepe; animation-iteration-count: infinite }
+@keyframes pepe {
+    from, 33%, 66%, to { transform: rotate(4deg) }
+    16%, 50%, 83% { transform: rotate(-4deg) }
+}
+
+
+.leKickOutFront span { animation-name: leKickOutBehind; transform-origin: top }
+@keyframes leKickOutBehind {
+    40% { transform: rotate(-45deg) }
+    100% {
+        transform: rotate(0deg);
+        animation-timing-function: cubic-bezier(0,.9,.7,1.45)
+    }
+}
+
+.leMovingBackFromRight span { animation-name: leMovingBackFromRight; transform-origin: bottom }
+@keyframes leMovingBackFromRight {
+    40% { transform: rotate(45deg) }
+    100% {
+        transform: rotate(0deg);
+        animation-timing-function: cubic-bezier(0,.9,.7,1.45)
+    }
+}
+
+.leWaterWave span { animation: leWaterWave .2s linear infinite }
+@keyframes leWaterWave {
+    50% { transform: skewY(1deg) skewX(-1deg) scale(1.06) }
+}
+
+
+.leSnake span { animation: leSnake 1.5s ease-in-out; animation-iteration-count: infinite }
+@keyframes leSnake {
+    from, to { transform: translateY(0px) }
+    50% { transform: translateY(30px) }
+}
+
+.leRainDrop span { animation-name: leRainDrop; animation-iteration-count: infinite; }
+@keyframes leRainDrop {
+    0%, 25%, 55%, 75%, 87%, 97%, 100% { transform: scaleX(1.0) }
+    26%, 56%, 76% { transform: scaleX(1.3) scaleY(0.8) }
+    31%, 61%, 81% { transform: scaleX(0.8) scaleY(1.2) }
+    76%, 88% { transform: scaleX(1.2) }
+    98% { transform: scaleX(1.1) }
+}
+
+.leFadeInLeft span { animation-name: leFadeInLeft }
+@keyframes leFadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to { opacity: 1 }
+}
