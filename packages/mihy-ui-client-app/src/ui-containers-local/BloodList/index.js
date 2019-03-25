@@ -1,6 +1,6 @@
 import React from "react";
 import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
-// import BloodList from "../../ui-molecules-local/BloodList";
+import BloodList from "../../ui-molecules-local/BloodList";
 import { handleScreenConfigurationFieldChange as showUrgencyPopup,prepareFinalObject as pFO } from "mihy-ui-framework/ui-redux/screen-configuration/actions";
 import get from "lodash/get";
 import { connect } from "react-redux";
@@ -9,7 +9,7 @@ class BloodListContainer extends React.Component {
   render() {
     return (
       <Div>
-        {/*<BloodList {...this.props}/>*/}
+        <BloodList {...this.props}/>
       </Div>
     );
   }
