@@ -1,0 +1,9 @@
+/* .firebaseui-idp-button {
+  font-size: 16px;
+  font-family: gothamrounded_medium;
+} */
+
+.firebaseui-idp-text-long {
+  font-family: gothamrounded_medium !important;
+  font-size: 13px !important;
+}
