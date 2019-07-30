@@ -75,24 +75,24 @@ export const team = [
   {
     name: "Murali M",
     photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
-    designation:"Co founder,CTO,Product,Arcitect & Sn. Developer",
+    designation:"CTO & Arcitect",
     about:"Developer and passionate about new technologies and innovation."
     // I am from shimoga and i am born for technologies",
-  },
-  {
-    name: "Gagan Deep TS",
-    photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
-    designation:"Arcitect,Product & Sn. Developer",
-    about:"Developer and passionate about java."
-    // I am from chennapattana and i am very deep on java",
-  },
-  {
-    name: "Manjunatha S",
-    photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
-    designation:"Product & QA/QC",
-    about:"Software Developer in Test (SDET), passionate about Automating things for fast and efficient  product delivery."
-    // I am from chennapattana and i am very deep on java",
   }
+  // {
+  //   name: "Gagan Deep TS",
+  //   photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
+  //   designation:"Arcitect,Product & Sn. Developer",
+  //   about:"Developer and passionate about java."
+  //   // I am from chennapattana and i am very deep on java",
+  // },
+  // {
+  //   name: "Manjunatha S",
+  //   photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
+  //   designation:"Product & QA/QC",
+  //   about:"Software Developer in Test (SDET), passionate about Automating things for fast and efficient  product delivery."
+  //   // I am from chennapattana and i am very deep on java",
+  // }
 ];
 
 export const showcases = [
