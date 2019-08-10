@@ -1,5 +1,5 @@
 import * as screenActionTypes from "./actionTypes";
-import { updateObjectWithComponentJsonPath, prepareFinalObject } from "./utils";
+import { prepareFinalObject } from "./utils";
 
 const intialState = {
   preparedFinalObject: {

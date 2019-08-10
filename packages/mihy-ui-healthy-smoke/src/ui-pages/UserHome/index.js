@@ -4,13 +4,12 @@ import Content from "./components/Content";
 import { mapDispatchToProps } from "../../ui-utils/commons";
 import { connect } from "react-redux";
 
-import { getQueryArg } from "../../ui-utils/commons";
 
 const styles = {
   root: {}
 };
 
-class VideoPage extends Component {
+class UserHome extends Component {
 
   render() {
     const { classes } = this.props;
@@ -25,4 +24,4 @@ class VideoPage extends Component {
 export default connect(
   null,
   mapDispatchToProps
-)(withStyles(styles)(VideoPage));
+)(withStyles(styles)(UserHome));

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Icon from '@material-ui/core/Icon';
+import Icon from "@material-ui/core/Icon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 
@@ -14,7 +14,7 @@ const routes = ["/user-home", "/user-home/settings"];
 
 const styles = {
   root: {
-    display:"flex"
+    display: "flex"
   }
 };
 
@@ -27,13 +27,12 @@ class SimpleBottomNavigation extends React.Component {
   };
 
   render() {
-    const { classes,menuItems} = this.props;
+    const { classes, menuItems } = this.props;
 
     return (
       <div className={classes.root}>
-        <List>
-          {
-            menuItems.map((menu,key)=>{
+          <List>
+            {menuItems.map((menu, key) => {
               return (
                 <ListItem
                   button
@@ -47,10 +46,10 @@ class SimpleBottomNavigation extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary={menu.name} />
                 </ListItem>
-              )
-            })
-          }
-        </List>
+              );
+            })}
+          </List>
+
       </div>
     );
   }

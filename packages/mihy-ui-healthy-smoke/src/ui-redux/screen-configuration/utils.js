@@ -1,10 +1,4 @@
-import {
-  prepareFinalObject as prepareFO,
-  handleScreenConfigurationFieldChange as handleField
-} from "./actions";
 import set from "lodash/set";
-import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
 
 export const validateField = field => {
   const {

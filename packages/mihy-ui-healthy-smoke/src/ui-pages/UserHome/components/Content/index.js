@@ -13,8 +13,26 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Hidden from "@material-ui/core/Hidden";
 import Navigator from "./components/Navigator";
-import {connect} from "react-redux";
+import UserRoutes from "../../../../ui-routes/UserRoutes";
+import BottomNavigation from "./components/BottomNavigation";
+import { connect } from "react-redux";
+
+const menuItems=[
+  {
+    name: "Home",
+    icon: "home"
+  },
+  {
+    name: "Settings",
+    icon: "settings"
+  },
+  {
+    name: "Logout",
+    icon: "exit_to_app"
+  }
+];
 
 const drawerWidth = 240;
 
@@ -97,14 +115,15 @@ const styles = theme => ({
     letterSpacing: "-0.93px",
     color: "#d81b60"
   },
-  webHeader:{
-    display:"flex",
-    alignItems:"center",
-    justifyContent:"left",
-    flexGrow: 1
+  webHeader: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "left",
+    flexGrow: 1,
+    marginLeft: "16px"
   },
-  avatar:{
-    marginRight:"16px"
+  avatar: {
+    marginRight: "16px"
   }
 });
 
@@ -122,7 +141,7 @@ class MiniDrawer extends React.Component {
   };
 
   render() {
-    const { classes, theme ,user={}} = this.props;
+    const { classes, theme } = this.props;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -133,70 +152,75 @@ class MiniDrawer extends React.Component {
           })}
         >
           <Toolbar disableGutters={!this.state.open}>
-            <IconButton
-              color="primary"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, {
-                [classes.hide]: this.state.open
-              })}
+            <Hidden xsDown>
+              <IconButton
+                color="primary"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+                className={classNames(classes.menuButton, {
+                  [classes.hide]: this.state.open
+                })}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              classes={{ root: classes.webHeader }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap classes={{root:classes.webHeader}}>
-                <span className={classes.userHomeHeader} >MIHY</span>
-                <span className={classes.userhomeSubHeader} style={{marginLeft:"8px"}}>Platform</span>
+              <span className={classes.userHomeHeader}>Smoke</span>
+              <span
+                className={classes.userhomeSubHeader}
+                style={{ marginLeft: "8px" }}
+              >
+                Plus
+              </span>
             </Typography>
             <Avatar
               alt="Remy Sharp"
               src="https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/WhatsApp%20Image%202019-02-23%20at%209.37.56%20PM.jpeg?alt=media&token=fa3d29e1-7dc2-429e-89b1-b9aa677ea91d"
               className={classes.avatar}
             />
-
           </Toolbar>
-
         </AppBar>
-        <Drawer
-          variant="permanent"
-          className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.open,
-            [classes.drawerClose]: !this.state.open
-          })}
-          classes={{
-            paper: classNames({
+        <Hidden xsDown>
+          <Drawer
+            variant="permanent"
+            className={classNames(classes.drawer, {
               [classes.drawerOpen]: this.state.open,
               [classes.drawerClose]: !this.state.open
-            })
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </div>
-          <Divider />
-          <Navigator menuItems={[
-            {
-              name:"Home",
-              icon:"home"
-            },
-            {
-              name:"Settings",
-              icon:"settings"
-            },
-            {
-              name:"Logout",
-              icon:"exit_to_app"
-            }
-          ]}/>
-        </Drawer>
+            })}
+            classes={{
+              paper: classNames({
+                [classes.drawerOpen]: this.state.open,
+                [classes.drawerClose]: !this.state.open
+              })
+            }}
+            open={this.state.open}
+          >
+            <div className={classes.toolbar}>
+              <IconButton onClick={this.handleDrawerClose}>
+                {theme.direction === "rtl" ? (
+                  <ChevronRightIcon />
+                ) : (
+                  <ChevronLeftIcon />
+                )}
+              </IconButton>
+            </div>
+            <Divider />
+            <Navigator
+              menuItems={menuItems}
+            />
+          </Drawer>
+        </Hidden>
+        <Hidden smUp>
+          <BottomNavigation menuItems={menuItems}/>
+        </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
+          <UserRoutes />
         </main>
       </div>
     );
@@ -210,13 +234,14 @@ MiniDrawer.propTypes = {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const {
-    userInfo = {}
-  } = preparedFinalObject;
+  const { userInfo = {} } = preparedFinalObject;
   const { user = {} } = userInfo;
-  return {user };
+  return { user };
 };
 
-
-
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps,null)(MiniDrawer));
+export default withStyles(styles, { withTheme: true })(
+  connect(
+    mapStateToProps,
+    null
+  )(MiniDrawer)
+);

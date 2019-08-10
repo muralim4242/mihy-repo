@@ -30,7 +30,7 @@ class Login extends React.Component {
           gutterBottom
           classes={{ root: classes.heading }}
         >
-          Welcome to MIHY
+          Welcome to Healthy Smoke
         </Typography>
         <Auth rootClass={classes.auth} />
       </div>
