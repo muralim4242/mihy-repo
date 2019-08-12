@@ -2,7 +2,7 @@
   "name": "mihy-ui-healty-smoke",
   "version": "0.1.0",
   "private": true,
-  "license":"MIHY",
+  "license": "MIHY",
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",

@@ -1,15 +1,20 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import NumberSelector from "./component/NumberSelector";
+import Typography from "@material-ui/core/Typography";
+import Counter from "./components/Counter";
+import BrandSelection from "./components/BrandSelection";
+import Statitics from "./components/Statitics";
 
 class Dashboard extends React.Component {
   render()
   {
     return(
       <div>
-        <Paper>
-          <NumberSelector/>
-        </Paper>
+        <Typography variant="h6" gutterBottom>
+         Dashboard
+        </Typography>
+        <BrandSelection/>
+        <Counter/>
+        <Statitics/>
       </div>
     )
   }
