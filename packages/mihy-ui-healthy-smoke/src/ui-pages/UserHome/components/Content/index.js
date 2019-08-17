@@ -95,7 +95,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: 8 * 3
+    padding: "16px 16px 54px"
   },
   userHomeHeader: {
     fontSize: "30px",
@@ -139,6 +139,8 @@ class MiniDrawer extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+
+
 
   render() {
     const { classes, theme } = this.props;

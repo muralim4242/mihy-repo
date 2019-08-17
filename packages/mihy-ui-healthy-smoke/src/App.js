@@ -15,7 +15,7 @@ class App extends React.Component {
     const { history} = this.props;
     this.unregisterAuthObserver = firebaseAuth().onAuthStateChanged(user => {
       if (user) {
-        history.push("/user-home");
+        history.push("/user-home/first-time");
       } else {
         history.push("/");
       }
