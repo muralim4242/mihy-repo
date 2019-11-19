@@ -4,12 +4,6 @@ import { storiesOf } from '@storybook/react';
 import Item from './index'
 
 storiesOf('Layout Item', module)
-    .add('Item Spacing', () =>
-        <React.Fragment>
-            <Item spacing={3}>Item 3</Item>
-            <Item spacing={6}>Item 6</Item>
-            <Item spacing={9}>Item 9</Item>
-        </React.Fragment>)
     .add('Item Justify', () =>
         <React.Fragment>
             <Item justify='flex-start'>Item Flex-Start</Item>

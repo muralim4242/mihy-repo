@@ -2,13 +2,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Container from './index'
+import Item from '../Item/index'
 
 storiesOf('Layout Container', module)
     .add('Container Spacing', () =>
         <React.Fragment>
-            <Container spacing={3}>Container 3</Container>
-            <Container spacing={6}>Container 6</Container>
-            <Container spacing={9}>Container 9</Container>
+            <Container spacing={3}><Item>Container 3</Item><Item>Container 3</Item><Item>Container 3</Item></Container>
+            <Container spacing={6}><Item>Container 6</Item><Item>Container 6</Item><Item>Container 6</Item><Item>Container 6</Item><Item>Container 6</Item><Item>Container 6</Item></Container>
+            <Container spacing={9}><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item><Item>Container 9</Item></Container>
         </React.Fragment>)
     .add('Container Justify', () =>
         <React.Fragment>
