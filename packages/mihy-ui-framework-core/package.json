@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
+    "@storybook/addon-storysource": "^5.2.6",
     "axios": "^0.18.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
