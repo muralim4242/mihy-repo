@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import LinearSpinner from './index'
 
 
-storiesOf('LinearSpinner', module)
+storiesOf('ui-atoms : LinearSpinner', module)
     .add('LinearSpinner Colors', () =>
         <React.Fragment>
             Primary

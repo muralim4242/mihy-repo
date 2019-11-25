@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Carousel from './index'
 
-storiesOf('Carousel', module)
+storiesOf('ui-molecules : Carousel', module)
     .add('Carousel', () =>
         <Carousel
             items={[{ src: 'dank.jpg', legend: 'Book' },

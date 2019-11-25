@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import StepperNonLinearWithoutAction from './index'
 
-storiesOf('StepperNonLinearWithoutAction', module)
+storiesOf('ui-molecules : StepperNonLinearWithoutAction', module)
     .add('StepperNonLinearWithoutAction', () =>
         <StepperNonLinearWithoutAction
             getStepContent={() => { }}

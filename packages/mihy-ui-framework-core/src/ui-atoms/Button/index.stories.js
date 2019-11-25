@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Button from './index'
 
 
-storiesOf('Button', module)
+storiesOf('ui-atoms : Button', module)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()}</div>)
   .add('Contained Buttons', () =>
     <React.Fragment>

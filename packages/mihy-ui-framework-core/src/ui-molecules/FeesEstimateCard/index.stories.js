@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import FeesEstimateCard from './index'
 
-storiesOf('FeesEstimateCard', module)
+storiesOf('ui-molecules : FeesEstimateCard', module)
     .add('FeesEstimateCard', () =>
         <FeesEstimateCard
             estimate={{

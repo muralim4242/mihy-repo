@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import TextfieldWithIcon from './index'
 
-storiesOf('TextfieldWithIcon', module)
+storiesOf('ui-molecules : TextfieldWithIcon', module)
     .add('TextfieldWithIcon', () =>
         <React.Fragment>
             <TextfieldWithIcon

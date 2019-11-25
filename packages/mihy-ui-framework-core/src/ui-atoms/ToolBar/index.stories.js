@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Toolbar from './index'
 
-storiesOf('Toolbar', module)
+storiesOf('ui-atoms : Toolbar', module)
     .add('Toolbar', () =>
     <React.Fragment>
         <Toolbar component='h1'>Toolbar component H1</Toolbar>

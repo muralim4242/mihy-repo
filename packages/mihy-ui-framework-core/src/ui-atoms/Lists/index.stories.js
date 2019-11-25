@@ -7,7 +7,7 @@ import ListItemIcon from './ListItemIcon/index'
 import ListItemText from './ListItemText/index'
 
 
-storiesOf('Lists', module)
+storiesOf('ui-atoms : Lists', module)
     .add('List', () =>
         <React.Fragment>
             <List component='ul'>List</List>

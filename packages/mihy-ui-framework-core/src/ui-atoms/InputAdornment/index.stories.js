@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import InputAdornment from './index'
 
-storiesOf('InputAdornment', module)
+storiesOf('ui-atoms : InputAdornment', module)
     .add('InputAdornment "Div" Component', () => <InputAdornment component='div'>InputAdornment "Div" Component</InputAdornment>)
     .add('InputAdornment Variant', () =>
         <React.Fragment>

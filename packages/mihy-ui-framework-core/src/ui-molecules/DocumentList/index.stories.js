@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import DocumentList from './index'
 
-storiesOf('DocumentList', module)
+storiesOf('ui-molecules : DocumentList', module)
     .add('DocumentList', () =>
         <DocumentList
             documents={[

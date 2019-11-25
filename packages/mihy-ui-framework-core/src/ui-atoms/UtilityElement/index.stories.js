@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Break from './Break/index'
 import Label from './Label/index'
 
-storiesOf('UtilityElement', module)
+storiesOf('ui-atoms : UtilityElement', module)
     .add('Break', () =>
         <React.Fragment>
             Hello World!

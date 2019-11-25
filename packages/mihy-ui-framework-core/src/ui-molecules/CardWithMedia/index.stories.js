@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import CardWithMedia from './index'
 
-storiesOf('CardWithMedia', module)
+storiesOf('ui-molecules : CardWithMedia', module)
     .add('CardWithMedia', () =>
         <CardWithMedia
             cardContent={['Typo1', 'Typo2']}

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Icon from './index'
 
-storiesOf('Icon', module)
+storiesOf('ui-atoms : Icon', module)
     .add('Icon', () =>
         <React.Fragment>
             <Icon iconName='Primary Default Icon' color="primary" style={{ fontSize: 'default' }} />

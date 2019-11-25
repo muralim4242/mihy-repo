@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Item from './index'
 
-storiesOf('Layout Item', module)
+storiesOf('ui-atoms : Layout Item', module)
     .add('Item Justify', () =>
         <React.Fragment>
             <Item justify='flex-start'>Item Flex-Start</Item>

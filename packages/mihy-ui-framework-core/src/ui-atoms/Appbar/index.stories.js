@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Appbar from './index'
 
-storiesOf('Appbar', module)
+storiesOf('ui-atoms : Appbar', module)
     .addDecorator(story => <div style={{ padding: '3rem' }}>{story()}</div>)
     .add('AppBar Absolute', () =>
         <React.Fragment>

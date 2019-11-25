@@ -3,6 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import AppSubOption from './index'
 
-storiesOf('AppSubOption', module)
+storiesOf('ui-molecules : AppSubOption', module)
     .add('AppSubOption', () =>
         <AppSubOption item={{ displayLabel: "menu", itemImage: "dank.jpg", displaySubLabel: 'submenu' }} />)

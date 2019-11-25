@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Stepper from './index'
 
-storiesOf('Stepper', module)
+storiesOf('ui-molecules : Stepper', module)
     .add('Stepper', () =>
         <Stepper
             activeStep={3}

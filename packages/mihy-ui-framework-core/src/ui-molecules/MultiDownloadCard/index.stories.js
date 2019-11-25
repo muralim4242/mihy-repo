@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import MultiDownloadCard from './index'
 
-storiesOf('MultiDownloadCard', module)
+storiesOf('ui-molecules : MultiDownloadCard', module)
     .add('MultiDownloadCard', () =>
         <MultiDownloadCard
         data={[{ title: 'Title 1', name: 'Name 1', link: 'https://www.youtube.com/', linkText: 'Link 1' },

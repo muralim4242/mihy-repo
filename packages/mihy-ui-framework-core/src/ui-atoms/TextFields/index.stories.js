@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Phonenumber from './Phonenumber/index'
 import Text from './Text/index'
 
-storiesOf('TextFields', module)
+storiesOf('ui-atoms : TextFields', module)
     .add('Phonenumber', () =>
         <React.Fragment>
             <Phonenumber

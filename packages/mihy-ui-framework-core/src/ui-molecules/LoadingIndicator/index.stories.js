@@ -3,6 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import LoadingIndicator from './index'
 
-storiesOf('LoadingIndicator', module)
+storiesOf('ui-molecules : LoadingIndicator', module)
     .add('LoadingIndicator', () =>
         <LoadingIndicator loadingColor='secondary' />)

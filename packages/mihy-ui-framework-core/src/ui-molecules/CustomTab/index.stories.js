@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import CustomTab from './index'
 
-storiesOf('CustomTab', module)
+storiesOf('ui-molecules : CustomTab', module)
     .add('CustomTab', () =>
         <CustomTab
             alignCenter

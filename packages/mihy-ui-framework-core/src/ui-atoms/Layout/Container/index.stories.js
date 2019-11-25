@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Container from './index'
 import Item from '../Item/index'
 
-storiesOf('Layout Container', module)
+storiesOf('ui-atoms : Layout Container', module)
     .add('Container Spacing', () =>
         <React.Fragment>
             <Container spacing={3}><Item>Container 3</Item><Item>Container 3</Item><Item>Container 3</Item></Container>

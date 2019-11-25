@@ -3,6 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import Card from './index'
 
-storiesOf('Card', module)
+storiesOf('ui-atoms : Card', module)
     .add('Default Card', () => <Card>Card</Card>)
     .add('Raised Card', () => <Card raised='true'>Card</Card>)

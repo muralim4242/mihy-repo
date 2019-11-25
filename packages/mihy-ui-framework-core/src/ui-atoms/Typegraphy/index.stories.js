@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Typography from './index'
 
-storiesOf('Typography', module)
+storiesOf('ui-atoms : Typography', module)
     .add('Typography Variant', () =>
         <React.Fragment>
             <Typography variant='h1'>Typography Variant h1</Typography>

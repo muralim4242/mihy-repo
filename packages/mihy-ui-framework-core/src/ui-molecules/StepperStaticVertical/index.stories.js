@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import StepperStaticVertical from './index'
 
-storiesOf('StepperStaticVertical', module)
+storiesOf('ui-molecules : StepperStaticVertical', module)
     .add('StepperStaticVertical', () =>
         <StepperStaticVertical
             steps={[{ iconColorOne: 'red', iconColorTwo: 'blue', iconName: 'IconName 1', displayLabel: 'Display Label 1', displaySubLabel: ['SubLabel 1', 'SubLabel 2'] },
