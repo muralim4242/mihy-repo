@@ -87,8 +87,8 @@ class OurTeam extends React.Component {
         </Grid>
         <Hidden smDown>
         <Paper>
-          <Grid container spacing={spacing}>
-              <Swiper {...params}>
+          <Grid container spacing={spacing} justify="center" alignItems="center">
+              {/*<Swiper {...params}>*/}
                 {team.map((item, key) => {
                   return (
                     <Grid item sm={4} xs={12} key={key}>
@@ -109,14 +109,14 @@ class OurTeam extends React.Component {
                     </Grid>
                   );
                 })}
-              </Swiper>
+              {/*</Swiper>*/}
           </Grid>
 
         </Paper>
         </Hidden>
 
         <Hidden smUp>
-          <Swiper {...paramsXs}>
+          {/*<Swiper {...paramsXs}>*/}
             {team.map((item, key) => {
               return (
                   <Paper style={{height:"340px"}}>
@@ -137,7 +137,7 @@ class OurTeam extends React.Component {
                   </Paper>
               );
             })}
-          </Swiper>
+          {/*</Swiper>*/}
         </Hidden>
       </div>
     );
