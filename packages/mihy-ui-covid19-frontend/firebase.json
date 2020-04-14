@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "target": "mihy-covid19",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "appNameOne": "Covid",
+  "appNameTwo": "19",
+  "language.header": "Langauge",
+  "language.subheader": "Select your language",
+  "dashboard.your-area":"Your area",
+  "dashboard.cuntry-status-header":"Contry tracker",
+  "dashboard.toplist":"State tracker",
+  "dashboard.top-district-list":"District Tracker",
+  "confirmed":"Confirmed",
+  "active":"Active",
+  "recovered":"Recovered",
+  "deaths":"Deaths"
+}
