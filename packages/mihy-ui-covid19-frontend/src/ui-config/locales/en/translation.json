@@ -446,5 +446,15 @@
   "district.Tripura.Gomati": "Gomati",
   "district.Tripura.North Tripura": "North Tripura",
   "district.Nagaland.Dimapur": "Dimapur",
-  "district.Meghalaya.East Khasi Hills": "East Khasi Hills"
+  "district.Meghalaya.East Khasi Hills": "East Khasi Hills",
+
+  "district.Maharashtra.Unknown":"Unknown",
+  "district.Madhya Pradesh.Unknown":"Unknown",
+  "district.Madhya Pradesh.Satna":"Satna",
+  "district.Uttar Pradesh.Unknown":"Unknown",
+  "district.Gujarat.Narmada":"Narmada",
+  "district.Gujarat.Botad":"Botad",
+  "district.Gujarat.Kheda":"Kheda",
+  "district.Telangana.Kumuram Bheem Asifabad":"Kumuram Bheem Asifabad",
+  "district.Himachal Pradesh.Unknown":"Unknown"
 }
