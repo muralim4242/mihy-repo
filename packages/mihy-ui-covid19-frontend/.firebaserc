@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "mihy-all"
+  },
+  "targets": {
+    "mihy-all": {
+      "hosting": {
+        "mihy-covid19": [
+          "mihy-covid19"
+        ]
+      }
+    }
   }
 }
