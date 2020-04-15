@@ -48,7 +48,8 @@ const TopDistrictList = ({
   t,
   dialogOpen,
   handleDistrictSearch,
-  districtSearchText=""
+  districtSearchText="",
+  selectedState
 }) => {
   const classes = useStyles();
   return (
@@ -91,7 +92,7 @@ const TopDistrictList = ({
           <TextField
              className={classes.textfield}
              id="input-with-icon-textfield"
-             label="Seach State"
+             label="Search District"
              fullWidth={true}
              InputProps={{
                startAdornment: (
@@ -110,7 +111,7 @@ const TopDistrictList = ({
                 <Grid item xs={6} key={key}>
                   <Card>
                     <CardContent>
-                      <DistrictStatus status={stateStatus} t={t} />
+                      <DistrictStatus status={stateStatus} t={t} selectedState={selectedState}/>
                     </CardContent>
                   </Card>
                 </Grid>
