@@ -10,7 +10,8 @@ const styles = {
   root: {
     width: "100%",
     position:"fixed",
-    bottom:"0px"
+    bottom:"0px",
+    zIndex:"1000"
   },
 };
 
