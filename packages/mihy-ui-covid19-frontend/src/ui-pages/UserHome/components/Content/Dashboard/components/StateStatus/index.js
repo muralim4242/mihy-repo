@@ -6,7 +6,7 @@ const StateStatus = ({ status = {}, t }) => {
   return (
     <div>
       <Typography variant="h6" gutterBottom color="primary">
-        {t(status.state)}
+        {t(`state.${status.state}`)}
       </Typography>
       <Typography variant="subtitle2" gutterBottom style={{color:"#f44336"}}>
         {`${t("confirmed")} - ${status.confirmed} ${parseInt(status.deltaconfirmed)?`[+${status.deltaconfirmed}]`:''}` }
