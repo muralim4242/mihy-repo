@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Grid, Typography ,TextField,InputAdornment} from "@material-ui/core";
+import { Card, CardContent, Grid, Typography ,TextField,InputAdornment,Button} from "@material-ui/core";
 import StateStatus from "../StateStatus";
 import Search from "@material-ui/icons/Search"
 // import Select from 'react-select';
@@ -24,7 +24,7 @@ const TopList = ({ topList = [], t ,handleOpen,handleStateSearch,stateSearchText
      <TextField
         // className={classes.margin}
         id="input-with-icon-textfield"
-        label="Seach State"
+        label="Search State"
         fullWidth={true}
         InputProps={{
           startAdornment: (
@@ -41,9 +41,10 @@ const TopList = ({ topList = [], t ,handleOpen,handleStateSearch,stateSearchText
         {topList.map((stateStatus,key) => {
           return stateStatus.statecode!=="TT" && stateStatus.state.toLowerCase().startsWith(stateSearchText.toLowerCase()) && (
             <Grid item xs={6} key={key}>
-              <Card onClick={(e)=>handleOpen(stateStatus.state)}>
+              <Card>
                 <CardContent>
                   <StateStatus status={stateStatus} t={t} />
+                  <Button variant="outlined" color="primary" onClick={(e)=>handleOpen(stateStatus.state)} size="small" fullWidth>{t("dashboard.view-district")}</Button>
                 </CardContent>
               </Card>
             </Grid>
