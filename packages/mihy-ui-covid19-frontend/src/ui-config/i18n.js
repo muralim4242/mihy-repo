@@ -27,7 +27,7 @@ i18n
       hin: {
         translations: translationHin
       },
-      jap: {
+      kan: {
         translations: translationKan
       }
     },
