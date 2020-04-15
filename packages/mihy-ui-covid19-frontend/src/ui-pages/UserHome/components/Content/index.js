@@ -10,6 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -19,6 +20,7 @@ import UserRoutes from "../../../../ui-routes/UserRoutes";
 import BottomNavigation from "./components/BottomNavigation";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
+import LanguageSelect from "./Dashboard/components/LanguageSelect/index"
 
 
 const menuItems=[
@@ -126,12 +128,16 @@ const styles = theme => ({
   },
   avatar: {
     marginRight: "16px"
+  },
+  languageButton:{
+    alignItems:"right"
   }
 });
 
 class MiniDrawer extends React.Component {
   state = {
-    open: false
+    open: false,
+    openLanguageOptions:false
   };
 
   handleDrawerOpen = () => {
@@ -141,11 +147,24 @@ class MiniDrawer extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+  openlanguageDialogue=()=>{
+  const {openLanguageOptions}=this.state
+    this.setState({openLanguageOptions:!openLanguageOptions})
+
+  }
+  closelanguageDialogue=()=>{
+  const {openLanguageOptions}=this.state
+
+    this.setState({openLanguageOptions:!openLanguageOptions})
+
+  }
 
 
 
   render() {
     const { classes, theme , t} = this.props;
+    const { openLanguageOptions,closelanguageDialogue} = this.state;
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -182,6 +201,13 @@ class MiniDrawer extends React.Component {
                 {t("appNameTwo")}
               </span>
             </Typography>
+            <Button className={classes.languageButton} onClick={e=>{
+              this.openlanguageDialogue()}}>
+            <span class="material-icons">
+language
+</span>
+            </Button>
+            {/* <LanguageSelect  openLanguageOptions={openLanguageOptions}/> */}
             {/*<Avatar
               alt="Remy Sharp"
               src="https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/WhatsApp%20Image%202019-02-23%20at%209.37.56%20PM.jpeg?alt=media&token=fa3d29e1-7dc2-429e-89b1-b9aa677ea91d"
@@ -226,7 +252,13 @@ class MiniDrawer extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <UserRoutes />
+
         </main>
+        
+        <div >
+        <LanguageSelect openLanguageOptions={openLanguageOptions} closelanguageDialogue={this.closelanguageDialogue}/>
+        </div>
+       
       </div>
     );
   }
