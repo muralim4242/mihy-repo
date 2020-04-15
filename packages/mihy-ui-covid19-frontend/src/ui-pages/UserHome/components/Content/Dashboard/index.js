@@ -32,6 +32,7 @@ class Dashboard extends React.Component {
     let {setAppData,dashboard}=this.props;
     const {stateDistrictMapping={}}=dashboard;
     let topDistrictList=stateDistrictMapping[selectedState] ||{};
+    topDistrictList.districtData=topDistrictList.districtData ||{}
     topDistrictList=Object.keys(topDistrictList.districtData).map((key)=>{
       return {
         code:key,
