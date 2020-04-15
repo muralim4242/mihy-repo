@@ -1,10 +1,10 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
 import { httpRequest } from "../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
-import YourArea from "./components/YourArea";
+// import YourArea from "./components/YourArea";
 import CountryStatus from "./components/CountryStatus";
 import TopList from "./components/TopList";
 import TopDistrictList from "./components/TopDistrictList";
@@ -42,6 +42,7 @@ class Dashboard extends React.Component {
     topDistrictList=orderBy(topDistrictList,["confirmed"],["desc"]);
     dashboard={
       ...dashboard,
+      selectedState,
       topDistrictList,
       dialogOpen:true
     }
@@ -63,7 +64,7 @@ class Dashboard extends React.Component {
       dashboard,
       t
     } = this.props;
-    const {dialogOpen=false,topList=[],topDistrictList=[],stateSearchText,districtSearchText}=dashboard;
+    const {dialogOpen=false,topList=[],topDistrictList=[],stateSearchText,districtSearchText,selectedState}=dashboard;
     const {  handleOpen, handleClose,handleStateSearch ,handleDistrictSearch} = this;
     return (
       <div>
@@ -77,6 +78,7 @@ class Dashboard extends React.Component {
           topDistrictList={topDistrictList}
           handleDistrictSearch={handleDistrictSearch}
           districtSearchText={districtSearchText}
+          selectedState={selectedState}
         />
       </div>
     );
