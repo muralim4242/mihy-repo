@@ -24,9 +24,9 @@ class App extends React.Component {
   // }
 
   // Make sure we un-register Firebase observers when the component unmounts.
-  componentWillUnmount() {
-    this.unregisterAuthObserver();
-  }
+  // componentWillUnmount() {
+  //   this.unregisterAuthObserver();
+  // }
 
   render() {
     const { spinner } = this.props;
