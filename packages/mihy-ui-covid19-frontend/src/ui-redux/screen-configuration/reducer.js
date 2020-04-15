@@ -8,7 +8,8 @@ const intialState = {
       variant:"success",
       message:""
     },
-    spinner:false
+    spinner:false,
+    selectedLanguage:window.localStorage.getItem("selectedLanguage")||"en"
   },
 };
 
