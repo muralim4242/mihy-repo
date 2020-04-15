@@ -9,7 +9,7 @@ const YourArea=({stateStatus={},districtStatus={},t,handleOpen})=>{
     <Typography variant="h5" gutterBottom color="primary">
         {t("dashboard.yourarea")}
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
 
         <Grid item xs={6} >
           <Card onClick={(e)=>handleOpen()}>
