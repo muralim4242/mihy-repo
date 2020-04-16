@@ -163,7 +163,7 @@ class MiniDrawer extends React.Component {
 
   render() {
     const { classes, theme , t} = this.props;
-    const { openLanguageOptions,closelanguageDialogue} = this.state;
+    const { openLanguageOptions} = this.state;
 
     return (
       <div className={classes.root}>
