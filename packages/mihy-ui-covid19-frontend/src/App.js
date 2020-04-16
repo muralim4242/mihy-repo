@@ -6,6 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import {mapDispatchToProps} from "./ui-utils/commons";
 import MainRoutes from "./ui-routes/MainRoutes";
 import { connect } from "react-redux";
+import { withTranslation } from "react-i18next";
 import "./App.css";
 
 
@@ -24,8 +25,12 @@ class App extends React.Component {
   // }
 
   // Make sure we un-register Firebase observers when the component unmounts.
-  componentWillUnmount() {
-    this.unregisterAuthObserver();
+  // componentWillUnmount() {
+  //   this.unregisterAuthObserver();
+  // }
+  componentDidMount=()=>{
+    const {i18n,selectedLanguage}=this.props;
+    i18n.changeLanguage(selectedLanguage);
   }
 
   render() {
@@ -53,11 +58,11 @@ class App extends React.Component {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { spinner } = preparedFinalObject;
-  return { spinner };
+  const { spinner ,selectedLanguage="en"} = preparedFinalObject;
+  return { spinner,selectedLanguage };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(App));
+)(withRouter(withTranslation()(App)));

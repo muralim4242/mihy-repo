@@ -10,7 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -20,22 +20,37 @@ import UserRoutes from "../../../../ui-routes/UserRoutes";
 import BottomNavigation from "./components/BottomNavigation";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import LanguageSelect from "./Dashboard/components/LanguageSelect/index"
+import LanguageSelect from "./Dashboard/components/LanguageSelect";
+import { mapDispatchToProps } from "../../../../ui-utils/commons";
 
-
-const menuItems=[
+const menuItems = [
   {
     name: "Home",
     icon: "home"
   },
-  // {
-  //   name: "Settings",
-  //   icon: "settings"
-  // },
-  // {
-  //   name: "Logout",
-  //   icon: "exit_to_app"
-  // }
+  {
+    name: "Statics",
+    icon: "equalizer"
+  },
+  {
+    name: "Services",
+    icon: "airport_shuttle"
+  }
+];
+
+const languages = [
+  {
+    name: "ENGLISH",
+    code: "en"
+  },
+  {
+    name: "हिन्दी",
+    code: "hin"
+  },
+  {
+    name: "ಕನ್ನಡ",
+    code: "kan"
+  }
 ];
 
 const drawerWidth = 240;
@@ -99,7 +114,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: "16px 16px 54px"
+    padding: "8px 8px 54px"
   },
   userHomeHeader: {
     fontSize: "30px",
@@ -129,15 +144,15 @@ const styles = theme => ({
   avatar: {
     marginRight: "16px"
   },
-  languageButton:{
-    alignItems:"right"
+  languageButton: {
+    alignItems: "right"
   }
 });
 
 class MiniDrawer extends React.Component {
   state = {
     open: false,
-    openLanguageOptions:false
+    openLanguageOptions: false
   };
 
   handleDrawerOpen = () => {
@@ -147,23 +162,61 @@ class MiniDrawer extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-  openlanguageDialogue=()=>{
-  const {openLanguageOptions}=this.state
-    this.setState({openLanguageOptions:!openLanguageOptions})
+  openlanguageDialogue = () => {
+    const { openLanguageOptions } = this.state;
+    this.setState({ openLanguageOptions: !openLanguageOptions });
+  };
+  closelanguageDialogue = () => {
+    const { openLanguageOptions } = this.state;
+    this.setState({ openLanguageOptions: !openLanguageOptions });
+  };
 
-  }
-  closelanguageDialogue=()=>{
-  const {openLanguageOptions}=this.state
+  onLanguageSelect = code => {
+    const { setAppData, i18n } = this.props;
+    setAppData("selectedLanguage", code);
+    i18n.changeLanguage(code);
+    window.localStorage.setItem("selectedLanguage", code);
+  };
 
-    this.setState({openLanguageOptions:!openLanguageOptions})
-
-  }
-
-
+  share = () => {
+    const { setAppData } = this.props;
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Mihy",
+          text: "Covid 19 tracker",
+          url: "http://mihy-covid19.web.app"
+        })
+        .then(() => {
+          setAppData("snackbar", {
+            open: true,
+            variant: "success",
+            message: "Successful share"
+          });
+          console.log("Successful share");
+        })
+        .catch(error => {
+          setAppData("snackbar", {
+            open: true,
+            variant: "warning",
+            message: "Error sharing"
+          });
+          console.log("Error sharing", error);
+        });
+    }
+  };
 
   render() {
-    const { classes, theme , t} = this.props;
-    const { openLanguageOptions} = this.state;
+    const { classes, theme, t, selectedLanguage, setAppData } = this.props;
+    const { openLanguageOptions } = this.state;
+    const {
+      onLanguageSelect,
+      closelanguageDialogue,
+      openlanguageDialogue,
+      handleDrawerClose,
+      handleDrawerOpen,
+      share
+    } = this;
 
     return (
       <div className={classes.root}>
@@ -179,7 +232,7 @@ class MiniDrawer extends React.Component {
               <IconButton
                 color="primary"
                 aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
+                onClick={handleDrawerOpen}
                 className={classNames(classes.menuButton, {
                   [classes.hide]: this.state.open
                 })}
@@ -193,6 +246,12 @@ class MiniDrawer extends React.Component {
               noWrap
               classes={{ root: classes.webHeader }}
             >
+              <img
+                width="24px"
+                hieght="24px"
+                src="virus-solid.svg"
+                alt="corana"
+              />
               <span className={classes.userHomeHeader}>{t("appNameOne")}</span>
               <span
                 className={classes.userhomeSubHeader}
@@ -201,12 +260,26 @@ class MiniDrawer extends React.Component {
                 {t("appNameTwo")}
               </span>
             </Typography>
-            <Button className={classes.languageButton} onClick={e=>{
-              this.openlanguageDialogue()}}>
-            <span class="material-icons">
-language
-</span>
-            </Button>
+            <IconButton
+              className={classes.languageButton}
+              onClick={e => {
+                openlanguageDialogue();
+              }}
+              color="primary"
+            >
+              <span className="material-icons">language</span>
+            </IconButton>
+            {navigator.share && (
+              <IconButton
+                className={classes.languageButton}
+                onClick={e => {
+                  share();
+                }}
+                color="primary"
+              >
+                <span className="material-icons">share</span>
+              </IconButton>
+            )}
             {/* <LanguageSelect  openLanguageOptions={openLanguageOptions}/> */}
             {/*<Avatar
               alt="Remy Sharp"
@@ -231,7 +304,7 @@ language
             open={this.state.open}
           >
             <div className={classes.toolbar}>
-              <IconButton onClick={this.handleDrawerClose}>
+              <IconButton onClick={handleDrawerClose}>
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
                 ) : (
@@ -240,25 +313,29 @@ language
               </IconButton>
             </div>
             <Divider />
-            <Navigator
-              menuItems={menuItems}
-              t={t}
-            />
+            <Navigator menuItems={menuItems} t={t} />
           </Drawer>
         </Hidden>
         <Hidden smUp>
-          <BottomNavigation menuItems={menuItems} t={t}/>
+          <BottomNavigation
+            menuItems={menuItems}
+            t={t}
+            setAppData={setAppData}
+          />
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <UserRoutes />
-
         </main>
-        
-        <div >
-        <LanguageSelect openLanguageOptions={openLanguageOptions} closelanguageDialogue={this.closelanguageDialogue}/>
-        </div>
-       
+
+        <LanguageSelect
+          t={t}
+          openLanguageOptions={openLanguageOptions}
+          closelanguageDialogue={closelanguageDialogue}
+          languages={languages}
+          onLanguageSelect={onLanguageSelect}
+          selectedLanguage={selectedLanguage}
+        />
       </div>
     );
   }
@@ -271,14 +348,14 @@ MiniDrawer.propTypes = {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { userInfo = {} } = preparedFinalObject;
+  const { userInfo = {}, selectedLanguage } = preparedFinalObject;
   const { user = {} } = userInfo;
-  return { user };
+  return { user, selectedLanguage };
 };
 
 export default withStyles(styles, { withTheme: true })(
   connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(withTranslation()(MiniDrawer))
 );

@@ -37,7 +37,7 @@ const TopList = ({ topList = [], t ,handleOpen,handleStateSearch,stateSearchText
           handleStateSearch(e.target.value)
         }}
       />
-      <Grid container spacing={2} style={{marginBottom:"8px",marginTop:"8px"}}>
+      <Grid container spacing={1} style={{marginBottom:"8px",marginTop:"8px"}}>
         {topList.map((stateStatus,key) => {
           return stateStatus.statecode!=="TT" && stateStatus.state.toLowerCase().startsWith(stateSearchText.toLowerCase()) && (
             <Grid item xs={6} key={key}>

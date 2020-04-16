@@ -4,11 +4,11 @@ import Status from "../Status";
 
 const CoutryStatus=({countryStatus={},t})=>{
   return (
-    <div>
+    <div style={{marginBottom:"8px"}}>
     <Typography variant="h5" gutterBottom color="primary">
         {t("dashboard.cuntry-status-header")}
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={1} alignItems="stretch">
         <Grid item xs={6} >
           <Card style={{background:"#f44336",color:"white"}}>
             <CardContent>
@@ -19,7 +19,7 @@ const CoutryStatus=({countryStatus={},t})=>{
         <Grid item xs={6}>
         <Card style={{background:"#2196f3",color:"white"}}>
           <CardContent>
-              <Status status={{label:"active",count:countryStatus.active}} t={t}/>
+              <Status status={{label:"active",count:countryStatus.active,delta:`${(parseInt(countryStatus.deltadeaths)+parseInt(countryStatus.deltarecovered))}`}} t={t}/>
           </CardContent>
         </Card>
         </Grid>

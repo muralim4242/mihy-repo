@@ -105,7 +105,7 @@ const TopDistrictList = ({
                handleDistrictSearch(e.target.value)
              }}
            />
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             {topDistrictList.map((stateStatus,key) => {
               return stateStatus.code.toLowerCase().startsWith(districtSearchText.toLowerCase()) && (
                 <Grid item xs={6} key={key}>
