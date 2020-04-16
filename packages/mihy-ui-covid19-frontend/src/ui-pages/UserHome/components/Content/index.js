@@ -29,7 +29,7 @@ const menuItems = [
     icon: "home"
   },
   {
-    name: "Statics",
+    name: "statistics",
     icon: "equalizer"
   },
   {
