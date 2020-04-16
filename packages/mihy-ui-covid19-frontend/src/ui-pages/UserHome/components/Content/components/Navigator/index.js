@@ -10,7 +10,7 @@ import Icon from "@material-ui/core/Icon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 
-const routes = ["/user-home", "/user-home/settings"];
+const routes = ["/user-home", "/statistics", "/user-home/settings"];
 
 const styles = {
   root: {
@@ -27,28 +27,28 @@ class SimpleBottomNavigation extends React.Component {
   };
 
   render() {
-    const { classes, menuItems,t } = this.props;
+    const { classes, menuItems, t } = this.props;
 
     return (
       <div className={classes.root}>
-          <List>
-            {menuItems.map((menu, key) => {
-              return (
-                <ListItem
-                  button
-                  onClick={e => {
-                    this.handleChange(e, 0);
-                  }}
-                  key={key}
-                >
-                  <ListItemIcon>
-                    <Icon color="primary">{menu.icon}</Icon>
-                  </ListItemIcon>
-                  <ListItemText primary={t(menu.name)} />
-                </ListItem>
-              );
-            })}
-          </List>
+        <List>
+          {menuItems.map((menu, key) => {
+            return (
+              <ListItem
+                button
+                onClick={e => {
+                  this.handleChange(e, key);
+                }}
+                key={key}
+              >
+                <ListItemIcon>
+                  <Icon color="primary">{menu.icon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={t(menu.name)} />
+              </ListItem>
+            );
+          })}
+        </List>
 
       </div>
     );
