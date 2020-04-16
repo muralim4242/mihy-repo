@@ -10,7 +10,7 @@ import Icon from "@material-ui/core/Icon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 
-const routes = ["/user-home", "/user-home/settings"];
+const routes = ["/user-home", "/user-home/settings","/services"];
 
 const styles = {
   root: {
@@ -37,7 +37,7 @@ class SimpleBottomNavigation extends React.Component {
                 <ListItem
                   button
                   onClick={e => {
-                    this.handleChange(e, 0);
+                    this.handleChange(e, key);
                   }}
                   key={key}
                 >

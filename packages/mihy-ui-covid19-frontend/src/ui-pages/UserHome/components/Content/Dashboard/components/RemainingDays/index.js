@@ -25,7 +25,6 @@ handle=()=>{
     return (
       <div>
         <Card style={{background:"pink"}}>
-        
         <CardContent>
         <Grid container>
         <Typography variant="h6" gutterBottom align="center">
@@ -36,8 +35,6 @@ handle=()=>{
       </Typography>
       </Grid>
       </CardContent>
-       
-        
         </Card>
       </div>
     );
