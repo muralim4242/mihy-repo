@@ -20,10 +20,10 @@ const styles = {
 
 class SimpleBottomNavigation extends React.Component {
   handleChange = (event, value) => {
-    let route = routes[value];
-    const { history } = this.props;
+    const { menuItems,changeRoute} = this.props;
+    let menu = menuItems[value];
     this.setState({ value });
-    history.push(route);
+    changeRoute(menu.route);
   };
 
   render() {

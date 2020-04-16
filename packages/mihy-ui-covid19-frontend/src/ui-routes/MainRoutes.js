@@ -11,7 +11,7 @@ const MainRoutes = () => {
       {/*<Route exact path="/" component={Login} />
       <Route path="/login" component={Login} />*/}
       <Route path="/user-home" component={UserHome} />
-      <Route path="/statistics" component={Statistics} />
+      <Route path="/user-home/statistics" component={Statistics} />
       <Redirect to="/user-home" />
     </div>
   )

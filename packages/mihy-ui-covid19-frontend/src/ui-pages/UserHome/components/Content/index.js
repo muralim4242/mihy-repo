@@ -22,15 +22,18 @@ import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import LanguageSelect from "./Dashboard/components/LanguageSelect";
 import { mapDispatchToProps } from "../../../../ui-utils/commons";
+import { withRouter } from "react-router-dom";
 
 const menuItems = [
   {
     name: "Home",
-    icon: "home"
+    icon: "home",
+    route: "/user-home"
   },
   {
-    name: "statistics",
-    icon: "equalizer"
+    name: "Statistics",
+    icon: "equalizer",
+    route: "/user-home/statistics"
   },
   {
     name: "Services",
@@ -206,9 +209,14 @@ class MiniDrawer extends React.Component {
     }
   };
 
+  changeRoute = route => {
+    this.props.history.push(route);
+  };
+
   render() {
     const { classes, theme, t, selectedLanguage, setAppData } = this.props;
     const { openLanguageOptions } = this.state;
+    const { changeRoute } = this;
     const {
       onLanguageSelect,
       closelanguageDialogue,
@@ -313,7 +321,7 @@ class MiniDrawer extends React.Component {
               </IconButton>
             </div>
             <Divider />
-            <Navigator menuItems={menuItems} t={t} />
+            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute} />
           </Drawer>
         </Hidden>
         <Hidden smUp>
@@ -321,6 +329,7 @@ class MiniDrawer extends React.Component {
             menuItems={menuItems}
             t={t}
             setAppData={setAppData}
+            changeRoute={changeRoute}
           />
         </Hidden>
         <main className={classes.content}>
@@ -357,5 +366,5 @@ export default withStyles(styles, { withTheme: true })(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(withTranslation()(MiniDrawer))
+  )(withRouter(withTranslation()(MiniDrawer)))
 );
