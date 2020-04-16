@@ -72,13 +72,13 @@ export const team = [
     about:"Passionate about product manangement and visual design."
     // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
   },
-  {
-    name: "Murali M",
-    photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
-    designation:"CTO & Arcitect",
-    about:"Developer and passionate about new technologies and innovation."
-    // I am from shimoga and i am born for technologies",
-  }
+  // {
+  //   name: "Murali M",
+  //   photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
+  //   designation:"CTO & Arcitect",
+  //   about:"Developer and passionate about new technologies and innovation."
+  //   // I am from shimoga and i am born for technologies",
+  // }
   // {
   //   name: "Gagan Deep TS",
   //   photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
