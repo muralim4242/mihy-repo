@@ -76,7 +76,7 @@ const TopDistrictList = ({
           </Toolbar>
         </AppBar>
         <div className={classes.root}>
-          {/*<Typography variant="h5" gutterBottom color="primary">
+          {/*<Typography variant="h5"  color="primary">
             {t("dashboard.top-district-list")}
           </Typography>*/}
           {/*<Select
