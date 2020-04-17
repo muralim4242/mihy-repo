@@ -31,20 +31,20 @@ class TotalCasesChart extends React.Component {
     const dates = [];
     const confirmed = [];
     const recovered = [];
-    const deceased = [];
+    const deaths = [];
 
     cases.forEach((el, index) => {
       if (index >= 31) {
         dates.push(moment(el.date.trim(), "DD MMM"));
         confirmed.push(el.totalconfirmed);
         recovered.push(el.totalrecovered);
-        deceased.push(el.totaldeceased);
+        deaths.push(el.totaldeaths);
       }
     });
     this.props.setAppData("totalCasesChart.totalCasesDates", dates);
     this.props.setAppData("totalCasesChart.totalCasesConfirmed", confirmed);
     this.props.setAppData("totalCasesChart.totalCasesRecovered", recovered);
-    this.props.setAppData("totalCasesChart.totalCasesDeceased", deceased);
+    this.props.setAppData("totalCasesChart.totalCasesDeceased", deaths);
   };
 
   componentDidMount = async () => {
@@ -56,7 +56,7 @@ class TotalCasesChart extends React.Component {
   };
 
   render() {
-    const { totalCasesChart } = this.props;
+    const { totalCasesChart ,t} = this.props;
     const {
       totalCasesDates,
       totalCasesConfirmed,
@@ -72,7 +72,7 @@ class TotalCasesChart extends React.Component {
           data: totalCasesConfirmed || [],
           borderCapStyle: "round",
           pointBackgroundColor: "#ff073a",
-          label: "Confirmed",
+          label: t("confirmed"),
           borderColor: "#ff073a",
           pointHoverRadius: 2
         },
@@ -81,7 +81,7 @@ class TotalCasesChart extends React.Component {
           data: totalCasesRecovered || [],
           borderCapStyle: "round",
           pointBackgroundColor: "#28a745",
-          label: "Recovered",
+          label: t("recovered"),
           borderColor: "#28a745",
           pointHoverRadius: 2
         },
@@ -90,7 +90,7 @@ class TotalCasesChart extends React.Component {
           data: totalCasesDeceased || [],
           borderCapStyle: "round",
           pointBackgroundColor: "#6c757d",
-          label: "Deceased",
+          label: t("deaths"),
           borderColor: "#6c757d",
           pointHoverRadius: 2
         }
@@ -138,7 +138,7 @@ class TotalCasesChart extends React.Component {
             },
             scaleLabel: {
               display: false,
-              labelString: "Total Cases"
+              labelString: t("Total Cases")
             }
           }
         ],
@@ -171,11 +171,11 @@ class TotalCasesChart extends React.Component {
 
     return (
       <div>
-      <Typography variant="h6" color="primary" style={{ padding: 8 }}>
-        INDIA - TOTAL CASES
+      <Typography variant="h6" color="primary">
+        {t("INDIA - TOTAL CASES")}
       </Typography>
       <Card >
-        <CardContent>
+        <CardContent className="ChartContainer">
           <Line data={dataset} options={options} />
         </CardContent>
       </Card>

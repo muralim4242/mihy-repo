@@ -53,6 +53,7 @@ class AgeChart extends React.Component {
   };
 
   render() {
+    const {t}=this.props;
     const chartData = {
       labels: [
         "0-10",
@@ -69,7 +70,7 @@ class AgeChart extends React.Component {
       datasets: [
         {
           data: this.props.ageChartAges || [],
-          label: "Cases",
+          label: t("Cases"),
           backgroundColor: "#ff073a"
         }
       ]
@@ -110,12 +111,12 @@ class AgeChart extends React.Component {
     return (
       <div>
         <Typography variant="h6" color="primary">
-          PATIENT AGE
+          {t("PATIENT AGE")}
         </Typography>
-        <Card>
-          <CardContent>
+        <Card >
+          <CardContent className="ChartContainer">
           <Bar data={chartData} options={chartOptions} />
-          *Awaiting details for {this.props.ageChartUnknown || 0} patients
+          {/*Awaiting details for {this.props.ageChartUnknown || 0} patients*/}
           </CardContent>
         </Card>
       </div>

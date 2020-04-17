@@ -58,7 +58,8 @@ class PatientGenderChart extends React.Component {
     const {
       patientGenderMale,
       patientGenderFemale,
-      patientGenderUnkown
+      patientGenderUnkown,
+      t
     } = this.props;
     const chartData = {
       datasets: [
@@ -72,7 +73,7 @@ class PatientGenderChart extends React.Component {
           label: "Hola"
         }
       ],
-      labels: ["Male", "Female", "Awaiting Details"]
+      labels: [t("Male"), t("Female"), t("Awaiting Details")]
     };
 
     const chartOptions = {
@@ -111,10 +112,10 @@ class PatientGenderChart extends React.Component {
     return (
       <div>
         <Typography variant="h6" color="primary">
-          PATIENT GENDER
+          {t("PATIENT GENDER")}
         </Typography>
         <Card>
-          <CardContent>
+          <CardContent className="ChartContainer">
             <Doughnut data={chartData} options={chartOptions} />
           </CardContent>
         </Card>
