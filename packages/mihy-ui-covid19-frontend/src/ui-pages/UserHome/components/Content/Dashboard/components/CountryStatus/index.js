@@ -1,16 +1,15 @@
 import React from "react";
 import {Card,CardContent,Grid,Typography} from "@material-ui/core";
 import Status from "../Status";
-// import RemainingDays from "../RemainingDays"
 
 const CoutryStatus=({countryStatus={},t})=>{
   return (
     <div style={{marginBottom:"8px"}}>
 
-    <Typography variant="h5" gutterBottom color="primary">
+    <Typography variant="h5"  color="primary">
         {t("dashboard.cuntry-status-header")}
       </Typography>
-      {/*<RemainingDays/>*/}
+
       <Grid container spacing={1} alignItems="stretch">
         <Grid item xs={6} >
           <Card style={{background:"#f44336",color:"white"}}>

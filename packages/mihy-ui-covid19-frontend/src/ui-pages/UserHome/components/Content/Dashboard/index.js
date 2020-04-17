@@ -8,6 +8,7 @@ import { withTranslation } from "react-i18next";
 import CountryStatus from "./components/CountryStatus";
 import TopList from "./components/TopList";
 import TopDistrictList from "./components/TopDistrictList";
+import RemainingDays from "./components/RemainingDays"
 import orderBy from "lodash/orderBy";
 
 class Dashboard extends React.Component {
@@ -70,6 +71,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <CountryStatus t={t} countryStatus={topList.length>0?topList[0]:{}}/>
+        <RemainingDays t={t}/>
         {/*<YourArea t={t} handleOpen={handleOpen} />*/}
         <TopList t={t} handleOpen={handleOpen} topList={topList} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText}/>
         <TopDistrictList
