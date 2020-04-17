@@ -473,5 +473,18 @@
   "district.Jharkhand.Dhanbad":"Dhanbad",
   "district.Meghalaya.Unknown":"Unknown",
 
-  "LockDown Remaining Days":"LockDown Remaining Days - "
+  "LockDown Remaining Days":"LockDown Remaining Days - ",
+
+  "MIHY":"MIHY",
+  "Covid 19 tracker":"कोविद 19 ट्रैकर",
+  "Successful shared":"Successful sharedೆ",
+  "INDIA - TOTAL CASES":"INDIA - TOTAL CASES",
+  "PATIENT GENDER":"PATIENT GENDER",
+  "Male":"Male",
+  "Female":"Female",
+  "Awaiting Details":"Awaiting Details",
+  "Total Cases":"Total Cases",
+  "INDIA - DAILY CASES":"INDIA - DAILY CASES",
+  "PATIENT AGE":"PATIENT AGE",
+  "Cases":"Cases"
 }

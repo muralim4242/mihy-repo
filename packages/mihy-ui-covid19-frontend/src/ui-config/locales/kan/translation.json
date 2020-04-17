@@ -4,9 +4,9 @@
   "language.header": "ಲ್ಯಾಂಗೇಜ್",
   "language.subheader": "ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆರಿಸಿ",
   "dashboard.your-area": "ನಿಮ್ಮ ಪ್ರದೇಶ",
-  "dashboard.cuntry-status-header": "ಭಾರತದ ಕೋವಿಡ್ 19 ಪ್ರಕರಣಗಳು್",
+  "dashboard.cuntry-status-header": "ಭಾರತದ ಕೋವಿಡ್ 19 ಪ್ರಕರಣಗಳು",
   "dashboard.toplist": "ರಾಜ್ಯಗಳ ಪ್ರಕರಣಗಳು",
-  "dashboard.top-district-list": "ಜಿಲ್ಲೆಗಳ ಪ್ರಕರಣಗಳು್",
+  "dashboard.top-district-list": "ಜಿಲ್ಲೆಗಳ ಪ್ರಕರಣಗಳು",
   "confirmed": "ಸೋಂಕಿತರು",
   "active": "ಸಕ್ರಿಯ",
   "recovered": "ಚೇತರಿಸಿಕೊಂಡವರು",
@@ -454,5 +454,18 @@
   "Services":"ಸೇವೆಗಳು",
   "Comming Soon":"ಶೀಘ್ರದಲ್ಲೇ ಬರುತ್ತಿದೆ!",
 
-  "LockDown Remaining Days":"ಲಾಕ್‌ಡೌನ್ ಉಳಿದ ದಿನಗಳು - "
+  "LockDown Remaining Days":"ಲಾಕ್‌ಡೌನ್ ಉಳಿದ ದಿನಗಳು - ",
+
+  "Covid 19 tracker":"ಕೋವಿಡ್ 19 ಟ್ರ್ಯಾಕರ್",
+  "Successful shared":"ಯಶಸ್ವಿಯಾಗಿ ಹಂಚಿಕೊಳ್ಳಲಾಗಿದೆ",
+  "Error sharing":"ಹಂಚಿಕೊಳ್ಳುವಲ್ಲಿ ದೋಷ",
+  "INDIA - TOTAL CASES":"ಭಾರತ - ಒಟ್ಟು ಪ್ರಕರಣಗಳು",
+  "PATIENT GENDER":"ರೋಗಿಯ ಲಿಂಗ",
+  "Male":"ಪುರುಷ",
+  "Female":"ಹೆಂಗಸು",
+  "Awaiting Details":"ವಿವರಗಳಿಗಾಗಿ ಕಾಯುತ್ತಿದೆ",
+  "Total Cases":"ಒಟ್ಟು ಪ್ರಕರಣಗಳು",
+  "INDIA - DAILY CASES":"ಭಾರತ - ದೈನಂದಿನ ಪ್ರಕರಣಗಳು",
+  "PATIENT AGE":"ರೋಗಿಯ ವಯಸ್ಸು",
+  "Cases":"ಪ್ರಕರಣಗಳು"
 }

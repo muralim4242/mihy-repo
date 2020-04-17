@@ -455,5 +455,16 @@
   "Services":"सेवाएं",
   "Comming Soon":"जल्द आ रहा है!",
 
-  "LockDown Remaining Days":"बचे हुए दिन - "
+  "LockDown Remaining Days":"बचे हुए दिन - ",
+  "Covid 19 tracker":"कोविद 19 ट्रैकर",
+  "Successful shared":"सफल साझा किया गया",
+  "INDIA - TOTAL CASES":"भारत - कुल मामले",
+  "PATIENT GENDER":"रोगी का भुगतान",
+  "Male":"पुस्र्ष",
+  "Female":"महिला",
+  "Awaiting Details":"विवरण की प्रतीक्षा है",
+  "Total Cases":"कुल मामले",
+  "INDIA - DAILY CASES":"भारत - दैनिक मामले",
+  "PATIENT AGE":"रोगी आयु",
+  "Cases":"मामले"
 }
