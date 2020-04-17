@@ -31,11 +31,15 @@ const menuItems = [
   {
     name: "Statistics",
     icon: "equalizer",
-    route: "/user-home/statistics"
+    route: "/user-home/statistics",
+    badge:true,
+    badgeLabel:"N"
   },
   {
     name: "Services",
-    icon: "airport_shuttle"
+    icon: "airport_shuttle",
+    badge:true,
+    badgeLabel:"C.."
   }
 ];
 
@@ -192,27 +196,27 @@ class MiniDrawer extends React.Component {
   };
 
   share = () => {
-    const { setAppData } = this.props;
+    const { setAppData ,t} = this.props;
     if (navigator.share) {
       navigator
         .share({
-          title: "Mihy",
-          text: "Covid 19 tracker",
+          title: t("MIHY"),
+          text: t("Covid 19 tracker"),
           url: "http://mihy-covid19.web.app"
         })
         .then(() => {
           setAppData("snackbar", {
             open: true,
             variant: "success",
-            message: "Successful share"
+            message: t("Successful shared")
           });
-          console.log("Successful share");
+          console.log(t("Successful shared"));
         })
         .catch(error => {
           setAppData("snackbar", {
             open: true,
             variant: "warning",
-            message: "Error sharing"
+            message: t("Error sharing")
           });
           console.log("Error sharing", error);
         });
