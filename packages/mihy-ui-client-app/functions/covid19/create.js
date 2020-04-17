@@ -115,11 +115,20 @@ const create = ({ covid19Ref }) => {
   api.post("/v1",async ({ body }, res) => {
     try {
       console.log("test");
-      covid19Ref.child('/messages').push({data: "test"});
-      let snapshot = await covid19Ref.once("value");
-      let data = snapshot.val();
-      console.log(data);
-      return res.send("Hello from Firebase!");
+      covid19Ref.child("stateinfo").set(
+          {
+            "KAR":{
+              "17-04-2020":{
+                "confirmed":"12"
+              }
+            }
+          }
+
+      ); //creating
+      let snapshot = await covid19Ref.once("value"); //getting
+      let data = snapshot.val(); //getting data from snapshot
+      console.log(data); //log the data
+      return res.send(data);
     } catch (e) {
       console.error(e);
       return res.status(500).send(e);

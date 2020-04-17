@@ -5,7 +5,9 @@ const app = require("../utils/express-instance");
 // const errorHandler=require("../utils/middlewares/error-handler");
 const { fA } = firebase;
 const db = fA.database();
-const covid19Ref = db.ref("covid19/playground");
+const covid19Ref = db.ref("covid19/dev");
+
+//make dev to prod
 
 const create=require("./create");
 const search=require("./search");
