@@ -33,7 +33,7 @@ const menuItems = [
   {
     name: "Statistics",
     icon: "equalizer",
-    route: "/user-home/statistics"
+    // route: "/user-home/statistics"
   },
   {
     name: "Services",
@@ -53,7 +53,19 @@ const languages = [
   {
     name: "ಕನ್ನಡ",
     code: "kan"
-  }
+  },
+  // {
+  //   name: "മലയാളം",
+  //   code: "mal"
+  // },
+  // {
+  //   name: "தமிழ்",
+  //   code: "tam"
+  // },
+  // {
+  //   name: "తెలుగు",
+  //   code: "tel"
+  // }
 ];
 
 const drawerWidth = 240;
@@ -321,7 +333,7 @@ class MiniDrawer extends React.Component {
               </IconButton>
             </div>
             <Divider />
-            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute} />
+            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute}   setAppData={setAppData}/>
           </Drawer>
         </Hidden>
         <Hidden smUp>
