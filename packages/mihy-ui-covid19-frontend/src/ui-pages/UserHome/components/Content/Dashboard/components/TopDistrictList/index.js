@@ -71,7 +71,7 @@ const TopDistrictList = ({
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              {t("dashboard.top-district-list")}
+              {`${t("dashboard.top-district-list")}(${t(`state.${selectedState}`)})`}
             </Typography>
           </Toolbar>
         </AppBar>
