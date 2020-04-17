@@ -4,9 +4,9 @@ import Status from "../Status";
 
 const CoutryStatus=({countryStatus={},t})=>{
   return (
-    <div style={{marginBottom:"8px"}}>
+    <div className="Margin-bottom-8px">
 
-    <Typography variant="h5"  color="primary">
+    <Typography variant="h5"  color="primary" className="Margin-bottom-8px">
         {t("dashboard.cuntry-status-header")}
       </Typography>
 
