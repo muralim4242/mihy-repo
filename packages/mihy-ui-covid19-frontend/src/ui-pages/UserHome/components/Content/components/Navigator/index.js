@@ -10,7 +10,7 @@ import Icon from "@material-ui/core/Icon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 
-const routes = ["/user-home", "/statistics", "/user-home/settings"];
+// const routes = ["/user-home", "/statistics", "/user-home/settings"];
 
 const styles = {
   root: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid, Hidden } from "@material-ui/core";
+import { Grid, Hidden } from "@material-ui/core";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
 import { withTranslation } from "react-i18next";
@@ -16,10 +16,6 @@ class Statistics extends React.Component {
             <>
                 <Hidden mdUp >
                     <Grid style={{ padding: 8 }}>
-                        <Typography
-                            variant="h3"
-                            color="textPrimary"
-                            style={{ padding: 8 }}>Statistics</Typography>
                         <TotalCasesChart />
                         <DailyCasesChart />
                         <AgeChart />
@@ -28,10 +24,6 @@ class Statistics extends React.Component {
                 </Hidden>
                 <Hidden mdDown >
                     <Grid style={{ padding: 8, marginLeft: 100 }}>
-                        <Typography
-                            variant="h3"
-                            color="textPrimary"
-                            style={{ padding: 8 }}>Statistics</Typography>
                         <TotalCasesChart />
                         <DailyCasesChart />
                         <AgeChart />
