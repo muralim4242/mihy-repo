@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, Card } from "@material-ui/core/";
+import { CardContent, Typography, Card } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 import { httpRequest } from "../../../../../../ui-utils/api";
@@ -120,12 +120,12 @@ class DailyCasesChart extends React.Component {
                 },
             },
             layout: {
-                padding: {
-                    left: 20,
-                    right: 20,
-                    top: 0,
-                    bottom: 20,
-                },
+                // padding: {
+                //     left: 20,
+                //     right: 20,
+                //     top: 0,
+                //     bottom: 20,
+                // },
             },
             scales: {
                 yAxes: [
@@ -171,18 +171,16 @@ class DailyCasesChart extends React.Component {
 
         return (
             <div>
-                <Grid container>
-                    <Card style={{ margin: 8 }}>
-                        <Grid item md={12} xs={12}>
-                            <Typography
-                                variant="h5"
-                                color="primary" style={{ padding: 8 }}>INDIA - DAILY CASES</Typography>
-                        </Grid>
-                        <Grid item md={12} xs={12}>
+            <Typography
+                variant="h6"
+                color="primary" >INDIA - DAILY CASES</Typography>
+                    <Card>
+
+
+                        <CardContent>
                             <Line data={dataset} options={options} />
-                        </Grid>
+                        </CardContent>
                     </Card>
-                </Grid>
             </div>
         );
     }

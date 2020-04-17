@@ -1,204 +1,199 @@
 import React from "react";
-import { Grid, Typography, Card } from "@material-ui/core/";
+import { CardContent, Typography, Card } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 import { httpRequest } from "../../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
-import { Line, defaults } from 'react-chartjs-2';
-import moment from 'moment';
-
+import { Line, defaults } from "react-chartjs-2";
+import moment from "moment";
 
 class TotalCasesChart extends React.Component {
-    calcTotalCases = (cases) => {
+  calcTotalCases = cases => {
+    defaults.global.elements.line.fill = false;
+    defaults.global.tooltips.intersect = false;
+    defaults.global.tooltips.mode = "nearest";
+    defaults.global.tooltips.position = "average";
+    defaults.global.tooltips.backgroundColor = "rgba(255, 255, 255, 0.6)";
+    defaults.global.tooltips.displayColors = false;
+    defaults.global.tooltips.borderColor = "#c62828";
+    defaults.global.tooltips.borderWidth = 1;
+    defaults.global.tooltips.titleFontColor = "#000";
+    defaults.global.tooltips.bodyFontColor = "#000";
+    defaults.global.tooltips.caretPadding = 4;
+    defaults.global.tooltips.intersect = false;
+    defaults.global.tooltips.mode = "nearest";
+    defaults.global.tooltips.position = "nearest";
+    defaults.global.legend.display = true;
+    defaults.global.legend.position = "bottom";
 
-        defaults.global.elements.line.fill = false;
-        defaults.global.tooltips.intersect = false;
-        defaults.global.tooltips.mode = 'nearest';
-        defaults.global.tooltips.position = 'average';
-        defaults.global.tooltips.backgroundColor = 'rgba(255, 255, 255, 0.6)';
-        defaults.global.tooltips.displayColors = false;
-        defaults.global.tooltips.borderColor = '#c62828';
-        defaults.global.tooltips.borderWidth = 1;
-        defaults.global.tooltips.titleFontColor = '#000';
-        defaults.global.tooltips.bodyFontColor = '#000';
-        defaults.global.tooltips.caretPadding = 4;
-        defaults.global.tooltips.intersect = false;
-        defaults.global.tooltips.mode = 'nearest';
-        defaults.global.tooltips.position = 'nearest';
-        defaults.global.legend.display = true;
-        defaults.global.legend.position = 'bottom';
+    defaults.global.hover.intersect = false;
 
-        defaults.global.hover.intersect = false;
+    const dates = [];
+    const confirmed = [];
+    const recovered = [];
+    const deceased = [];
 
-        const dates = [];
-        const confirmed = [];
-        const recovered = [];
-        const deceased = [];
+    cases.forEach((el, index) => {
+      if (index >= 31) {
+        dates.push(moment(el.date.trim(), "DD MMM"));
+        confirmed.push(el.totalconfirmed);
+        recovered.push(el.totalrecovered);
+        deceased.push(el.totaldeceased);
+      }
+    });
+    this.props.setAppData("totalCasesChart.totalCasesDates", dates);
+    this.props.setAppData("totalCasesChart.totalCasesConfirmed", confirmed);
+    this.props.setAppData("totalCasesChart.totalCasesRecovered", recovered);
+    this.props.setAppData("totalCasesChart.totalCasesDeceased", deceased);
+  };
 
-        cases.forEach((el, index) => {
-            if (index >= 31) {
-                dates.push(moment(el.date.trim(), 'DD MMM'));
-                confirmed.push(el.totalconfirmed);
-                recovered.push(el.totalrecovered);
-                deceased.push(el.totaldeceased);
+  componentDidMount = async () => {
+    const response = await httpRequest({
+      endPoint: "https://api.covid19india.org/data.json",
+      method: "get"
+    });
+    await this.calcTotalCases(response.cases_time_series);
+  };
+
+  render() {
+    const { totalCasesChart } = this.props;
+    const {
+      totalCasesDates,
+      totalCasesConfirmed,
+      totalCasesRecovered,
+      totalCasesDeceased
+    } = totalCasesChart;
+
+    const dataset = {
+      labels: totalCasesDates || [],
+      datasets: [
+        {
+          borderWidth: 2,
+          data: totalCasesConfirmed || [],
+          borderCapStyle: "round",
+          pointBackgroundColor: "#ff073a",
+          label: "Confirmed",
+          borderColor: "#ff073a",
+          pointHoverRadius: 2
+        },
+        {
+          borderWidth: 2,
+          data: totalCasesRecovered || [],
+          borderCapStyle: "round",
+          pointBackgroundColor: "#28a745",
+          label: "Recovered",
+          borderColor: "#28a745",
+          pointHoverRadius: 2
+        },
+        {
+          borderWidth: 2,
+          data: totalCasesDeceased || [],
+          borderCapStyle: "round",
+          pointBackgroundColor: "#6c757d",
+          label: "Deceased",
+          borderColor: "#6c757d",
+          pointHoverRadius: 2
+        }
+      ]
+    };
+
+    const options = {
+      responsive: true,
+      events: [
+        "click",
+        "mousemove",
+        "mouseout",
+        "touchstart",
+        "touchmove",
+        "touchend"
+      ],
+      maintainAspectRatio: false,
+      tooltips: {
+        mode: "index"
+      },
+      elements: {
+        point: {
+          radius: 0
+        },
+        line: {
+          tension: 0.1
+        }
+      },
+      layout: {
+        // padding: {
+        //   left: 20,
+        //   right: 20,
+        //   top: 0,
+        //   bottom: 20
+        // }
+      },
+      scales: {
+        yAxes: [
+          {
+            type: "linear",
+            ticks: {
+              beginAtZero: true,
+              max: undefined,
+              precision: 0
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "Total Cases"
             }
-        })
-        this.props.setAppData('totalCasesChart.totalCasesDates', dates)
-        this.props.setAppData('totalCasesChart.totalCasesConfirmed', confirmed)
-        this.props.setAppData('totalCasesChart.totalCasesRecovered', recovered)
-        this.props.setAppData('totalCasesChart.totalCasesDeceased', deceased)
-
-    }
-
-    componentDidMount = async () => {
-        const response = await httpRequest({
-            endPoint: "https://api.covid19india.org/data.json",
-            method: "get"
-        });
-        await this.calcTotalCases(response.cases_time_series)
-    }
-
-    render() {
-        const { totalCasesChart } = this.props
-        const { totalCasesDates, totalCasesConfirmed, totalCasesRecovered, totalCasesDeceased } = totalCasesChart
-
-        const dataset = {
-            labels: totalCasesDates || [],
-            datasets: [
-                {
-                    borderWidth: 2,
-                    data: totalCasesConfirmed || [],
-                    borderCapStyle: 'round',
-                    pointBackgroundColor: '#ff073a',
-                    label: 'Confirmed',
-                    borderColor: '#ff073a',
-                    pointHoverRadius: 2,
-                },
-                {
-                    borderWidth: 2,
-                    data: totalCasesRecovered || [],
-                    borderCapStyle: 'round',
-                    pointBackgroundColor: '#28a745',
-                    label: 'Recovered',
-                    borderColor: '#28a745',
-                    pointHoverRadius: 2,
-                },
-                {
-                    borderWidth: 2,
-                    data: totalCasesDeceased || [],
-                    borderCapStyle: 'round',
-                    pointBackgroundColor: '#6c757d',
-                    label: 'Deceased',
-                    borderColor: '#6c757d',
-                    pointHoverRadius: 2,
-                },
-            ],
-        };
-
-        const options = {
-            responsive: true,
-            events: [
-                'click',
-                'mousemove',
-                'mouseout',
-                'touchstart',
-                'touchmove',
-                'touchend',
-            ],
-            maintainAspectRatio: false,
-            tooltips: {
-                mode: 'index',
+          }
+        ],
+        xAxes: [
+          {
+            type: "time",
+            time: {
+              unit: "day",
+              tooltipFormat: "MMM DD",
+              stepSize: 7,
+              displayFormats: {
+                millisecond: "MMM DD",
+                second: "MMM DD",
+                minute: "MMM DD",
+                hour: "MMM DD",
+                day: "MMM DD",
+                week: "MMM DD",
+                month: "MMM DD",
+                quarter: "MMM DD",
+                year: "MMM DD"
+              }
             },
-            elements: {
-                point: {
-                    radius: 0,
-                },
-                line: {
-                    tension: 0.1,
-                },
-            },
-            layout: {
-                padding: {
-                    left: 20,
-                    right: 20,
-                    top: 0,
-                    bottom: 20,
-                },
-            },
-            scales: {
-                yAxes: [
-                    {
-                        type: 'linear',
-                        ticks: {
-                            beginAtZero: true,
-                            max: undefined,
-                            precision: 0,
-                        },
-                        scaleLabel: {
-                            display: false,
-                            labelString: 'Total Cases',
-                        },
-                    },
-                ],
-                xAxes: [
-                    {
-                        type: 'time',
-                        time: {
-                            unit: 'day',
-                            tooltipFormat: 'MMM DD',
-                            stepSize: 7,
-                            displayFormats: {
-                                millisecond: 'MMM DD',
-                                second: 'MMM DD',
-                                minute: 'MMM DD',
-                                hour: 'MMM DD',
-                                day: 'MMM DD',
-                                week: 'MMM DD',
-                                month: 'MMM DD',
-                                quarter: 'MMM DD',
-                                year: 'MMM DD',
-                            },
-                        },
-                        gridLines: {
-                            color: 'rgba(0, 0, 0, 0)',
-                        },
-                    },
-                ],
-            },
-        };
+            gridLines: {
+              color: "rgba(0, 0, 0, 0)"
+            }
+          }
+        ]
+      }
+    };
 
-        return (
-            <div>
-                <Grid container>
-                    <Card style={{ margin: 8 }}>
-                        <Grid item md={12} xs={12}>
-                            <Typography
-                                variant="h5"
-                                color="primary" style={{ padding: 8 }}>INDIA - TOTAL CASES</Typography>
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                            <Line data={dataset} options={options} />
-                        </Grid>
-                    </Card>
-                </Grid>
-            </div>
-        );
-    }
+    return (
+      <div>
+      <Typography variant="h6" color="primary" style={{ padding: 8 }}>
+        INDIA - TOTAL CASES
+      </Typography>
+      <Card >
+        <CardContent>
+          <Line data={dataset} options={options} />
+        </CardContent>
+      </Card>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ screenConfiguration }) => {
-    const { preparedFinalObject = {} } = screenConfiguration;
-    const {
-        totalCasesChart = {}
-    } = preparedFinalObject;
+  const { preparedFinalObject = {} } = screenConfiguration;
+  const { totalCasesChart = {} } = preparedFinalObject;
 
-    return {
-        totalCasesChart,
-
-    };
+  return {
+    totalCasesChart
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(withTranslation()(TotalCasesChart));
