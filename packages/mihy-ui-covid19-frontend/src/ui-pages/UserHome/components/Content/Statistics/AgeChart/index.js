@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core/";
+import { Grid, Typography, Card } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 import { httpRequest } from "../../../../../../ui-utils/api";
@@ -9,6 +9,26 @@ import { Bar, defaults } from 'react-chartjs-2';
 
 class AgeChart extends React.Component {
     calcAges = async (tempArray) => {
+
+        defaults.global.tooltips.intersect = false;
+        defaults.global.tooltips.mode = 'nearest';
+        defaults.global.tooltips.position = 'average';
+        defaults.global.tooltips.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        defaults.global.tooltips.displayColors = false;
+        defaults.global.tooltips.borderColor = '#c62828';
+        defaults.global.tooltips.borderWidth = 1;
+        defaults.global.tooltips.titleFontColor = '#000';
+        defaults.global.tooltips.bodyFontColor = '#000';
+        defaults.global.tooltips.caretPadding = 4;
+        defaults.global.tooltips.intersect = false;
+        defaults.global.tooltips.mode = 'nearest';
+        defaults.global.tooltips.position = 'nearest';
+
+        defaults.global.legend.display = true;
+        defaults.global.legend.position = 'bottom';
+
+        defaults.global.hover.intersect = false;
+
         const ages = Array(10).fill(0);
         let unknown = 0;
         tempArray.forEach(el => {
@@ -26,7 +46,7 @@ class AgeChart extends React.Component {
         this.props.setAppData('ageChartUnknown', unknown)
     }
     componentDidMount = async () => {
-        const { setAppData } = this.props
+
         let agesArray = []
         const response = await httpRequest({
             endPoint: "https://api.covid19india.org/raw_data.json",
@@ -94,15 +114,19 @@ class AgeChart extends React.Component {
         return (
             <div>
                 <Grid container>
-                    <Grid item md={12} xs={12}>
-                        <Typography>PATIENT AGE</Typography>
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                        <Bar data={chartData} options={chartOptions} />
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                        <div className="chart-note">*Awaiting details for {this.props.ageChartUnknown || 0} patients</div>
-                    </Grid>
+                    <Card style={{ margin: 8 }}>
+                        <Grid item md={12} xs={12}>
+                            <Typography
+                                variant="h5"
+                                color="primary" style={{ padding: 8 }}>PATIENT AGE</Typography>
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                            <Bar data={chartData} options={chartOptions} />
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                            <div style={{ padding: 8 }}>*Awaiting details for {this.props.ageChartUnknown || 0} patients</div>
+                        </Grid>
+                    </Card>
                 </Grid>
             </div>
         );
