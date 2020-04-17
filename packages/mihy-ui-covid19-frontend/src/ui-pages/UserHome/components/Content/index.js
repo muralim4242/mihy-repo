@@ -5,12 +5,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-// import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-// import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -227,7 +225,7 @@ class MiniDrawer extends React.Component {
 
   render() {
     const { classes, theme, t, selectedLanguage, setAppData } = this.props;
-    const { openLanguageOptions } = this.state;
+    const { openLanguageOptions ,open} = this.state;
     const { changeRoute } = this;
     const {
       onLanguageSelect,
@@ -244,17 +242,17 @@ class MiniDrawer extends React.Component {
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
-            [classes.appBarShift]: this.state.open
+            [classes.appBarShift]: open
           })}
         >
-          <Toolbar disableGutters={!this.state.open}>
+          <Toolbar disableGutters={!open}>
             <Hidden xsDown>
               <IconButton
                 color="primary"
                 aria-label="Open drawer"
                 onClick={handleDrawerOpen}
                 className={classNames(classes.menuButton, {
-                  [classes.hide]: this.state.open
+                  [classes.hide]: open
                 })}
               >
                 <MenuIcon />
@@ -300,28 +298,22 @@ class MiniDrawer extends React.Component {
                 <span className="material-icons">share</span>
               </IconButton>
             )}
-            {/* <LanguageSelect  openLanguageOptions={openLanguageOptions}/> */}
-            {/*<Avatar
-              alt="Remy Sharp"
-              src="https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/WhatsApp%20Image%202019-02-23%20at%209.37.56%20PM.jpeg?alt=media&token=fa3d29e1-7dc2-429e-89b1-b9aa677ea91d"
-              className={classes.avatar}
-            />*/}
           </Toolbar>
         </AppBar>
         <Hidden xsDown>
           <Drawer
             variant="permanent"
             className={classNames(classes.drawer, {
-              [classes.drawerOpen]: this.state.open,
-              [classes.drawerClose]: !this.state.open
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
             })}
             classes={{
               paper: classNames({
-                [classes.drawerOpen]: this.state.open,
-                [classes.drawerClose]: !this.state.open
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open
               })
             }}
-            open={this.state.open}
+            open={open}
           >
             <div className={classes.toolbar}>
               <IconButton onClick={handleDrawerClose}>
