@@ -33,11 +33,13 @@ const menuItems = [
   {
     name: "Statistics",
     icon: "equalizer",
-    // route: "/user-home/statistics"
+    route: "/user-home/statistics"
   },
   {
     name: "Services",
-    icon: "airport_shuttle"
+    icon: "airport_shuttle",
+    route: "/user-home/services"
+
   }
 ];
 
