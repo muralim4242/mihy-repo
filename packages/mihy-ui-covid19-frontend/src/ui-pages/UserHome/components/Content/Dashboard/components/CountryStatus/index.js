@@ -6,7 +6,6 @@ import RemainingDays from "../RemainingDays"
 const CoutryStatus=({countryStatus={},t})=>{
   return (
     <div style={{marginBottom:"8px"}}>
-   
     <Typography variant="h5" gutterBottom color="primary">
         {t("dashboard.cuntry-status-header")}
       </Typography>
