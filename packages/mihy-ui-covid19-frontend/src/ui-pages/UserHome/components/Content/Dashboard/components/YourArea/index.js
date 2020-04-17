@@ -6,7 +6,7 @@ import DistrictStatus from "../DistrictStatus";
 const YourArea=({stateStatus={},districtStatus={},t,handleOpen})=>{
   return (
     <div>
-    <Typography variant="h5" gutterBottom color="primary">
+    <Typography variant="h5"  color="primary">
         {t("dashboard.yourarea")}
       </Typography>
       <Grid container spacing={1}>

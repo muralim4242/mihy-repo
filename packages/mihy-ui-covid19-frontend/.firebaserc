@@ -6,8 +6,7 @@
     "mihy-all": {
       "hosting": {
         "mihy-covid19": [
-          "mihy-covid19",
-          "mihy-covid19-dev"
+          "mihy-covid19"
         ]
       }
     }

@@ -71,12 +71,12 @@ const TopDistrictList = ({
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              {t("dashboard.top-district-list")}
+              {`${t("dashboard.top-district-list")}(${t(`state.${selectedState}`)})`}
             </Typography>
           </Toolbar>
         </AppBar>
         <div className={classes.root}>
-          {/*<Typography variant="h5" gutterBottom color="primary">
+          {/*<Typography variant="h5"  color="primary">
             {t("dashboard.top-district-list")}
           </Typography>*/}
           {/*<Select
