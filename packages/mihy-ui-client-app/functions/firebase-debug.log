@@ -24,3 +24,39 @@
 [debug] [2018-12-11T18:56:38.307Z] Parsing function triggers
 [info] ✔  functions: mdms
 [info] ✔  functions: auth
+[debug] [2020-04-16T17:57:10.915Z] ----------------------------------------------------------------------
+[debug] [2020-04-16T17:57:10.918Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
+[debug] [2020-04-16T17:57:10.919Z] CLI Version:   8.0.3
+[debug] [2020-04-16T17:57:10.919Z] Platform:      darwin
+[debug] [2020-04-16T17:57:10.919Z] Node Version:  v10.15.1
+[debug] [2020-04-16T17:57:10.924Z] Time:          Thu Apr 16 2020 23:27:10 GMT+0530 (India Standard Time)
+[debug] [2020-04-16T17:57:10.924Z] ----------------------------------------------------------------------
+[debug] [2020-04-16T17:57:10.924Z] 
+[debug] [2020-04-16T17:57:10.937Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-16T17:57:10.938Z] > authorizing via signed-in user
+[debug] [2020-04-16T17:57:10.938Z] [iam] checking project mihy-all for permissions ["firebase.projects.get"]
+[debug] [2020-04-16T17:57:10.943Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-04-16T17:57:10.943Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-04-16T17:57:14.391Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 16 Apr 2020 17:57:15 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-16T17:57:14.418Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/mihy-all:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-04-16T17:57:16.434Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 16 Apr 2020 17:57:17 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1354","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-16T17:57:16.436Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/mihy-all  
+ 
+[debug] [2020-04-16T17:57:17.123Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 16 Apr 2020 17:57:18 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: functions emulator started at http://localhost:5000
+[info] i  functions: Watching "/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-client-app/functions" for Cloud Functions...
+[debug] [2020-04-16T17:57:17.174Z] [worker-pool] addWorker(~diagnostic~) 
+[debug] [2020-04-16T17:57:17.175Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 
+[debug] [2020-04-16T17:57:17.175Z] [worker-pool] submitWork(triggerId=) 
+[debug] [2020-04-16T17:57:17.176Z] [worker-~diagnostic~-f5f8f27f-1086-4bde-993a-838fed1c0e7d]: Assigning socketPath: /var/folders/88/ydxw34w10jg3mhfn9zpyh4yc0000gn/T/fire_emu_37974.sock 
+[debug] [2020-04-16T17:57:17.176Z] [worker-~diagnostic~-f5f8f27f-1086-4bde-993a-838fed1c0e7d]: BUSY 
+[debug] [2020-04-16T17:57:17.708Z] [runtime-status] [37974] Functions runtime initialized. {"cwd":"/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-client-app/functions","node_version":"10.15.1"} 
+[debug] [2020-04-16T17:57:17.709Z] [runtime-status] [37974] Disabled runtime features: undefined 
+[debug] [2020-04-16T17:57:17.716Z] [runtime-status] [37974] Resolved module firebase-admin {"declared":true,"installed":true,"version":"6.0.0","resolution":"/Users/GoodWork/Documents/GitHub/mihy-repo/packages/mihy-ui-client-app/functions/node_modules/firebase-admin/lib/index.js"} 
+[warn] ⚠  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.9.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2020-04-16T17:57:17.736Z] [worker-~diagnostic~-f5f8f27f-1086-4bde-993a-838fed1c0e7d]: exited 
+[debug] [2020-04-16T17:57:17.736Z] [worker-~diagnostic~-f5f8f27f-1086-4bde-993a-838fed1c0e7d]: FINISHED 
