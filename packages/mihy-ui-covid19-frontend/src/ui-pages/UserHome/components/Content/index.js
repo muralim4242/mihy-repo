@@ -33,7 +33,7 @@ const menuItems = [
   {
     name: "Statistics",
     icon: "equalizer",
-    // route: "/user-home/statistics"
+    route: "/user-home/statistics"
   },
   {
     name: "Services",
