@@ -252,7 +252,7 @@ const MyMapComponent = compose(
       <SearchBox
         ref={props.onSearchBoxMounted}
         bounds={props.bounds}
-        controlPosition={google.maps.ControlPosition.TOP_LEFT}
+        controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
         onPlacesChanged={props.onPlacesChanged}
       >
         <input

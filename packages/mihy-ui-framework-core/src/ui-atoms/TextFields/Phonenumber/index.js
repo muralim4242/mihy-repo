@@ -25,36 +25,36 @@ TextMaskCustom.propTypes = {
 
 
 
-const Phonenumber=(props)=> {
-    const {id,textmask,label,fullWidth,...rest} = props;
-    return (
-        <TextField
-          label={label}
-          value={textmask}
-          id={id}
-          fullWidth={fullWidth}
-          InputProps={{
-            inputComponent: TextMaskCustom,
-            startAdornment: (
-              <InputAdornment position="start">
-                <Icon iconName="stay_current_portrait"/>
-              </InputAdornment>
-            )
-          }}
+const Phonenumber = (props) => {
+  const { id, textmask, label, fullWidth, ...rest } = props;
+  return (
+    <TextField
+      label={label}
+      value={textmask}
+      id={id}
+      fullWidth={fullWidth}
+      InputProps={{
+        inputComponent: TextMaskCustom,
+        startAdornment: (
+          <InputAdornment position="start">
+            <Icon iconName="stay_current_portrait" />
+          </InputAdornment>
+        )
+      }}
 
-          {...rest}
-        />
-    );
-  }
+      {...rest}
+    />
+  );
+}
 
 Phonenumber.propTypes = {
   id: PropTypes.string.isRequired,
-  label:PropTypes.string.isRequired,
-  textmask:PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  textmask: PropTypes.string.isRequired
 };
 
-Phonenumber.defaultProps= {
-  fullWidth:true
+Phonenumber.defaultProps = {
+  fullWidth: true
 }
 
 

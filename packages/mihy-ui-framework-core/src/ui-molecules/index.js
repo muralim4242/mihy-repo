@@ -104,10 +104,10 @@ const MultiDownloadCard = Loadable({
   loading: () => <Loading />
 });
 
-const RadioGroup = Loadable({
-  loader: () => import("./RadioGroup"),
-  loading: () => <Loading />
-});
+// const RadioGroup = Loadable({
+//   loader: () => import("./RadioGroup"),
+//   loading: () => <Loading />
+// });
 
 const CustomTab = Loadable({
   loader: () => import("./CustomTab"),
@@ -142,7 +142,7 @@ export {
   DocumentList,
   FeesEstimateCard,
   MultiDownloadCard,
-  RadioGroup,
+  // RadioGroup,
   CustomTab,
   Tooltip
 };

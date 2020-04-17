@@ -8,7 +8,7 @@ class MihyCarousel extends Component {
   render() {
     const { items } = this.props;
     return (
-      <Carousel showThumbs={false}>
+      <Carousel showThumbs={false} dynamicHeight>
         {items.map((item, key) => {
           return (
             <Div key={key}>

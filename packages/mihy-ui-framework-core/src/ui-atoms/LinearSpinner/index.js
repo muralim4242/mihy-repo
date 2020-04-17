@@ -3,7 +3,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 function LinearSpinner(props) {
   return (
-    <div></div>
+    // <div></div>
+    <LinearProgress {...props}/>
   );
 }
 

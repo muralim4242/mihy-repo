@@ -460,7 +460,18 @@
 
   "Langauge":"Select your language",
   "Home":"Home",
-  "Statics":"Statics",
+  "Statistics":"Statistics",
   "Services":"Services",
-  "Comming Soon":"Comming Soon!"
+  "Comming Soon":"Comming Soon!",
+
+  "district.Maharashtra.Chandrapur":"Chandrapur",
+  "district.Madhya Pradesh.Alirajpur":"Alirajpur",
+  "district.Gujarat.Aravalli":"Aravalli",
+  "district.Gujarat.Mahisagar":"Mahisagar",
+  "district.Bihar.Vaisha":"Vaisha",
+  "district.Jharkhand.Simdega":"Simdega",
+  "district.Jharkhand.Dhanbad":"Dhanbad",
+  "district.Meghalaya.Unknown":"Unknown",
+
+  "LockDown Remaining Days":"LockDown Remaining Days - "
 }

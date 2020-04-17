@@ -10,7 +10,6 @@ import Icon from "@material-ui/core/Icon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 
-const routes = ["/user-home", "/user-home/settings","/services"];
 
 const styles = {
   root: {
@@ -20,14 +19,23 @@ const styles = {
 
 class SimpleBottomNavigation extends React.Component {
   handleChange = (event, value) => {
-    let route = routes[value];
-    const { history } = this.props;
+    const { menuItems,changeRoute,setAppData,t} = this.props;
+    let menu = menuItems[value];
     this.setState({ value });
-    history.push(route);
+    if (!menu.route) {
+      setAppData("snackbar", {
+        open: true,
+        variant: "success",
+        message: t("Comming Soon!")
+      });
+    }
+    else {
+      changeRoute(menu.route)
+    }
   };
 
   render() {
-    const { classes, menuItems,t } = this.props;
+    const { classes, menuItems, t } = this.props;
 
     return (
       <div className={classes.root}>

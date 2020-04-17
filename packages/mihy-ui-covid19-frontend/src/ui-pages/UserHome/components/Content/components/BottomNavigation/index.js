@@ -20,14 +20,18 @@ class SimpleBottomNavigation extends React.Component {
   };
 
   handleChange = (event, value) => {
-    const { t, setAppData } = this.props;
+    const { t, setAppData ,menuItems,changeRoute} = this.props;
     this.setState({ value });
-    if (value) {
+    const menu=menuItems[value];
+    if (!menu.route) {
       setAppData("snackbar", {
         open: true,
         variant: "success",
         message: t("Comming Soon!")
       });
+    }
+    else {
+      changeRoute(menu.route)
     }
   };
 

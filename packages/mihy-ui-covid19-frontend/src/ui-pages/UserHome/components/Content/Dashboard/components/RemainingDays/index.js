@@ -14,27 +14,31 @@ handle=()=>{
         var mm = String(today.getMonth() + 1).padStart(2, '0')
         var yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
-        var date1 = new Date(today); 
-        var date2 = new Date("05/03/2020"); 
-        var Difference_In_Time = date2.getTime() - date1.getTime(); 
-        var diffDays = Difference_In_Time / (1000 * 3600 * 24); 
+        var date1 = new Date(today);
+        var date2 = new Date("05/03/2020");
+        var Difference_In_Time = date2.getTime() - date1.getTime();
+        var diffDays = Difference_In_Time / (1000 * 3600 * 24);
             setAppData("remainingDays",diffDays)
         }
   render() {
-    const { remainingDays  } = this.props;
+    const { remainingDays ,t } = this.props;
     return (
-      <div>
-        <Card style={{background:"pink"}}>
+      <div style={{marginBottom:"8px"}}>
+        <Card>
+
         <CardContent>
         <Grid container>
-        <Typography variant="h6" gutterBottom align="center">
-        LockDown Remaining Days :
+
+        <Typography variant="h6"  align="center">
+        {t("LockDown Remaining Days")}
       </Typography>
-        <Typography variant="h6" gutterBottom align="center">
+        <Typography variant="h5"  align="center" color="primary">
         {remainingDays}
       </Typography>
       </Grid>
       </CardContent>
+
+
         </Card>
       </div>
     );
@@ -46,7 +50,7 @@ const mapStateToProps = ({ screenConfiguration }) => {
     const { remainingDays} = preparedFinalObject;
     return { remainingDays };
   };
-  
+
   export default connect(
     mapStateToProps,
     mapDispatchToProps
