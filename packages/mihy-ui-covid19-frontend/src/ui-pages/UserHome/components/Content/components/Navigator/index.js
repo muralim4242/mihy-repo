@@ -7,9 +7,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Icon from "@material-ui/core/Icon";
+import Badge from "@material-ui/core/Badge";
 import ListItemText from "@material-ui/core/ListItemText";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 
+// const routes = ["/user-home", "/statistics", "/user-home/settings"];
 
 const styles = {
   root: {
@@ -26,7 +28,7 @@ class SimpleBottomNavigation extends React.Component {
       setAppData("snackbar", {
         open: true,
         variant: "success",
-        message: t("Comming Soon!")
+        message: t("Comming Soon")
       });
     }
     else {
@@ -39,24 +41,25 @@ class SimpleBottomNavigation extends React.Component {
 
     return (
       <div className={classes.root}>
-          <List>
-            {menuItems.map((menu, key) => {
-              return (
-                <ListItem
-                  button
-                  onClick={e => {
-                    this.handleChange(e, key);
-                  }}
-                  key={key}
-                >
-                  <ListItemIcon>
-                    <Icon color="primary">{menu.icon}</Icon>
-                  </ListItemIcon>
-                  <ListItemText primary={t(menu.name)} />
-                </ListItem>
-              );
-            })}
-          </List>
+      
+      <List>
+          {menuItems.map((menu, key) => {
+            return (
+              <ListItem
+                button
+                onClick={e => {
+                  this.handleChange(e, key);
+                }}
+                key={key}
+              >
+                <ListItemIcon>
+                  {menu.badge?<Badge badgeContent={t(menu.badgeLabel)} color="secondary"><Icon color="primary">{menu.icon}</Icon></Badge>:<Icon color="primary">{menu.icon}</Icon>}
+                </ListItemIcon>
+                <ListItemText primary={t(menu.name)} />
+              </ListItem>
+            );
+          })}
+        </List>
 
       </div>
     );

@@ -3,10 +3,10 @@
   "appNameTwo": "19",
   "language.header": "Langauge",
   "language.subheader": "Select your language",
-  "dashboard.your-area": "Your area",
-  "dashboard.cuntry-status-header": "Country tracker",
-  "dashboard.toplist": "States tracker",
-  "dashboard.top-district-list": "District Tracker",
+  "dashboard.your-area": "YOUR AREA",
+  "dashboard.cuntry-status-header": "INDIA'S COVID19 CASES",
+  "dashboard.toplist": "STATES CASES",
+  "dashboard.top-district-list": "DISTRICT CASES",
   "confirmed": "Confirmed",
   "active": "Active",
   "recovered": "Recovered",
@@ -447,7 +447,6 @@
   "district.Tripura.North Tripura": "North Tripura",
   "district.Nagaland.Dimapur": "Dimapur",
   "district.Meghalaya.East Khasi Hills": "East Khasi Hills",
-
   "district.Maharashtra.Unknown":"Unknown",
   "district.Madhya Pradesh.Unknown":"Unknown",
   "district.Madhya Pradesh.Satna":"Satna",
@@ -457,13 +456,11 @@
   "district.Gujarat.Kheda":"Kheda",
   "district.Telangana.Kumuram Bheem Asifabad":"Kumuram Bheem Asifabad",
   "district.Himachal Pradesh.Unknown":"Unknown",
-
   "Langauge":"Select your language",
   "Home":"Home",
   "Statistics":"Statistics",
   "Services":"Services",
   "Comming Soon":"Comming Soon!",
-
   "district.Maharashtra.Chandrapur":"Chandrapur",
   "district.Madhya Pradesh.Alirajpur":"Alirajpur",
   "district.Gujarat.Aravalli":"Aravalli",
@@ -472,6 +469,17 @@
   "district.Jharkhand.Simdega":"Simdega",
   "district.Jharkhand.Dhanbad":"Dhanbad",
   "district.Meghalaya.Unknown":"Unknown",
-
-  "LockDown Remaining Days":"LockDown Remaining Days - "
+  "LockDown Remaining Days":"LockDown Remaining Days - ",
+  "MIHY":"MIHY",
+  "Covid 19 tracker":"कोविद 19 ट्रैकर",
+  "Successful shared":"Successful sharedೆ",
+  "INDIA - TOTAL CASES":"INDIA - TOTAL CASES",
+  "PATIENT GENDER":"PATIENT GENDER",
+  "Male":"Male",
+  "Female":"Female",
+  "Awaiting Details":"Awaiting Details",
+  "Total Cases":"Total Cases",
+  "INDIA - DAILY CASES":"INDIA - DAILY CASES",
+  "PATIENT AGE":"PATIENT AGE",
+  "Cases":"Cases"
 }

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
+import Badge from "@material-ui/core/Badge";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Icon from "@material-ui/core/Icon";
 
@@ -27,7 +28,7 @@ class SimpleBottomNavigation extends React.Component {
       setAppData("snackbar", {
         open: true,
         variant: "success",
-        message: t("Comming Soon!")
+        message: t("Comming Soon")
       });
     }
     else {
@@ -51,7 +52,7 @@ class SimpleBottomNavigation extends React.Component {
             <BottomNavigationAction
               key={key}
               label={t(menu.name)}
-              icon={<Icon color="primary">{menu.icon}</Icon>}
+              icon={menu.badge?<Badge badgeContent={t(menu.badgeLabel)} color="secondary"><Icon color="primary">{menu.icon}</Icon></Badge>:<Icon color="primary">{menu.icon}</Icon>}
             />
           );
         })}

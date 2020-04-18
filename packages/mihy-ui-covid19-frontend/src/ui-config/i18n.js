@@ -5,9 +5,10 @@ import XHR from "i18next-xhr-backend";
 import translationEng from "./locales/en/translation.json";
 import translationHin from "./locales/hin/translation.json";
 import translationKan from "./locales/kan/translation.json";
-// import translationMal from "./locales/kan/translation.json";
-// import translationTam from "./locales/kan/translation.json";
-// import translationTel from "./locales/kan/translation.json";
+import translationMal from "./locales/mal/translation.json";
+import translationTam from "./locales/tam/translation.json";
+import translationTel from "./locales/tel/translation.json";
+import translationMar from "./locales/mar/translation.json";
 
 
 i18n
@@ -34,15 +35,18 @@ i18n
       kan: {
         translations: translationKan
       },
-      // mal: {
-      //   translations: translationMal
-      // },
-      // tam: {
-      //   translations: translationTam
-      // },
-      // tel: {
-      //   translations: translationTel
-      // }
+      mal: {
+        translations: translationMal
+      },
+      tam: {
+        translations: translationTam
+      },
+      tel: {
+        translations: translationTel
+      },
+      mar: {
+        translations: translationMar
+      }
     },
     // have a common namespace used around the full app
     ns: ["translations"],
