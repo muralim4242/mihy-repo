@@ -18,8 +18,6 @@ class LocationDetail extends React.Component {
     }
 }
 const mapStateToProps = ({ screenConfiguration }) => {
-    const { preparedFinalObject = {} } = screenConfiguration;
-    const { } = preparedFinalObject;
     return {};
 };
 export default connect( mapStateToProps, mapDispatchToProps)(LocationDetail);

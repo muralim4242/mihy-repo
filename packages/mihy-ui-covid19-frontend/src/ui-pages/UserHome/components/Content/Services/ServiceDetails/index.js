@@ -9,76 +9,77 @@ import {  MuiPickersUtilsProvider, DatePicker} from "@material-ui/pickers";
 class ServiceDetails extends React.Component {
   
   render() {
+    const {serviveTypeDropDown,
+      frequencyDropDown
+    }=this.props
     let today = new Date();
     return (
       <div >
-        <Card style={{ padding: "10px 10px 10px 10px" }}>
+        <Card style={{ padding: "15px 15px 15px 15px" }}>
           <CardContent>
-            <Grid container spacing={4} >
+            <Grid container spacing={2} >
               <Grid item md={6} xs={12}>
-                <Typography variant="h5" >Service Type</Typography>
-                <Select
+                <Typography variant="h6" className="Margin-bottom-8px">Service Type</Typography>
+                <Select 
+                 theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                  ...theme.colors,
+                    primary: '#FF1493',
+                  },
+                })}
                   // value={value}
                   // onChange={handleChange}
-                  // options={options}
-                  menuPortalTarget={document.querySelector("body")}
+                  options={serviveTypeDropDown}
                 />
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h5"> Frequency</Typography>
+                <Typography variant="h6"className="Margin-bottom-8px">Frequency</Typography>
                 <Select
+                 theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                  ...theme.colors,
+                    primary: '#FF1493',
+                  },
+                })}
                   // value={value}
                   // onChange={handleChange}
-                  // options={options}
-                  menuPortalTarget={document.querySelector("body")}
+                  options={frequencyDropDown}
                 />
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h5"> Email</Typography>
-                <TextField id="outlined-basic" label="Email" variant="outlined" style={{ width: "100%" }} ></TextField>
+                <Typography variant="h6" className="Margin-bottom-8px">Email</Typography>
+                <TextField fullWidth id="outlined-basic"  variant="outlined"  ></TextField>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h5"> Phone</Typography>
-                <TextField id="outlined-basic" label="Phone" variant="outlined" style={{ width: "100%" }}></TextField>
+                <Typography variant="h6" className="Margin-bottom-8px">Phone</Typography>
+                <TextField fullWidth id="outlined-basic" variant="outlined" ></TextField>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h5"style={{ color: "black" }}> From Time </Typography>
+                <Typography variant="h6" className="Margin-bottom-8px">From Time</Typography>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <DatePicker
-                    style={{ width: "100%" }}
+                  <DatePicker fullWidth
                     minDate={today}
-                    shouldDisableDate={this.disableWeekends}
-                    InputProps={{
-                      style: { fontSize: 14 },
-                      fontFamily: "Roboto Regular"
-                    }}
                     format="dd/MM/yyyy"
                     // value={}
-                    onChange={e => {
-
-                    }}
+                    onChange={e => { }}
                   />
                 </MuiPickersUtilsProvider>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h5" style={{ color: "black" }}> To Time </Typography>
+                <Typography variant="h6" className="Margin-bottom-8px">To Time</Typography>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <DatePicker
-                    style={{ width: "100%" }}
+                  <DatePicker fullWidth
                     minDate={today}
-                    shouldDisableDate={this.disableWeekends}
-                    InputProps={{
-                      style: { fontSize: 14 },
-                      fontFamily: "Roboto Regular"
-                    }}
                     format="dd/MM/yyyy"
                     // value={}
                     onChange={e => {  }} />
                 </MuiPickersUtilsProvider>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h5"> Additional Information</Typography>
-                <TextField id="outlined-basic" label="Additional Inforation" variant="outlined" style={{ width: "100%" }}></TextField>
+                <Typography variant="h6" className="Margin-bottom-8px">Additional Information</Typography>
+                <TextField fullWidth id="outlined-basic"  variant="outlined"></TextField>
               </Grid>
             </Grid>
           </CardContent>
@@ -89,8 +90,12 @@ class ServiceDetails extends React.Component {
 }
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { } = preparedFinalObject;
-  return {};
+  const { 
+    serviveTypeDropDown=[{label:"Service1",value:"1"},{label:"Service2",value:"2"}],
+    frequencyDropDown=[{label:"Daily",value:"1"},{label:"Weekly",value:"2"},{label:"Monthly",value:"3"}]
+  } = preparedFinalObject;
+  return {serviveTypeDropDown,
+    frequencyDropDown};
 };
 
 export default connect( mapStateToProps,mapDispatchToProps)(ServiceDetails);

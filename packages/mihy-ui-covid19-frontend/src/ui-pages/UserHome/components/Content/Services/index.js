@@ -52,8 +52,6 @@ class Services extends React.Component {
 }
 
 const mapStateToProps = ({ screenConfiguration }) => {
-    const { preparedFinalObject = {} } = screenConfiguration;
-    const { } = preparedFinalObject;
     return {};
 };
 

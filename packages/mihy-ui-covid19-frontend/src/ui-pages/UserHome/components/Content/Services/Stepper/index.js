@@ -77,7 +77,7 @@ function getStepContent(step) {
 class StepperComponent extends React.Component {
   isStepOptional = step => step === 1;
   componentDidMount() {
-    const { activeStep, setAppData } = this.props;
+    const { setAppData } = this.props;
     setAppData("activeStep", 0);
   }
   handleNext = () => {
