@@ -12,12 +12,14 @@ import TotalCasesChart from "./TotalCasesChart";
 class Statistics extends React.Component {
 
   componentDidMount = async () => {
-    const { setAppData } = this.props
+    let { setAppData,statistics={} } = this.props
     const response = await httpRequest({
       endPoint: "https://api.covid19india.org/data.json",
       method: "get"
     });
-    setAppData('covidData', response.cases_time_series);
+
+
+    // setAppData('covidData', response.cases_time_series);
 
     let patientsGenderArray = [];
     let agesArray = [];
@@ -25,10 +27,17 @@ class Statistics extends React.Component {
       endPoint: "https://api.covid19india.org/raw_data.json",
       method: "get"
     });
-    anotherResponse.raw_data.map(el => patientsGenderArray.push(el.gender));
-    anotherResponse.raw_data.map(el => agesArray.push(el.agebracket));
-    setAppData('patientsGenderArray', patientsGenderArray);
-    setAppData('agesArray', agesArray);
+    anotherResponse.raw_data.forEach(el => patientsGenderArray.push(el.gender));
+    anotherResponse.raw_data.forEach(el => agesArray.push(el.agebracket));
+    // setAppData('patientsGenderArray', patientsGenderArray);
+    // setAppData('agesArray', agesArray);
+    statistics={
+      ...statistics,
+      covidData:response.cases_time_series,
+      patientsGenderArray,
+      agesArray
+    }
+    setAppData('statistics', statistics);
   }
 
   render() {
@@ -56,9 +65,9 @@ class Statistics extends React.Component {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { statistics = {}, covidData = [], patientsGenderArray = [], agesArray = [] } = preparedFinalObject;
+  const { statistics = {} } = preparedFinalObject;
+  const { covidData = [], patientsGenderArray = [], agesArray = []}=statistics
   return {
-    statistics,
     covidData,
     patientsGenderArray,
     agesArray
