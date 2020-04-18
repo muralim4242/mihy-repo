@@ -8,30 +8,31 @@ class AboutUS extends React.Component {
   componentDidMount = async () => {};
 
   render() {
+    const { t } = this.props;
     const questionsList = [
       {
-        question: "Are you official?",
-        answer: "NO"
+        question: t("FAQQuestion1"),
+        answer: t("FAQAnswer1")
       },
       {
-        question: "Who are you?",
-        answer: `We are a group of dedicated volunteers who curate and verify the data coming from several sources. We extract the details, like a patient's relationship with other patients to identify local and community transmissions, travel history and status. We never collect or expose any personally identifiable data regarding the patients.`
-      },
-      {
-        question:
-          "What are your sources? How is the data gathered for this project?",
-        answer:
-          "We are using state bulletins and official handles to update our numbers. The data is validated by a group of volunteers and published into a Google sheet and an API. "
+        question: t("FAQQuestion2"),
+        answer: t("FAQAnswer2")
       },
       {
         question:
-          "Why our app have more positive count than MoH?",
+        t("FAQQuestion3"),
         answer:
-          "MoHFW updates the data at a scheduled time. However, we update them based on state press bulletins, official (CM, Health M) handles, PBI, Press Trust of India, ANI reports. These are generally more recent. "
+        t("FAQAnswer3")
+      },
+      {
+        question:
+        t("FAQQuestion4"),
+        answer:
+        t("FAQAnswer4")
       }
     ];
-    return <FAQQuestions questionsList={questionsList}></FAQQuestions>;
+    return <FAQQuestions questionsList={questionsList} t={t}></FAQQuestions>;
   }
 }
 
-export default connect(null, mapDispatchToProps)(AboutUS);
+export default connect(null, mapDispatchToProps)(withTranslation()(AboutUS));

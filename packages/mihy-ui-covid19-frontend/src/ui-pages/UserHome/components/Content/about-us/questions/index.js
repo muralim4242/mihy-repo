@@ -20,13 +20,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const FAQQuestions = ({ questionsList = [] }) => {
+const FAQQuestions = ({ questionsList = [], t }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid container direction="column" justify="center" alignItems="center">
         <Typography variant="h6" color="primary">
-          About US
+          { t('About US') }
       </Typography>
         </Grid>
       <Grid container direction="column" justify="center" alignItems="stretch">
