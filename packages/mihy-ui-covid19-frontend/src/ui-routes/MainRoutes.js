@@ -6,7 +6,6 @@ import Services from "../ui-pages/UserHome/components/Content/Services"
 import DonerStepper from "../ui-pages/UserHome/components/Content/Services/DonerStepper"
 import TakerStepper from "../ui-pages/UserHome/components/Content/Services/TakerStepper"
 import Acknowledgement from "../ui-pages/UserHome/components/Content/Services/Acknowledgement"
-
 import Statistics from '../ui-pages/UserHome/components/Content/Statistics'
 // import Landing from "../ui-pages/Landing";
 
@@ -20,11 +19,8 @@ const MainRoutes = () => {
       <Route path="/user-home/doner-stepper" component={DonerStepper} />
       <Route path="/user-home/taker-stepper" component={TakerStepper} />
       <Route path="/user-home/create-service-acknowledgement" component={Acknowledgement}/>
-
-
       <Redirect to="/user-home"/>
       <Route path="/user-home/statistics" component={Statistics} />
-     
     </div>
   )
 }
