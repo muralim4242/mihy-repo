@@ -38,6 +38,11 @@ const menuItems = [
   {
     name: "Services",
     icon: "airport_shuttle"
+  },
+  {
+    name: "About us",
+    icon: "about-us",
+    route: "/user-home/about-us"
   }
 ];
 
