@@ -2,13 +2,12 @@ import React from "react";
 import { CardContent, Typography, Card } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
-import { httpRequest } from "../../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Line, defaults } from "react-chartjs-2";
 import moment from "moment";
 
 class TotalCasesChart extends React.Component {
-  calcTotalCases = cases => {
+  calcTotalCases = () => {
     defaults.global.elements.line.fill = false;
     defaults.global.tooltips.intersect = false;
     defaults.global.tooltips.mode = "nearest";
@@ -33,12 +32,12 @@ class TotalCasesChart extends React.Component {
     const recovered = [];
     const deaths = [];
 
-    cases.forEach((el, index) => {
+    this.props.casesData.forEach((el, index) => {
       if (index >= 31) {
         dates.push(moment(el.date.trim(), "DD MMM"));
         confirmed.push(el.totalconfirmed);
         recovered.push(el.totalrecovered);
-        deaths.push(el.totaldeaths);
+        deaths.push(el.totaldeceased);
       }
     });
     this.props.setAppData("totalCasesChart.totalCasesDates", dates);
@@ -48,15 +47,11 @@ class TotalCasesChart extends React.Component {
   };
 
   componentDidMount = async () => {
-    const response = await httpRequest({
-      endPoint: "https://api.covid19india.org/data.json",
-      method: "get"
-    });
-    await this.calcTotalCases(response.cases_time_series);
+    this.calcTotalCases()
   };
 
   render() {
-    const { totalCasesChart ,t} = this.props;
+    const { totalCasesChart, t } = this.props;
     const {
       totalCasesDates,
       totalCasesConfirmed,
@@ -171,14 +166,14 @@ class TotalCasesChart extends React.Component {
 
     return (
       <div>
-      <Typography variant="h6" color="primary">
-        {t("INDIA - TOTAL CASES")}
-      </Typography>
-      <Card >
-        <CardContent className="ChartContainer">
-          <Line data={dataset} options={options} />
-        </CardContent>
-      </Card>
+        <Typography variant="h6" color="primary">
+          {t("INDIA - TOTAL CASES")}
+        </Typography>
+        <Card >
+          <CardContent className="ChartContainer">
+            <Line data={dataset} options={options} />
+          </CardContent>
+        </Card>
       </div>
     );
   }

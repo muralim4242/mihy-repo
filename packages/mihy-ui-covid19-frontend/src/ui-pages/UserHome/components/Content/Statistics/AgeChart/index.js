@@ -1,13 +1,15 @@
 import React from "react";
-import { CardContent,Typography, Card } from "@material-ui/core/";
+import { CardContent, Typography, Card } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
-import { httpRequest } from "../../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Bar, defaults } from "react-chartjs-2";
 
 class AgeChart extends React.Component {
-  calcAges = async tempArray => {
+  calcAges = async () => {
+
+    const { setAppData, agesArray } = this.props
+
     defaults.global.tooltips.intersect = false;
     defaults.global.tooltips.mode = "nearest";
     defaults.global.tooltips.position = "average";
@@ -29,7 +31,7 @@ class AgeChart extends React.Component {
 
     const ages = Array(10).fill(0);
     let unknown = 0;
-    tempArray.forEach(el => {
+    agesArray.forEach(el => {
       const age = parseInt(el);
       for (let i = 0; i < 10; i++) {
         if (age > i * 10 && age <= (i + 1) * 10) {
@@ -39,21 +41,15 @@ class AgeChart extends React.Component {
         }
       }
     });
-    this.props.setAppData("ageChartAges", ages);
-    this.props.setAppData("ageChartUnknown", unknown);
+    setAppData("ageChartAges", ages);
+    setAppData("ageChartUnknown", unknown);
   };
   componentDidMount = async () => {
-    let agesArray = [];
-    const response = await httpRequest({
-      endPoint: "https://api.covid19india.org/raw_data.json",
-      method: "get"
-    });
-    response.raw_data.map(el => agesArray.push(el.agebracket));
-    await this.calcAges(agesArray);
+    this.calcAges();
   };
 
   render() {
-    const {t}=this.props;
+    const { t } = this.props;
     const chartData = {
       labels: [
         "0-10",
@@ -115,8 +111,8 @@ class AgeChart extends React.Component {
         </Typography>
         <Card >
           <CardContent className="ChartContainer">
-          <Bar data={chartData} options={chartOptions} />
-          {/*Awaiting details for {this.props.ageChartUnknown || 0} patients*/}
+            <Bar data={chartData} options={chartOptions} />
+            {/*Awaiting details for {this.props.ageChartUnknown || 0} patients*/}
           </CardContent>
         </Card>
       </div>
