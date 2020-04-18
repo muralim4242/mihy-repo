@@ -2,7 +2,6 @@ import React from "react";
 import { Typography, Card, CardContent } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
-import { httpRequest } from "../../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Doughnut, defaults } from "react-chartjs-2";
 

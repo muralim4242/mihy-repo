@@ -2,7 +2,6 @@ import React from "react";
 import { CardContent, Typography, Card } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
-import { httpRequest } from "../../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Line, defaults } from "react-chartjs-2";
 import moment from "moment";
