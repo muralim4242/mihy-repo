@@ -56,22 +56,23 @@ const languages = [
     name: "ಕನ್ನಡ",
     code: "kan"
   },
-  {
-    name: "മലയാളം",
-    code: "mal"
-  },
+  // {
+  //   name: "മലയാളം",
+  //   code: "mal"
+  // },
   {
     name: "தமிழ்",
     code: "tam"
-  },
-  {
-    name: "తెలుగు",
-    code: "tel"
-  },
-  {
-    name: "मराठी",
-    code: "mar"
   }
+  // ,
+  // {
+  //   name: "తెలుగు",
+  //   code: "tel"
+  // },
+  // {
+  //   name: "मराठी",
+  //   code: "mar"
+  // }
 ];
 
 const drawerWidth = 240;
