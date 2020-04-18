@@ -4,9 +4,9 @@
   "language.header": "भाषा",
   "language.subheader": "अपनी भाषा चुनें",
   "dashboard.your-area": "आपका क्षेत्र",
-  "dashboard.cuntry-status-header": "देश ट्रैकर",
-  "dashboard.toplist": "स्टेट ट्रैकर",
-  "dashboard.top-district-list": "स्टेट्स ट्रैकर",
+  "dashboard.cuntry-status-header": "भारत के कैविड 19 मामले",
+  "dashboard.toplist": "राज्य के कोविद 19 मामले",
+  "dashboard.top-district-list": "जिले के मामले",
   "confirmed": "पुष्टि",
   "active": "सक्रिय",
   "recovered": "बरामद",
@@ -455,5 +455,16 @@
   "Services":"सेवाएं",
   "Comming Soon":"जल्द आ रहा है!",
 
-  "LockDown Remaining Days":"बचे हुए दिन - "
+  "LockDown Remaining Days":"बचे हुए दिन - ",
+  "Covid 19 tracker":"कोविद 19 ट्रैकर",
+  "Successful shared":"सफल साझा किया गया",
+  "INDIA - TOTAL CASES":"भारत - कुल मामले",
+  "PATIENT GENDER":"रोगी का भुगतान",
+  "Male":"पुस्र्ष",
+  "Female":"महिला",
+  "Awaiting Details":"विवरण की प्रतीक्षा है",
+  "Total Cases":"कुल मामले",
+  "INDIA - DAILY CASES":"भारत - दैनिक मामले",
+  "PATIENT AGE":"रोगी आयु",
+  "Cases":"मामले"
 }

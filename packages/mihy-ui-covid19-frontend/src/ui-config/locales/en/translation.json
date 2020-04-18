@@ -3,10 +3,10 @@
   "appNameTwo": "19",
   "language.header": "Langauge",
   "language.subheader": "Select your language",
-  "dashboard.your-area": "Your area",
-  "dashboard.cuntry-status-header": "Country tracker",
-  "dashboard.toplist": "States tracker",
-  "dashboard.top-district-list": "District Tracker",
+  "dashboard.your-area": "YOUR AREA",
+  "dashboard.cuntry-status-header": "INDIA'S COVID19 CASES",
+  "dashboard.toplist": "STATES CASES",
+  "dashboard.top-district-list": "DISTRICS CASES",
   "confirmed": "Confirmed",
   "active": "Active",
   "recovered": "Recovered",
@@ -473,5 +473,18 @@
   "district.Jharkhand.Dhanbad":"Dhanbad",
   "district.Meghalaya.Unknown":"Unknown",
 
-  "LockDown Remaining Days":"LockDown Remaining Days - "
+  "LockDown Remaining Days":"LockDown Remaining Days - ",
+
+  "MIHY":"MIHY",
+  "Covid 19 tracker":"कोविद 19 ट्रैकर",
+  "Successful shared":"Successful sharedೆ",
+  "INDIA - TOTAL CASES":"INDIA - TOTAL CASES",
+  "PATIENT GENDER":"PATIENT GENDER",
+  "Male":"Male",
+  "Female":"Female",
+  "Awaiting Details":"Awaiting Details",
+  "Total Cases":"Total Cases",
+  "INDIA - DAILY CASES":"INDIA - DAILY CASES",
+  "PATIENT AGE":"PATIENT AGE",
+  "Cases":"Cases"
 }
