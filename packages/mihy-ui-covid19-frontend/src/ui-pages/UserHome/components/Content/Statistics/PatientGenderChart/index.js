@@ -1,5 +1,5 @@
 import React from "react";
-import {  Typography, Card, CardContent } from "@material-ui/core/";
+import { Typography, Card, CardContent } from "@material-ui/core/";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 import { httpRequest } from "../../../../../../ui-utils/api";
@@ -7,7 +7,10 @@ import { withTranslation } from "react-i18next";
 import { Doughnut, defaults } from "react-chartjs-2";
 
 class PatientGenderChart extends React.Component {
-  calcGender = genderArray => {
+  calcGender = () => {
+
+    const { setAppData, genderArray } = this.props
+
     defaults.global.tooltips.intersect = false;
     defaults.global.tooltips.mode = "nearest";
     defaults.global.tooltips.position = "average";
@@ -40,18 +43,12 @@ class PatientGenderChart extends React.Component {
         unknown++;
       }
     });
-    this.props.setAppData("patientGenderMale", male);
-    this.props.setAppData("patientGenderFemale", female);
-    this.props.setAppData("patientGenderUnkown", unknown);
+    setAppData("patientGenderMale", male);
+    setAppData("patientGenderFemale", female);
+    setAppData("patientGenderUnkown", unknown);
   };
   componentDidMount = async () => {
-    let patientsGenderArray = [];
-    const response = await httpRequest({
-      endPoint: "https://api.covid19india.org/raw_data.json",
-      method: "get"
-    });
-    response.raw_data.map(el => patientsGenderArray.push(el.gender));
-    await this.calcGender(patientsGenderArray);
+    this.calcGender();
   };
 
   render() {
@@ -92,7 +89,7 @@ class PatientGenderChart extends React.Component {
         mode: "point",
         position: "nearest",
         callbacks: {
-          label: function(tooltipItem, data) {
+          label: function (tooltipItem, data) {
             const dataset = data.datasets[tooltipItem.datasetIndex];
             const meta = dataset._meta[Object.keys(dataset._meta)[0]];
             const total = meta.total;
@@ -102,7 +99,7 @@ class PatientGenderChart extends React.Component {
             );
             return currentValue + " (" + percentage + "%)";
           },
-          title: function(tooltipItem, data) {
+          title: function (tooltipItem, data) {
             return data.labels[tooltipItem[0].index];
           }
         }
