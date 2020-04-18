@@ -40,6 +40,13 @@ const menuItems = [
     icon: "airport_shuttle",
     badge:true,
     badgeLabel:"C.."
+  },
+  {
+    name: "About Us",
+    icon: "AccountBox",
+    route: "/user-home/about-us",
+    badge:true,
+    badgeLabel:"C.."
   }
 ];
 
