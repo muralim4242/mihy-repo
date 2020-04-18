@@ -56,10 +56,10 @@ const languages = [
     name: "ಕನ್ನಡ",
     code: "kan"
   },
-  // {
-  //   name: "മലയാളം",
-  //   code: "mal"
-  // },
+  {
+    name: "മലയാളം",
+    code: "mal"
+  },
   {
     name: "தமிழ்",
     code: "tam"
