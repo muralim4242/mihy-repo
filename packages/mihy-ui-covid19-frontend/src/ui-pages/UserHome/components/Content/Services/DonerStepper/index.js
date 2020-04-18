@@ -74,7 +74,7 @@ function getStepContent(step) {
   }
 }
 
-class StepperComponent extends React.Component {
+class DonerStepper extends React.Component {
   isStepOptional = step => step === 1;
   componentDidMount() {
     const { setAppData } = this.props;
@@ -93,6 +93,10 @@ class StepperComponent extends React.Component {
     const { setAppData } = this.props;
     setAppData(property, evt);
   }
+  handleFinal = () => {
+    this.props.history.push("/user-home/create-service-acknowledgement");
+
+  };
   render() {
     const {
       classes,
@@ -148,7 +152,7 @@ class StepperComponent extends React.Component {
                       color="primary"
                       onClick={
                         activeStep === steps.length - 1
-                          ? this.create 
+                          ? this.handleFinal 
                           : this.handleNext 
                       }
                       className={classes.button}
@@ -202,7 +206,7 @@ class StepperComponent extends React.Component {
                       color="primary"
                       onClick={
                         activeStep === steps.length - 1
-                          ? this.create 
+                          ? this.handleFinal 
                           : this.handleNext 
                       }
                       className={classes.button}
@@ -224,7 +228,7 @@ class StepperComponent extends React.Component {
   }
 }
 
-StepperComponent.propTypes = {
+DonerStepper.propTypes = {
   classes: PropTypes.object
 };
 const mapStateToProps = ({ screenConfiguration }) => {
@@ -232,4 +236,4 @@ const mapStateToProps = ({ screenConfiguration }) => {
   const {  activeStep = 0,  errorMessages,} = preparedFinalObject;
   return { activeStep,  errorMessages };
 };
-export default connect( mapStateToProps,mapDispatchToProps)(withStyles(design)(StepperComponent));
+export default connect( mapStateToProps,mapDispatchToProps)(withStyles(design)(DonerStepper));

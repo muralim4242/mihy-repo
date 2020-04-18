@@ -4,10 +4,10 @@ import { mapDispatchToProps } from "../../../../../ui-utils/commons";
 import { connect } from "react-redux";
 
 class Services extends React.Component {
-    handleChange = () => {
+     handleChange(property) {
         const { history } = this.props;
-        history.push("/user-home/stepper")
-     };
+        history.push(property)
+      }
     render() {
         return (
             <div >
@@ -20,10 +20,10 @@ class Services extends React.Component {
                             <Divider />
                             <br></br>
                             <Typography variant="h6" gutterBottom align="center">
-                            <Button variant="contained" color="primary" fullWidth={true} onClick={e => { this.handleChange(e) }}>Doner </Button>
+                            <Button variant="contained" color="primary" fullWidth={true} onClick={e => { this.handleChange("/user-home/doner-stepper") }}>Doner </Button>
                             </Typography>
                             <Typography variant="h6" gutterBottom align="center">
-                            <Button variant="contained" color="primary" fullWidth={true} >Taker </Button>
+                            <Button variant="contained" color="primary" fullWidth={true}  onClick={e => { this.handleChange("/user-home/taker-stepper") }}>Taker </Button>
                             </Typography>
                         </CardContent>
                     </Card>

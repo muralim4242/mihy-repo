@@ -57,7 +57,7 @@ class ServiceDetails extends React.Component {
                 <TextField fullWidth id="outlined-basic" variant="outlined" ></TextField>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h6" className="Margin-bottom-8px">From Time</Typography>
+                <Typography variant="h6" className="Margin-bottom-8px">From Date</Typography>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DatePicker fullWidth
                     minDate={today}
@@ -68,7 +68,7 @@ class ServiceDetails extends React.Component {
                 </MuiPickersUtilsProvider>
               </Grid>
               <Grid item md={6} xs={12}>
-                <Typography variant="h6" className="Margin-bottom-8px">To Time</Typography>
+                <Typography variant="h6" className="Margin-bottom-8px">To Date</Typography>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DatePicker fullWidth
                     minDate={today}
