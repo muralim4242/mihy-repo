@@ -287,6 +287,7 @@ class MiniDrawer extends React.Component {
                 {t("appNameTwo")}
               </span>
             </Typography>
+        
             <IconButton
               className={classes.languageButton}
               onClick={e => {
@@ -294,7 +295,7 @@ class MiniDrawer extends React.Component {
               }}
               color="primary"
             >
-              <span className="material-icons">language</span>
+            <span class="material-icons">g_translate</span>
             </IconButton>
             {navigator.share && (
               <IconButton
