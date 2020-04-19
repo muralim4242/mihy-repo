@@ -77,46 +77,18 @@ const data = [
 ];
 const styles = theme => ({
   nameStyle: {
-    color: "#d81b60",
-    fontSize: 30,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 24
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 24
-    },
-    fontWeight: 600,
     margin: "10px 0px",
     textAlign: "center"
   },
   roleStyle: {
-    fontSize: 24,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 18
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 18
-    },
-    fontWeight: 400,
-    color: "grey",
     marginBottom: 10,
     textAlign: "center"
-  },
-  heading: {
-    fontSize: 22,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 16
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 16
-    },
-    fontWeight: 600,
   },
   mainContainer: {
     position: "absolute",
     top: "45%",
     [theme.breakpoints.down("sm")]: {
-      top: "35%"
+      top: "38%"
     },
     left: "50%",
     marginLeft: "-50%",
@@ -124,16 +96,6 @@ const styles = theme => ({
   },
   contentContainer: {
     margin: "25px 0px"
-  },
-  data: {
-    fontSize: 22,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 16
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 16
-    },
-    color: "grey"
   },
   grid: {
     margin: "10px 0px",
@@ -143,15 +105,7 @@ const styles = theme => ({
   placeGrid: {
     margin: "10px 0px 75px 0px",
     textAlign: "right",
-    padding: "0px 40px",
-    fontSize: 20,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 14
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 14
-    },
-    color: "grey"
+    padding: "0px 40px"
   }
 
 })
@@ -167,28 +121,32 @@ class AboutUs extends React.Component {
           <Swiper data={data} setAppData = {setAppData}/>
         </Grid>
         {!isEmpty(aboutUsContent) &&
-          <Grid item md={12} xs={12} sm={12} className={classes.mainContainer}>
-                <Grid container className={classes.contentContainer}>
-                  <Grid item md={12} sm={12} xs={12} className={classes.nameStyle}>{name}</Grid>
+          <Grid item md={12} xs={12} sm={12} className={classes.contentContainer}>
+                <Grid container className={classes.mainContainer}>
+                  <Grid item md={12} sm={12} xs={12} className={classes.nameStyle}>
+                    <Typography variant = "h6" color = "primary">{name}</Typography></Grid>
                   <Grid item md={12} sm={12} xs={12} className={classes.roleStyle}>
+                  <Typography variant="subtitle2"  style={{color:"#9e9e9e"}}>
                   {role}
+                  </Typography>
                   </Grid>
                   <Grid item md={12} sm={12} xs={12} className={classes.grid}>
-                    <Typography className={classes.heading}>Role in Covid 19:&nbsp;</Typography>
-                    <Typography className={classes.data}>{roleInCovid19}</Typography>
+                    <Typography variant="subtitle2">Role in Covid 19:&nbsp;</Typography>
+                    <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{roleInCovid19}</Typography>
                   </Grid>
                   {skills && <Grid item md={12} sm={12} xs={12} className={classes.grid}>
-                    <Typography className={classes.heading}>Skills:&nbsp;</Typography>
-                    <Typography className={classes.data}>{skills}</Typography>
+                    <Typography variant="subtitle2">Skills:&nbsp;</Typography>
+                    <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{skills}</Typography>
                   </Grid>}
                   {qualification && <Grid item md={12} sm={12} xs={12} className={classes.grid}>
-                    <Typography className={classes.heading}>Qualification:&nbsp;</Typography>
-                    <Typography className={classes.data}>{qualification}</Typography>
+                    <Typography variant="subtitle2">Qualification:&nbsp;</Typography>
+                    <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{qualification}</Typography>
                   </Grid>}
-                </Grid>
-              {from && <Grid item md={12} sm={12} xs={12} className={classes.placeGrid}>
-                {from}
+                  {from && <Grid item md={12} sm={12} xs={12} className={classes.placeGrid}>
+                <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{from}</Typography> 
               </Grid>}
+                </Grid>
+              
           </Grid>
         }
       </Grid>
