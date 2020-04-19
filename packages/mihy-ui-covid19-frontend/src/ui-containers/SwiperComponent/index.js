@@ -138,13 +138,22 @@ const data = [
     skills: "JS, React, Redux, Material-ui",
     qualification: "B.Tech in CSE",
     from: "Zirakpur, Punjab",
-    src: "assets/girl.jpg"
+    src: "assets/pooja.jpeg"
   },
   {
     name: "Gagan",
     role: "Fullstack Developer",
     roleInCovid19: "Frontend Developer",
     src: "assets/boy.jpg"
+  },
+  {
+    name: "Neha Kumari",
+    role: "Fullstack Developer",
+    roleInCovid19: "Backend Developer",
+    skills: "JS, Node JS, Firebase",
+    qualification: "B.Tech in CSE",
+    from: "Ramgarh, Jharkhand",
+    src: "assets/neha.jpeg"
   }
 ]
 class SwiperComponent extends React.Component {
