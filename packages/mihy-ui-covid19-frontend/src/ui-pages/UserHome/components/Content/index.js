@@ -41,8 +41,14 @@ const menuItems = [
     badge:true,
     badgeLabel:"C.."
   },
+  // {
+  //   name: "About US",
+  //   icon: "info",
+  //   badge:true,
+  //   badgeLabel:"C.."
+  // },
   {
-    name: "FAQ",
+    name: "About US & FAQ",
     icon: "live_help",
     route: "/user-home/faq",
     badge:true,
