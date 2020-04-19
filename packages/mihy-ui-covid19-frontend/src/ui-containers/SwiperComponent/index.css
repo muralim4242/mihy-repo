@@ -15,11 +15,34 @@ body {
   height: 300px;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 30%;
   margin-left: -150px;
   margin-top: -150px;
 }
 .swiper-slide {
   background-position: center;
   background-size: cover;
+  text-align: center;
+  
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+}
+.swiper-button-next {
+  right: 0%;
+  color: #d81b60;
+}
+.swiper-button-prev {
+color: #d81b60;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 // import FirstTimeUser from "../ui-pages/UserHome/components/Content/FirstTimeUser";
 import Dashboard from "../ui-pages/UserHome/components/Content/Dashboard";
-import AboutUs from "../ui-pages/UserHome/components/Content/components/AboutUs";
+import AboutUs from "../ui-pages/UserHome/components/Content/AboutUs";
 import Statistics from '../ui-pages/UserHome/components/Content/Statistics'
 import DistrictList from '../ui-pages/UserHome/components/Content/DistrictList'
 
