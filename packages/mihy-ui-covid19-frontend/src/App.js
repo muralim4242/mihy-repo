@@ -32,7 +32,6 @@ class App extends React.Component {
     const {i18n,selectedLanguage}=this.props;
     i18n.changeLanguage(selectedLanguage);
   }
-
   render() {
     const { spinner } = this.props;
     return (

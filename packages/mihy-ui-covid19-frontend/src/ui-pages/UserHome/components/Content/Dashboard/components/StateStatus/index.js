@@ -12,7 +12,7 @@ const StateStatus = ({ status = {}, t }) => {
         {`${t("confirmed")} - ${status.confirmed} ${parseInt(status.deltaconfirmed)?`[+${status.deltaconfirmed}]`:''}` }
       </Typography>
       <Typography variant="subtitle2"  style={{color:"#2196f3"}}>
-        {`${t("active")}  - ${status.active}`}
+        {`${t("active")}  - ${status.active} [+${parseInt(status.deltadeaths)+parseInt(status.deltarecovered)}]`}
       </Typography>
       <Typography variant="subtitle2"  style={{color:"#4caf50"}}>
         {`${t("recovered")}  - ${status.recovered} ${parseInt(status.deltarecovered)?`[+${status.deltarecovered}]`:''}`}

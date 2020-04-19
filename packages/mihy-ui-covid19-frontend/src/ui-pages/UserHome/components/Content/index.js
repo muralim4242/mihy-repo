@@ -194,6 +194,7 @@ class MiniDrawer extends React.Component {
   };
 
   onLanguageSelect = code => {
+    debugger
     const { setAppData, i18n } = this.props;
     setAppData("selectedLanguage", code);
     i18n.changeLanguage(code);
@@ -295,7 +296,7 @@ class MiniDrawer extends React.Component {
               }}
               color="primary"
             >
-            <span class="material-icons">g_translate</span>
+            <span className="material-icons">g_translate</span>
             </IconButton>
             {navigator.share && (
               <IconButton
