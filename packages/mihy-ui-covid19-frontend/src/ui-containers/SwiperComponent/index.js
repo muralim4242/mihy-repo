@@ -28,6 +28,10 @@ class SwiperComponent extends React.Component {
       pagination: {
         el: '.swiper-pagination',
       },
+       autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      }
     });
     swiper.on('transitionEnd', function () {
       console.log('*** mySwiper.realIndex', swiper.activeIndex);
@@ -127,7 +131,6 @@ class SwiperComponent extends React.Component {
           </div> */}
         </div>
         <div class="swiper-pagination"></div>
-
       </div>
 
     );
