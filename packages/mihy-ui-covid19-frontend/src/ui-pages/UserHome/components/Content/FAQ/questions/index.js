@@ -26,7 +26,7 @@ const FAQQuestions = ({ questionsList = [], t }) => {
     <div className={classes.root}>
       <Grid container direction="column" justify="center" alignItems="center">
         <Typography variant="h6" color="primary">
-          { t('About US') }
+          { t('FAQ') }
       </Typography>
         </Grid>
       <Grid container direction="column" justify="center" alignItems="stretch">

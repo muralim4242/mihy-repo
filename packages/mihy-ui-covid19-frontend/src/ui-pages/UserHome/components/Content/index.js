@@ -42,11 +42,11 @@ const menuItems = [
     badgeLabel:"C.."
   },
   {
-    name: "About Us",
-    icon: "AccountBox",
-    route: "/user-home/about-us",
+    name: "FAQ",
+    icon: "live_help",
+    route: "/user-home/faq",
     badge:true,
-    badgeLabel:"C.."
+    badgeLabel:"N"
   }
 ];
 
