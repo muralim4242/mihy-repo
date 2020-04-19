@@ -46,16 +46,16 @@ class Statistics extends React.Component {
       <div>
         <Grid container spacing={1}>
           <Grid item xs={12} md={6}>
-            <TotalCasesChart casesData={covidData} />
+            {covidData.length>0 && <TotalCasesChart casesData={covidData} />}
           </Grid>
           <Grid item xs={12} md={6}>
-            <DailyCasesChart casesData={covidData} />
+            {covidData.length>0 && <DailyCasesChart casesData={covidData} />}
           </Grid>
           <Grid item xs={12} md={6}>
-            <AgeChart agesArray={agesArray} />
+            {agesArray.length>0  && <AgeChart agesArray={agesArray} />}
           </Grid>
           <Grid item xs={12} md={6}>
-            <PatientGenderChart genderArray={patientsGenderArray} />
+            {patientsGenderArray.length>0 && <PatientGenderChart genderArray={patientsGenderArray} />}
           </Grid>
         </Grid>
       </div>
@@ -65,7 +65,7 @@ class Statistics extends React.Component {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { statistics = {} } = preparedFinalObject;
+  let { statistics = {} } = preparedFinalObject;
   const { covidData = [], patientsGenderArray = [], agesArray = []}=statistics
   return {
     covidData,

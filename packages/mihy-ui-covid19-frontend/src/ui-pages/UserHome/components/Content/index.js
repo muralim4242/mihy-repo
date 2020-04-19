@@ -32,7 +32,7 @@ const menuItems = [
     name: "Statistics",
     icon: "equalizer",
     route: "/user-home/statistics",
-    badge:true,
+    // badge:true,
     badgeLabel:"N"
   },
   {
@@ -63,17 +63,21 @@ const languages = [
     name: "ಕನ್ನಡ",
     code: "kan"
   },
+  {
+    name: "മലയാളം",
+    code: "mal"
+  },
+  {
+    name: "தமிழ்",
+    code: "tam"
+  },
+  {
+    name: "తెలుగు",
+    code: "tel"
+  },
   // {
-  //   name: "മലയാളം",
-  //   code: "mal"
-  // },
-  // {
-  //   name: "தமிழ்",
-  //   code: "tam"
-  // },
-  // {
-  //   name: "తెలుగు",
-  //   code: "tel"
+  //   name: "मराठी",
+  //   code: "mar"
   // }
 ];
 
