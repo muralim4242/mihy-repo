@@ -309,7 +309,7 @@ let obj={
 
 });
 
-// get all data of state
+// get Service
 exports.getService = functions.https.onRequest(async (req, res) => {
   try {
 const {state,district,service_type}= req.body;
