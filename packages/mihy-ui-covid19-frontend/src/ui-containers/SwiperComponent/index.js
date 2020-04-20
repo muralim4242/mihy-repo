@@ -18,7 +18,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       top: "25%",
     },
-    
+
   }
 })
 
@@ -85,29 +85,29 @@ class SwiperComponent extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classNames(classes.swiperContainer, "swiper-container")}>
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
+        <div className="swiper-wrapper">
+          <div className="swiper-slide">
             <Avatar alt="Murali. M" src="assets/murali.jpeg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <Avatar alt="Thahareema" src="assets/thahareema.jpeg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <Avatar alt="Praveen M P" src="assets/praveen.jpeg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <Avatar alt="Shalu Singh" src="assets/shalu.jpeg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <Avatar alt="Bikki Mahato" src="assets/bikki.jpeg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
           <Avatar alt="Pooja Datyal" src="assets/pooja.jpeg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
           <Avatar alt="Gagan" src="assets/boy.jpg" className={classes.bigAvatar} />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
           <Avatar alt="Neha Kumari" src="assets/neha.jpeg" className={classes.bigAvatar} />
           </div>
         </div>
