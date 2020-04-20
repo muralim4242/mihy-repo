@@ -43,6 +43,7 @@ class SwiperComponent extends React.Component {
         <div className="swiper-wrapper">
           {ourTeam.map(team => {
             return (
+              team.active === true &&
               <div className="swiper-slide">
                 <Grid container className={classes.mainContainer} align="center">
                   <Grid item md={12} sm={12} xs={12}>
