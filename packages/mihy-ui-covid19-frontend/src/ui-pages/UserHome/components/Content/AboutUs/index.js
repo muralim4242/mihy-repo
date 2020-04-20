@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 const data = [
   {
     name: "Murali. M",
-    role: "Fullstack Developer",
-    roleInCovid19: "Fullstack Developer",
+    // role: "Fullstack Developer And Initiator",
+    roleInCovid19: "Fullstack Developer And Initiator",
     skills: "JS, React JS, Node JS and DevOPS",
     qualification: "B.E. in ISE, Diploma in CSE",
     from: "Shimoga, Karnataka",
@@ -16,7 +16,7 @@ const data = [
   },
   {
     name: "Thahareema",
-    role: "UI/UX Designer",
+    // role: "UI/UX Designer",
     roleInCovid19: "UI/UX Designer",
     skills: "Adobe XD and Product Management",
     qualification: "Diploma in ECE",
@@ -25,7 +25,7 @@ const data = [
   },
   {
     name: "Praveen M P",
-    role: "Fullstack Developer",
+    // role: "Frontend Developer",
     roleInCovid19: "Frontend Developer",
     skills: "Javascript, React, Angular",
     qualification: "MCA",
@@ -34,7 +34,7 @@ const data = [
   },
   {
     name: "Shalu Singh",
-    role: "Fullstack Developer",
+    // role: "Frontend Developer",
     roleInCovid19: "Frontend Developer",
     skills: "JS, React, Redux, Material-ui",
     qualification: "M.Tech in CSE, VIT",
@@ -43,7 +43,7 @@ const data = [
   },
   {
     name: "Bikki Mahato",
-    role: "Fullstack Developer",
+    // role: "Frontend Developer",
     roleInCovid19: "Frontend Developer",
     skills: "JS, React, Redux, Material-ui, Node JS",
     qualification: "B.Tech in IT",
@@ -52,7 +52,7 @@ const data = [
   },
   {
     name: "Pooja Datyal",
-    role: "Fullstack Developer",
+    // role: "Frontend Developer",
     roleInCovid19: "Frontend Developer",
     skills: "JS, React, Redux, Material-ui",
     qualification: "B.Tech in CSE",
@@ -61,13 +61,13 @@ const data = [
   },
   {
     name: "Gagan",
-    role: "Fullstack Developer",
-    roleInCovid19: "Frontend Developer",
+    // role: "Frontend Developer",
+    roleInCovid19: "Marketing and Analytics",
     src: "assets/boy.jpg"
   },
   {
     name: "Neha Kumari",
-    role: "Fullstack Developer",
+    // role: "Backend Developer",
     roleInCovid19: "Backend Developer",
     skills: "JS, Node JS, Firebase",
     qualification: "B.Tech in CSE",
@@ -76,14 +76,14 @@ const data = [
   }
 ];
 const styles = theme => ({
-  nameStyle: {
-    margin: "10px 0px",
-    textAlign: "center"
-  },
-  roleStyle: {
-    marginBottom: 10,
-    textAlign: "center"
-  },
+  // nameStyle: {
+  //   margin: "10px 0px",
+  //   textAlign: "center"
+  // },
+  // roleStyle: {
+  //   marginBottom: 10,
+  //   textAlign: "center"
+  // },
   mainContainer: {
     position: "absolute",
     top: "45%",
@@ -98,7 +98,7 @@ const styles = theme => ({
     margin: "25px 0px"
   },
   grid: {
-    margin: "4px 0px",
+    // margin: "4px 0px",
     display: "flex",
     justifyContent: "center"
   },
@@ -130,11 +130,11 @@ class AboutUs extends React.Component {
           <Grid item md={12} xs={12} sm={12} className={classes.contentContainer}>
                 <Grid container className={classes.mainContainer}>
                   <Grid item md={12} sm={12} xs={12} className={classes.nameStyle}>
-                    <Typography variant = "h6" color = "primary">{name}</Typography></Grid>
-                  <Grid item md={12} sm={12} xs={12} className={classes.roleStyle}>
-                  <Typography variant="subtitle2"  style={{color:"#9e9e9e"}}>
+                    <Typography variant = "h6" color = "primary" align="center">{name}</Typography></Grid>
+                  <Grid item md={12} sm={12} xs={12} className={classes.roleStyle} align="center">
+                  {role &&<Typography variant="subtitle2"  style={{color:"#9e9e9e"}}>
                   {role}
-                  </Typography>
+                  </Typography>}
                   </Grid>
                   <Grid item md={12} sm={12} xs={12} className={classes.grid}>
                     <Typography variant="subtitle2">Role in Covid 19:&nbsp;</Typography>
