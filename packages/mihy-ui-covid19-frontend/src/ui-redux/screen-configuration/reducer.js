@@ -6,7 +6,8 @@ const intialState = {
     snackbar:{
       open:false,
       variant:"success",
-      message:""
+      message:"",
+      checked:false
     },
     spinner:false,
     selectedLanguage:window.localStorage.getItem("selectedLanguage")||"en"

@@ -115,7 +115,7 @@ class AboutUs extends React.Component {
 
   render() {
     const { classes, aboutUsContent, setAppData ,t} = this.props;
-    const { name, role, roleInCovid19, skills, qualification, from } = aboutUsContent;
+    const { name, role, roleInCovid19, skills, qualification} = aboutUsContent;
 
     return (
       <div>
