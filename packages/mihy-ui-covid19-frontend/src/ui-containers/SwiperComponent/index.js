@@ -8,8 +8,8 @@ import "./index.css";
 const styles = theme => ({
   bigAvatar: {
     margin: 10,
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
   },
   grid: {
     display: "flex",
@@ -30,9 +30,12 @@ class SwiperComponent extends React.Component {
         shadowScale: 0.94,
       },
       autoplay: {
-        delay: 4000,
+        delay: 3000,
         disableOnInteraction: false,
-      }
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
     });
   };
 
@@ -81,6 +84,7 @@ class SwiperComponent extends React.Component {
           })}
 
         </div>
+        <div className="swiper-pagination"></div>
       </div>
 
     );
