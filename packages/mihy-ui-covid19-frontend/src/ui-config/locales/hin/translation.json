@@ -474,8 +474,28 @@
   "FAQAnswer3": "हम अपने नंबर को अपडेट करने के लिए राज्य बुलेटिन और आधिकारिक हैंडल का उपयोग कर रहे हैं। डेटा स्वयंसेवकों के समूह द्वारा मान्य है और Google शीट और एपीआई में प्रकाशित किया गया है।",
   "FAQQuestion4": "हमारे ऐप में MoH से अधिक सकारात्मक गणना क्यों है?",
   "FAQAnswer4": "MoHFW एक निर्धारित समय में डेटा को अपडेट करता है। हालांकि, हम उन्हें स्टेट प्रेस बुलेटिन, आधिकारिक (CM, हेल्थ M) हैंडल, PBI, प्रेस ट्रस्ट ऑफ इंडिया, ANI रिपोर्ट के आधार पर अपडेट करते हैं। ये आम तौर पर हाल ही में अधिक होते हैं। ",
-  "FAQ":"हमारे बारे में"
+  "FAQ":"सामान्य प्रश्न",
+  "AboutUS":"हमारे बारे में",
 
-  
+  "district.Maharashtra.Parbhani":"Parbhani",
+  "district.Maharashtra.Nandurbar":"Nandurbar",
+  "district.Rajasthan.Sawai Madhopur":"Sawai Madhopur",
+  "district.Tamil Nadu.Pudukkottai":"Pudukkottai",
+  "district.Madhya Pradesh.Agar Malwa":"Agar Malwa",
+  "district.Uttar Pradesh.Kannauj":"Kannauj",
+  "district.Uttar Pradesh.Mainpuri":"Mainpuri",
+  "district.Uttar Pradesh.Etah":"Etah",
+  "district.Uttar Pradesh.Unnao":"Unnao",
+  "district.Uttar Pradesh.Sant Kabir Nagar":"Sant Kabir Nagar",
+  "district.Uttar Pradesh.Gonda":"Gonda",
+  "district.Uttar Pradesh.Mau":"Mau",
+  "district.Uttar Pradesh.Sultanpur":"Sultanpur",
+  "district.Jammu and Kashmir.Anantnag":"Anantnag",
+  "district.Punjab.Firozpur":"Firozpur",
+  "district.Bihar.Buxar":"Buxar",
+  "district.Bihar.Vaishali":"Vaishali",
+  "district.Bihar.Bhojpur":"Bhojpur",
+  "district.Odisha.Baleshwar":"Baleshwar",
+  "district.Manipur.Imphal East":"Imphal East"
 
 }
