@@ -41,10 +41,10 @@ class SwiperComponent extends React.Component {
     return (
       <div className={classNames(classes.swiperContainer, "swiper-container")}>
         <div className="swiper-wrapper">
-          {ourTeam.map(team => {
+          {ourTeam.map((team,index) => {
             return (
               team.active === true &&
-              <div className="swiper-slide">
+              <div className="swiper-slide" key={index}>
                 <Grid container className={classes.mainContainer} align="center">
                   <Grid item md={12} sm={12} xs={12}>
                     <Avatar alt={team.name} src={team.src} className={classes.bigAvatar} />
