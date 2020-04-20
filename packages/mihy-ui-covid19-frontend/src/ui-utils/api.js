@@ -17,7 +17,7 @@ let axiosInstances = {
     }
   }),
   instanceTwo: axios.create({
-    baseURL: "",
+    baseURL: "https://coronavirus-tracker-api.herokuapp.com",
     // window.location.origin,
     headers: {
       "Content-Type": "application/json"
