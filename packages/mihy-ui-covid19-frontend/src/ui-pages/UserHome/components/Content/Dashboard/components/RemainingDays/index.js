@@ -1,5 +1,6 @@
 import React from "react";
 import {Grid,Card,Typography,CardContent} from "@material-ui/core";
+import CountUp from 'react-countup';
 import { mapDispatchToProps } from "../../../../../../../ui-utils/commons";
 import { connect } from "react-redux";
 
@@ -33,7 +34,7 @@ handle=()=>{
         {t("LockDown Remaining Days")}
       </Typography>
         <Typography variant="h5"  align="center" color="primary">
-        {remainingDays}
+        {remainingDays && <CountUp start={0} end={parseInt(remainingDays)} duration={parseInt(remainingDays)}/>}
       </Typography>
       </Grid>
       </CardContent>

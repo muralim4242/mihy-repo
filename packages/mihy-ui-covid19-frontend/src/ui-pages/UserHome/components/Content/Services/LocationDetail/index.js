@@ -10,7 +10,7 @@ class LocationDetail extends React.Component {
             CityDropDown}=this.props
         return (
             <div >
-                <Card style={{padding:"15px 15px 15px 15px"}}>
+                <Card style={{padding:"15px 15px 100px 15px"}}>
                     <CardContent>
                     <Grid container spacing={2} >
               <Grid item md={6} xs={12}>
