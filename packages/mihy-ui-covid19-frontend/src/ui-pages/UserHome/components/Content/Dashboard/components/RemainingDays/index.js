@@ -34,7 +34,8 @@ handle=()=>{
         {t("LockDown Remaining Days")}
       </Typography>
         <Typography variant="h5"  align="center" color="primary">
-        {remainingDays && <CountUp start={0} end={parseInt(remainingDays)} duration={parseInt(remainingDays)}/>}
+        {remainingDays}
+         {/*&& <CountUp start={0} end={parseInt(remainingDays)} duration={parseInt(remainingDays)}/>*/}
       </Typography>
       </Grid>
       </CardContent>
