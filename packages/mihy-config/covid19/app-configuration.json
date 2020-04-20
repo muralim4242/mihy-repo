@@ -1,0 +1,119 @@
+{
+   "menuItems":[
+      {
+         "name":"Home",
+         "icon":"home",
+         "route":"/user-home"
+      },
+      {
+         "name":"Statistics",
+         "icon":"equalizer",
+         "route":"/user-home/statistics",
+         "badgeLabel":"N"
+      },
+      {
+         "name":"Services",
+         "icon":"airport_shuttle",
+         "badge":true,
+         "badgeLabel":"C.."
+      },
+      {
+         "name":"About US & FAQ",
+         "icon":"info",
+         "route":"/user-home/about-faq",
+         "badge":true,
+         "badgeLabel":"N"
+      }
+   ],
+   "langauges":[
+      {
+         "name":"ENGLISH",
+         "code":"en"
+      },
+      {
+         "name":"हिन्दी",
+         "code":"hin"
+      },
+      {
+         "name":"ಕನ್ನಡ",
+         "code":"kan"
+      },
+      {
+         "name":"മലയാളം",
+         "code":"mal"
+      },
+      {
+         "name":"தமிழ்",
+         "code":"tam"
+      },
+      {
+         "name":"తెలుగు",
+         "code":"tel"
+      }
+   ],
+   "ourTeam":[
+      {
+         "name":"Murali. M",
+         "roleInCovid19":"Fullstack Developer And Initiator",
+         "skills":"JS, React JS, Node JS and DevOPS",
+         "qualification":"B.E. in ISE, Diploma in CSE",
+         "from":"Shimoga, Karnataka",
+         "src":"assets/murali.jpeg"
+      },
+      {
+         "name":"Thahareema",
+         "roleInCovid19":"UI/UX Designer",
+         "skills":"Adobe XD and Product Management",
+         "qualification":"Diploma in E&C",
+         "from":"Chaamaraajanagara, Karnataka",
+         "src":"assets/thahareema.jpeg"
+      },
+      {
+         "name":"Gagan",
+         "skills":"Java,Spring Boot,Distributed systems",
+         "qualification":"B.E. in CSE, Diploma in CSE",
+         "roleInCovid19":"Backend Developer,Marketing and Analytics",
+         "src":"assets/gagan.jpeg"
+      },
+      {
+         "name":"Praveen M P",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"Javascript, React, Angular",
+         "qualification":"MCA",
+         "from":"Bangalore",
+         "src":"assets/praveen.jpeg"
+      },
+      {
+         "name":"Shalu Singh",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"JS, React, Redux, Material-ui",
+         "qualification":"M.Tech in CSE, VIT",
+         "from":"Bulandshahar, Uttar Pradesh",
+         "src":"assets/shalu.jpeg"
+      },
+      {
+         "name":"Bikki Mahato",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"JS, React, Redux, Material-ui, Node JS",
+         "qualification":"B.Tech in IT",
+         "from":"Kolkata, West Bengal",
+         "src":"assets/bikki.jpeg"
+      },
+      {
+         "name":"Pooja Datyal",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"JS, React, Redux, Material-ui",
+         "qualification":"B.Tech in CSE",
+         "from":"Zirakpur, Punjab",
+         "src":"assets/pooja.jpeg"
+      },
+      {
+         "name":"Neha Kumari",
+         "roleInCovid19":"Backend Developer",
+         "skills":"JS, Node JS, Firebase",
+         "qualification":"B.Tech in CSE",
+         "from":"Ramgarh, Jharkhand",
+         "src":"assets/neha.jpeg"
+      }
+   ]
+}
