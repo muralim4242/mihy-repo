@@ -58,7 +58,8 @@
          "skills":"JS, React JS, Node JS and DevOPS",
          "qualification":"B.E. in ISE, Diploma in CSE",
          "from":"Shimoga, Karnataka",
-         "src":"assets/murali.jpeg"
+         "src":"assets/murali.jpeg",
+         "active": true
       },
       {
          "name":"Thahareema",
@@ -66,14 +67,16 @@
          "skills":"Adobe XD and Product Management",
          "qualification":"Diploma in E&C",
          "from":"Chaamaraajanagara, Karnataka",
-         "src":"assets/thahareema.jpeg"
+         "src":"assets/thahareema.jpeg",
+         "active": true
       },
       {
          "name":"Gagan",
          "skills":"Java,Spring Boot,Distributed systems",
          "qualification":"B.E. in CSE, Diploma in CSE",
          "roleInCovid19":"Backend Developer,Marketing and Analytics",
-         "src":"assets/gagan.jpeg"
+         "src":"assets/gagan.jpeg",
+         "active": true
       },
       {
          "name":"Praveen M P",
@@ -81,7 +84,8 @@
          "skills":"Javascript, React, Angular",
          "qualification":"MCA",
          "from":"Bangalore",
-         "src":"assets/praveen.jpeg"
+         "src":"assets/praveen.jpeg",
+         "active": true
       },
       {
          "name":"Shalu Singh",
@@ -89,7 +93,8 @@
          "skills":"JS, React, Redux, Material-ui",
          "qualification":"M.Tech in CSE, VIT",
          "from":"Bulandshahar, Uttar Pradesh",
-         "src":"assets/shalu.jpeg"
+         "src":"assets/shalu.jpeg",
+         "active": true
       },
       {
          "name":"Bikki Mahato",
@@ -97,7 +102,8 @@
          "skills":"JS, React, Redux, Material-ui, Node JS",
          "qualification":"B.Tech in IT",
          "from":"Kolkata, West Bengal",
-         "src":"assets/bikki.jpeg"
+         "src":"assets/bikki.jpeg",
+         "active": true
       },
       {
          "name":"Pooja Datyal",
@@ -105,7 +111,8 @@
          "skills":"JS, React, Redux, Material-ui",
          "qualification":"B.Tech in CSE",
          "from":"Zirakpur, Punjab",
-         "src":"assets/pooja.jpeg"
+         "src":"assets/pooja.jpeg",
+         "active": true
       },
       {
          "name":"Neha Kumari",
@@ -113,7 +120,8 @@
          "skills":"JS, Node JS, Firebase",
          "qualification":"B.Tech in CSE",
          "from":"Ramgarh, Jharkhand",
-         "src":"assets/neha.jpeg"
+         "src":"assets/neha.jpeg",
+         "active": true
       }
    ]
 }
