@@ -98,7 +98,7 @@ const styles = theme => ({
     margin: "25px 0px"
   },
   grid: {
-    margin: "10px 0px",
+    margin: "4px 0px",
     display: "flex",
     justifyContent: "center"
   },
