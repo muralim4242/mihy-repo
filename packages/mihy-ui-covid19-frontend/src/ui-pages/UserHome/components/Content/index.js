@@ -306,7 +306,7 @@ class MiniDrawer extends React.Component {
               }}
               color="primary"
             >
-              <span className="material-icons">language</span>
+              <span className="material-icons">g_translate</span>
             </IconButton>
             {navigator.share && (
               <IconButton
