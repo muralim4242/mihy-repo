@@ -11,7 +11,7 @@ class AboutUs extends React.Component {
     return (
       <div>
         <Typography variant="h6" color="primary" align="center">
-          {t("About US")}
+          {t("AboutUS")}
         </Typography>
         <Grid container style={{ position: "relative" }}>
           <Grid item md={12} sm={12} xs={12}>

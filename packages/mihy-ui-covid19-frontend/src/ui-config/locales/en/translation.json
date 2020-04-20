@@ -471,7 +471,7 @@
   "district.Meghalaya.Unknown":"Unknown",
   "LockDown Remaining Days":"LockDown Remaining Days - ",
   "MIHY":"MIHY",
-  "Covid 19 tracker":"कोविद 19 ट्रैकर",
+  "Covid 19 tracker":"Covid 19 tracker",
   "Successful shared":"Successful sharedೆ",
   "INDIA - TOTAL CASES":"INDIA - TOTAL CASES",
   "PATIENT GENDER":"PATIENT GENDER",
@@ -482,8 +482,6 @@
   "INDIA - DAILY CASES":"INDIA - DAILY CASES",
   "PATIENT AGE":"PATIENT AGE",
   "Cases":"Cases",
-
-
   "FAQQuestion1":"Are you official?",
   "FAQAnswer1":"NO",
   "FAQQuestion2":"Who are you?",
@@ -492,5 +490,27 @@
   "FAQAnswer3":  "We are using state bulletins and official handles to update our numbers. The data is validated by a group of volunteers and published into a Google sheet and an API. ",
   "FAQQuestion4":"Why our app have more positive count than MoH?",
   "FAQAnswer4": "MoHFW updates the data at a scheduled time. However, we update them based on state press bulletins, official (CM, Health M) handles, PBI, Press Trust of India, ANI reports. These are generally more recent. ",
-  "FAQ":"FAQ"
+  "FAQ":"FAQ",
+  "AboutUS":"About Us",
+
+  "district.Maharashtra.Parbhani":"Parbhani",
+  "district.Maharashtra.Nandurbar":"Nandurbar",
+  "district.Rajasthan.Sawai Madhopur":"Sawai Madhopur",
+  "district.Tamil Nadu.Pudukkottai":"Pudukkottai",
+  "district.Madhya Pradesh.Agar Malwa":"Agar Malwa",
+  "district.Uttar Pradesh.Kannauj":"Kannauj",
+  "district.Uttar Pradesh.Mainpuri":"Mainpuri",
+  "district.Uttar Pradesh.Etah":"Etah",
+  "district.Uttar Pradesh.Unnao":"Unnao",
+  "district.Uttar Pradesh.Sant Kabir Nagar":"Sant Kabir Nagar",
+  "district.Uttar Pradesh.Gonda":"Gonda",
+  "district.Uttar Pradesh.Mau":"Mau",
+  "district.Uttar Pradesh.Sultanpur":"Sultanpur",
+  "district.Jammu and Kashmir.Anantnag":"Anantnag",
+  "district.Punjab.Firozpur":"Firozpur",
+  "district.Bihar.Buxar":"Buxar",
+  "district.Bihar.Vaishali":"Vaishali",
+  "district.Bihar.Bhojpur":"Bhojpur",
+  "district.Odisha.Baleshwar":"Baleshwar",
+  "district.Manipur.Imphal East":"Imphal East"
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid,Card,Typography,CardContent} from "@material-ui/core";
-import CountUp from 'react-countup';
+// import CountUp from 'react-countup';
 import { mapDispatchToProps } from "../../../../../../../ui-utils/commons";
 import { connect } from "react-redux";
 
