@@ -14,17 +14,21 @@
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
     "lodash": "^4.17.14",
+    "moment": "^2.24.0",
     "proptypes": "^1.1.0",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.9.0",
+    "react-countup": "^4.3.3",
     "react-dom": "^16.8.6",
     "react-i18next": "^11.3.4",
+    "react-moment": "^0.9.7",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.4.1",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "swiper": "^5.3.7"
   },
   "scripts": {
     "start": "react-scripts start",

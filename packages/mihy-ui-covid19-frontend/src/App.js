@@ -28,9 +28,15 @@ class App extends React.Component {
   // componentWillUnmount() {
   //   this.unregisterAuthObserver();
   // }
-  componentDidMount=()=>{
-    const {i18n,selectedLanguage}=this.props;
+  componentDidMount= async()=>{
+    const {i18n,selectedLanguage, setAppData}=this.props;
     i18n.changeLanguage(selectedLanguage);
+    let appConfig = await fetch("https://raw.githubusercontent.com/muralim4242/mihy-repo/master/packages/mihy-config/covid19/app-configuration.json?timestamp="+new Date().getTime())
+      .then(function(response) {
+        return response.json();
+      })
+      .catch(error => console.error(error));
+    setAppData("appConfig",appConfig)
   }
 
   render() {
