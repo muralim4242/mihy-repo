@@ -165,7 +165,7 @@ const mapStateToProps = ({ screenConfiguration }) => {
   const {
     aboutUsContent = {
       name: "Murali. M",
-      role: "Fullstack Developer",
+      // role: "Fullstack Developer",
       roleInCovid19: "Fullstack Developer",
       skills: "JS, React JS, Node JS and DevOPS",
       qualification: "B.E. in ISE, Diploma in CSE",
