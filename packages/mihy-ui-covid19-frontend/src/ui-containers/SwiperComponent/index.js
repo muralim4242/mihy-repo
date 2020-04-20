@@ -93,6 +93,9 @@ class SwiperComponent extends React.Component {
             <Avatar alt="Thahareema" src="assets/thahareema.jpeg" className={classes.bigAvatar} />
           </div>
           <div className="swiper-slide">
+          <Avatar alt="Gagan" src="assets/gagan.jpeg" className={classes.bigAvatar} />
+          </div>
+          <div className="swiper-slide">
             <Avatar alt="Praveen M P" src="assets/praveen.jpeg" className={classes.bigAvatar} />
           </div>
           <div className="swiper-slide">
@@ -104,9 +107,7 @@ class SwiperComponent extends React.Component {
           <div className="swiper-slide">
           <Avatar alt="Pooja Datyal" src="assets/pooja.jpeg" className={classes.bigAvatar} />
           </div>
-          <div className="swiper-slide">
-          <Avatar alt="Gagan" src="assets/boy.jpg" className={classes.bigAvatar} />
-          </div>
+
           <div className="swiper-slide">
           <Avatar alt="Neha Kumari" src="assets/neha.jpeg" className={classes.bigAvatar} />
           </div>

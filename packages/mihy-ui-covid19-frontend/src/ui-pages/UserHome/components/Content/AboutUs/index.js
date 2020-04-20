@@ -19,9 +19,17 @@ const data = [
     // role: "UI/UX Designer",
     roleInCovid19: "UI/UX Designer",
     skills: "Adobe XD and Product Management",
-    qualification: "Diploma in ECE",
+    qualification: "Diploma in E&C",
     from: "Chaamaraajanagara, Karnataka",
     src: "assets/thahareema.jpeg"
+  },
+  {
+    name: "Gagan",
+    // role: "Frontend Developer",
+    skills:"Java,Spring Boot,Distributed systems",
+    qualification: "B.E. in CSE, Diploma in CSE",
+    roleInCovid19: "Backend Developer,Marketing and Analytics",
+    src: "assets/gagan.jpeg"
   },
   {
     name: "Praveen M P",
@@ -58,12 +66,6 @@ const data = [
     qualification: "B.Tech in CSE",
     from: "Zirakpur, Punjab",
     src: "assets/pooja.jpeg"
-  },
-  {
-    name: "Gagan",
-    // role: "Frontend Developer",
-    roleInCovid19: "Marketing and Analytics",
-    src: "assets/boy.jpg"
   },
   {
     name: "Neha Kumari",
@@ -165,11 +167,12 @@ const mapStateToProps = ({ screenConfiguration }) => {
   const {
     aboutUsContent = {
       name: "Murali. M",
-      // role: "Fullstack Developer",
-      roleInCovid19: "Fullstack Developer",
+      // role: "Fullstack Developer And Initiator",
+      roleInCovid19: "Fullstack Developer And Initiator",
       skills: "JS, React JS, Node JS and DevOPS",
       qualification: "B.E. in ISE, Diploma in CSE",
-      from: "Shimoga, Karnataka"
+      from: "Shimoga, Karnataka",
+      src: "assets/murali.jpeg"
     }
   } = preparedFinalObject;
 
