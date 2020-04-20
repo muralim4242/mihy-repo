@@ -24,6 +24,20 @@ class Dashboard extends React.Component {
       setAppData("dashboard",dashboard)
   }
 
+  feathIndiaData=async()=>{
+    //move component did mount logic her
+  }
+
+  feathWorldData=async()=>{
+    //move component did mount logic her
+    // const dataResponse=await httpRequest({endPoint:"v2/locations"});
+  }
+
+  viewSwitch =async(view="india")=>
+  {
+    //depending on view call related fetch data
+  }
+
   handleClose = () => {
     this.props.setAppData("dashboard.dialogOpen", false);
   };
