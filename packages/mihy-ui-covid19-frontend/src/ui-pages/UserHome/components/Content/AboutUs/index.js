@@ -112,10 +112,16 @@ const styles = theme => ({
 class AboutUs extends React.Component {
 
   render() {
-    const { classes, aboutUsContent, setAppData } = this.props;
+    const { classes, aboutUsContent, setAppData ,t} = this.props;
     const { name, role, roleInCovid19, skills, qualification, from } = aboutUsContent;
 
     return (
+      <div>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <Typography variant="h6" color="primary">
+          { t('About US') }
+      </Typography>
+        </Grid>
       <Grid container>
         <Grid item md={12} sm={12} xs={12}>
           <Swiper data={data} setAppData = {setAppData}/>
@@ -142,14 +148,15 @@ class AboutUs extends React.Component {
                     <Typography variant="subtitle2">Qualification:&nbsp;</Typography>
                     <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{qualification}</Typography>
                   </Grid>}
-                  {from && <Grid item md={12} sm={12} xs={12} className={classes.placeGrid}>
-                <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{from}</Typography> 
-              </Grid>}
+                  {/*from && <Grid item md={12} sm={12} xs={12} className={classes.placeGrid}>
+                <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{from}</Typography>
+              </Grid>*/}
                 </Grid>
-              
+
           </Grid>
         }
       </Grid>
+      </div>
     );
   }
 };

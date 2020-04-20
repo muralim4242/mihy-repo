@@ -2,9 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
+import AboutUs from "../AboutUs";
 import FAQQuestions from "./questions";
 
-class AboutUS extends React.Component {
+class FAQ extends React.Component {
   componentDidMount = async () => {};
 
   render() {
@@ -31,8 +32,11 @@ class AboutUS extends React.Component {
         t("FAQAnswer4")
       }
     ];
-    return <FAQQuestions questionsList={questionsList} t={t}></FAQQuestions>;
+    return (<div>
+      <AboutUs t={t}/>
+      <FAQQuestions questionsList={questionsList} t={t}></FAQQuestions>
+    </div>)
   }
 }
 
-export default connect(null, mapDispatchToProps)(withTranslation()(AboutUS));
+export default connect(null, mapDispatchToProps)(withTranslation()(FAQ));
