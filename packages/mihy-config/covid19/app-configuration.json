@@ -74,7 +74,7 @@
          "name":"Gagan",
          "skills":"Java,Spring Boot,Distributed systems",
          "qualification":"B.E. in CSE, Diploma in CSE",
-         "roleInCovid19":"Backend Developer,Marketing and Analytics",
+         "roleInCovid19":"Backend Developer, Analytics",
          "src":"assets/gagan.jpeg",
          "active": true
       },
@@ -117,7 +117,7 @@
       {
          "name":"Neha Kumari",
          "roleInCovid19":"Backend Developer",
-         "skills":"JS, Node JS, Firebase",
+         "skills":"JS, Node JS, Firebase, SQL",
          "qualification":"B.Tech in CSE",
          "from":"Ramgarh, Jharkhand",
          "src":"assets/neha.jpeg",
