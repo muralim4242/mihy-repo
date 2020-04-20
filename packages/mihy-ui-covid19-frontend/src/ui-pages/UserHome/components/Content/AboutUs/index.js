@@ -90,17 +90,16 @@ const styles = theme => ({
     position: "absolute",
     top: "45%",
     [theme.breakpoints.down("sm")]: {
-      top: "38%"
+      top: "38%",
     },
     left: "50%",
     marginLeft: "-50%",
-    marginTop: "0%"
+    marginTop: "152px"
   },
   contentContainer: {
     margin: "25px 0px"
   },
   grid: {
-    // margin: "4px 0px",
     display: "flex",
     justifyContent: "center"
   },
@@ -124,12 +123,9 @@ class AboutUs extends React.Component {
           { t('About US') }
       </Typography>
         </Grid>
-      <Grid container>
-        <Grid item md={12} sm={12} xs={12}>
+      <Grid container style = {{position: "relative"}}>
           <Swiper data={data} setAppData = {setAppData}/>
-        </Grid>
         {!isEmpty(aboutUsContent) &&
-          <Grid item md={12} xs={12} sm={12} className={classes.contentContainer}>
                 <Grid container className={classes.mainContainer}>
                   <Grid item md={12} sm={12} xs={12} className={classes.nameStyle}>
                     <Typography variant = "h6" color = "primary" align="center">{name}</Typography></Grid>
@@ -154,8 +150,6 @@ class AboutUs extends React.Component {
                 <Typography variant="subtitle2" style={{color:"#9e9e9e"}}>{from}</Typography>
               </Grid>*/}
                 </Grid>
-
-          </Grid>
         }
       </Grid>
       </div>
