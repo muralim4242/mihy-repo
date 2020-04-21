@@ -27,10 +27,12 @@ class Dashboard extends React.Component {
   }
   feathWorldData = async () => {
     let { setAppData, dashboard } = this.props;
-    const dataResponse = await httpRequest({ endPoint: "https://coronavirus-tracker-api.herokuapp.com/v2/locations" });
+    const dataResponse = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/all" });
+    const dataResponse1 = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/countries" });
     dashboard = {
       ...dashboard,
       topList: dataResponse,
+      countriesMapping:dataResponse1
     }
     setAppData("dashboard", dashboard)
   }
@@ -68,10 +70,10 @@ class Dashboard extends React.Component {
     const { handleOpen, handleStateSearch, feathIndiaData, feathWorldData } = this;
     return (
       <div>
-        <CountryStatus t={t} feathIndiaData={feathIndiaData} feathWorldData={feathWorldData} countryStatus={topList.latest ? topList : topList.length > 0 ? topList[0] : {}} />
-        {topList.latest ? "" : <RemainingDays t={t} />}
+        <CountryStatus t={t} feathIndiaData={feathIndiaData} feathWorldData={feathWorldData} countryStatus={topList.updated ? topList : topList.length > 0 ? topList[0] : {}} />
+        {topList.updated ? "" : <RemainingDays t={t} />}
         {/* <YourArea t={t} handleOpen={handleOpen} /> */}
-        {topList.locations ? <TopList t={t} handleOpen={handleOpen} topList={topList.locations} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText} /> :
+        {topList.updated ? <TopList t={t} handleOpen={handleOpen} topList={dashboard.countriesMapping} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText} /> :
         <TopList t={t} handleOpen={handleOpen} topList={topList} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText} />}
       </div>
     );

@@ -7,11 +7,10 @@ import Search from "@material-ui/icons/Search"
 // const animatedComponents = makeAnimated();
 
 const TopList = ({ topList = [], t, handleOpen, handleStateSearch, stateSearchText = "" }) => {
-  debugger
   return (
     <div>
       <Typography variant="h6" color="primary" className="Margin-bottom-8px">
-        {topList[0]&&topList[0].active? t("dashboard.toplist") : t("dashboard.toplist1")}
+        {topList[0]&&topList[0].updated? t("dashboard.toplist1") : t("dashboard.toplist")}
       </Typography>
       {/*<Select
         closeMenuOnSelect={false}
@@ -37,7 +36,7 @@ const TopList = ({ topList = [], t, handleOpen, handleStateSearch, stateSearchTe
       <Grid container spacing={1} style={{ marginBottom: "8px", marginTop: "8px" }}>
         {topList.map((stateStatus, key) => {
           return (
-            stateStatus.latest ? stateStatus.country.toLowerCase().startsWith(stateSearchText && stateSearchText.toLowerCase()) && (
+            stateStatus.updated ? stateStatus.country.toLowerCase().startsWith(stateSearchText && stateSearchText.toLowerCase()) && (
               <Grid item xs={6} key={key} >
                 <Card>
                   <CardContent>
