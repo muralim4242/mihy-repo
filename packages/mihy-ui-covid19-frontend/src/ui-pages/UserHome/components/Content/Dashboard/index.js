@@ -9,11 +9,8 @@ import CountryStatus from "./components/CountryStatus";
 import TopList from "./components/TopList";
 import RemainingDays from "./components/RemainingDays"
 import orderBy from "lodash/orderBy";
-import { Switch, FormGroup, FormControlLabel,Grid } from "@material-ui/core";
-
 
 class Dashboard extends React.Component {
-  state={checked:false}
   componentDidMount = async () => {
     this.feathIndiaData()
   }
@@ -36,18 +33,6 @@ class Dashboard extends React.Component {
       topList: dataResponse,
     }
     setAppData("dashboard", dashboard)
-  }
-  viewSwitch = async () => {
-    const { setAppData } = this.props
-    const { checked} = this.state
-    this.setState({checked:!checked})
-    // setAppData("checked", !checked)
-    if (checked === false) {
-      this.feathWorldData()
-    }
-    else {
-      this.feathIndiaData()
-    }
   }
   handleClose = () => {
     this.props.setAppData("dashboard.dialogOpen", false);
@@ -78,26 +63,16 @@ class Dashboard extends React.Component {
     this.props.setAppData("dashboard.stateSearchText", searchText);
   }
   render() {
-    const { dashboard,t} = this.props;
+    const { dashboard, t} = this.props;
     const { topList = [], stateSearchText } = dashboard;
-    const { handleOpen, handleStateSearch } = this;
+    const { handleOpen, handleStateSearch, feathIndiaData, feathWorldData } = this;
     return (
-      <div><Grid container>  
-      <Grid item xs={7} md={10}></Grid>
-      <Grid item xs={5} md={2}>      
-        <FormGroup  >
-          <FormControlLabel 
-            control={<Switch checked={this.state.checked} onChange={this.viewSwitch} name="checked"  />}
-            label="Country Cases" style={{color:"red"}}
-          />
-        </FormGroup>
-        </Grid>
-        </Grid>
-
-        <CountryStatus t={t} countryStatus={topList.latest ? topList : topList.length > 0 ? topList[0] : {}} />
+      <div>
+        <CountryStatus t={t} feathIndiaData={feathIndiaData} feathWorldData={feathWorldData} countryStatus={topList.latest ? topList : topList.length > 0 ? topList[0] : {}} />
         {topList.latest ? "" : <RemainingDays t={t} />}
-        {/*<YourArea t={t} handleOpen={handleOpen} />*/}
-        <TopList t={t} handleOpen={handleOpen} topList={topList} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText} />
+        {/* <YourArea t={t} handleOpen={handleOpen} /> */}
+        {topList.locations ? <TopList t={t} handleOpen={handleOpen} topList={topList.locations} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText} /> :
+        <TopList t={t} handleOpen={handleOpen} topList={topList} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText} />}
       </div>
     );
   }
@@ -105,7 +80,7 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { dashboard = {}, } = preparedFinalObject;
+  const { dashboard = {}} = preparedFinalObject;
   return { dashboard};
 };
 
