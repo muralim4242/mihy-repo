@@ -41,7 +41,7 @@ const TopList = ({ topList = [], t ,handleOpen,handleStateSearch,stateSearchText
       <Grid container spacing={1} style={{marginBottom:"8px",marginTop:"8px"}}>
        {topList.locations.map((stateStatus,key) => {
           return  stateStatus.country.toLowerCase().startsWith(stateSearchText&&stateSearchText.toLowerCase()) && (
-          <Grid item md={6} key={key} >
+          <Grid item xs={6} key={key} >
               <Card>
                 <CardContent>
                   <StateStatus status={stateStatus} t={t} />
@@ -54,7 +54,7 @@ const TopList = ({ topList = [], t ,handleOpen,handleStateSearch,stateSearchText
       <Grid container spacing={1} style={{marginBottom:"8px",marginTop:"8px"}}>
         {topList.map((stateStatus,key) => {
           return stateStatus.statecode!=="TT" && stateStatus.state.toLowerCase().startsWith(stateSearchText.toLowerCase()) && (
-            <Grid item md={6} key={key} >
+            <Grid item xs={6} key={key} >
               <Card>
                 <CardContent>
                   <StateStatus status={stateStatus} t={t} />

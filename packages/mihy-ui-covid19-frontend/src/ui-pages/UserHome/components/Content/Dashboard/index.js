@@ -83,8 +83,8 @@ class Dashboard extends React.Component {
     const { handleOpen, handleStateSearch } = this;
     return (
       <div><Grid container>  
-      <Grid item md={10}></Grid>
-      <Grid item md={2}>      
+      <Grid item xs={7} md={10}></Grid>
+      <Grid item xs={5} md={2}>      
         <FormGroup  >
           <FormControlLabel 
             control={<Switch checked={this.state.checked} onChange={this.viewSwitch} name="checked"  />}
