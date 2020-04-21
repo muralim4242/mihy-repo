@@ -27,6 +27,11 @@
   margin-bottom:8px !important;
 }
 
+.ChartContainer {
+  position: relative !important;
+  height:40vh !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

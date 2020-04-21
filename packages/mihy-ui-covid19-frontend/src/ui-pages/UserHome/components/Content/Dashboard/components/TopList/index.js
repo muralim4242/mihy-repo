@@ -13,7 +13,7 @@ const TopList = ({ topList = [], t ,handleOpen,handleStateSearch,stateSearchText
 
   return (
     <div>
-      <Typography variant="h5"  color="primary" className="Margin-bottom-8px">
+      <Typography variant="h6"  color="primary" className="Margin-bottom-8px">
         {t("dashboard.toplist")}
       </Typography>
       {/*<Select

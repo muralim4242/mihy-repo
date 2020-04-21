@@ -1,12 +1,13 @@
 import React from "react";
 import {Card,CardContent,Grid,Typography} from "@material-ui/core";
+
 import Status from "../Status";
 
 const CoutryStatus=({countryStatus={},t})=>{
   return (
     <div className="Margin-bottom-8px">
 
-    <Typography variant="h5"  color="primary" className="Margin-bottom-8px">
+    <Typography variant="h6"  color="primary" className="Margin-bottom-8px">
         {t("dashboard.cuntry-status-header")}
       </Typography>
 

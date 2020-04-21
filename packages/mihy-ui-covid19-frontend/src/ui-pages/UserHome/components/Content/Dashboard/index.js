@@ -7,7 +7,6 @@ import { withTranslation } from "react-i18next";
 // import YourArea from "./components/YourArea";
 import CountryStatus from "./components/CountryStatus";
 import TopList from "./components/TopList";
-import TopDistrictList from "./components/TopDistrictList";
 import RemainingDays from "./components/RemainingDays"
 import orderBy from "lodash/orderBy";
 
@@ -25,12 +24,26 @@ class Dashboard extends React.Component {
       setAppData("dashboard",dashboard)
   }
 
+  feathIndiaData=async()=>{
+    //move component did mount logic her
+  }
+
+  feathWorldData=async()=>{
+    //move component did mount logic her
+    // const dataResponse=await httpRequest({endPoint:"v2/locations"});
+  }
+
+  viewSwitch =async(view="india")=>
+  {
+    //depending on view call related fetch data
+  }
+
   handleClose = () => {
     this.props.setAppData("dashboard.dialogOpen", false);
   };
 
   handleOpen = (selectedState) => {
-    let {setAppData,dashboard}=this.props;
+    let {setAppData,dashboard,history}=this.props;
     const {stateDistrictMapping={}}=dashboard;
     let topDistrictList=stateDistrictMapping[selectedState] ||{};
     topDistrictList.districtData=topDistrictList.districtData ||{}
@@ -49,6 +62,7 @@ class Dashboard extends React.Component {
       dialogOpen:true
     }
     setAppData("dashboard",dashboard);
+    history.push("/user-home/districts-list");
   };
 
   handleStateSearch=(searchText="")=>
@@ -56,33 +70,20 @@ class Dashboard extends React.Component {
     this.props.setAppData("dashboard.stateSearchText",searchText);
   }
 
-  handleDistrictSearch=(searchText="")=>
-  {
-    this.props.setAppData("dashboard.districtSearchText",searchText);
-  }
 
   render() {
     const {
       dashboard,
       t
     } = this.props;
-    const {dialogOpen=false,topList=[],topDistrictList=[],stateSearchText,districtSearchText,selectedState}=dashboard;
-    const {  handleOpen, handleClose,handleStateSearch ,handleDistrictSearch} = this;
+    const {topList=[],stateSearchText}=dashboard;
+    const {  handleOpen, handleStateSearch } = this;
     return (
       <div>
         <CountryStatus t={t} countryStatus={topList.length>0?topList[0]:{}}/>
         <RemainingDays t={t}/>
         {/*<YourArea t={t} handleOpen={handleOpen} />*/}
         <TopList t={t} handleOpen={handleOpen} topList={topList} handleStateSearch={handleStateSearch} stateSearchText={stateSearchText}/>
-        <TopDistrictList
-          handleClose={handleClose}
-          t={t}
-          dialogOpen={dialogOpen}
-          topDistrictList={topDistrictList}
-          handleDistrictSearch={handleDistrictSearch}
-          districtSearchText={districtSearchText}
-          selectedState={selectedState}
-        />
       </div>
     );
   }
