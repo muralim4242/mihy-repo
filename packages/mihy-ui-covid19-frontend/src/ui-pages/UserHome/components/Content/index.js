@@ -210,6 +210,7 @@ class MiniDrawer extends React.Component {
     setAppData("selectedLanguage", code);
     i18n.changeLanguage(code);
     window.localStorage.setItem("selectedLanguage", code);
+    this.closelanguageDialogue();
   };
 
   share = () => {
