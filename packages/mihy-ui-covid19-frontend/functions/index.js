@@ -4,6 +4,7 @@ const { fA } = firebase;
 const db = fA.database();
 const mdmsRef = db.ref("covid19_dev");
 var rp = require('request-promise');
+const axios = require('axios');
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 // const admin = require('firebase-admin');
@@ -56,18 +57,12 @@ exports.getState = functions.https.onRequest(async (req, res) => {
       .catch(function (err) {
 
       });
-    //upddate and insert
+    //update and insert
     state.forEach(ele => {
 
       var date = ele.lastupdatedtime.split(" ")[0].split("/").join("-")
 
-      //  var path = `statewise/${ele.statecode}/${date}`
-      let obj = {
-        [ele.statecode]: {
-          [date]: ele
-        }
-      }
-      mdmsRef.child('statewise/').update(obj)
+      mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele)
     })
 
     let mainData = []
@@ -76,7 +71,7 @@ exports.getState = functions.https.onRequest(async (req, res) => {
     let year = new Date().getUTCFullYear();
 
     //current state data
-    mdmsRef.child('statewise/').once('value', (snapshot) => {
+    mdmsRef.child('statewiseData/').once('value', (snapshot) => {
       snapshot.forEach(element => {
         let yd = year;
         let md = month;
@@ -148,7 +143,7 @@ exports.getState = functions.https.onRequest(async (req, res) => {
 exports.getallState = functions.https.onRequest(async (req, res) => {
   try {
 
-    mdmsRef.child('statewise/').once('value', (snapshot) => {
+    mdmsRef.child('statewiseData/').once('value', (snapshot) => {
 
       res.send(snapshot)
     })
@@ -315,11 +310,17 @@ exports.getService = functions.https.onRequest(async (req, res) => {
 const {state,district,service_type}= req.body;
 console.log(`'${state}'`);
 
-mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
+// mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
+// snapshot.orderByChild('Location_details/district').equalTo('Alappuzha').once('value',snap=>{
+//   res.send(snap.val())
+// })
+//       res.send(snapshot.val())
+//     })
 
-      res.send(snapshot.val())
-    })
-
+    mdmsRef.child(`service/`).child('Location_details/').child(`${state}`).once('value', (s) => {
+        res.send(s.val())
+          })
+      
 
  
 
@@ -332,6 +333,137 @@ mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${stat
 
 
 
+// get World Status
+exports.getWorldStatus = functions.https.onRequest(async (req, res) => {
+  try {
+let {status_req}=req.body;
 
+if(status_req=='get all status'){
+  mdmsRef.child(`worldStatusData/`).once('value', (s) => {
+    res.send(s.val())
+      })
+  
+}else{
+
+let world_data;
+    await rp('https://corona.lmao.ninja/v2/all')
+    .then(function (result) {
+
+       world_data = JSON.parse(result);
+      
+    })
+    .catch(function (err) {
+
+    });
+let d=new Date(world_data.updated).getDate();
+let month=new Date(world_data.updated).getMonth();
+let year= new Date(world_data.updated).getFullYear();
+let date=`${d}-${month}-${year}`
+
+  
+   await mdmsRef.child(`worldStatusData/worldStatus/${date}`).update(world_data)
+   await mdmsRef.child('worldStatusData/').once('value', (snapshot) => {
+     let temp, obj,l_date;
+     let date= new Date();
+     let count=0;
+snapshot.forEach(ele=>{
+
+  ele.forEach(ee=>{
+    let current_time=ee.key;
+    let d_current_time = parseInt(current_time.split("-")[0]);
+    let m_current_time = parseInt(current_time.split("-")[1]);
+    let y_current_time = parseInt(current_time.split("-")[2]);
+let d1=new Date(y_current_time,m_current_time,d_current_time);
+//console.log(ee.update);
+count++;
+l_date=ee.key;
+let temp2=date.getTime()-d1.getTime();
+if(count==1){
+  temp=temp2;
+  obj=ee;
+};
+if(temp2<temp){
+  temp=temp2;
+  obj=ee;
+}
+
+  });
+  let latest_world_data={
+    "worldStatus":{
+        [l_date]:obj
+    }
+  }
+  res.send(latest_world_data);
+});
+  
+   });
+  
+  }
+ 
+
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send(e);
+  }
+
+})
+
+
+
+exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
+  try {
+let {status_req}=req.body;
+
+if(status_req=='get all status'){
+  mdmsRef.child(`getCountriesStatus/`).once('value', (s) => {
+    res.send(s.val())
+      })
+  
+}else{
+
+let country_data;
+await rp('https://corona.lmao.ninja/v2/countries')
+.then(function (result) {
+
+  country_data = JSON.parse(result);
+  
+})
+.catch(function (err) {
+
+});
+
+
+country_data.forEach(ele=>{
+ 
+ 
+ let r_d= new Date(ele.updated).getDate();
+ let r_m=  new Date(ele.updated).getMonth()+1;
+ let r_y=  new Date(ele.updated).getYear();
+  var date = `${r_d}-${r_m}-${r_y}`
+  let curr_obj=ele;
+  delete curr_obj.country;
+  delete curr_obj.updated;
+ mdmsRef.child(`countryWiseData/${ele.country}/${date}`).update(curr_obj)
+ 
+});
+
+await mdmsRef.child('countryWiseData/').once('value', (snapshot) => {
+res.send(snapshot)
+});
+  }
+
+
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send(e);
+  }
+
+})
+
+
+// temp =1; obj= res1 da
+// take current date
+// res1 date{ cur - res} 21-20=1.. temp=1
+//next res date {cur -res} 21-18=3 if(temp<3)  update temp update obj else ..fine
 
 

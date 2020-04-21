@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@firebase/app": "^0.6.2",
+    "axios": "^0.19.2",
     "firebase": "^7.14.1",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0",
