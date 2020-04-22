@@ -26,7 +26,9 @@ const CoutryStatus = ({ countryStatus = {}, t, setAppData, classes }) => {
             <CardContent>
               {countryStatus.updated ? (
                 <Status
-                  status={{ label: "confirmed", count: countryStatus.cases }}
+                  status={{ label: "confirmed", 
+                  count: countryStatus.cases,
+                  delta: countryStatus.todayCases}}
                   t={t}
                 />
               ) : (
@@ -93,7 +95,9 @@ const CoutryStatus = ({ countryStatus = {}, t, setAppData, classes }) => {
             <CardContent>
               {countryStatus.updated ? (
                 <Status
-                  status={{ label: "deaths", count: countryStatus.deaths }}
+                  status={{ label: "deaths", 
+                  count: countryStatus.deaths,
+                  delta: countryStatus.todayDeaths }}
                   t={t}
                 />
               ) : (
