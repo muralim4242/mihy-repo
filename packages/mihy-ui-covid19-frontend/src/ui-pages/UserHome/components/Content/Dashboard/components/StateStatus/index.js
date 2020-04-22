@@ -15,14 +15,14 @@ const StateStatus = ({ status = {}, t }) => {
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#2196f3" }}>
         {status.updated ? 
-          `${t("active")}  - ${status.active} ` :
-          `${t("active")}  - ${status.active} ${`[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`===`[+0]`?'': `[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`} `
+          `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ` :
+          `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ${`[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`===`[+0]`?'': `[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`} `
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#4caf50" }}>
         {status.updated ?
-          `${t("recovered")}  - ${status.recovered}` :
-          `${t("recovered")}  - ${status.recovered} ${parseInt(status.deltarecovered) ? `[+${status.deltarecovered}]` : ''}`
+          `${t("recovered")}  - ${new Intl.NumberFormat('en-IN').format(status.recovered)}` :
+          `${t("recovered")}  - ${new Intl.NumberFormat('en-IN').format(status.recovered)} ${parseInt(status.deltarecovered) ? `[+${status.deltarecovered}]` : ''}`
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#9e9e9e" }}>

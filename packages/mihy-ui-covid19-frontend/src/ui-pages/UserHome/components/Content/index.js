@@ -33,14 +33,14 @@ const menuItems = [
     icon: "equalizer",
     route: "/user-home/statistics",
     // badge:true,
-    badgeLabel:"N"
+    // badgeLabel:"N"
   },
-  {
-    name: "Services",
-    icon: "airport_shuttle",
-    badge:true,
-    badgeLabel:"C.."
-  },
+  // {
+  //   name: "Services",
+  //   icon: "airport_shuttle",
+  //   badge:true,
+  //   badgeLabel:"C.."
+  // },
   // {
   //   name: "About US",
   //   icon: "info",
@@ -51,8 +51,8 @@ const menuItems = [
     name: "About US & FAQ",
     icon: "info",
     route: "/user-home/about-faq",
-    badge:true,
-    badgeLabel:"N"
+    // badge:true,
+    // badgeLabel:"N"
   }
 ];
 
