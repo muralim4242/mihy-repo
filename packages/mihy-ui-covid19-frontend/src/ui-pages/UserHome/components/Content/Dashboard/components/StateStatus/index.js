@@ -9,26 +9,26 @@ const StateStatus = ({ status = {}, t }) => {
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#f44336" }}>
         {status.updated ? 
-          `${t("confirmed")} - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.cases)} ` :
-          `${t("confirmed")} - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.confirmed)} ${parseInt(status.deltaconfirmed) ? `[+${status.deltaconfirmed}]` : ''}`
+          `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.cases)} ` :
+          `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.confirmed)} ${parseInt(status.deltaconfirmed) ? `[+${status.deltaconfirmed}]` : ''}`
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#2196f3" }}>
         {status.updated ? 
-          `${t("active")}  - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.active)} ` :
-          `${t("active")}  - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.active)} ${`[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`===`[+0]`?'': `[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`} `
+          `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ` :
+          `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ${`[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`===`[+0]`?'': `[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`} `
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#4caf50" }}>
         {status.updated ?
-          `${t("recovered")}  - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.recovered)}` :
-          `${t("recovered")}  - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.recovered)} ${parseInt(status.deltarecovered) ? `[+${status.deltarecovered}]` : ''}`
+          `${t("recovered")}  - ${new Intl.NumberFormat('en-IN').format(status.recovered)}` :
+          `${t("recovered")}  - ${new Intl.NumberFormat('en-IN').format(status.recovered)} ${parseInt(status.deltarecovered) ? `[+${status.deltarecovered}]` : ''}`
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#9e9e9e" }}>
         {status.updated ?
-          `${t("deaths")}  - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.deaths)} ` :
-          `${t("deaths")}  - ${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(status.deaths)} ${parseInt(status.deltadeaths) ? `[+${status.deltadeaths}]` : ''}`
+          `${t("deaths")}  - ${new Intl.NumberFormat('en-IN').format(status.deaths)} ` :
+          `${t("deaths")}  - ${new Intl.NumberFormat('en-IN').format(status.deaths)} ${parseInt(status.deltadeaths) ? `[+${status.deltadeaths}]` : ''}`
         }
       </Typography>
     </div>
