@@ -10,7 +10,7 @@ const Status = ({ status = {}, t }) => {
       </Typography>
       <Typography variant="h5"  align="center">
         {status.count && <CountUp formattingFn={(number)=>{
-          return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(number);
+          return new Intl.NumberFormat('en-IN').format(number);
         }} end={parseInt(status.count)}/>}
       </Typography>
       <Typography variant="subtitle2"  align="center">
