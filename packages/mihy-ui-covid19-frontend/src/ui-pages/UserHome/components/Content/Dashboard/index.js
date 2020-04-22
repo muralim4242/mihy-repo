@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
   }
   feathIndiaData = async () => {
     let { setAppData, dashboard } = this.props;
-    const { checked } = dashboard;
     const dataResponse = await httpRequest({ endPoint: "data.json" });
     const stateDistrictWiseResponse = await httpRequest({
       endPoint: "state_district_wise.json"
@@ -43,7 +42,6 @@ class Dashboard extends React.Component {
   };
   feathWorldData = async () => {
     let { setAppData, dashboard } = this.props;
-    const { checked } = dashboard;
     const dataResponse = await httpRequest({endPoint: "https://corona.lmao.ninja/v2/all" });
     let countriesResponse = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/countries"});
     if (countriesResponse) {
