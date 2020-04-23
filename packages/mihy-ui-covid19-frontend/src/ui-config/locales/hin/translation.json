@@ -5,7 +5,9 @@
   "language.subheader": "अपनी भाषा चुनें",
   "dashboard.your-area": "आपका क्षेत्र",
   "dashboard.cuntry-status-header": "भारत के कैविड 19 मामले",
+  "dashboard.cuntry-status-header1": "दुनिया के कैविड 19 मामले",
   "dashboard.toplist": "राज्य के कैविड 19 मामले",
+  "dashboard.toplist1": "राज्य के कैविड 19 मामले",
   "dashboard.top-district-list": "जिले के मामले",
   "confirmed": "पुष्टि",
   "active": "सक्रिय",
@@ -82,7 +84,6 @@
   "district.Telangana.Rajanna Sircilla": "राजन्ना सिर्सिल्ला",
   "district.Telangana.Khammam": "खम्मम",
   "district.Telangana.Warangal Urban": "वारंगल अर्बन",
-
   "district.Telangana.Vikarabad": "विकाराबाद",
   "district.Telangana.Suryapet": "सूर्यपेट",
   "district.Telangana.Siddipet": "सिद्दीपेट",
@@ -497,5 +498,7 @@
   "district.Bihar.Bhojpur":"Bhojpur",
   "district.Odisha.Baleshwar":"Baleshwar",
   "district.Manipur.Imphal East":"Imphal East"
+  
+
 
 }
