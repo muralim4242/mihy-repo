@@ -9,8 +9,8 @@ const StateStatus = ({ status = {}, t }) => {
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#f44336" }}>
         {status.updated ? 
-          `${t("confirmed")} - ${status.cases} ${parseInt(status.todayCases) ? `[+${status.todayCases}]`:''}` :
-          `${t("confirmed")} - ${status.confirmed} ${parseInt(status.deltaconfirmed) ? `[+${status.deltaconfirmed}]` : ''}`
+          `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.cases)} ${parseInt(status.todayCases) ? `[+${status.todayCases}]`:''}` :
+          `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.confirmed)} ${parseInt(status.deltaconfirmed) ? `[+${status.deltaconfirmed}]` : ''}`
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#2196f3" }}>
@@ -27,8 +27,8 @@ const StateStatus = ({ status = {}, t }) => {
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#9e9e9e" }}>
         {status.updated ?
-          `${t("deaths")}  - ${status.deaths} ${parseInt(status.todayDeaths) ? `[+${status.todayDeaths}]`:''} ` :
-          `${t("deaths")}  - ${status.deaths} ${parseInt(status.deltadeaths) ? `[+${status.deltadeaths}]` : ''}`
+          `${t("deaths")}  - ${new Intl.NumberFormat('en-IN').format(status.deaths)} ${parseInt(status.todayDeaths) ? `[+${status.todayDeaths}]`:''} ` :
+          `${t("deaths")}  - ${new Intl.NumberFormat('en-IN').format(status.deaths)} ${parseInt(status.deltadeaths) ? `[+${status.deltadeaths}]` : ''}`
         }
       </Typography>
     </div>
