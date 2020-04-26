@@ -1,13 +1,13 @@
 //var firebase = require("firebase");
-console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+//console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
 var firebase = require('firebase');
-console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+//console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 
 var admin = require("firebase-admin");
 var serviceAccount = require("./service-account.json");
 
-console.log("check1111111111111111111111111111111111111111111111111111111111111");
+//console.log("check1111111111111111111111111111111111111111111111111111111111111");
 
 try {
   var prodConfig = {
@@ -47,7 +47,7 @@ try {
 } catch (e) {
   console.log(e);
 }
-console.log("check 222222222222222222222222222222222222222222222222222222222222222222");
+//console.log("check 222222222222222222222222222222222222222222222222222222222222222222");
 
 try {
   admin.initializeApp({

@@ -1,5 +1,5 @@
 const functions = require("firebase-functions");
-const firebase = require("../utils/firebase");
+const firebase = require("../utils/firebase");//req
 const app = require("../utils/express-instance");
 // const app = require("../utils/authorized-express-instance");
 // const errorHandler=require("../utils/middlewares/error-handler");
