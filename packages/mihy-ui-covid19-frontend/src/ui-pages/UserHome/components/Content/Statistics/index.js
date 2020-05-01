@@ -24,7 +24,7 @@ class Statistics extends React.Component {
     let patientsGenderArray = [];
     let agesArray = [];
     const anotherResponse = await httpRequest({
-      endPoint: "https://api.covid19india.org/raw_data.json",
+      endPoint: "https://api.covid19india.org/raw_data3.json",
       method: "get"
     });
     anotherResponse.raw_data.forEach(el => patientsGenderArray.push(el.gender));
