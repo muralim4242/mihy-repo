@@ -533,7 +533,7 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
       feedback
 
     } = req.body;
-    if (!name && !stars) {
+    if (!name || !stars) {
       res.send("Please give name and ratings")
     }
     let current_time = new Date().getTime()
