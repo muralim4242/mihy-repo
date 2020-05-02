@@ -559,12 +559,12 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
    
 
     const querybaseRef = querybase.ref(mdmsRef.child('feedback/'),[]);
-    if(rate==-4){ querybaseRef.where('stars').between(1, 3).once('value', (snap)=>{
+    if(rate==-4){ querybaseRef.where('stars').between(1, 4).once('value', (snap)=>{
       res.send(snap.val())
     });
   }else{
     if(rate==4){
-      querybaseRef.where('stars').between(4, 5).once('value', (snap)=>{
+      querybaseRef.where('stars').between(5, 5).once('value', (snap)=>{
         res.send(snap)
       });
     }else{
