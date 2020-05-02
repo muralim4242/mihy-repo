@@ -16,7 +16,7 @@ handle=()=>{
         var yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
         var date1 = new Date(today);
-        var date2 = new Date("05/03/2020");
+        var date2 = new Date("05/17/2020");
         var Difference_In_Time = date2.getTime() - date1.getTime();
         var diffDays = Difference_In_Time / (1000 * 3600 * 24);
             setAppData("remainingDays",diffDays)
