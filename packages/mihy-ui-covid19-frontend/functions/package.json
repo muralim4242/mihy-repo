@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@firebase/app": "^0.6.2",
-    "axios": "^0.19.2",
+    "cron": "^1.8.2",
+    "express": "^4.17.1",
     "firebase": "^7.14.1",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0",
+    "firebase-query-gator": "^1.0.20",
+    "querybase": "^0.6.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
   },
