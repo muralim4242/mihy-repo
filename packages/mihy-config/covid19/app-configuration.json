@@ -122,6 +122,24 @@
          "from":"Ramgarh, Jharkhand",
          "src":"assets/neha.jpeg",
          "active": true
+      },
+      {
+         "name":"Nishant",
+         "roleInCovid19":"Language support",
+         "skills":"JS, Node JS, Firebase, SQL",
+         "qualification":"MCA",
+         "from":"Kannur, Kerala",
+         "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/nishant_covid19.jpeg?alt=media&token=4b8defa4-654a-4e34-8cda-c46e31542267",
+         "active": true
+      },
+      {
+         "name":"Nireesh",
+         "roleInCovid19":"Language support",
+         "skills":"IOS,Xamarin,React Js, Firebase",
+         "qualification":"B.Tech in CSE",
+         "from":"Ramgarh, Jharkhand",
+         "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/nireesh_covid19.jpeg?alt=media&token=df93bb75-9262-47c0-bb8b-82f71486a0bd",
+         "active": true
       }
    ]
 }
