@@ -525,12 +525,17 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 //Service_create
 exports.createFeedback = functions.https.onRequest(async (req, res) => {
   try {
+    console.log(req.body.name);
+    
     const {
       name,
       stars,
       feedback
       
     } = req.body;
+    if(!name && !stars){
+      res.send( "Please give name and ratings")
+    }
     let current_time=new Date().getTime()
     let obj = {
       name: name,
