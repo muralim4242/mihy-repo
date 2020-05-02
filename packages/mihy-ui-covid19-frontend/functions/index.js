@@ -17,44 +17,44 @@ var querybase = require('querybase');
 
 
 
-let statefn= async()=>{
+let statefn = async () => {
   var stateff;
-    var state = [];
-   
-   
+  var state = [];
+
+
   await rp("https://api.covid19india.org/data.json")
-  .then(async function (result) {
-    console.log("check2");
-    
-    stateff = await JSON.parse(result);
-    state = stateff.statewise;
-    console.log("cron running");
+    .then(async function (result) {
+      console.log("check2");
+
+      stateff = await JSON.parse(result);
+      state = stateff.statewise;
+      console.log("cron running");
+    })
+    .catch(function (err) { });
+  //upddate and insert
+
+
+  state.forEach(async ele => {
+    var date = ele.lastupdatedtime
+      .split(" ")[0]
+      .split("/")
+      .join("-");
+
+    await mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele)
   })
-  .catch(function (err) { });
-//upddate and insert
 
-
-state.forEach(async ele => {
-  var date = ele.lastupdatedtime
-    .split(" ")[0]
-    .split("/")
-    .join("-");
-
- await mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele)
-})
-
-return 0
+  return 0
 }
 
 
 
-  var CronJob = require('cron').CronJob;
-  
-  var job = new CronJob(' * * * * *',statefn(), null, true, 'America/Los_Angeles');
-  job.start();
-  
-  console.log("after");
-  
+var CronJob = require('cron').CronJob;
+
+var job = new CronJob(' * * * * *', statefn(), null, true, 'America/Los_Angeles');
+job.start();
+
+console.log("after");
+
 
 
 //get current state data
@@ -62,27 +62,27 @@ exports.get_state_wise_status = functions.https.onRequest(async (req, res) => {
   try {
     var stateff;
     var state = [];
-job= new CronJob('2 * * * * *', async()=>{
-  await rp("https://api.covid19india.org/data.json")
-  .then(function (result) {
-    stateff = JSON.parse(result);
-    state = stateff.statewise;
-  })
-  .catch(function (err) { });
-//upddate and insert
-state.forEach(ele => {
-  var date = ele.lastupdatedtime
-    .split(" ")[0]
-    .split("/")
-    .join("-");
+    job = new CronJob('2 * * * * *', async () => {
+      await rp("https://api.covid19india.org/data.json")
+        .then(function (result) {
+          stateff = JSON.parse(result);
+          state = stateff.statewise;
+        })
+        .catch(function (err) { });
+      //upddate and insert
+      state.forEach(ele => {
+        var date = ele.lastupdatedtime
+          .split(" ")[0]
+          .split("/")
+          .join("-");
 
-  mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele)
-})
-console.log("cron running");
+        mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele)
+      })
+      console.log("cron running");
 
-});
-job.start();
-    
+    });
+    job.start();
+
     let mainData = [];
     let day = new Date().getDate();
     let month = new Date().getMonth() + 1;
@@ -159,121 +159,121 @@ exports.getAllState = functions.https.onRequest(async (req, res) => {
 //get all district data
 exports.getallDistrict = functions.https.onRequest(async (req, res) => {
   try {
-const {status}=req.body;
+    const { status } = req.body;
 
-if(status=='get all district data'){
-  mdmsRef.child(`districtWise/`).once('value', (s) => {
-    res.send(s.val())
-  })
-}
-else{
-    let districtDate = [];
-    await rp("https://api.covid19india.org/state_district_wise.json")
-      .then(function (result) {
-        districtDate = JSON.parse(result);
+    if (status == 'get all district data') {
+      mdmsRef.child(`districtWise/`).once('value', (s) => {
+        res.send(s.val())
       })
-      .catch(function (err) { });
-
-    //upddate and insert\
-  let _date;
-    for (let x in districtDate) {
-      if (x === "Punjab") {
-        let a = districtDate[x];
-        let ac;
-        for (let y in a) {
-          let punjabData = a[y];
-          for (let k in punjabData) {
-            if (k === "S.A.S. Nagar") {
-              console.log(k);
-              k.replace(".", "");
-              ac = punjabData[k];
-              delete punjabData[k];
-            }
-            punjabData["Sahibzada Ajit Singh Nagar"] = ac;
-          }
-        }
-      }
     }
-
-    for (let x in districtDate) {
-      if (x === "Andhra Pradesh") {
-        let flag1 = false;
-        let flag2 = false;
-        let a = districtDate[x];
-        let ac, ca;
-
-        for (let y in a) {
-          let andhraPradesh = a[y];
-          for (let k in andhraPradesh) {
-            if (k === "S.P.S. Nellore") {
-              flag1 = true;
-              ac = andhraPradesh[k];
-              delete andhraPradesh[k];
-            }
-            if (k === "Y.S.R.") {
-              flag2 = true;
-              ca = andhraPradesh[k];
-              delete andhraPradesh[k];
-            }
-
-            if (flag1) {
-              andhraPradesh["Sri Potti Sriramulu Nellore"] = ac;
-            }
-            if (flag2) {
-              andhraPradesh["YSR"] = ca;
-            }
-          }
-        }
-      }
-    }
-    let newdata;
-    let obj = {};
-    for (let x in districtDate) {
-      let keystate = x;
-
-      let data = districtDate[x];
-     
-      newdata = Object.values(data);
-    
-      let d = new Date().getDate();
-      let month = new Date().getMonth()+1;
-      let year = new Date().getFullYear();
-      let date = `${d}-${month}-${year}`
-     _date=date;
-
-      await mdmsRef.child(`districtWise/${keystate}/${date}`).update(newdata[0]);
-    
-    
-
-    }
-
-
-
-
-
-let districtResponse=[]
-    await mdmsRef.child("districtWise/").once("value", snapshot => {
-      
-      snapshot.forEach(s=>{
-        let obj,cur_date;
-
-        s.forEach(d1=>{
-          let day  = parseInt(d1.key.split("-")[0]);
-          let month_ = parseInt(d1.key.split("-")[1]);
-          let year_ = parseInt(d1.key.split("-")[2]);
-          let date_ = `${day}-${month_}-${year_}`
-          cur_date=_date
-              
-if(date_==_date){ obj=d1}
- 
+    else {
+      let districtDate = [];
+      await rp("https://api.covid19india.org/state_district_wise.json")
+        .then(function (result) {
+          districtDate = JSON.parse(result);
         })
-  obj2={[s.key]:{[cur_date]:obj}}
-  districtResponse.push(obj2);
-      })
-     
-    });
-    res.send(districtResponse);
-  }
+        .catch(function (err) { });
+
+      //upddate and insert\
+      let _date;
+      for (let x in districtDate) {
+        if (x === "Punjab") {
+          let a = districtDate[x];
+          let ac;
+          for (let y in a) {
+            let punjabData = a[y];
+            for (let k in punjabData) {
+              if (k === "S.A.S. Nagar") {
+                console.log(k);
+                k.replace(".", "");
+                ac = punjabData[k];
+                delete punjabData[k];
+              }
+              punjabData["Sahibzada Ajit Singh Nagar"] = ac;
+            }
+          }
+        }
+      }
+
+      for (let x in districtDate) {
+        if (x === "Andhra Pradesh") {
+          let flag1 = false;
+          let flag2 = false;
+          let a = districtDate[x];
+          let ac, ca;
+
+          for (let y in a) {
+            let andhraPradesh = a[y];
+            for (let k in andhraPradesh) {
+              if (k === "S.P.S. Nellore") {
+                flag1 = true;
+                ac = andhraPradesh[k];
+                delete andhraPradesh[k];
+              }
+              if (k === "Y.S.R.") {
+                flag2 = true;
+                ca = andhraPradesh[k];
+                delete andhraPradesh[k];
+              }
+
+              if (flag1) {
+                andhraPradesh["Sri Potti Sriramulu Nellore"] = ac;
+              }
+              if (flag2) {
+                andhraPradesh["YSR"] = ca;
+              }
+            }
+          }
+        }
+      }
+      let newdata;
+      let obj = {};
+      for (let x in districtDate) {
+        let keystate = x;
+
+        let data = districtDate[x];
+
+        newdata = Object.values(data);
+
+        let d = new Date().getDate();
+        let month = new Date().getMonth() + 1;
+        let year = new Date().getFullYear();
+        let date = `${d}-${month}-${year}`
+        _date = date;
+
+        await mdmsRef.child(`districtWise/${keystate}/${date}`).update(newdata[0]);
+
+
+
+      }
+
+
+
+
+
+      let districtResponse = []
+      await mdmsRef.child("districtWise/").once("value", snapshot => {
+
+        snapshot.forEach(s => {
+          let obj, cur_date;
+
+          s.forEach(d1 => {
+            let day = parseInt(d1.key.split("-")[0]);
+            let month_ = parseInt(d1.key.split("-")[1]);
+            let year_ = parseInt(d1.key.split("-")[2]);
+            let date_ = `${day}-${month_}-${year_}`
+            cur_date = _date
+
+            if (date_ == _date) { obj = d1 }
+
+          })
+          obj2 = { [s.key]: { [cur_date]: obj } }
+          districtResponse.push(obj2);
+        })
+
+      });
+      res.send(districtResponse);
+    }
   } catch (e) {
     console.error(e);
     return res.status(500).send(e);
@@ -295,16 +295,16 @@ exports.createService = functions.https.onRequest(async (req, res) => {
       additional_info
     } = req.body;
     let obj = {
-        state: state,
-        district: district,
-        service_type: service_type,
-        frequency: frequency,
-        email: email,
-        phone: phone,
-        from_date: from_date,
-        to_date: to_date,
-        additional_info: additional_info
-      
+      state: state,
+      district: district,
+      service_type: service_type,
+      frequency: frequency,
+      email: email,
+      phone: phone,
+      from_date: from_date,
+      to_date: to_date,
+      additional_info: additional_info
+
     };
 
     await mdmsRef.child("service/").push(obj);
@@ -324,24 +324,24 @@ exports.getService = functions.https.onRequest(async (req, res) => {
     console.log(`'${state}'`);
 
     // mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
-   
+
     //       res.send(snapshot.val())
     //     })
-      let databaseRef=  mdmsRef.child('service/Location_details');
-     let queryDbRef=querybase.ref(databaseRef,['state','district']) 
-     queryDbRef.where({state:"Kerala",district:"Alappuzha"}).on('value', (snapshot) => {
-   
-          res.send(snapshot)
-        })
+    let databaseRef = mdmsRef.child('service/Location_details');
+    let queryDbRef = querybase.ref(databaseRef, ['state', 'district'])
+    queryDbRef.where({ state: "Kerala", district: "Alappuzha" }).on('value', (snapshot) => {
+
+      res.send(snapshot)
+    })
 
     // let databaseRef=  mdmsRef.child('service/Location_details');
     // let queryDbRef=querybase.ref(databaseRef,['state']) 
     // queryDbRef.where('state').startsWith('K').once('value', (snapshot) => {
-  
+
     //      res.send(snapshot.val())
     //    })
 
-   
+
 
 
 
@@ -378,7 +378,7 @@ exports.getWorldStatus = functions.https.onRequest(async (req, res) => {
 
         });
       let d = new Date(world_data.updated).getDate();
-      let month = new Date(world_data.updated).getMonth()+1;
+      let month = new Date(world_data.updated).getMonth() + 1;
       let year = new Date(world_data.updated).getFullYear();
       let date = `${d}-${month}-${year}`
 
@@ -462,7 +462,7 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
         let r_m = new Date(ele.updated).getMonth() + 1;
         let r_y = new Date(ele.updated).getFullYear();
         var date = `${r_d}-${r_m}-${r_y}`
-       
+
         mdmsRef.child(`countryWiseData/${ele.countryInfo.iso3}/${date}`).update(ele)
 
 
@@ -475,17 +475,17 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 
 
       await mdmsRef.child('countryWiseData/').once('value', (snapshot) => {
-        
-          let countryResponse=[];
-          let temp, obj,current_time;
-          let date = new Date();
-          let count = 0;
-        snapshot.forEach(snap=>{
-          let country_code= snap.key;
-          snap.forEach(s=>{
-            current_time=s.key
-            console.log("current_timeqqq",s.key);
-            
+
+        let countryResponse = [];
+        let temp, obj, current_time;
+        let date = new Date();
+        let count = 0;
+        snapshot.forEach(snap => {
+          let country_code = snap.key;
+          snap.forEach(s => {
+            current_time = s.key
+            console.log("current_timeqqq", s.key);
+
             let d_current_time = parseInt(current_time.split("-")[0]);
             let m_current_time = parseInt(current_time.split("-")[1]);
             let y_current_time = parseInt(current_time.split("-")[2]);
@@ -501,13 +501,13 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
               obj = s;
             }
           })
-        // console.log("current_time",current_time);
-         
-          let obje={[country_code]:{[current_time]:obj}};
+          // console.log("current_time",current_time);
+
+          let obje = { [country_code]: { [current_time]: obj } };
           countryResponse.push(obje)
         });
 
-       res.send(countryResponse)
+        res.send(countryResponse)
       });
     }
 
@@ -526,27 +526,27 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 exports.createFeedback = functions.https.onRequest(async (req, res) => {
   try {
     console.log(req.body.name);
-    
+
     const {
       name,
       stars,
       feedback
-      
+
     } = req.body;
-    if(!name && !stars){
-      res.send( "Please give name and ratings")
+    if (!name && !stars) {
+      res.send("Please give name and ratings")
     }
-    let current_time=new Date().getTime()
+    let current_time = new Date().getTime()
     let obj = {
       name: name,
       stars: stars,
       feedback: feedback,
-      created_date:current_time
-      
+      created_date: current_time
+
     };
 
     await mdmsRef.child("feedback/").push(obj);
-   res.send(`Thanks for ur valuable Feedback ${name}`)
+    res.send(`Thanks for ur valuable Feedback ${name}`)
   } catch (e) {
     console.error(e);
     return res.status(500).send(e);
@@ -558,38 +558,39 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
 // get Service
 exports.getFeedback = functions.https.onRequest(async (req, res) => {
   try {
-    const {rate} = req.body;
-   
+    const { rate } = req.body;
 
-    const querybaseRef = querybase.ref(mdmsRef.child('feedback/'),[]);
-    if(rate==-4){ querybaseRef.where('stars').between(1, 3).once('value', (snap)=>{
-      res.send(snap.val())
-    });
-  }else{
-    if(rate==4){
-      querybaseRef.where('stars').between(4, 5).once('value', (snap)=>{
-        res.send(snap)
+
+    const querybaseRef = querybase.ref(mdmsRef.child('feedback/'), []);
+    if (rate == -4) {
+      querybaseRef.where('stars').between(1, 3).once('value', (snap) => {
+        res.send(snap.val())
       });
-    }else{
-      return "Please input a rating 4 or -4"
+    } else {
+      if (rate == 4) {
+        querybaseRef.where('stars').between(4, 5).once('value', (snap) => {
+          res.send(snap)
+        });
+      } else {
+        return "Please input a rating 4 or -4"
+      }
     }
-  }
-    
+
 
     // mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
-   
+
     //       res.send(snapshot.val())
     //     })
-      
-         
+
+
     // let databaseRef=  mdmsRef.child('service/Location_details');
     // let queryDbRef=querybase.ref(databaseRef,['state']) 
     // queryDbRef.where('state').startsWith('K').once('value', (snapshot) => {
-  
+
     //      res.send(snapshot.val())
     //    })
 
-   
+
 
 
 
@@ -612,4 +613,3 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
     //     ...obj2
     //   };
 
-    
