@@ -2,13 +2,14 @@ const functions = require("firebase-functions");
 const firebase = require("./utils/firebase");
 const { fA } = firebase;
 const db = fA.database();
-const mdmsRef = db.ref("covid19_dev");
+const mdmsRef = process.env.FUNCTIONS_EMULATOR?db.ref("covid19_dev"):db.ref("covid19_prod");
+
 var rp = require('request-promise');
 var querybase = require('querybase');
 
 
 // console.log("env-test", process.env.GCLOUD_PROJECT);
-// console.log("function emulator", process.env.FUNCTIONS_EMULATOR);
+console.log("function emulator", process.env.FUNCTIONS_EMULATOR);
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 // const admin = require('firebase-admin');
 // admin.initializeApp();
@@ -19,13 +20,13 @@ var querybase = require('querybase');
 
 let statefn = async () => {
   var stateff;
+
   var state = [];
 
 
   await rp("https://api.covid19india.org/data.json")
     .then(async function (result) {
       console.log("check2");
-
       stateff = await JSON.parse(result);
       state = stateff.statewise;
       console.log("cron running");
@@ -45,6 +46,7 @@ let statefn = async () => {
 
   return 0
 }
+
 
 
 
@@ -226,6 +228,7 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
           }
         }
       }
+
       let newdata;
       let obj = {};
       for (let x in districtDate) {
@@ -246,6 +249,7 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
 
 
       }
+
 
 
 
@@ -323,27 +327,12 @@ exports.getService = functions.https.onRequest(async (req, res) => {
     const { state, district, service_type } = req.body;
     console.log(`'${state}'`);
 
-    // mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
-
-    //       res.send(snapshot.val())
-    //     })
     let databaseRef = mdmsRef.child('service/Location_details');
     let queryDbRef = querybase.ref(databaseRef, ['state', 'district'])
     queryDbRef.where({ state: "Kerala", district: "Alappuzha" }).on('value', (snapshot) => {
 
       res.send(snapshot)
     })
-
-    // let databaseRef=  mdmsRef.child('service/Location_details');
-    // let queryDbRef=querybase.ref(databaseRef,['state']) 
-    // queryDbRef.where('state').startsWith('K').once('value', (snapshot) => {
-
-    //      res.send(snapshot.val())
-    //    })
-
-
-
-
 
 
   } catch (e) {
@@ -475,7 +464,6 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 
 
       await mdmsRef.child('countryWiseData/').once('value', (snapshot) => {
-
         let countryResponse = [];
         let temp, obj, current_time;
         let date = new Date();
@@ -485,7 +473,6 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
           snap.forEach(s => {
             current_time = s.key
             console.log("current_timeqqq", s.key);
-
             let d_current_time = parseInt(current_time.split("-")[0]);
             let m_current_time = parseInt(current_time.split("-")[1]);
             let y_current_time = parseInt(current_time.split("-")[2]);
@@ -501,9 +488,9 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
               obj = s;
             }
           })
-          // console.log("current_time",current_time);
 
           let obje = { [country_code]: { [current_time]: obj } };
+
           countryResponse.push(obje)
         });
 
@@ -542,7 +529,6 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
       stars: stars,
       feedback: feedback,
       created_date: current_time
-
     };
 
     await mdmsRef.child("feedback/").push(obj);
@@ -561,6 +547,7 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
     const { rate } = req.body;
 
 
+
     const querybaseRef = querybase.ref(mdmsRef.child('feedback/'), []);
     if (rate == -4) {
       querybaseRef.where('stars').between(1, 3).once('value', (snap) => {
@@ -577,6 +564,7 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
     }
 
 
+
     // mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
 
     //       res.send(snapshot.val())
@@ -584,7 +572,7 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
 
 
     // let databaseRef=  mdmsRef.child('service/Location_details');
-    // let queryDbRef=querybase.ref(databaseRef,['state']) 
+    // let queryDbRef=querybase.ref(databaseRef,['state'])
     // queryDbRef.where('state').startsWith('K').once('value', (snapshot) => {
 
     //      res.send(snapshot.val())
@@ -612,4 +600,3 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
     //     ...obj,
     //     ...obj2
     //   };
-
