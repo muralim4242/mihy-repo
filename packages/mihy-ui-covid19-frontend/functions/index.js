@@ -2,13 +2,14 @@ const functions = require("firebase-functions");
 const firebase = require("./utils/firebase");
 const { fA } = firebase;
 const db = fA.database();
-const mdmsRef = db.ref("covid19_dev");
+const mdmsRef = process.env.FUNCTIONS_EMULATOR?db.ref("covid19_dev"):db.ref("covid19_prod");
+
 var rp = require('request-promise');
 var querybase = require('querybase');
 
 
 // console.log("env-test", process.env.GCLOUD_PROJECT);
-// console.log("function emulator", process.env.FUNCTIONS_EMULATOR);
+console.log("function emulator", process.env.FUNCTIONS_EMULATOR);
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 // const admin = require('firebase-admin');
 // admin.initializeApp();
@@ -20,12 +21,12 @@ var querybase = require('querybase');
 let statefn= async()=>{
   var stateff;
     var state = [];
-   
-   
+
+
   await rp("https://api.covid19india.org/data.json")
   .then(async function (result) {
     console.log("check2");
-    
+
     stateff = await JSON.parse(result);
     state = stateff.statewise;
     console.log("cron running");
@@ -49,12 +50,12 @@ return 0
 
 
   var CronJob = require('cron').CronJob;
-  
+
   var job = new CronJob(' * * * * *',statefn(), null, true, 'America/Los_Angeles');
   job.start();
-  
+
   console.log("after");
-  
+
 
 
 //get current state data
@@ -82,7 +83,7 @@ console.log("cron running");
 
 });
 job.start();
-    
+
     let mainData = [];
     let day = new Date().getDate();
     let month = new Date().getMonth() + 1;
@@ -232,9 +233,9 @@ else{
       let keystate = x;
 
       let data = districtDate[x];
-     
+
       newdata = Object.values(data);
-    
+
       let d = new Date().getDate();
       let month = new Date().getMonth()+1;
       let year = new Date().getFullYear();
@@ -242,8 +243,8 @@ else{
      _date=date;
 
       await mdmsRef.child(`districtWise/${keystate}/${date}`).update(newdata[0]);
-    
-    
+
+
 
     }
 
@@ -253,7 +254,7 @@ else{
 
 let districtResponse=[]
     await mdmsRef.child("districtWise/").once("value", snapshot => {
-      
+
       snapshot.forEach(s=>{
         let obj,cur_date;
 
@@ -263,14 +264,14 @@ let districtResponse=[]
           let year_ = parseInt(d1.key.split("-")[2]);
           let date_ = `${day}-${month_}-${year_}`
           cur_date=_date
-              
+
 if(date_==_date){ obj=d1}
- 
+
         })
   obj2={[s.key]:{[cur_date]:obj}}
   districtResponse.push(obj2);
       })
-     
+
     });
     res.send(districtResponse);
   }
@@ -304,7 +305,7 @@ exports.createService = functions.https.onRequest(async (req, res) => {
         from_date: from_date,
         to_date: to_date,
         additional_info: additional_info
-      
+
     };
 
     await mdmsRef.child("service/").push(obj);
@@ -324,24 +325,24 @@ exports.getService = functions.https.onRequest(async (req, res) => {
     console.log(`'${state}'`);
 
     // mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
-   
+
     //       res.send(snapshot.val())
     //     })
       let databaseRef=  mdmsRef.child('service/Location_details');
-     let queryDbRef=querybase.ref(databaseRef,['state','district']) 
+     let queryDbRef=querybase.ref(databaseRef,['state','district'])
      queryDbRef.where({state:"Kerala",district:"Alappuzha"}).on('value', (snapshot) => {
-   
+
           res.send(snapshot)
         })
 
     // let databaseRef=  mdmsRef.child('service/Location_details');
-    // let queryDbRef=querybase.ref(databaseRef,['state']) 
+    // let queryDbRef=querybase.ref(databaseRef,['state'])
     // queryDbRef.where('state').startsWith('K').once('value', (snapshot) => {
-  
+
     //      res.send(snapshot.val())
     //    })
 
-   
+
 
 
 
@@ -462,7 +463,7 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
         let r_m = new Date(ele.updated).getMonth() + 1;
         let r_y = new Date(ele.updated).getFullYear();
         var date = `${r_d}-${r_m}-${r_y}`
-       
+
         mdmsRef.child(`countryWiseData/${ele.countryInfo.iso3}/${date}`).update(ele)
 
 
@@ -475,7 +476,7 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 
 
       await mdmsRef.child('countryWiseData/').once('value', (snapshot) => {
-        
+
           let countryResponse=[];
           let temp, obj,current_time;
           let date = new Date();
@@ -485,7 +486,7 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
           snap.forEach(s=>{
             current_time=s.key
             console.log("current_timeqqq",s.key);
-            
+
             let d_current_time = parseInt(current_time.split("-")[0]);
             let m_current_time = parseInt(current_time.split("-")[1]);
             let y_current_time = parseInt(current_time.split("-")[2]);
@@ -502,7 +503,7 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
             }
           })
         // console.log("current_time",current_time);
-         
+
           let obje={[country_code]:{[current_time]:obj}};
           countryResponse.push(obje)
         });
@@ -526,12 +527,12 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 exports.createFeedback = functions.https.onRequest(async (req, res) => {
   try {
     console.log(req.body.name);
-    
+
     const {
       name,
       stars,
       feedback
-      
+
     } = req.body;
     if(!name && !stars){
       res.send( "Please give name and ratings")
@@ -542,7 +543,7 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
       stars: stars,
       feedback: feedback,
       created_date:current_time
-      
+
     };
 
     await mdmsRef.child("feedback/").push(obj);
@@ -561,7 +562,7 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
 exports.getFeedback = functions.https.onRequest(async (req, res) => {
   try {
     const {rate} = req.body;
-   
+
 
     const querybaseRef = querybase.ref(mdmsRef.child('feedback/'),[]);
     if(rate==-4){ querybaseRef.where('stars').between(1, 3).once('value', (snap)=>{
@@ -576,22 +577,22 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
       return "Please input a rating 4 or -4"
     }
   }
-    
+
 
     // mdmsRef.child('service/').orderByChild(`Location_details/state`).equalTo(`${state}`).once('value', (snapshot) => {
-   
+
     //       res.send(snapshot.val())
     //     })
-      
-         
+
+
     // let databaseRef=  mdmsRef.child('service/Location_details');
-    // let queryDbRef=querybase.ref(databaseRef,['state']) 
+    // let queryDbRef=querybase.ref(databaseRef,['state'])
     // queryDbRef.where('state').startsWith('K').once('value', (snapshot) => {
-  
+
     //      res.send(snapshot.val())
     //    })
 
-   
+
 
 
 
@@ -613,5 +614,3 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
     //     ...obj,
     //     ...obj2
     //   };
-
-    
