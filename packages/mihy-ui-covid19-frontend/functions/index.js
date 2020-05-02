@@ -546,9 +546,7 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
     };
 
     await mdmsRef.child("feedback/").push(obj);
-    await mdmsRef.child("feedback/").once("value", snapshot => {
-      res.send(snapshot);
-    });
+   res.send(`Thanks for ur valuable Feedback ${name}`)
   } catch (e) {
     console.error(e);
     return res.status(500).send(e);
