@@ -6,10 +6,29 @@ import { httpRequest } from "../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Paper, Switch, Grid, Typography } from "@material-ui/core";
 // import YourArea from "./components/YourArea";
-import CountryStatus from "./components/CountryStatus";
-import TopList from "./components/TopList";
-import RemainingDays from "./components/RemainingDays";
+// import CountryStatus from "./components/CountryStatus";
+// import TopList from "./components/TopList";
+// import RemainingDays from "./components/RemainingDays";
 import orderBy from "lodash/orderBy";
+import Loadable from "react-loadable";
+import Loading from "../../../../../ui-molecules/Loading";
+
+
+const CountryStatus = Loadable({
+  loader: () => import("./components/CountryStatus"),
+  loading: Loading
+});
+
+const TopList = Loadable({
+  loader: () => import("./components/TopList"),
+  loading: Loading
+});
+
+const RemainingDays = Loadable({
+  loader: () => import("./components/RemainingDays"),
+  loading: Loading
+});
+
 
 class Dashboard extends React.Component {
   componentDidMount = async () => {

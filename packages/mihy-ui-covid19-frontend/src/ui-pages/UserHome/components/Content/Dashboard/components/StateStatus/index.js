@@ -2,21 +2,32 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 
 const StateStatus = ({ status = {}, t }) => {
+  const stateTranslatedValue=t(`state.${status.state}`);
+  let stateName=stateTranslatedValue;
+  if (stateTranslatedValue.search("state.")!==-1) {
+    stateName=stateTranslatedValue.replace(`state.`,"")
+  }
+
+  const countryTranslatedValue=t(`country.${status.country}`);
+  let countryName=countryTranslatedValue;
+  if (countryTranslatedValue.search("country.")!==-1) {
+    countryName=countryTranslatedValue.replace(`country.`,"")
+  }
   return (
     <div>
       <Typography variant="h6" color="primary">
-        {status.updated ? t(`${status.country}`) : t(`state.${status.state}`)}
+        {status.updated ? countryName : stateName}
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#f44336" }}>
-        {status.updated ? 
+        {status.updated ?
           `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.cases)} ${parseInt(status.todayCases) ? `[+${status.todayCases}]`:''}` :
           `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.confirmed)} ${parseInt(status.deltaconfirmed) ? `[+${status.deltaconfirmed}]` : ''}`
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#2196f3" }}>
-        {status.updated ? 
+        {status.updated ?
           `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ` :
-          `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ${`[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`===`[+0]`?'': `[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`} `
+          `${t("active")}  - ${new Intl.NumberFormat('en-IN').format(status.active)} ${`[+${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`===`[+0]`?'': `[-${parseInt(status.deltadeaths) + parseInt(status.deltarecovered)}]`} `
         }
       </Typography>
       <Typography variant="subtitle2" style={{ color: "#4caf50" }}>

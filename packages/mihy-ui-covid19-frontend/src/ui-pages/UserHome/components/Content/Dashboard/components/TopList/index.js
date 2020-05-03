@@ -36,7 +36,7 @@ const TopList = ({ topList = [], t, handleOpen, handleStateSearch, stateSearchTe
       <Grid container spacing={1} style={{ marginBottom: "8px", marginTop: "8px" }}>
         {topList.map((stateStatus, key) => {
           return (
-            stateStatus.updated ? stateStatus.country.toLowerCase().startsWith(stateSearchText && stateSearchText.toLowerCase()) && (
+            stateStatus.updated ? stateStatus.country.toLowerCase().startsWith(stateSearchText.toLowerCase()) && (
               <Grid item xs={6} key={key} >
                 <Card>
                   <CardContent>
