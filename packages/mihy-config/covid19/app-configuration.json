@@ -140,6 +140,16 @@
          "from":"Ramgarh, Jharkhand",
          "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/nireesh_covid19.jpeg?alt=media&token=df93bb75-9262-47c0-bb8b-82f71486a0bd",
          "active": true
+      },
+       {
+         "name":"Bharath S",
+         "roleInCovid19":"Front End Developer",
+         "skills":"JS,React Js,Redux,Material-UI, Firebase",
+         "qualification":"B.E. in ECE",
+         "from":"Shimoga, Karnataka",
+         "src":"",
+         "active": true
       }
+      
    ]
 }
