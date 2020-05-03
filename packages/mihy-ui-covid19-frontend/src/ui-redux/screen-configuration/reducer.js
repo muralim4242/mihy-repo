@@ -3,13 +3,19 @@ import { prepareFinalObject } from "./utils";
 
 const intialState = {
   preparedFinalObject: {
-    snackbar:{
-      open:false,
-      variant:"success",
-      message:""
+    snackbar: {
+      open: false,
+      variant: "success",
+      message: ""
     },
-    spinner:false,
-    selectedLanguage:window.localStorage.getItem("selectedLanguage")||"en"
+    spinner: false,
+    feedback: {
+      hover: 0,
+      value: 0,
+      name: '',
+      description: ''
+    },
+    selectedLanguage: window.localStorage.getItem("selectedLanguage") || "en"
   },
 };
 

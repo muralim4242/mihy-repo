@@ -80,7 +80,7 @@ export const httpRequest = async ({
       apiError = "INVALID_TOKEN";
     }
     else {
-      apiError=data;
+      apiError = data;
     }
     if (hasSpinner) {
       store.dispatch(prepareFinalObject("spinner", false));
