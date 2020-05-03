@@ -85,23 +85,27 @@ class FeedBack extends React.Component {
                     open: true,
                     variant: "success",
                     message: feedbackSubmit
-                })
+                });
+                setAppData("feedback", {
+                    name: '', value: 0, hover: 0, description: ''
+                });
             }
         }
         setAppData("spinner", false);
+
     };
     valiDateForm = () => {
-        const { feedback, setAppData } = this.props;
+        const { feedback, setAppData, t } = this.props;
         const { value, name } = feedback;
         let isFormValid = true;
         let tempErrors = {};
         if (name === "" && !name) {
             isFormValid = false;
-            tempErrors["name"] = "** please enter a name";
+            tempErrors["name"] = t("Please Enter Your Name");
         }
         if (value === 0) {
             isFormValid = false;
-            tempErrors["value"] = "** please select a rating";
+            tempErrors["value"] = t("Please Select a Rating");
         }
         setAppData("errors", tempErrors);
         return isFormValid;
@@ -114,26 +118,19 @@ class FeedBack extends React.Component {
             setAppData,
             name,
             description,
-            errors
+            errors, t
         } = this.props;
         const { onChangeStar, onChangeHover, onClickSubmit } = this;
         return (
             <div className={classes.root}>
                 <Typography variant="h6" color="primary" align="center">
-                    {"Feedback"}
+                    {t("FeedBack")}
                 </Typography>
                 <Grid item md={12} xs={12} sm={12} align="center" justify="center">
                     <Grid item md={8} xs={10} sm={8}>
                         <Card style={{ boxShadow: "5px 5px 4px -1px rgba(0,0,0,0.2)" }}>
                             <CardContent>
-                                <Grid
-                                    justify="center"
-                                    align="center"
-                                    item
-                                    md={12}
-                                    xs={12}
-                                    sm={12}
-                                >
+                                <Grid justify="center" align="center" item md={12} xs={12} sm={12}>
                                     <Grid
                                         container
                                         item
@@ -172,7 +169,7 @@ class FeedBack extends React.Component {
                                         <Grid item md={1} xs={6} sm={1} align="end">
                                             {value !== null && (
                                                 <p className={classes.ratingValue}>
-                                                    {labels[hover !== -1 ? hover : value]}
+                                                    {labels[hover !== -1 ? hover : t[value]]}
                                                 </p>
                                             )}
                                         </Grid>
@@ -184,20 +181,11 @@ class FeedBack extends React.Component {
                                                 variant="subtitle2"
                                                 style={{ textAlign: "start" }}
                                             >
-                                                User Name:
+                                                {t("UserName")}:
                       </Typography>
                                             <TextField
-                                                required={
-                                                    name === "" || name === undefined ? true : false
-                                                }
-                                                error={name === "" || name === undefined ? true : false}
                                                 style={{ width: "100%" }}
                                                 value={name}
-                                                errorMessages={[
-                                                    "this field is required",
-                                                    "email is not valid"
-                                                ]}
-                                                valueType={String}
                                                 onChange={e => {
                                                     setAppData("feedback.name", e.target.value);
                                                 }}
@@ -218,17 +206,18 @@ class FeedBack extends React.Component {
                                             variant="subtitle2"
                                             style={{ textAlign: "start" }}
                                         >
-                                            User Description:
+                                            {t("User Description")}:
                     </Typography>
                                         <TextField
                                             multiline
-                                            rowsMax={4}
+                                            rows="4"
                                             required={true}
                                             style={{ width: "100%" }}
                                             value={description}
                                             onChange={e => {
                                                 setAppData("feedback.description", e.target.value);
                                             }}
+                                            margin="normal"
                                         />
                                     </Grid>
                                     <br />
@@ -237,8 +226,8 @@ class FeedBack extends React.Component {
                                             className={classes.buttonStyle}
                                             onClick={() => onClickSubmit()}
                                         >
-                                            Submit
-                    </Button>
+                                            {t("Submit")}
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </CardContent>

@@ -35,7 +35,7 @@ class FAQ extends React.Component {
     ];
     return (<div>
       <AboutUs t={t} />
-      <FeedBack></FeedBack>
+      <FeedBack t={t} />
       <FAQQuestions questionsList={questionsList} t={t}></FAQQuestions>
     </div>)
   }
