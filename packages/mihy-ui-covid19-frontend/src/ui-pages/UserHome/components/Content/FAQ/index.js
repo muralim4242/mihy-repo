@@ -4,9 +4,10 @@ import { withTranslation } from "react-i18next";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
 import AboutUs from "../AboutUs";
 import FAQQuestions from "./questions";
+import FeedBack from "../AboutUs/FeedBack";
 
 class FAQ extends React.Component {
-  componentDidMount = async () => {};
+  componentDidMount = async () => { };
 
   render() {
     const { t } = this.props;
@@ -21,19 +22,20 @@ class FAQ extends React.Component {
       },
       {
         question:
-        t("FAQQuestion3"),
+          t("FAQQuestion3"),
         answer:
-        t("FAQAnswer3")
+          t("FAQAnswer3")
       },
       {
         question:
-        t("FAQQuestion4"),
+          t("FAQQuestion4"),
         answer:
-        t("FAQAnswer4")
+          t("FAQAnswer4")
       }
     ];
     return (<div>
-      <AboutUs t={t}/>
+      <AboutUs t={t} />
+      <FeedBack t={t} />
       <FAQQuestions questionsList={questionsList} t={t}></FAQQuestions>
     </div>)
   }
