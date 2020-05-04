@@ -477,8 +477,8 @@ exports.createFeedback = functions.https.onRequest(async (req, res) => {
       console.log(req.body.name);
 
       const { name, stars, feedback } = req.body;
-      if (!name || !stars) {
-        res.send("Please give name and ratings");
+      if (!name || !stars || stars<0 || stars>5) {
+        res.send("Please enter correct name and ratings");
       }
       let current_time = new Date().getTime();
       let obj = {
