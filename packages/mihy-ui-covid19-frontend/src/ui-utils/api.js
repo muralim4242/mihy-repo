@@ -23,13 +23,13 @@ let axiosInstances = {
       "Content-Type": "application/json"
     }
   }),
-  // instanceThree: axios.create({
-  //   baseURL: "https://coronavirus-tracker-api.herokuapp.com",
-  //   // window.location.origin,
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   }
-  // })
+  instanceThree: axios.create({
+    baseURL: "https://us-central1-mihy-all.cloudfunctions.net",
+    // window.location.origin,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
 };
 
 const wrapRequestBody = requestBody => {

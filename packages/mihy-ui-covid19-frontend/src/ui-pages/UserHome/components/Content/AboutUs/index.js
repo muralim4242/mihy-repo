@@ -18,6 +18,7 @@ class AboutUs extends React.Component {
             <Swiper ourTeam={ourTeam} setAppData={setAppData} />
           </Grid>
         </Grid>
+
       </div>
     );
   }
