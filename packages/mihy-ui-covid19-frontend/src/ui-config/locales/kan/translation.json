@@ -477,8 +477,6 @@
   "FAQ":"FAQ",
   "AboutUS":"ನಮ್ಮ ಬಗ್ಗೆ",
 
-  "district.Maharashtra.Parbhani":"Parbhani",
-  "district.Maharashtra.Nandurbar":"Nandurbar",
   "district.Rajasthan.Sawai Madhopur":"Sawai Madhopur",
   "district.Tamil Nadu.Pudukkottai":"Pudukkottai",
   "district.Madhya Pradesh.Agar Malwa":"Agar Malwa",
@@ -496,5 +494,109 @@
   "district.Bihar.Vaishali":"Vaishali",
   "district.Bihar.Bhojpur":"Bhojpur",
   "district.Odisha.Baleshwar":"Baleshwar",
-  "district.Manipur.Imphal East":"Imphal East"
+  "district.Manipur.Imphal East":"Imphal East",
+
+  "district.Maharashtra.Raigad":"ರಾಯಗಡ್",
+  "district.Maharashtra.Ahmednagar":"ಅಹ್ಮದ್‌ನಗರ",
+  "district.Maharashtra.Other States":"ಇತರ ರಾಜ್ಯ",
+  "district.Maharashtra.Buldhana":"ಬುಲ್ಖಾನಾಯ",
+  "district.Maharashtra.Nandurbar":"ನಂದುರ್ಬಾರ್",
+  "district.Maharashtra.Nanded":"ನಾಂದೇಡ್",
+  "district.Maharashtra.Chandrapur":"ಚಂದ್ರಪುರ",
+  "district.Maharashtra.Parbhani":"ಭಂಡಾರ",
+  "district.Maharashtra.Bhandara":"ಪರಭಾನಿ",
+  "district.Maharashtra.Beed":"ಬೀಡ್",
+  "district.Maharashtra.Gondia":"ಗೊಂಡಿಯಾ",
+  "district.Gujarat.Ahmedabad":"ಅಹಮದಾಬಾದ್",
+  "district.Gujarat.Panchmahal":"ಪಂಚ ಮಹಲ್",
+  "district.Gujarat.Banaskantha":"ಬನಸ್ಕಂತ",
+  "district.Gujarat.Botad":"ಬೊಟಾಡ್",
+  "district.Gujarat.Mahisagar":"ಮಹಿಸಾಗರ್",
+  "district.Gujarat.Aravalli":"ಅರವಳ್ಳಿ",
+  "district.Gujarat.Chhota Udaipur":"ಚೋಟ ಉದಯಪುರ",
+  "district.Gujarat.Narmada":"ನರ್ಮದಾ",
+  "district.Gujarat.Mehsana":"ಮೆಹ್ಸಾನಾ",
+  "district.Gujarat.Kheda":"ಖೇಡಾ",
+  "district.Gujarat.Navsari":"ನವಸಾರಿ",
+  "district.Gujarat.Kutch":"ಕಚ್",
+  "district.Gujarat.Valsad":"ವಲ್ಸಾದ್",
+  "district.Gujarat.Sabarkantha":"ಸಬ್ರ ಕಾಂತ",
+  "district.Gujarat.Tapi":"ಟ್ಯಾಪಿ",
+  "district.Gujarat.Dang":"ಡ್ಯಾಂಗ್",
+  "district.Gujarat.Surendranagar":"ಸುರೇಂದ್ರನಗರ",
+  "district.Delhi.Central Delhi":"ಮಧ್ಯ ದೆಹಲಿ",
+  "district.Delhi.South East Delhi":"ಆಗ್ನೇಯ ದೆಹಲಿ",
+  "district.Delhi.Shahdara":"ಶಹದಾರ",
+  "district.Madhya Pradesh.Burhanpur":"ಬುರ್ಹಾನ್ಪುರ್",
+  "district.Madhya Pradesh.Agar Malwa":"ಅಗರ್ ಮಾಲ್ವಾ",
+  "district.Madhya Pradesh.Alirajpur":"ಅಲಿರಾಜ್ಪುರ್",
+  "district.Madhya Pradesh.Harda":"ಹರ್ದಾ",
+  "district.Madhya Pradesh.Shahdol":"ಶಹ್ದೋಲ್",
+  "district.Madhya Pradesh.Other Region":"ಇತರ ಪ್ರದೇಶ",
+  "district.Madhya Pradesh.Anuppur":"ಅನುಪ್ಪೂರ್",
+  "district.Madhya Pradesh.Rewa":"ರೇವಾ",
+  "district.Madhya Pradesh.Ashoknagar":"ಅಶೋಕ್‌ನಗರ",
+  "district.Madhya Pradesh.Dindori":"ದಿಂಡೋರಿ",
+  "district.Madhya Pradesh.Katni":"ಕಟ್ನಿ",
+
+  "district.Rajasthan.Chittorgarh":"ಚಿತ್ತೋರ್ಗರ್",
+  "district.Rajasthan.Dholpur":"ಧೋಲ್ಪುರ್ವಾ",
+  "district.Rajasthan.Sawai Madhopur":"ಸವಾಯಿ ಮಾಧೋಪುರ*",
+  "district.Rajasthan.Italians":"ಇಟಾಲಿಯನ್ನರು",
+  "district.Rajasthan.Other state":"ಇತರ ರಾಜ್ಯ",
+  "district.Rajasthan.Rajsamand":"ರಾಜಮಂದ್",
+  "district.Rajasthan.Baran":"ಬರಾನ್",
+
+  "district.Tamil Nadu.Kanyakumari":"ಕನ್ಯಾಕುಮಾರಿ",
+  "district.Tamil Nadu.Nilgiris":"ನೀಲಗಿರಿ",
+  "district.Tamil Nadu.Dharmapuri":"ಧರ್ಮಪುರಿ",
+  "district.Tamil Nadu.Pudukkottai":"ಪುದುಕ್ಕೊಟ್ಟೈ",
+
+  "district.Uttar Pradesh.Aligarh":"ಅಲಿಗರ್",
+  "district.Uttar Pradesh.Sant Kabir Nagar":"ಸಂತ ಕಬೀರ್ ನಗರ",
+  "district.Uttar Pradesh.Bahraich":"ಬಹ್ರೈಚ್",
+  "district.Uttar Pradesh.Etah":"ಎತಾಹ್",
+  "district.Uttar Pradesh.Jhansi":"ಜನ್ಸಿ",
+  "district.Uttar Pradesh.Kannauj":"ಕನ್ನೌಜ್",
+  "district.Uttar Pradesh.Maharajganj":"ಮಹಾರಾಜ್ ಗಂಜ್",
+  "district.Uttar Pradesh.Mainpuri":"ಮೈನ್‌ಪುರಿ",
+  "district.Uttar Pradesh.Shrawasti":"ಶ್ರಾವಸ್ತಿ",
+  "district.Uttar Pradesh.Jalaun":"ಜಲಾನ್",
+  "district.Uttar Pradesh.Lakhimpur Kheri":"ಲಖಿಂಪುರ್ ಖೇರಿ",
+  "district.Uttar Pradesh.Gonda":"ಗೊಂಡಾ",
+  "district.Uttar Pradesh.Gorakhpur":"ಗೋರಖ್‌ಪುರ್",
+  "district.Uttar Pradesh.Sultanpur":"ಸುಲ್ತಾನಪುರ",
+  "district.Uttar Pradesh.Unnao":"ಉನ್ನಾವೊ",
+  "district.Uttar Pradesh.Mahoba":"ಮಹೋಬಾ",
+  "district.Uttar Pradesh.Siddharthnagar":"ಸಿದ್ಧಾರ್ಥನಗರ",
+  "district.Uttar Pradesh.Balrampur":"ಬಲರಂಪುರ",
+  "district.Uttar Pradesh.Barabanki":"ಬರಾಬಂಕಿ",
+  "district.Uttar Pradesh.Kanpur Dehat":"ಕಾನ್ಪುರ್‍ಹೇತ್",
+  "district.Uttar Pradesh.Mau":"ಮೌ",
+  "district.Uttar Pradesh.Ayodhya":"ಅಯೋಧ್ಯೆ",
+  "district.Uttar Pradesh.Deoria":"ಡಿಯೋರಿಯಾ",
+
+  "district.Andhra Pradesh.Y.S.R. Kadapa":"Y.S.R. Kadapa",
+  "district.Andhra Pradesh.Srikakulam":"ಶ್ರೀಕಾಕುಲಂ"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
