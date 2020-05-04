@@ -103,7 +103,7 @@ class FeedBack extends React.Component {
             isFormValid = false;
             tempErrors["name"] = t("Please Enter Your Name");
         }
-        if (value === 0) {
+        if (value <= 1) {
             isFormValid = false;
             tempErrors["value"] = t("Please Select a Rating");
         }
@@ -157,7 +157,7 @@ class FeedBack extends React.Component {
                                                     onChangeHover(event, newHover);
                                                 }}
                                             />
-                                            {value === 0 || value === undefined ? (
+                                            {value === undefined || value <= 1 ? (
                                                 <div style={{ color: "red" }}>
                                                     {" "}
                                                     {errors && errors.value}
