@@ -22,6 +22,7 @@ import { withTranslation } from "react-i18next";
 import LanguageSelect from "./Dashboard/components/LanguageSelect";
 import { mapDispatchToProps } from "../../../../ui-utils/commons";
 import { withRouter } from "react-router-dom";
+import { httpRequest } from "../../../../ui-utils/api";
 
 const menuItems = [
   {
@@ -214,9 +215,20 @@ class MiniDrawer extends React.Component {
     this.closelanguageDialogue();
   };
   notification_show = () => {
+    const { setAppData } = this.props;
+    setAppData("spinner", true);
+    this.feathRecentData();
     this.props.history.push("/user-home/new-cases");
+    setAppData("spinner", false);
   }
-
+  feathRecentData = async () => {
+    const { setAppData } = this.props;
+    const fetchRecentCases = await httpRequest({
+      endPoint: "updatelog/log.json"
+    })
+    setAppData("recentCases", fetchRecentCases);
+    setAppData("dashboard.dialogOpen", true);
+  }
   share = () => {
     const { setAppData, t } = this.props;
     if (navigator.share) {

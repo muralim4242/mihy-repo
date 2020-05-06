@@ -126,11 +126,11 @@ class FeedBack extends React.Component {
                 <Typography variant="h6" color="primary" align="center">
                     {t("FeedBack")}
                 </Typography>
-                <Grid item md={12} xs={12} sm={12} align="center" justify="center">
+                <Grid item md={12} xs={12} sm={12} align="center" >
                     <Grid item md={8} xs={10} sm={8}>
                         <Card style={{ boxShadow: "5px 5px 4px -1px rgba(0,0,0,0.2)" }}>
                             <CardContent>
-                                <Grid justify="center" align="center" item md={12} xs={12} sm={12}>
+                                <Grid item md={12} xs={12} sm={12}>
                                     <Grid
                                         container
                                         item
