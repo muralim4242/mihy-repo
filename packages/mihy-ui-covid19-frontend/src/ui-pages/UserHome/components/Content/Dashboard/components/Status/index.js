@@ -4,7 +4,7 @@ import { Typography } from "@material-ui/core";
 
 const Status = ({ status = {}, t }) => {
   return (
-    <div>
+    <div className="custom-flex-center">
       <Typography variant="h6"  align="center">
         {t(status.label)}
       </Typography>
@@ -13,7 +13,7 @@ const Status = ({ status = {}, t }) => {
           return new Intl.NumberFormat('en-IN').format(number);
         }} end={parseInt(status.count)}/>}
       </Typography>
-      <Typography variant="subtitle2"  align="center">
+      <Typography variant="subtitle2" align="center">
         {parseInt(status.delta)?status.label==="active"?`[-${status.delta}]`:`[+${status.delta}]`:<br/>}
       </Typography>
     </div>
