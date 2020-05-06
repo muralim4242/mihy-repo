@@ -32,17 +32,17 @@ const RemainingDays = Loadable({
 
 class Dashboard extends React.Component {
   componentDidMount = async () => {
-    const {setAppData}=this.props
+    const { setAppData } = this.props
     this.feathIndiaData();
-    setAppData("checked",true)
+    setAppData("checked", true)
   };
-  viewSwitch = async ()=>{
-    const {checked,setAppData}=this.props
-    setAppData("checked",!checked)
-    if(checked===false){
+  viewSwitch = async () => {
+    const { checked, setAppData } = this.props
+    setAppData("checked", !checked)
+    if (checked === false) {
       this.feathIndiaData()
     }
-    else{
+    else {
       this.feathWorldData()
     }
   }
@@ -61,15 +61,15 @@ class Dashboard extends React.Component {
   };
   feathWorldData = async () => {
     let { setAppData, dashboard } = this.props;
-    const dataResponse = await httpRequest({endPoint: "https://corona.lmao.ninja/v2/all" });
-    let countriesResponse = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/countries"});
+    const dataResponse = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/all" });
+    let countriesResponse = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/countries" });
     if (countriesResponse) {
-      countriesResponse=orderBy(countriesResponse, ["cases"], ["desc"]);
+      countriesResponse = orderBy(countriesResponse, ["cases"], ["desc"]);
     }
     dashboard = {
       ...dashboard,
-      topList: dataResponse||{},
-      countriesMapping: countriesResponse||[],
+      topList: dataResponse || {},
+      countriesMapping: countriesResponse || [],
     };
     setAppData("dashboard", dashboard);
   };
@@ -102,9 +102,9 @@ class Dashboard extends React.Component {
     this.props.setAppData("dashboard.stateSearchText", searchText);
   };
   render() {
-    const { dashboard, t,checked} = this.props;
-    const { topList = [], stateSearchText} = dashboard;
-    const { handleOpen,handleStateSearch,viewSwitch} = this;
+    const { dashboard, t, checked } = this.props;
+    const { topList = [], stateSearchText } = dashboard;
+    const { handleOpen, handleStateSearch, viewSwitch } = this;
     return (
       <div>
         <CountryStatus
@@ -126,14 +126,14 @@ class Dashboard extends React.Component {
             stateSearchText={stateSearchText}
           />
         ) : (
-          <TopList
-            t={t}
-            handleOpen={handleOpen}
-            topList={topList}
-            handleStateSearch={handleStateSearch}
-            stateSearchText={stateSearchText}
-          />
-        )}
+            <TopList
+              t={t}
+              handleOpen={handleOpen}
+              topList={topList}
+              handleStateSearch={handleStateSearch}
+              stateSearchText={stateSearchText}
+            />
+          )}
         <div
           style={{
             width: "100%",
@@ -156,7 +156,7 @@ class Dashboard extends React.Component {
                 <Grid item>
                   <Switch
                     checked={checked}
-                    onChange={(e) => {viewSwitch()}}
+                    onChange={(e) => { viewSwitch() }}
                     name="ViewSwitch"
                   />
                 </Grid>
@@ -172,8 +172,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = ({ screenConfiguration }) => {
   const { preparedFinalObject = {} } = screenConfiguration;
-  const { dashboard = {},checked=true } = preparedFinalObject;
-  return { dashboard,checked };
+  const { dashboard = {}, checked = true } = preparedFinalObject;
+  return { dashboard, checked };
 };
 
 export default connect(

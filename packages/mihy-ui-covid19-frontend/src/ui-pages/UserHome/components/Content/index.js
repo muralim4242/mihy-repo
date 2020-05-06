@@ -13,6 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Hidden from "@material-ui/core/Hidden";
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import Navigator from "./components/Navigator";
 import UserRoutes from "../../../../ui-routes/UserRoutes";
 import BottomNavigation from "./components/BottomNavigation";
@@ -212,9 +213,12 @@ class MiniDrawer extends React.Component {
     window.localStorage.setItem("selectedLanguage", code);
     this.closelanguageDialogue();
   };
+  notification_show = () => {
+    this.props.history.push("/user-home/new-cases");
+  }
 
   share = () => {
-    const { setAppData ,t} = this.props;
+    const { setAppData, t } = this.props;
     if (navigator.share) {
       navigator
         .share({
@@ -247,8 +251,8 @@ class MiniDrawer extends React.Component {
 
   render() {
     const { classes, theme, t, selectedLanguage, setAppData } = this.props;
-    const { openLanguageOptions ,open} = this.state;
-    const { changeRoute } = this;
+    const { openLanguageOptions, open } = this.state;
+    const { changeRoute, notification_show } = this;
     const {
       onLanguageSelect,
       closelanguageDialogue,
@@ -307,7 +311,16 @@ class MiniDrawer extends React.Component {
               }}
               color="primary"
             >
-            <span className="material-icons">g_translate</span>
+              <span className="material-icons">g_translate</span>
+            </IconButton>
+            <IconButton
+              className={classes.languageButton}
+              onClick={e => {
+                notification_show();
+              }}
+              color="primary"
+            >
+              <NotificationsNoneIcon fontSize="large" />
             </IconButton>
             {navigator.share && (
               <IconButton
@@ -342,12 +355,12 @@ class MiniDrawer extends React.Component {
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
                 ) : (
-                  <ChevronLeftIcon />
-                )}
+                    <ChevronLeftIcon />
+                  )}
               </IconButton>
             </div>
             <Divider />
-            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute}   setAppData={setAppData}/>
+            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute} setAppData={setAppData} />
           </Drawer>
         </Hidden>
         <Hidden smUp>
