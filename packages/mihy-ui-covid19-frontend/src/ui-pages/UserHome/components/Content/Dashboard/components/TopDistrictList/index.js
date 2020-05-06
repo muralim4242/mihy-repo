@@ -44,6 +44,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const TopDistrictList = ({
   topDistrictList = [],
+  stateDistrictMapping,
   handleClose,
   t,
   dialogOpen,

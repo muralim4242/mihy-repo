@@ -85,7 +85,13 @@ class Dashboard extends React.Component {
       return {
         code: key,
         confirmed: topDistrictList.districtData[key].confirmed,
-        delta: topDistrictList.districtData[key].delta.confirmed
+        active: topDistrictList.districtData[key].confirmed,
+        recovered:topDistrictList.districtData[key].recovered,
+        deaths:topDistrictList.districtData[key].deceased,
+        delta: topDistrictList.districtData[key].delta.confirmed,
+        deltaRecovered: topDistrictList.districtData[key].delta.recovered,
+        deltaDeaths: topDistrictList.districtData[key].delta.deceased,
+        // notes:topDistrictList.districtData[key].notes,
       };
     });
     topDistrictList = orderBy(topDistrictList, ["confirmed"], ["desc"]);
