@@ -93,7 +93,7 @@ class Dashboard extends React.Component {
           tempTopDistrictList.push({
             code: key,
             confirmed: topDistrictList.districtData[key].confirmed,
-            active: topDistrictList.districtData[key].confirmed,
+            active: topDistrictList.districtData[key].active,
             recovered: topDistrictList.districtData[key].recovered,
             deaths: topDistrictList.districtData[key].deceased,
             delta: topDistrictList.districtData[key].delta.confirmed,
