@@ -19,13 +19,14 @@ class DistrictList extends React.Component {
   {
     const {handleClose,handleDistrictSearch} =this;
     const {t,dashboard}=this.props;
-    const {dialogOpen=false,topDistrictList=[],districtSearchText,selectedState}=dashboard;
+    const {dialogOpen=false,topDistrictList=[],districtSearchText,selectedState,stateDistrictMapping}=dashboard;
     return (
       <TopDistrictList
         handleClose={handleClose}
         t={t}
         dialogOpen={dialogOpen}
         topDistrictList={topDistrictList}
+        stateDistrictMapping={stateDistrictMapping}
         handleDistrictSearch={handleDistrictSearch}
         districtSearchText={districtSearchText}
         selectedState={selectedState}
