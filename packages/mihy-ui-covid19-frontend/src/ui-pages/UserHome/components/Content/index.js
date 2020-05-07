@@ -225,7 +225,9 @@ class MiniDrawer extends React.Component {
     const { setAppData } = this.props;
     const fetchRecentCases = await httpRequest({
       endPoint: "updatelog/log.json"
-    })
+    });
+    console.log("fetchRecentCases:", fetchRecentCases);
+
     setAppData("recentCases", fetchRecentCases);
     setAppData("dashboard.dialogOpen", true);
   }

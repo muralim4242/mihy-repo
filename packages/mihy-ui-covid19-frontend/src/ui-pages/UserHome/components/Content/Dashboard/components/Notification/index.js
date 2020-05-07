@@ -1,15 +1,25 @@
 import React from "react";
 import { mapDispatchToProps } from "../../../../../../../ui-utils/commons";
 import { connect } from "react-redux";
-import { httpRequest } from "../../../../../../../ui-utils/api";
-import { Typography, Card, CardContent, Dialog, Slide, AppBar, Toolbar, IconButton, makeStyles } from "@material-ui/core";
+import { Typography, Card, CardContent, Dialog, Slide, AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { formatDistance, format } from 'date-fns';
 import CloseIcon from "@material-ui/icons/Close";
 import { withStyles } from "@material-ui/styles";
 
 const styles = ({
     root: {
-        padding: "60px 8px 8px 8px"
+        padding: "70px 0px 0px 8px"
+    },
+    card: {
+        borderRadius: "10px"
+    },
+    dateStyle: {
+        padding: "0px 0px 0px 8px"
+    },
+    fontStyle: {
+        fontWeight: 900,
+        fontSize: "large",
+        color: "salmon"
     }
 });
 
@@ -24,10 +34,12 @@ class Notification extends React.Component {
         const Transition = React.forwardRef(function Transition(props, ref) {
             return <Slide direction="up" ref={ref} {...props} />;
         });
-        const { recentCases, dashboard, classes } = this.props;
+        const { recentCases = [], dashboard, classes } = this.props;
         const { dialogOpen = false } = dashboard;
         const { handleClose } = this;
         let currentDate = new Date();
+        console.log("recentCases:", recentCases);
+
         return (
             recentCases.length > 0 && <div>
                 <Dialog
@@ -52,10 +64,11 @@ class Notification extends React.Component {
                     </AppBar>
                     <div>
                         <div className={classes.root}>
-                            <h2 >{format(currentDate, 'd MMM')}</h2>
+                            <Typography className={classes.fontStyle}>{format(currentDate, 'd MMM')}</Typography>
                         </div>
                         {
                             recentCases.reverse().map((data, key) => {
+                                console.log("data:", data, "key:", key);
                                 const activityDate = new Date(data.timestamp * 1000);
                                 const addHeader = () => {
                                     currentDate = activityDate;
@@ -70,20 +83,20 @@ class Notification extends React.Component {
                                                         ''
                                                     )
                                             }
-                                            <div >
-                                                <h2>{format(activityDate, 'd MMM')}</h2>
+                                            <div className={classes.dateStyle} >
+                                                <Typography className={classes.fontStyle}>{format(activityDate, 'd MMM')}</Typography>
                                             </div>
                                         </React.Fragment>
                                     );
                                 };
                                 return (
-                                    <div key={key}>
+                                    <React.Fragment key={key}>
                                         {
                                             activityDate.getDate() !== currentDate.getDate()
                                                 ? addHeader()
                                                 : ' '
                                         }
-                                        <Card>
+                                        <Card className={classes.card}>
                                             <CardContent>
                                                 <Typography>
                                                     {formatDistance(
@@ -95,7 +108,7 @@ class Notification extends React.Component {
                                             </CardContent>
                                         </Card>
                                         <br />
-                                    </div>
+                                    </React.Fragment>
                                 )
                             })
                         }
@@ -107,7 +120,8 @@ class Notification extends React.Component {
 }
 const mapStateToProps = ({ screenConfiguration }) => {
     const { preparedFinalObject = {} } = screenConfiguration;
-    const { recentCases = [], dashboard = {} } = preparedFinalObject;
+    let { recentCases = [], dashboard = {} } = preparedFinalObject;
+    recentCases = recentCases && [...recentCases];
     return {
         recentCases, dashboard
     }
