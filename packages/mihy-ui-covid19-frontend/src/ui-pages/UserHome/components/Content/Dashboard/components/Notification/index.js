@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/styles";
 
 const styles = ({
     root: {
-        padding: "70px 0px 0px 8px"
+        padding: "62px 0px 0px 8px"
     },
     card: {
         borderRadius: "10px"
@@ -19,7 +19,7 @@ const styles = ({
     fontStyle: {
         fontWeight: 900,
         fontSize: "large",
-        color: "salmon"
+        // color: "salmon"
     }
 });
 
@@ -38,7 +38,7 @@ class Notification extends React.Component {
         const { dialogOpen = false } = dashboard;
         const { handleClose } = this;
         let currentDate = new Date();
-        console.log("recentCases:", recentCases);
+        // console.log("recentCases:", recentCases);
 
         return (
             recentCases.length > 0 && <div>
@@ -58,13 +58,13 @@ class Notification extends React.Component {
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="h6" >
-                                Recent Covid19 Cases
+                                Latest New
                                 </Typography>
                         </Toolbar>
                     </AppBar>
-                    <div>
+                    <div style={{padding:'8px'}}>
                         <div className={classes.root}>
-                            <Typography className={classes.fontStyle}>{format(currentDate, 'd MMM')}</Typography>
+                            <Typography variant="h6" color="primary" display="block">{format(currentDate, 'd MMM')}</Typography>
                         </div>
                         {
                             recentCases.reverse().map((data, key) => {
@@ -84,7 +84,7 @@ class Notification extends React.Component {
                                                     )
                                             }
                                             <div className={classes.dateStyle} >
-                                                <Typography className={classes.fontStyle}>{format(activityDate, 'd MMM')}</Typography>
+                                                <Typography variant="h6" color="primary" display="block">{format(activityDate, 'd MMM')}</Typography>
                                             </div>
                                         </React.Fragment>
                                     );
@@ -98,13 +98,13 @@ class Notification extends React.Component {
                                         }
                                         <Card className={classes.card}>
                                             <CardContent>
-                                                <Typography>
+                                                <Typography variant="caption" display="block">
                                                     {formatDistance(
                                                         new Date(data.timestamp * 1000),
                                                         new Date()
                                                     ) + ' ago'}
                                                 </Typography>
-                                                <Typography>{data.update}</Typography>
+                                                <Typography variant="subtitle1">{data.update}</Typography>
                                             </CardContent>
                                         </Card>
                                         <br />
