@@ -500,6 +500,7 @@
   "Submit": "Submit",
   "Please Select a Rating": "Please Select a Rating",
   "Please Enter Your Name": "Please Enter Your Name",
+  "Latest New": "Latest New",
   "district.Maharashtra.Parbhani": "Parbhani",
   "district.Maharashtra.Nandurbar": "Nandurbar",
   "district.Rajasthan.Sawai Madhopur": "Sawai Madhopur",
@@ -727,5 +728,6 @@
   "country.South Sudan": "South Sudan",
   "country.Anguilla": "Anguilla",
   "country.Saint Pierre Miquelon": "Saint Pierre Miquelon",
-  "country.Yemen": "Yemen"
+  "country.Yemen": "Yemen",
+  "World": "World"
 }
