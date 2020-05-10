@@ -264,7 +264,7 @@ class MiniDrawer extends React.Component {
   };
 
   render() {
-    const { classes, theme, t, selectedLanguage, setAppData } = this.props;
+    const { classes, theme, t, selectedLanguage, setAppData, history } = this.props;
     const { openLanguageOptions, open } = this.state;
     const { changeRoute, notification_show } = this;
     const {

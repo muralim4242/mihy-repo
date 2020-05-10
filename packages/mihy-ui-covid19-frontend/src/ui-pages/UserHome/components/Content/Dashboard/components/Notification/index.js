@@ -5,6 +5,7 @@ import { Typography, Card, CardContent, Dialog, Slide, AppBar, Toolbar, IconButt
 import { formatDistance, format } from 'date-fns';
 import CloseIcon from "@material-ui/icons/Close";
 import { withStyles } from "@material-ui/styles";
+import { withTranslation } from "react-i18next";
 
 const styles = ({
     root: {
@@ -34,7 +35,9 @@ class Notification extends React.Component {
         const Transition = React.forwardRef(function Transition(props, ref) {
             return <Slide direction="up" ref={ref} {...props} />;
         });
-        const { recentCases = [], dashboard, classes } = this.props;
+        const { recentCases = [], dashboard, classes, t } = this.props;
+        console.log("this.props:", this.props);
+
         const { dialogOpen = false } = dashboard;
         const { handleClose } = this;
         let currentDate = new Date();
@@ -58,11 +61,11 @@ class Notification extends React.Component {
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="h6" >
-                                Latest New
-                                </Typography>
+                                {t("Latest New")}
+                            </Typography>
                         </Toolbar>
                     </AppBar>
-                    <div style={{padding:'8px'}}>
+                    <div style={{ padding: '8px' }}>
                         <div className={classes.root}>
                             <Typography variant="h6" color="primary" display="block">{format(currentDate, 'd MMM')}</Typography>
                         </div>
@@ -126,4 +129,4 @@ const mapStateToProps = ({ screenConfiguration }) => {
         recentCases, dashboard
     }
 }
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Notification));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Notification)));
