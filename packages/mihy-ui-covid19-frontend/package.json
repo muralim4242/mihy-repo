@@ -37,7 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "branch-build":"brunch build -p"
+    "branch-build": "brunch build -p"
   },
   "eslintConfig": {
     "extends": "react-app"
