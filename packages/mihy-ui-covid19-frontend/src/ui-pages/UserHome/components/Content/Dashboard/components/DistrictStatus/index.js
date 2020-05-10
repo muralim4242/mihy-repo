@@ -7,23 +7,35 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
   if (districtTranslatedValue.search("district.") !== -1) {
     districtName = districtTranslatedValue.replace(`district.${selectedState}.`, "")
   }
-  let colr
+  let headerStyle;
   if (status.zones === "Red") {
-    colr = '#ef5350'
+    headerStyle={
+      background: "#ffcdd2",
+      borderLeft: "8px solid #ef5350",
+    }
   }
   else if (status.zones === "Orange") {
-    colr = '#d4e157'
+    headerStyle={
+      background: "#ffe0b2",
+      borderLeft: "8px solid #ffa726",
+    }
   }
   else if (status.zones === "Yellow") {
-    colr = '#ffff8d'
+    headerStyle={
+      background: "#fff9c4",
+      borderLeft: "8px solid #ffee58",
+    }
   }
   else {
-    colr = '#66bb6a'
+    headerStyle={
+      background: "#c8e6c9",
+      borderLeft: "8px solid #66bb6a",
+    }
   }
   return (
     <div>
       <Tooltip title={status.notes} placement="right">
-      <Typography variant="h6" align="center" style={{ background: colr }}>
+      <Typography variant="h6" align="center" style={headerStyle}>
         {districtName}
       </Typography>
       </Tooltip>

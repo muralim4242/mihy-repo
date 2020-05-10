@@ -59,7 +59,7 @@
          "qualification":"B.E. in ISE, Diploma in CSE",
          "from":"Shimoga, Karnataka",
          "src":"assets/murali.jpeg",
-         "active": true
+         "active":true
       },
       {
          "name":"Thahareema",
@@ -68,24 +68,7 @@
          "qualification":"Diploma in E&C",
          "from":"Chaamaraajanagara, Karnataka",
          "src":"assets/thahareema.jpeg",
-         "active": true
-      },
-      {
-         "name":"Gagan",
-         "skills":"Java,Spring Boot,Distributed systems",
-         "qualification":"B.E. in CSE, Diploma in CSE",
-         "roleInCovid19":"Backend Developer, Analytics",
-         "src":"assets/gagan.jpeg",
-         "active": true
-      },
-      {
-         "name":"Praveen M P",
-         "roleInCovid19":"Frontend Developer",
-         "skills":"Javascript, React, Angular",
-         "qualification":"MCA",
-         "from":"Bangalore",
-         "src":"assets/praveen.jpeg",
-         "active": true
+         "active":true
       },
       {
          "name":"Shalu Singh",
@@ -94,25 +77,7 @@
          "qualification":"M.Tech in CSE, VIT",
          "from":"Bulandshahar, Uttar Pradesh",
          "src":"assets/shalu.jpeg",
-         "active": true
-      },
-      {
-         "name":"Bikki Mahato",
-         "roleInCovid19":"Frontend Developer",
-         "skills":"JS, React, Redux, Material-ui, Node JS",
-         "qualification":"B.Tech in IT",
-         "from":"Kolkata, West Bengal",
-         "src":"assets/bikki.jpeg",
-         "active": true
-      },
-      {
-         "name":"Pooja Datyal",
-         "roleInCovid19":"Frontend Developer",
-         "skills":"JS, React, Redux, Material-ui",
-         "qualification":"B.Tech in CSE",
-         "from":"Zirakpur, Punjab",
-         "src":"assets/pooja.jpeg",
-         "active": true
+         "active":true
       },
       {
          "name":"Neha Kumari",
@@ -121,7 +86,25 @@
          "qualification":"B.Tech in CSE",
          "from":"Ramgarh, Jharkhand",
          "src":"assets/neha.jpeg",
-         "active": true
+         "active":true
+      },
+      {
+         "name":"Bharath S",
+         "roleInCovid19":"Front End Developer",
+         "skills":"JS,React Js,Redux,Material-UI, Firebase",
+         "qualification":"B.E. in ECE",
+         "from":"Shimoga, Karnataka",
+         "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/WhatsApp%20Image%202020-05-04%20at%2012.58.25.jpeg?alt=media&token=60849c96-72d4-4203-a46a-e49be6a668fb",
+         "active":true
+      },
+      {
+         "name":"Pooja Datyal",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"JS, React, Redux, Material-ui",
+         "qualification":"B.Tech in CSE",
+         "from":"Zirakpur, Punjab",
+         "src":"assets/pooja.jpeg",
+         "active":true
       },
       {
          "name":"Nishant",
@@ -130,7 +113,33 @@
          "qualification":"MCA",
          "from":"Kannur, Kerala",
          "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/nishant_covid19.jpeg?alt=media&token=4b8defa4-654a-4e34-8cda-c46e31542267",
-         "active": true
+         "active":true
+      },
+      {
+         "name":"Bikki Mahato",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"JS, React, Redux, Material-ui, Node JS",
+         "qualification":"B.Tech in IT",
+         "from":"Kolkata, West Bengal",
+         "src":"assets/bikki.jpeg",
+         "active":true
+      },
+      {
+         "name":"Gagan",
+         "skills":"Java,Spring Boot,Distributed systems",
+         "qualification":"B.E. in CSE, Diploma in CSE",
+         "roleInCovid19":"Backend Developer, Analytics",
+         "src":"assets/gagan.jpeg",
+         "active":true
+      },
+      {
+         "name":"Praveen M P",
+         "roleInCovid19":"Frontend Developer",
+         "skills":"Javascript, React, Angular",
+         "qualification":"MCA",
+         "from":"Bangalore",
+         "src":"assets/praveen.jpeg",
+         "active":true
       },
       {
          "name":"Nireesh",
@@ -139,17 +148,7 @@
          "qualification":"B.Tech in CSE",
          "from":"Ramgarh, Jharkhand",
          "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/nireesh_covid19.jpeg?alt=media&token=df93bb75-9262-47c0-bb8b-82f71486a0bd",
-         "active": true
-      },
-       {
-         "name":"Bharath S",
-         "roleInCovid19":"Front End Developer",
-         "skills":"JS,React Js,Redux,Material-UI, Firebase",
-         "qualification":"B.E. in ECE",
-         "from":"Shimoga, Karnataka",
-         "src":"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/WhatsApp%20Image%202020-05-04%20at%2012.58.25.jpeg?alt=media&token=60849c96-72d4-4203-a46a-e49be6a668fb",
-         "active": true
+         "active":true
       }
-      
    ]
 }

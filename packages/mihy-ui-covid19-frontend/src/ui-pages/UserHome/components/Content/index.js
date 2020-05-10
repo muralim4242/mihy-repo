@@ -13,6 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Hidden from "@material-ui/core/Hidden";
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import Navigator from "./components/Navigator";
 import UserRoutes from "../../../../ui-routes/UserRoutes";
 import BottomNavigation from "./components/BottomNavigation";
@@ -21,6 +22,7 @@ import { withTranslation } from "react-i18next";
 import LanguageSelect from "./Dashboard/components/LanguageSelect";
 import { mapDispatchToProps } from "../../../../ui-utils/commons";
 import { withRouter } from "react-router-dom";
+import { httpRequest } from "../../../../ui-utils/api";
 
 const menuItems = [
   {
@@ -212,9 +214,25 @@ class MiniDrawer extends React.Component {
     window.localStorage.setItem("selectedLanguage", code);
     this.closelanguageDialogue();
   };
+  notification_show = () => {
+    const { setAppData } = this.props;
+    setAppData("spinner", true);
+    this.feathRecentData();
+    this.props.history.push("/user-home/new-cases");
+    setAppData("spinner", false);
+  }
+  feathRecentData = async () => {
+    const { setAppData } = this.props;
+    const fetchRecentCases = await httpRequest({
+      endPoint: "updatelog/log.json"
+    });
+    console.log("fetchRecentCases:", fetchRecentCases);
 
+    setAppData("recentCases", fetchRecentCases);
+    setAppData("dashboard.dialogOpen", true);
+  }
   share = () => {
-    const { setAppData ,t} = this.props;
+    const { setAppData, t } = this.props;
     if (navigator.share) {
       navigator
         .share({
@@ -246,9 +264,9 @@ class MiniDrawer extends React.Component {
   };
 
   render() {
-    const { classes, theme, t, selectedLanguage, setAppData } = this.props;
-    const { openLanguageOptions ,open} = this.state;
-    const { changeRoute } = this;
+    const { classes, theme, t, selectedLanguage, setAppData, history } = this.props;
+    const { openLanguageOptions, open } = this.state;
+    const { changeRoute, notification_show } = this;
     const {
       onLanguageSelect,
       closelanguageDialogue,
@@ -307,7 +325,16 @@ class MiniDrawer extends React.Component {
               }}
               color="primary"
             >
-            <span className="material-icons">g_translate</span>
+              <span className="material-icons">g_translate</span>
+            </IconButton>
+            <IconButton
+              className={classes.languageButton}
+              onClick={e => {
+                notification_show();
+              }}
+              color="primary"
+            >
+              <NotificationsNoneIcon fontSize="large" />
             </IconButton>
             {navigator.share && (
               <IconButton
@@ -342,12 +369,12 @@ class MiniDrawer extends React.Component {
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
                 ) : (
-                  <ChevronLeftIcon />
-                )}
+                    <ChevronLeftIcon />
+                  )}
               </IconButton>
             </div>
             <Divider />
-            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute}   setAppData={setAppData}/>
+            <Navigator menuItems={menuItems} t={t} changeRoute={changeRoute} setAppData={setAppData} />
           </Drawer>
         </Hidden>
         <Hidden smUp>

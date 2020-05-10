@@ -19,6 +19,10 @@ const FAQ = Loadable({
   loader: () => import("../ui-pages/UserHome/components/Content/FAQ"),
   loading: Loading
 });
+const Notification = Loadable({
+  loader: () => import("../ui-pages/UserHome/components/Content/Dashboard/components/Notification"),
+  loading: Loading
+});
 const UserRoutes = () => {
   return (
     <div>
@@ -26,6 +30,7 @@ const UserRoutes = () => {
       <Route path="/user-home/statistics" component={Statistics} />
       <Route path="/user-home/districts-list" component={DistrictList} />
       <Route path="/user-home/about-faq" component={FAQ} />
+      <Route path="/user-home/new-cases" component={Notification} />
     </div>
   )
 }

@@ -171,7 +171,7 @@ class Dashboard extends React.Component {
           >
             <Typography component="div">
               <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>World</Grid>
+                <Grid item>{t("World")}</Grid>
                 <Grid item>
                   <Switch
                     checked={checked}
@@ -179,7 +179,7 @@ class Dashboard extends React.Component {
                     name="ViewSwitch"
                   />
                 </Grid>
-                <Grid item>India</Grid>
+                <Grid item>{t("country.India")}</Grid>
               </Grid>
             </Typography>
           </Paper>
