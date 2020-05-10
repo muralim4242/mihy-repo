@@ -70,7 +70,7 @@ class Notification extends React.Component {
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="h6" >
-                                {t("Latest New")}
+                                {t("Latest News")}
                             </Typography>
                         </Toolbar>
                     </AppBar>
