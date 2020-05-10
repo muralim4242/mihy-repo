@@ -2,12 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
+import { initGA,pageView } from "../../../../../ui-utils/tracking";
 import AboutUs from "../AboutUs";
 import FAQQuestions from "./questions";
 import FeedBack from "../AboutUs/FeedBack";
 
 class FAQ extends React.Component {
-  componentDidMount = async () => { };
+  componentDidMount = async () => {
+      const {match={}}=this.props;
+      initGA();
+      pageView(match.url)
+   };
 
   render() {
     const { t } = this.props;

@@ -3,9 +3,16 @@ import {connect} from "react-redux";
 import { withTranslation } from "react-i18next";
 import TopDistrictList from "../Dashboard/components/TopDistrictList";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
+import { initGA,pageView } from "../../../../../ui-utils/tracking";
 
 
 class DistrictList extends React.Component {
+  componentDidMount=()=>{
+        const {match={}} = this.props;
+        initGA();
+        pageView(match.url)
+  }
+
   handleClose = () => {
     const {history,setAppData}=this.props;
     setAppData("dashboard.dialogOpen", false);
