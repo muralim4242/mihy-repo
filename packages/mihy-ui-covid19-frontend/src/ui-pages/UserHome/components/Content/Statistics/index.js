@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
+import { initGA,pageView } from "../../../../../ui-utils/tracking";
 import { httpRequest } from "../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import AgeChart from "./AgeChart";
@@ -12,7 +13,7 @@ import TotalCasesChart from "./TotalCasesChart";
 class Statistics extends React.Component {
 
   componentDidMount = async () => {
-    let { setAppData,statistics={} } = this.props
+    let { setAppData,statistics={} ,match={}} = this.props
     const response = await httpRequest({
       endPoint: "https://api.covid19india.org/data.json",
       method: "get"
@@ -38,6 +39,8 @@ class Statistics extends React.Component {
       agesArray
     }
     setAppData('statistics', statistics);
+    initGA();
+    pageView(match.url)
   }
 
   render() {

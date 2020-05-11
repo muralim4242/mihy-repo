@@ -260,10 +260,12 @@
   "district.Karnataka.Tumakuru": "Tumakuru",
   "district.Karnataka.Ballari": "Ballari",
   "district.Karnataka.Bidar": "Bidar",
-  "district.Karnataka.Bagalkote": "Bagalkote",
+  "district.Karnataka.Bagalkote": "Bagalkot",
   "district.Karnataka.Belagavi": "Belagavi",
   "district.Karnataka.Bengaluru Rural": "Bengaluru Rural",
+  "district.Karnataka.Bengaluru Urban": "Bengaluru Urban",
   "district.Karnataka.Gadag": "Gadag",
+  "district.Karnataka.Haveri": "Haveri",
   "district.Karnataka.Mandya": "Mandya",
   "district.Karnataka.Vijayapura": "Vijayapura",
   "district.Maharashtra.Pune": "Pune",
@@ -500,6 +502,7 @@
   "Submit": "Submit",
   "Please Select a Rating": "Please Select a Rating",
   "Please Enter Your Name": "Please Enter Your Name",
+  "Latest New": "Latest New",
   "district.Maharashtra.Parbhani": "Parbhani",
   "district.Maharashtra.Nandurbar": "Nandurbar",
   "district.Rajasthan.Sawai Madhopur": "Sawai Madhopur",
@@ -727,5 +730,6 @@
   "country.South Sudan": "South Sudan",
   "country.Anguilla": "Anguilla",
   "country.Saint Pierre Miquelon": "Saint Pierre Miquelon",
-  "country.Yemen": "Yemen"
+  "country.Yemen": "Yemen",
+  "World": "World"
 }

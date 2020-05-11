@@ -21,12 +21,12 @@ const CoutryStatus = ({ countryStatus = {}, t, setAppData, classes }) => {
           : t("dashboard.cuntry-status-header")}
       </Typography>
       <Grid container spacing={1} alignItems="stretch">
-        <Grid item xs={6}>
+        <Grid item xs={6} md={3}>
           <Card style={{ background: "#f44336", color: "white" }}>
             <CardContent>
               {countryStatus.updated ? (
                 <Status
-                  status={{ label: "confirmed", 
+                  status={{ label: "confirmed",
                   count: countryStatus.cases,
                   delta: countryStatus.todayCases}}
                   t={t}
@@ -44,7 +44,7 @@ const CoutryStatus = ({ countryStatus = {}, t, setAppData, classes }) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={3}>
           <Card style={{ background: "#2196f3", color: "white" }}>
             <CardContent>
               {countryStatus.updated ? (
@@ -66,7 +66,7 @@ const CoutryStatus = ({ countryStatus = {}, t, setAppData, classes }) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={3}>
           <Card style={{ background: "#4caf50", color: "white" }}>
             <CardContent>
               {countryStatus.updated ? (
@@ -90,12 +90,12 @@ const CoutryStatus = ({ countryStatus = {}, t, setAppData, classes }) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={3}>
           <Card style={{ background: "#9e9e9e", color: "white" }}>
             <CardContent>
               {countryStatus.updated ? (
                 <Status
-                  status={{ label: "deaths", 
+                  status={{ label: "deaths",
                   count: countryStatus.deaths,
                   delta: countryStatus.todayDeaths }}
                   t={t}
