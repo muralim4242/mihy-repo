@@ -14,7 +14,7 @@ const StateStatus = ({ status = {}, t }) => {
   }
   return (
       <Grid container >
-        <Grid item md={11} xs={11} sm={11}>
+        <Grid item md={11} xs={10} sm={10}>
     <Typography variant="h6" color="primary">
       {status.updated ? countryName : stateName}
     </Typography>
@@ -43,9 +43,9 @@ const StateStatus = ({ status = {}, t }) => {
         }
       </Typography>
       </Grid>
-      <Grid item md={1} xs={1} sm={1} align="right">
+      <Grid item md={1} xs={2} sm={2} align="right" >
         {status.statenotes ? <Tooltip title={status.statenotes} placement="right" >
-<InfoIcon />
+<InfoIcon  style={{paddingRight:"7px",fontSize:"26px" }}/>
 </Tooltip>:""}
       </Grid>
       </Grid>
