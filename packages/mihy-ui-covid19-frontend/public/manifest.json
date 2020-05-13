@@ -18,13 +18,13 @@
       "type": "image/png"
     },
     {
-      "src": "covid19-512x512.png",
+      "src": "splash-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#d81b60",
   "background_color": "#d81b60"
 }
