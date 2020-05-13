@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography, Tooltip} from "@material-ui/core";
-
+import { Typography, Tooltip, Grid} from "@material-ui/core";
+import InfoIcon from "@material-ui/icons/Info";
 const DistrictStatus = ({ status = {}, selectedState, t }) => {
   const districtTranslatedValue = t(`district.${selectedState}.${status.code}`);
   let districtName = districtTranslatedValue;
@@ -33,12 +33,13 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
     }
   }
   return (
-    <div>
-      <Tooltip title={status.notes} placement="right">
+    <Grid container>
+      <Grid item md={11} xs={10} sm={10}> 
+      
       <Typography variant="h6" align="center" style={headerStyle}>
         {districtName}
       </Typography>
-      </Tooltip>
+      
       <Typography variant="subtitle2" style={{ color: "#f44336" }}>
         {`${t("confirmed")} - ${status.confirmed} ${parseInt(status.delta) ? `[+${status.delta}]` : ''}`}
       </Typography>
@@ -51,7 +52,12 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
       <Typography variant="subtitle2" style={{ color: "#9e9e9e" }}>
         {`${t("deaths")} - ${status.deaths} ${parseInt(status.deltaDeaths) ? `[+${status.deltaDeaths}]` : ''}`}
       </Typography>
-    </div>
+      </Grid>
+      <Grid item md={1} xs={2} sm={2} align="right">
+        {status.notes? <Tooltip title={status.notes} placement="right"><InfoIcon  style={{paddingRight:"2px",fontSize:"20px"}}/></Tooltip>:""}
+
+      </Grid>
+    </Grid>
   );
 };
 
