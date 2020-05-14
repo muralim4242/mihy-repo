@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../../ui-utils/commons";
 import { withTranslation } from "react-i18next";
 import { Line, defaults } from "react-chartjs-2";
-import moment from "moment";
 
 class TotalCasesChart extends React.Component {
   calcTotalCases = () => {
@@ -32,9 +31,9 @@ class TotalCasesChart extends React.Component {
     const recovered = [];
     const deaths = [];
 
-    this.props.casesData.forEach((el, index) => {
+    this.props.casesData.forEach((el, index) => {      
       if (index >= 31) {
-        dates.push(moment(el.date.trim(), "DD MMM"));
+        dates.push(el.date);
         confirmed.push(el.totalconfirmed);
         recovered.push(el.totalrecovered);
         deaths.push(el.totaldeceased);
