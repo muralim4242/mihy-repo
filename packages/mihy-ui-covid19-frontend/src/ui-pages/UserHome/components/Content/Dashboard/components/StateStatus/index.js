@@ -45,7 +45,7 @@ const StateStatus = ({ status = {}, t }) => {
       </Grid>
       <Grid item md={1} xs={2} sm={2} align="right" >
         {status.statenotes ? <Tooltip title={status.statenotes} placement="right" >
-<InfoIcon  style={{paddingRight:"7px",fontSize:"26px" }}/>
+<InfoIcon  color="primary"style={{paddingRight:"7px",fontSize:"26px" }}/>
 </Tooltip>:""}
       </Grid>
       </Grid>
