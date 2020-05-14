@@ -1,5 +1,7 @@
 import React from "react";
-import { Typography, Tooltip } from "@material-ui/core";
+import { Typography, Tooltip,Grid } from "@material-ui/core";
+import InfoIcon from "@material-ui/icons/Info";
+
 
 const StateStatus = ({ status = {}, t }) => {
   const stateTranslatedValue = t(`state.${status.state}`);
@@ -14,12 +16,12 @@ const StateStatus = ({ status = {}, t }) => {
     countryName = countryTranslatedValue.replace(`country.`, "")
   }
   return (
-    <div>
-      <Tooltip title={status.statenotes} placement="right" style={{ width: "30%", }}>
-        <Typography variant="h6" color="primary">
-          {status.updated ? countryName : stateName}
-        </Typography>
-      </Tooltip>
+
+      <Grid container>
+        <Grid item md={11}>
+    <Typography variant="h6" color="primary">
+      {status.updated ? countryName : stateName}
+    </Typography>
       <Typography variant="subtitle2" style={{ color: "#f44336" }}>
         {status.updated ?
           `${t("confirmed")} - ${new Intl.NumberFormat('en-IN').format(status.cases)} ${parseInt(status.todayCases) ? `[+${status.todayCases}]` : ''}` :
@@ -44,7 +46,16 @@ const StateStatus = ({ status = {}, t }) => {
           `${t("deaths")}  - ${new Intl.NumberFormat('en-IN').format(status.deaths)} ${parseInt(status.deltadeaths) ? `[+${status.deltadeaths}]` : ''}`
         }
       </Typography>
-    </div>
+      </Grid>
+      <Grid item md={1}>
+        {status.statenotes ? <Tooltip title={status.statenotes} placement="right" style={{ width: "30%", }}>
+
+<InfoIcon/>
+
+</Tooltip>:""}
+     
+      </Grid>
+      </Grid>
   );
 };
 

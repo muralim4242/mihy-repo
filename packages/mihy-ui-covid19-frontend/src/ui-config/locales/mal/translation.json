@@ -51,6 +51,7 @@
    "state.Sikkim":"സിക്കിം",
    "state.Dadra and Nagar Haveli and Daman and Diu":"ദാദ്രയും നഗർ ഹവേലിയും ദാമനും ഡിയുവും",
    "dashboard.view-district":"ജില്ല കാണുക",
+
    "district.Dadra and Nagar Haveli and Daman and Diu.Dadra and Nagar Haveli":"ദാദ്രയും നഗർ ഹവേലിയും",
    "district.Kerala.Thrissur":"തൃശ്ശൂർ",
    "district.Kerala.Alappuzha":"ആലപ്പുഴ",
@@ -167,7 +168,8 @@
    "district.Haryana.Yamunanagar":"യമുനാനഗർ",
    "district.Haryana.Jhajjar":"ജജ്ജർ",
    "district.Haryana.Mahendragarh":"മഹേന്ദ്രഗഡ്",
-   "district.Haryana.Rewari":"റിവാരി",
+   
+   
    "district.Uttar Pradesh.Agra":"ആഗ്ര",
    "district.Uttar Pradesh.Ghaziabad":"ഗാസിയാബാദ്",
    "district.Uttar Pradesh.Lucknow":"ലക്‌നൗ",
@@ -238,10 +240,7 @@
    "district.Uttar Pradesh.Jalaun":"ജല un ൻ",
    "district.Uttar Pradesh.Shrawasti":"ശ്രാവസ്തി",
    "district.Uttar Pradesh.Amethi":"അമേത്തി",
-   "district.Uttar Pradesh.Fatehpur":"ഫാത്തിപൂർ",
-   "district.Uttar Pradesh.Farrukhabad":"ഫാറൂഖാബാദ്",
-   "district.Uttar Pradesh.Lalitpur":"ലളിത്പൂർ",
-   "district.Uttar Pradesh.Hamirpur":"ഹാമിർപൂർ",
+	  
    "district.Ladakh.Leh":"ലേ",
    "district.Ladakh.Kargil":"കാർഗിൽ",
    "district.Tamil Nadu.Kancheepuram":"കാഞ്ചീപുരം",
@@ -321,7 +320,6 @@
    "district.Karnataka.Gadag":"ഗഡാഗ്",
    "district.Karnataka.Mandya":"മാണ്ഡ്യ",
    "district.Karnataka.Vijayapura":"വിജയപുര",
-   "district.Karnataka.Shivamogga":"ഷിമോഗ",
    "district.Karnataka.Haveri":"ഹവേരി",
    "district.Karnataka.Chitradurga":"ചിത്രാദുർഗ",
    "district.Maharashtra.Pune":"പൂനെ",
@@ -401,7 +399,6 @@
    "district.Uttarakhand.Haridwar":"ഹരിദ്വാർ",
    "district.Uttarakhand.Almora":"അൽമോറ",
    "district.Uttarakhand.Unknown":"അജ്ഞാതം",
-   "district.Uttarakhand.Uttarkashi":"ഉത്തരകാഷി",
    "district.Odisha.Khordha":"ഖോർദ",
    "district.Odisha.Bhadrak":"ഭദ്രക്",
    "district.Odisha.Cuttack":"കട്ടക്ക്",
@@ -417,9 +414,7 @@
 	   "district.Odisha.Jagatsinghpur":"ജഗത്സിംഗ്പൂർ",
 	    "district.Odisha.Mayurbhanj":"മയൂർഭഞ്ച്",
 		"district.Odisha.Balangir":"ബാലങ്കിർ",
-      "district.Odisha.Koraput":"കോരാപുട്ട്",
-      "district.Odisha.Angul":"അങ്കുൽ",
-      "district.Odisha.Nayagarh":"നായഗഡ്",
+		"district.Odisha.Koraput":"കോരാപുട്ട്",
    "district.Odisha.Deogarh":"ദിയോഘർ",
    "district.Odisha.Kendujhar":"കെണ്ടുജാർ",
    "district.Odisha.Jharsuguda":"ജർസുഗുഡ",
@@ -442,9 +437,6 @@
    "district.West Bengal.Darjeeling":"ഡാർജിലിംഗ്",
    "district.West Bengal.Paschim Medinipur":"വെസ്റ്റ് മെഡിനിപൂർ",
    "district.West Bengal.Paschim Bardhaman":"വെസ്റ്റ് ബർദ്ധമാൻ",
-   "district.West Bengal.Purba Bardhaman":"പൂർബ ബാർധമാൻ",
-   "district.West Bengal.Jhargram":"ഘർഗ്രാം",
-   "district.West Bengal. Uttar Dinajpur":"ഉത്തര ദിനാജ്പൂർ",
    "district.Chandigarh.Chandigarh":"ചണ്ഡിഗഡ്",
    "district.Chhattisgarh.Raipur":"റായ്പൂർ",
    "district.Chhattisgarh.Rajnandgaon":"രാജ്‌നന്ദ്‌ഗാവ്",
@@ -488,8 +480,7 @@
    "district.Himachal Pradesh.Sirmaur":"സിർമൗർ",
     "district.Himachal Pradesh.Mandi":"മാന്ദ്യം",
 	 "district.Himachal Pradesh.Hamirpur":"ഹാമിർപൂർ",
-     "district.Himachal Pradesh.Shimla":"ഷിംല",
-     "district.Himachal Pradesh.Bilaspur":"ബിലാസ്പൂർ",
+	  "district.Himachal Pradesh.Shimla":"ഷിംല",
    "district.Madhya Pradesh.Jabalpur":"ജബൽപൂർ",
    "district.Madhya Pradesh.Bhopal":"ഭോപ്പാൽ",
    "district.Madhya Pradesh.Indore":"ഇൻഡോർ",
@@ -524,9 +515,6 @@
    "district.Madhya Pradesh.Dindori":"ദിൻഡോറി",
    "district.Madhya Pradesh.Panna":"പന്ന",
    "district.Madhya Pradesh.Jhabua":"ജാബുവ",
-   "district.Madhya Pradesh.Bhind":"ബിന്ദ്",
-   "district.Madhya Pradesh.Guna":"ഗുണ",
-   "district.Madhya Pradesh.Sehore":"സെഹോർ",
    "district.Bihar.Munger":"മുങെർ",
    "district.Bihar.Patna":"പട്ന",
    "district.Bihar.Siwan":"സിവാൻ",
@@ -597,7 +585,6 @@
    "district.Assam.Dhubri":"ദുബ്രി",
    "district.Assam.Karimganj":"കരിംഗഞ്ച്",
    "district.Assam.Kokrajhar":"കൊക്രാജർ",
-   "district.Assam.Bongaigaon":"ബോംഗൈഗാവ്",
    "district.Assam.Hailakandi":"ഹൈലകണ്ടി",
    "district.Arunachal Pradesh.Lohit":"ലോഹിത്",
    "district.Dadra and Nagar Haveli.Unknown":"അജ്ഞാതം",
@@ -655,7 +642,8 @@
    "User Name:":"ഉപയോക്തൃനാമം   :",
    "User Description:":"ഉപയോക്തൃ വിവരണം",
    "SUBMIT":"സമർപ്പിക്കുക",
-   "Search":"തിരയൽ",
+   "About US & FAQ":"വിവരം",
+   
    "district.Rajasthan.Sawai Madhopur":"സവായ് മാധോപൂർ",
    "district.Madhya Pradesh.Agar Malwa":"അഗർ മാൽവ",
    "district.Jammu and Kashmir.Anantnag":"അന്നാനംഗ്",
@@ -663,6 +651,7 @@
    "district.Bihar.Vaishali":"വൈശാലി",
    "district.Odisha.Baleshwar":"ബലെഷ്വർ",
    "district.Manipur.Imphal East":"ഇമ്ഫൽ ഈസ്റ്റ്",
+   
    "World Covid 19 cases": "ലോക കോവിഡ് 19 കേസുകൾ",
 "World Cases": "ലോക കേസുകൾ",
 "country.USA" : "അമേരിക്ക" ,
@@ -886,8 +875,7 @@
 "country.Tajikistan":"താജിക്കിസ്ഥാൻ",
 "country.Israel":"ഇസ്രായേൽ",
 "country.S. Korea":"ദക്ഷിണ കൊറിയ",
-"country.Saudi Arabia":"സൗദി അറേബ്യ",
-"country.Côte d'Ivoire":"കോട്ട് ഡിവൂർ"
+"country.Saudi Arabia":"സൗദി അറേബ്യ"
 
 
 }
