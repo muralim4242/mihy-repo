@@ -54,7 +54,7 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
       </Typography>
       </Grid>
       <Grid item md={1} xs={2} sm={2} align="right">
-        {status.notes? <Tooltip title={status.notes} placement="right"><InfoIcon  style={{paddingRight:"2px",fontSize:"20px"}}/></Tooltip>:""}
+        {status.notes? <Tooltip title={status.notes} placement="right"><InfoIcon color="primary" style={{paddingRight:"2px",fontSize:"20px"}}/></Tooltip>:""}
 
       </Grid>
     </Grid>
