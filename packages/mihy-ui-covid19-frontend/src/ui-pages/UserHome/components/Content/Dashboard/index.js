@@ -2,6 +2,7 @@ import React from "react";
 // import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
+import { initGA,pageView } from "../../../../../ui-utils/tracking";
 import { httpRequest } from "../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Paper, Switch, Grid, Typography } from "@material-ui/core";
@@ -32,9 +33,11 @@ const RemainingDays = Loadable({
 
 class Dashboard extends React.Component {
   componentDidMount = async () => {
-    const { setAppData } = this.props
+    const { setAppData,match={} } = this.props
     this.feathIndiaData();
     setAppData("checked", true)
+    initGA();
+    pageView(match.url)
   };
   viewSwitch = async () => {
     const { checked, setAppData } = this.props

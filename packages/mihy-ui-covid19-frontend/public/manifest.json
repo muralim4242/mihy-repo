@@ -1,5 +1,5 @@
 {
-  "short_name": "Covid 19",
+  "short_name": "Covid 19 tracker",
   "name": "Powered by mihy.org",
   "icons": [
     {
@@ -18,18 +18,13 @@
       "type": "image/png"
     },
     {
-      "src": "covid19-512x512.png",
+      "src": "splash-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "virus-solid.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
     }
   ],
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#d81b60",
   "background_color": "#d81b60"
 }

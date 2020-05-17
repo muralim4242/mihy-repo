@@ -1,5 +1,6 @@
 import React from "react";
 import { mapDispatchToProps } from "../../../../../../../ui-utils/commons";
+import { initGA,pageView } from "../../../../../../../ui-utils/tracking";
 import { connect } from "react-redux";
 import { Typography, Card, CardContent, Dialog, Slide, AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { formatDistance, format } from 'date-fns';
@@ -25,10 +26,18 @@ const styles = ({
 });
 
 class Notification extends React.Component {
+    componentDidMount=()=>{
+          const {match={}} = this.props;
+          initGA();
+          pageView(match.url)
+    }
+
     handleClose = () => {
-        const { history, setAppData } = this.props;
+        const { history, setAppData ,match={}} = this.props;
         setAppData("dashboard.dialogOpen", false);
         history.push("/user-home");
+        initGA();
+        pageView(match.url)
     };
 
     render() {
@@ -61,7 +70,7 @@ class Notification extends React.Component {
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="h6" >
-                                {t("Latest New")}
+                                {t("Latest News")}
                             </Typography>
                         </Toolbar>
                     </AppBar>
