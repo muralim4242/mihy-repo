@@ -130,29 +130,24 @@ class FeedBack extends React.Component {
           {t("FeedBack")}
         </Typography>
         <Grid item md={12} xs={12} sm={12} align="center">
-          <Grid item md={8} xs={10} sm={8}>
+          <Grid item md={6} xs={10} sm={8}>
             <Card style={{ boxShadow: "5px 5px 4px -1px rgba(0,0,0,0.2)" }}>
               <CardContent>
                 <Grid item md={12} xs={12} sm={12}>
                   <Grid
                     container
                     item
-                    md={12}
+                    md={6}
                     xs={12}
                     sm={6}
                     style={{ display: "inline-flex" }}
                   >
-                    <Grid item md={8} xs={6} sm={8} align="center">
+                    <Grid item md={6} xs={6} sm={8} align="start">
+                      <Typography style={{}} variant="subtitle2" > {t("Rating")}:</Typography>
                       <Rating
-                        name="customized-icons"
-                        size="large"
+                        name="simple-controlled"
                         value={value}
-                        style={{
-                          paddingRight: "10px",
-                          width: "31%",
-                          justifyContent: "space-evenly",
-                        }}
-                        precision={0.5}
+                        size="large"
                         onChange={(event, newValue) => {
                           onChangeStar(event, newValue);
                         }}
@@ -160,16 +155,17 @@ class FeedBack extends React.Component {
                           onChangeHover(event, newHover);
                         }}
                       />
+
                       {value === undefined || value <= 1 ? (
                         <div style={{ color: "red" }}>
                           {" "}
                           {errors && errors.value}
                         </div>
                       ) : (
-                        <div></div>
-                      )}
+                          <div></div>
+                        )}
                     </Grid>
-                    <Grid item md={1} xs={6} sm={1} align="end">
+                    <Grid item md={6} xs={6} sm={1} align="end">
                       {value !== null && (
                         <p className={classes.ratingValue}>
                           {labels[hover !== -1 ? hover : t[value]]}
@@ -199,8 +195,8 @@ class FeedBack extends React.Component {
                           {errors && errors.name}
                         </div>
                       ) : (
-                        <div></div>
-                      )}
+                          <div></div>
+                        )}
                     </Grid>
                   </Grid>
                   <br />
