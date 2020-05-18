@@ -25,10 +25,10 @@ const TopList = Loadable({
   loading: Loading
 });
 
-const RemainingDays = Loadable({
-  loader: () => import("./components/RemainingDays"),
-  loading: Loading
-});
+// const RemainingDays = Loadable({
+//   loader: () => import("./components/RemainingDays"),
+//   loading: Loading
+// });
 
 
 class Dashboard extends React.Component {
