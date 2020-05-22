@@ -86,13 +86,13 @@ class FeedBack extends React.Component {
           variant: "success",
           message: feedbackSubmit,
         });
-        setAppData("feedback", {
-          name: "",
-          value: 0,
-          hover: 0,
-          description: "",
-        });
       }
+      setAppData("feedback", {
+        name: "",
+        value: 0,
+        hover: 0,
+        description: "",
+      });
     }
     setAppData("spinner", false);
   };
