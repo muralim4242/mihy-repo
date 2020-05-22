@@ -25,10 +25,10 @@ const TopList = Loadable({
   loading: Loading
 });
 
-const RemainingDays = Loadable({
-  loader: () => import("./components/RemainingDays"),
-  loading: Loading
-});
+// const RemainingDays = Loadable({
+//   loader: () => import("./components/RemainingDays"),
+//   loading: Loading
+// });
 
 
 class Dashboard extends React.Component {
@@ -137,7 +137,7 @@ class Dashboard extends React.Component {
             topList.updated ? topList : topList.length > 0 ? topList[0] : {}
           }
         />
-        {topList.updated ? "" : <RemainingDays t={t} />}
+        {/* {topList.updated ? "" : <RemainingDays t={t} />} */}
         {/* <YourArea t={t} handleOpen={handleOpen} /> */}
         {topList.updated ? (
           <TopList
