@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 const firebase = require("./utils/firebase");
-const { fA } = firebase;
+const { fA , fC} = firebase;
 const db = fA.database();
 const mdmsRef = process.env.FUNCTIONS_EMULATOR
   ? db.ref("covid19_dev")
@@ -13,6 +13,7 @@ const cors = require("cors")({
   origin: true
 });
 
+
 // console.log("env-test", process.env.GCLOUD_PROJECT);
 console.log("function emulator", process.env.FUNCTIONS_EMULATOR);
 // The Firebase Admin SDK to access the Firebase Realtime Database.
@@ -21,76 +22,55 @@ console.log("function emulator", process.env.FUNCTIONS_EMULATOR);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
-let statefn = async () => {
-  var stateff;
 
-  var state = [];
-
-  await rp("https://api.covid19india.org/data.json")
-    .then(async function(result) {
-      console.log("check2");
-      stateff = await JSON.parse(result);
-      state = stateff.statewise;
-      console.log("cron running");
-    })
-    .catch(function(err) {});
-  //upddate and insert
-
-  state.forEach(async ele => {
-    var date = ele.lastupdatedtime
-      .split(" ")[0]
-      .split("/")
-      .join("-");
-
-    await mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele);
-  });
-
-  return 0;
-};
-
-var CronJob = require("cron").CronJob;
-
-var job = new CronJob(
-  " * * * * *",
-  statefn(),
-  null,
-  true,
-  "America/Los_Angeles"
-);
-job.start();
-
-console.log("after");
 
 //get current state data
 exports.get_state_wise_status = functions.https.onRequest(async (req, res) => {
   return cors(req,res,async()=>{
     try {
+      let dataFlag=true;
       var stateff;
-      var state = [];
-      job = new CronJob("2 * * * * *", async () => {
+      const { status_req, date_data, state_status } = req.body;
+
+      if(status_req=="get all status"){
+        mdmsRef.child("statewiseData/").once("value", snapshot => {
+          res.send(snapshot);
+        });
+      
+      }
+     else if(state_status){
+      var stateff,state;
+       if(dataFlag==false){
         await rp("https://api.covid19india.org/data.json")
           .then(function(result) {
             stateff = JSON.parse(result);
             state = stateff.statewise;
           })
           .catch(function(err) {});
+        }else{
+          state=state_status;
+        }
         //upddate and insert
         state.forEach(ele => {
           var date = ele.lastupdatedtime
             .split(" ")[0]
             .split("/")
             .join("-");
-  
-          mdmsRef.child(`statewiseData/${ele.statecode}/${date}`).update(ele);
+ 
+          mdmsRef
+          .child
+          (`statewiseData/${ele.statecode}/${date}`)
+          .update(ele);
         });
-        console.log("cron running");
-      });
-      job.start();
-  
+        res.send("Data Stored")
+    
+  }
+  else{
+    if(date_data){
       let mainData = [];
-      let day = new Date().getDate();
-      let month = new Date().getMonth() + 1;
-      let year = new Date().getUTCFullYear();
+      let day = new Date(date_data).getDate();
+      let month = new Date(date_data).getMonth() + 1;
+      let year = new Date(date_data).getFullYear();
   
       //current state data
       mdmsRef.child("statewiseData/").once("value", snapshot => {
@@ -137,8 +117,13 @@ exports.get_state_wise_status = functions.https.onRequest(async (req, res) => {
   
           mainData.push(stateobj);
         });
+       
         res.send(mainData);
       });
+    }else{
+      res.send("Please give valid input")
+    }
+    }
     } catch (e) {
       console.error(e);
       return res.status(500).send(e);
@@ -147,37 +132,30 @@ exports.get_state_wise_status = functions.https.onRequest(async (req, res) => {
  
 });
 
-// get all data of state
-exports.getAllState = functions.https.onRequest(async (req, res) => {
-  return cors(req,res,async()=>{ try {
-    mdmsRef.child("statewiseData/").once("value", snapshot => {
-      res.send(snapshot);
-    });
-  } catch (e) {
-    console.error(e);
-    return res.status(500).send(e);
-  }})
- 
-});
 
 //get all district data
-exports.getallDistrict = functions.https.onRequest(async (req, res) => {
+exports.get_district_wise_status = functions.https.onRequest(async (req, res) => {
   return cors(req,res,async()=>{
     try {
-      const { status } = req.body;
-  
-      if (status == "get all district data") {
+      const { status_req, date_data, district_status } = req.body;
+  let dataFlag=true;
+      if (status_req == "get all district data") {
         mdmsRef.child(`districtWise/`).once("value", s => {
           res.send(s.val());
         });
-      } else {
-        let districtDate = [];
+      }else if(district_status){
+        let districtDate ={};
+        if(dataFlag==true){
+          districtDate=district_status;
+        }
+       else{
         await rp("https://api.covid19india.org/state_district_wise.json")
           .then(function(result) {
             districtDate = JSON.parse(result);
           })
           .catch(function(err) {});
-  
+         
+        }
         //upddate and insert\
         let _date;
         for (let x in districtDate) {
@@ -214,7 +192,7 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
                   ac = andhraPradesh[k];
                   delete andhraPradesh[k];
                 }
-                if (k === "Y.S.R.") {
+                if (k === "Y.S.R. Kadapa") {
                   flag2 = true;
                   ca = andhraPradesh[k];
                   delete andhraPradesh[k];
@@ -224,7 +202,7 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
                   andhraPradesh["Sri Potti Sriramulu Nellore"] = ac;
                 }
                 if (flag2) {
-                  andhraPradesh["YSR"] = ca;
+                  andhraPradesh["YSR Kadapa"] = ca;
                 }
               }
             }
@@ -235,22 +213,25 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
         let obj = {};
         for (let x in districtDate) {
           let keystate = x;
-  
           let data = districtDate[x];
-  
+ 
           newdata = Object.values(data);
-  
+ 
           let d = new Date().getDate();
           let month = new Date().getMonth() + 1;
           let year = new Date().getFullYear();
           let date = `${d}-${month}-${year}`;
-          _date = date;
-  
+          
           await mdmsRef
             .child(`districtWise/${keystate}/${date}`)
             .update(newdata[0]);
         }
-  
+        res.send("Data Stored")
+      }else{
+        if(date_data){
+          let actual_date=`${new Date(date_data).getDate()}-${new Date(date_data).getMonth()+1}-${new Date(date_data).getFullYear()}`;
+          console.log("actual_date",actual_date);
+          
         let districtResponse = [];
         await mdmsRef.child("districtWise/").once("value", snapshot => {
           snapshot.forEach(s => {
@@ -261,9 +242,9 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
               let month_ = parseInt(d1.key.split("-")[1]);
               let year_ = parseInt(d1.key.split("-")[2]);
               let date_ = `${day}-${month_}-${year_}`;
-              cur_date = _date;
+              cur_date = actual_date;
   
-              if (date_ == _date) {
+              if (date_ == actual_date) {
                 obj = d1;
               }
             });
@@ -272,8 +253,12 @@ exports.getallDistrict = functions.https.onRequest(async (req, res) => {
           });
         });
         res.send(districtResponse);
+      
+      }else{
+        res.send("Please input a valid input");
       }
-    } catch (e) {
+    }
+   } catch (e) {
       console.error(e);
       return res.status(500).send(e);
     }
@@ -336,34 +321,51 @@ exports.getService = functions.https.onRequest(async (req, res) => {
   }
 });
 
-// get World Status
-exports.getWorldStatus = functions.https.onRequest(async (req, res) => {
+
+//get world status
+exports.get_world_wise_status = functions.https.onRequest(async (req, res) => {
   return cors(req,res,async()=>{
     try {
-      let { status_req } = req.body;
-  
+      let dataFlag=true;
+      let { status_req, date_data, world_status } = req.body;
+      
+    
+
+//all status
       if (status_req == "get all status") {
         mdmsRef.child(`worldStatusData/`).once("value", s => {
           res.send(s.val());
         });
-      } else {
-        let world_data;
+      } else if(world_status) { //if world data is coming in reqbody from https://corona.lmao.ninja/v2/all api
+        let world_data=[];
+
+        if(dataFlag==false){ // it should never execute
         await rp("https://corona.lmao.ninja/v2/all")
           .then(function(result) {
             world_data = JSON.parse(result);
           })
           .catch(function(err) {});
+        }else{
+          //assigning world status data 
+          world_data=world_status;
+        }
         let d = new Date(world_data.updated).getDate();
         let month = new Date(world_data.updated).getMonth() + 1;
         let year = new Date(world_data.updated).getFullYear();
         let date = `${d}-${month}-${year}`;
-  
+  // storing data in db
         await mdmsRef
-          .child(`worldStatusData/worldStatus/${date}`)
-          .update(world_data);
+        .child(`worldStatusData/worldStatus/${date}`)
+        .update(world_data);
+        res.send("Data stored")
+      }
+      else{
+//returning given date data
+if(date_data){
+  let actual_date=new Date(date_data);
         await mdmsRef.child("worldStatusData/").once("value", snapshot => {
           let temp, obj, l_date;
-          let date = new Date();
+          let date= actual_date;
           let count = 0;
           snapshot.forEach(ele => {
             ele.forEach(ee => {
@@ -391,9 +393,17 @@ exports.getWorldStatus = functions.https.onRequest(async (req, res) => {
               }
             };
             res.send(latest_world_data);
+         
           });
         });
+
       }
+      else{
+        // if nothing is coming in reqqbody
+        res.send("Please give valid input")
+      }
+      }
+      
     } catch (e) {
       console.error(e);
       return res.status(500).send(e);
@@ -402,22 +412,25 @@ exports.getWorldStatus = functions.https.onRequest(async (req, res) => {
  
 });
 
-exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
+exports.get_countries_wise_status = functions.https.onRequest(async (req, res) => {
   return cors(req,res,async()=>{ try {
-    let { status_req } = req.body;
-
+    let { status_req,date_data, country_status } = req.body;
+let dataFlag= true;
     if (status_req == "get all status") {
-      mdmsRef.child(`getCountriesStatus/`).once("value", s => {
+      mdmsRef.child(`countryWiseData/`).once("value", s => {
         res.send(s.val());
       });
-    } else {
-      let country_data;
+    } else if(country_status){
+      let country_data=[];
+      if(dataFlag==false){
       await rp("https://corona.lmao.ninja/v2/countries")
         .then(function(result) {
           country_data = JSON.parse(result);
         })
         .catch(function(err) {});
-
+      }else{
+        country_data=country_status;
+      }
       country_data.forEach(ele => {
         let r_d = new Date(ele.updated).getDate();
         let r_m = new Date(ele.updated).getMonth() + 1;
@@ -428,11 +441,15 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
           .child(`countryWiseData/${ele.countryInfo.iso3}/${date}`)
           .update(ele);
       });
-
+      res.send("Data Stored")
+    }
+    else{
+      if(date_data){
+        let actual_date=new Date(date_data);
       await mdmsRef.child("countryWiseData/").once("value", snapshot => {
         let countryResponse = [];
         let temp, obj, current_time;
-        let date = new Date();
+        let date = actual_date;
         let count = 0;
         snapshot.forEach(snap => {
           let country_code = snap.key;
@@ -462,7 +479,10 @@ exports.getCountriesStatus = functions.https.onRequest(async (req, res) => {
 
         res.send(countryResponse);
       });
+    }else{
+      res.send("Please give a valid input")
     }
+  }
   } catch (e) {
     console.error(e);
     return res.status(500).send(e);

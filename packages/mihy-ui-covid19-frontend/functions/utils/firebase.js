@@ -7,8 +7,6 @@ var firebase = require('firebase');
 var admin = require("firebase-admin");
 var serviceAccount = require("./service-account.json");
 
-//console.log("check1111111111111111111111111111111111111111111111111111111111111");
-
 try {
   var prodConfig = {
     // apiKey: process.env.DEV_API_KEY,
@@ -47,7 +45,6 @@ try {
 } catch (e) {
   console.log(e);
 }
-//console.log("check 222222222222222222222222222222222222222222222222222222222222222222");
 
 try {
   admin.initializeApp({
