@@ -34,6 +34,17 @@ export const technologies = [
   }
 ];
 
+export const ourProducts = [
+  {
+    name: "Covid19",
+    image:require("../../ui-assets/images/covid19.jpg")
+  },
+  {
+    name: "IMS",
+    image:require("../../ui-assets/images/ims.jpg")
+  }
+];
+
 export const platforms = [
   {
     name: "Web Platform",
