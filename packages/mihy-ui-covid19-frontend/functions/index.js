@@ -29,7 +29,7 @@ exports.get_state_wise_status = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       let dataFlag = true;
-      var stateff;
+      var stateff,state;
       const { status_req, date_data, state_status } = req.body;
 
       if (status_req == "get all status") {
@@ -39,7 +39,7 @@ exports.get_state_wise_status = functions.https.onRequest(async (req, res) => {
 
       }
       else if (state_status) {
-        var stateff, state;
+       
         if (dataFlag == false) {
           await rp("https://api.covid19india.org/data.json")
             .then(function (result) {
