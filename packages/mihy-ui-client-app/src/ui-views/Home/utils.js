@@ -83,6 +83,34 @@ export const team = [
     about:"Passionate about product manangement and visual design."
     // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
   },
+  {
+    name: "Muhid",
+    photo:require("../../ui-assets/images/boy.jpg"),
+    designation:"Fullstack Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Skyler",
+    photo:require("../../ui-assets/images/girl.jpg"),
+    designation:"Frontend Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Perrie",
+    photo:require("../../ui-assets/images/girl.jpg"),
+    designation:"Frontend Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Sadia",
+    photo:require("../../ui-assets/images/girl.jpg"),
+    designation:"Backend Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
   // {
   //   name: "Murali M",
   //   photo:require("../../ui-assets/images/baseline_person_black_48dp.png"),
@@ -123,3 +151,4 @@ export const showcases = [
     bigImage: require("../../ui-assets/images/Screenshot 2019-01-13 at 6.17.38 PM.png")
   }
 ];
+

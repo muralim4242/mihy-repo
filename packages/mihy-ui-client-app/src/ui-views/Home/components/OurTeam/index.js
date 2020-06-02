@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -9,21 +9,27 @@ import Swiper from "react-id-swiper";
 import Hidden from "@material-ui/core/Hidden";
 
 const params = {
-  effect: "coverflow",
-  grabCursor: true,
-  centeredSlides: true,
+  // effect: "coverflow",
+  // grabCursor: true,
+  // centeredSlides: true,
   slidesPerView: "auto",
-  activeSlideKey: 1,
-  coverflowEffect: {
-    rotate: 50,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true
+  // CircularProgress:true,
+  loop: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false
   },
+  // activeSlideKey: 1,
+  // coverflowEffect: {
+  //   rotate: 50,
+  //   stretch: 0,
+  //   depth: 100,
+  //   modifier: 1,
+  //   slideShadows: true
+  // },
   pagination: {
     el: ".swiper-pagination",
-    bulletActiveClass:"customBulletActive"
+    bulletActiveClass: "customBulletActive",
   }
 };
 
@@ -36,9 +42,13 @@ const paramsXs = {
     shadowOffset: 20,
     shadowScale: 0.94
   },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false
+  },
   pagination: {
     el: ".swiper-pagination",
-    bulletActiveClass:"customBulletActive"
+    bulletActiveClass: "customBulletActive"
   }
 };
 
@@ -69,26 +79,24 @@ const styles = theme => ({
 
 class OurTeam extends React.Component {
   state = {
-    spacing: "40"
+    // spacing: "40"
   };
-
   render() {
     const { classes, team } = this.props;
     const { spacing } = this.state;
-
     return (
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={12} align="center">
-            <Typography component="h2" variant="h2" style={{color:"#d81b60"}} className="cssanimation sequence leMovingBackFromRight" gutterBottom>
+            <Typography component="h2" variant="h2" style={{ color: "#d81b60" }} className="cssanimation sequence leMovingBackFromRight" gutterBottom>
               Here is our team
             </Typography>
           </Grid>
         </Grid>
         <Hidden smDown>
-        <Paper>
-          <Grid container spacing={spacing} justify="center" alignItems="center">
-              {/*<Swiper {...params}>*/}
+          <Paper>
+            <Grid container spacing={spacing} justify="center" alignItems="center">
+              <Swiper {...params}>
                 {team.map((item, key) => {
                   return (
                     <Grid item sm={4} xs={12} key={key}>
@@ -109,35 +117,33 @@ class OurTeam extends React.Component {
                     </Grid>
                   );
                 })}
-              {/*</Swiper>*/}
-          </Grid>
-
-        </Paper>
+              </Swiper>
+            </Grid>
+          </Paper>
         </Hidden>
-
         <Hidden smUp>
-          {/*<Swiper {...paramsXs}>*/}
+          <Swiper {...paramsXs}>
             {team.map((item, key) => {
               return (
-                  <Paper style={{height:"340px"}}>
-                    <div className={classes.div} key={key}>
-                      <Avatar
-                        alt={item.name}
-                        src={item.photo}
-                        className={classes.avatar}
-                      />
-                      <Typography variant="title" gutterBottom>
-                        {item.name}
-                      </Typography>
-                      <Typography variant="subheading" gutterBottom>
-                        {item.designation}
-                      </Typography>
-                      <Typography gutterBottom>{item.about}</Typography>
-                    </div>
-                  </Paper>
+                <Paper style={{ height: "340px" }}>
+                  <div className={classes.div} key={key}>
+                    <Avatar
+                      alt={item.name}
+                      src={item.photo}
+                      className={classes.avatar}
+                    />
+                    <Typography variant="title" gutterBottom>
+                      {item.name}
+                    </Typography>
+                    <Typography variant="subheading" gutterBottom>
+                      {item.designation}
+                    </Typography>
+                    <Typography gutterBottom>{item.about}</Typography>
+                  </div>
+                </Paper>
               );
             })}
-          {/*</Swiper>*/}
+          </Swiper>
         </Hidden>
       </div>
     );

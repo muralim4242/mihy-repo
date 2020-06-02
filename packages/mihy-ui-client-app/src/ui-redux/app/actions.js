@@ -19,3 +19,12 @@ export const toggleSpinner = ()=>{
     type: actionTypes.TOGGLE_SPINNER
   }
 }
+
+export const setStatesFromResponse = (attribute, val) => {
+  return {
+    type : actionTypes.SET_STATES_FROM_RESPONSE,
+    payload : {
+      attribute, val
+    }
+  }
+}
