@@ -9,7 +9,9 @@ const initialState = {
     open: false,
     error: true
   },
-  spinner:false
+  appName:"",
+  iframeUrl:"",
+  spinner:false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const appReducer = (state = initialState, action) => {
         ...state,
         spinner:!state.spinner
       }
+      case actionTypes.SET_STATES_FROM_RESPONSE:
+      var { attribute, val } = action.payload;
+      return {
+        ...state,
+        [attribute]: val
+      };
     default:
       return state;
   }

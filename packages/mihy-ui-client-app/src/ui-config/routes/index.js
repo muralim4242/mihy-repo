@@ -30,6 +30,16 @@ const Home=Loadable({
   loading:Loading
 })
 
+const AllProducts=Loadable({
+  loader:()=>import ('../../ui-views/AllProducts'),
+  loading:Loading
+})
+
+const IFrame=Loadable({
+  loader:()=>import ('../../ui-views/IFrame'),
+  loading:Loading
+})
+
 const mainRoutes = [
   // {
   //   path: mainRouteConstants.LANDING,
@@ -49,12 +59,21 @@ const mainRoutes = [
   // },
   {
     path: mainRouteConstants.HOME,
-    component: Home
+    component: Home, isExact:true
+  },
+  {
+    path: mainRouteConstants.All_PRODUCTS,
+    component: AllProducts
+  },
+  {
+    path: mainRouteConstants.INTEGRATION,
+    component: IFrame
   },
   {
     isRedirect:true,
     to:mainRouteConstants.REDIRECT
   }
+  
 ];
 
 export default mainRoutes;
