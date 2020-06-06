@@ -575,3 +575,33 @@ exports.getFeedback = functions.https.onRequest(async (req, res) => {
 //     ...obj,
 //     ...obj2
 //   };
+
+
+
+//Service_create done
+exports.createEnquiry = functions.https.onRequest(async (req, res) => {
+  return cors(req, res, async () => {
+    try {
+    
+
+      const { name, email, subject,additional_info } = req.body;
+      if (!name || !email || !subject ||!additional_info) {
+        res.send("Please enter all fields");
+      }
+      let current_time = new Date().getTime();
+      let obj = {
+        name: name,
+        email: email,
+        subject: subject,
+        additional_info:additional_info,
+        created_date: current_time
+      };
+
+      await mdmsRef.child("mihy_enquiry").push(obj);
+      res.send(`Thanks for your valuable enquiry ${name}`);
+    } catch (e) {
+      console.error(e);
+      return res.status(500).send(e);
+    }
+  });
+});
