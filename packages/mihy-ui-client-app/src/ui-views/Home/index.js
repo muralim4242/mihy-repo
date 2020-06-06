@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Comment from "./components/Comment";
 import {technologies,platforms,showcases,team, ourProducts} from "./utils";
 import "./index.css";
+import Feature from "./components/Feature";
 
 
 
@@ -101,6 +102,7 @@ class Home extends React.Component {
         <Platforms platforms={platforms}/>
         <OurProducts ourProducts={ourProducts}/>
         <OurTeam team={team}/>
+        <Feature/>
         <Footer />
         {/*<Comment handleClose={handleClose} open={open} handleClickOpen={handleClickOpen}/>*/}
       </div>
