@@ -5,56 +5,75 @@ import * as mainRouteConstants from "./route-names";
 
 const Loading = () => <LinearProgress/>;
 
-const Landing = Loadable({
-  loader: () => import('../../ui-views/Landing'),
-  loading: Loading,
-});
-
-const Playground = Loadable({
-  loader: () => import('../../ui-views/Playground'),
-  loading: Loading,
-});
-
-const ScreenInterface=Loadable({
-  loader:()=>import ('../../ui-views/ScreenInterface'),
-  loading:Loading
-})
-
-const Catalog=Loadable({
-  loader:()=>import ('../../ui-views/Catalog'),
-  loading:Loading
-})
+// const Landing = Loadable({
+//   loader: () => import('../../ui-views/Landing'),
+//   loading: Loading,
+// });
+//
+// const Playground = Loadable({
+//   loader: () => import('../../ui-views/Playground'),
+//   loading: Loading,
+// });
+//
+// const ScreenInterface=Loadable({
+//   loader:()=>import ('../../ui-views/ScreenInterface'),
+//   loading:Loading
+// })
+//
+// const Catalog=Loadable({
+//   loader:()=>import ('../../ui-views/Catalog'),
+//   loading:Loading
+// })
 
 const Home=Loadable({
   loader:()=>import ('../../ui-views/Home'),
   loading:Loading
 })
 
+const AllProducts=Loadable({
+  loader:()=>import ('../../ui-views/AllProducts'),
+  loading:Loading
+})
+
+const IFrame=Loadable({
+  loader:()=>import ('../../ui-views/IFrame'),
+  loading:Loading
+})
+
 const mainRoutes = [
-  {
-    path: mainRouteConstants.LANDING,
-    component: Landing
-  },
-  {
-    path:mainRouteConstants.SCREEN_INTERFACE,
-    component:ScreenInterface
-  },
-  {
-    path: mainRouteConstants.PLAYGROUND,
-    component: Playground
-  },
-  {
-    path: mainRouteConstants.CATALOG,
-    component: Catalog
-  },
+  // {
+  //   path: mainRouteConstants.LANDING,
+  //   component: Landing
+  // },
+  // {
+  //   path:mainRouteConstants.SCREEN_INTERFACE,
+  //   component:ScreenInterface
+  // },
+  // {
+  //   path: mainRouteConstants.PLAYGROUND,
+  //   component: Playground
+  // },
+  // {
+  //   path: mainRouteConstants.CATALOG,
+  //   component: Catalog
+  // },
   {
     path: mainRouteConstants.HOME,
-    component: Home
+    component: Home, isExact:true
+  },
+  {
+    path: mainRouteConstants.All_PRODUCTS,
+    component: AllProducts
+  },
+  {
+    path: mainRouteConstants.INTEGRATION,
+    component: IFrame
   },
   {
     isRedirect:true,
     to:mainRouteConstants.REDIRECT
   }
+  
 ];
 
 export default mainRoutes;

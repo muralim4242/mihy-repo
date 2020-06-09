@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import PePe from "ui-molecules-local/AnimationTexts/PePe";
@@ -82,8 +82,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     minHeight: "350px",
     color: "#fff",
-    backgroundColor: "#d81b60"
-    // marginTop:"64px"
+    backgroundColor: "#d81b60",
   }
 });
 
@@ -100,12 +99,13 @@ class PaperSheet extends React.Component {
     return (
       <div className={classes.root} elevation={1}>
         <Typography variant="h1" component="h1" classes={{ root: "cssanimation sequence leKickOutFront" }}>
-          MAY I HELP YOU
+          MAY I HELP YOU 
         </Typography>
         <br />
         <div style={{ display: "flex" }}>
-          <Typography variant="h2" component="h2" classes={{ root: "cssanimation sequence leFadeInLeft"}}>
-            {`Software platform,product \&\ service company`}
+          <Typography variant="h2" component="h2" 
+          // classes={{ root: "cssanimation sequence leFadeInLeft"}}
+           >Software platform, product &#38; service company
           </Typography>
           {/*<Typography
             variant="h2"

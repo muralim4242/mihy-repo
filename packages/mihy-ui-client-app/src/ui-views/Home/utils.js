@@ -34,6 +34,17 @@ export const technologies = [
   }
 ];
 
+export const ourProducts = [
+  {
+    name: "Covid19",
+    image:require("../../ui-assets/images/covid19.jpg")
+  },
+  {
+    name: "IMS",
+    image:require("../../ui-assets/images/ims.jpg")
+  }
+];
+
 export const platforms = [
   {
     name: "Web Platform",
@@ -70,6 +81,34 @@ export const team = [
     photo:"https://firebasestorage.googleapis.com/v0/b/mihy-all.appspot.com/o/WhatsApp%20Image%202019-02-23%20at%209.37.56%20PM.jpeg?alt=media&token=fa3d29e1-7dc2-429e-89b1-b9aa677ea91d",
     designation:"Co founder,CEO,Product & UX",
     about:"Passionate about product manangement and visual design."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Muhid",
+    photo:require("../../ui-assets/images/boy.jpg"),
+    designation:"Fullstack Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Skyler",
+    photo:require("../../ui-assets/images/girl.jpg"),
+    designation:"Frontend Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Perrie",
+    photo:require("../../ui-assets/images/girl.jpg"),
+    designation:"Frontend Developer",
+    about:"Passionate about development."
+    // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
+  },
+  {
+    name: "Sadia",
+    photo:require("../../ui-assets/images/girl.jpg"),
+    designation:"Backend Developer",
+    about:"Passionate about development."
     // I am from mysore, i has not studied technologies and but i am super exite to create new platform",
   },
   // {
@@ -112,3 +151,4 @@ export const showcases = [
     bigImage: require("../../ui-assets/images/Screenshot 2019-01-13 at 6.17.38 PM.png")
   }
 ];
+
