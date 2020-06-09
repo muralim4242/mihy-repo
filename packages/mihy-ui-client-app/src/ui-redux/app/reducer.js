@@ -1,7 +1,12 @@
 import * as actionTypes from "./actionTypes";
 
 const initialState = {
-  name: "MIHY",
+  // name: "MIHY",
+  snackbar: {
+    open: false,
+    variant: "success",
+    message: ""
+  },
   route: "",
   previousRoute: "",
   toast: {

@@ -28,11 +28,11 @@ export const getQueryArg = (url, name) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
-export const addQueryArg = (url, queries = []) => {
+export const addQueryArg = (url="", queries = []) => {
   const urlParts = url.split("?");
   const path = urlParts[0];
   let queryParts = urlParts.length > 1 ? urlParts[1].split("&") : [];
-  queries.forEach((query) => {
+  queries.forEach(query => {
     const key = query.key;
     const value = query.value;
     const newQuery = `${key}=${value}`;
