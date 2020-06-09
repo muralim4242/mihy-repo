@@ -34,7 +34,7 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
   }
   return (
     <Grid container>
-      <Grid item md={11} xs={10} sm={10}> 
+      <Grid item md={11} xs={11} sm={12}> 
       
       <Typography variant="h6" align="center" style={headerStyle}>
         {districtName}
