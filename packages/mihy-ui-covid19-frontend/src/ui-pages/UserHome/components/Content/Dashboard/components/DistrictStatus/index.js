@@ -34,12 +34,10 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
   }
   return (
     <Grid container>
-      <Grid item md={11} xs={11} sm={12}> 
-      
+      <Grid item xs={12}> 
       <Typography variant="h6" align="center" style={headerStyle}>
         {districtName}
       </Typography>
-      
       <Typography variant="subtitle2" style={{ color: "#f44336" }}>
         {`${t("confirmed")} - ${status.confirmed} ${parseInt(status.delta) ? `[+${status.delta}]` : ''}`}
       </Typography>
@@ -55,7 +53,6 @@ const DistrictStatus = ({ status = {}, selectedState, t }) => {
       </Grid>
       <Grid item md={1} xs={2} sm={2} align="right">
         {status.notes? <Tooltip title={status.notes} placement="right"><InfoIcon color="primary" style={{paddingRight:"2px",fontSize:"20px"}}/></Tooltip>:""}
-
       </Grid>
     </Grid>
   );
