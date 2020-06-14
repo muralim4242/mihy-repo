@@ -25,12 +25,13 @@ export const technologies = [
     iconName:"fab fa-node-js"
   },
   {
-    name: "Wordpress",
+    name: "UI/UX",
     smallImage: require("../../ui-assets/images/WordPress_blue_logo.svg.png"),
-    bigImage: require("../../ui-assets/images/feb-21-word-press-main.png"),
-    about:"WordPress is a free and open-source content management system based on PHP and MySQL.",
+    bigImage: require("../../ui-assets/images/UXUI.png"),
+    about:"UX refers to the user experience, which focuses on how something works and how people interact with it.UI, or user interface, focuses on the look and layout.",
     website:"https://wordpress.org/",
-    iconName:"fab fa-wordpress-simple"
+    // iconName:"fab fa-wordpress-simple"
+    iconName:"fas fa-pencil-ruler"
   }
 ];
 
