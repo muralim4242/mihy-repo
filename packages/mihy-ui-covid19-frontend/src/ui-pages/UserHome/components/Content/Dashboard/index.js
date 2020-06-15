@@ -2,7 +2,7 @@ import React from "react";
 // import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../../../../ui-utils/commons";
-import { initGA,pageView } from "../../../../../ui-utils/tracking";
+import { initGA, pageView } from "../../../../../ui-utils/tracking";
 import { httpRequest } from "../../../../../ui-utils/api";
 import { withTranslation } from "react-i18next";
 import { Paper, Switch, Grid, Typography } from "@material-ui/core";
@@ -33,7 +33,7 @@ const TopList = Loadable({
 
 class Dashboard extends React.Component {
   componentDidMount = async () => {
-    const { setAppData,match={} } = this.props
+    const { setAppData, match = {} } = this.props
     this.feathIndiaData();
     setAppData("checked", true)
     initGA();
@@ -65,7 +65,30 @@ class Dashboard extends React.Component {
       stateDistrictZonesMapping: stateDistrictWiseZonesResponse
     };
     setAppData("dashboard", dashboard);
+    this.fetchStateWiseResponse(dataResponse.statewise);
+    this.fetchStateDistrictWiseResponse(stateDistrictWiseZonesResponse);
   };
+
+  fetchStateWiseResponse = async (stateDistrictWiseResponse) => {
+    await httpRequest({
+      endPoint: "get_state_wise_status",
+      instance: "instanceThree",
+      method: "post",
+      requestBody: {
+        state_status: stateDistrictWiseResponse
+      },
+    });
+  }
+  fetchStateDistrictWiseResponse = async (stateDistrictWiseZonesResponse) => {
+    await httpRequest({
+      endPoint: "get_district_wise_status",
+      instance: "instanceThree",
+      method: "post",
+      requestBody: {
+        district_status: stateDistrictWiseZonesResponse
+      },
+    });
+  }
   feathWorldData = async () => {
     let { setAppData, dashboard } = this.props;
     const dataResponse = await httpRequest({ endPoint: "https://corona.lmao.ninja/v2/all" });
@@ -79,7 +102,29 @@ class Dashboard extends React.Component {
       countriesMapping: countriesResponse || [],
     };
     setAppData("dashboard", dashboard);
+    this.fetchWorldWiseResponse(countriesResponse);
+    this.fetchCountryWiseResponse(countriesResponse);
   };
+  fetchWorldWiseResponse = async (worldResponse) => {
+    await httpRequest({
+      endPoint: "get_world_wise_status",
+      instance: "instanceThree",
+      method: "post",
+      requestBody: {
+        world_status: worldResponse
+      },
+    });
+  }
+  fetchCountryWiseResponse = async (countryResponse) => {
+    await httpRequest({
+      endPoint: "get_countries_wise_status",
+      instance: "instanceThree",
+      method: "post",
+      requestBody: {
+        country_status: countryResponse
+      },
+    });
+  }
   handleClose = () => {
     this.props.setAppData("dashboard.dialogOpen", false);
   };
