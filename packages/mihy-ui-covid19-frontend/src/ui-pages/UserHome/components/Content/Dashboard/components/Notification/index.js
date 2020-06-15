@@ -1,6 +1,6 @@
 import React from "react";
 import { mapDispatchToProps } from "../../../../../../../ui-utils/commons";
-import { initGA,pageView } from "../../../../../../../ui-utils/tracking";
+import { initGA, pageView } from "../../../../../../../ui-utils/tracking";
 import { connect } from "react-redux";
 import { Typography, Card, CardContent, Dialog, Slide, AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { formatDistance, format } from 'date-fns';
@@ -26,14 +26,14 @@ const styles = ({
 });
 
 class Notification extends React.Component {
-    componentDidMount=()=>{
-          const {match={}} = this.props;
-          initGA();
-          pageView(match.url)
+    componentDidMount = () => {
+        const { match = {} } = this.props;
+        initGA();
+        pageView(match.url)
     }
 
     handleClose = () => {
-        const { history, setAppData ,match={}} = this.props;
+        const { history, setAppData, match = {} } = this.props;
         setAppData("dashboard.dialogOpen", false);
         history.push("/user-home");
         initGA();
@@ -45,12 +45,10 @@ class Notification extends React.Component {
             return <Slide direction="up" ref={ref} {...props} />;
         });
         const { recentCases = [], dashboard, classes, t } = this.props;
-        console.log("this.props:", this.props);
 
         const { dialogOpen = false } = dashboard;
         const { handleClose } = this;
         let currentDate = new Date();
-        // console.log("recentCases:", recentCases);
 
         return (
             recentCases.length > 0 && <div>
@@ -80,7 +78,6 @@ class Notification extends React.Component {
                         </div>
                         {
                             recentCases.reverse().map((data, key) => {
-                                console.log("data:", data, "key:", key);
                                 const activityDate = new Date(data.timestamp * 1000);
                                 const addHeader = () => {
                                     currentDate = activityDate;
