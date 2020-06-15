@@ -108,7 +108,7 @@ class Landing extends React.Component {
         </Hidden>
         <Main className={classes.content}>
           <div className={classes.toolbar} />
-          <RenderRoutes basePath={match.url} routes={appRoutes} />
+          {/* <RenderRoutes basePath={match.url} routes={appRoutes} /> */}
         </Main>
       </Div>
     );

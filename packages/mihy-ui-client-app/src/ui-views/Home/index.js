@@ -6,10 +6,11 @@ import Banner from "./components/Banner";
 import Technologies from "./components/Technologies";
 import Showcases from "./components/Showcases";
 import Platforms from "./components/Platforms";
+import OurProducts from "./components/OurProducts"
 import OurTeam from "./components/OurTeam";
 import Footer from "./components/Footer";
 import Comment from "./components/Comment";
-import {technologies,platforms,showcases,team} from "./utils";
+import {technologies,platforms,showcases,team, ourProducts} from "./utils";
 import "./index.css";
 
 
@@ -98,6 +99,7 @@ class Home extends React.Component {
           showcaseIndex={currentIndexObject.showcase}
         />*/}
         <Platforms platforms={platforms}/>
+        <OurProducts ourProducts={ourProducts}/>
         <OurTeam team={team}/>
         <Footer />
         {/*<Comment handleClose={handleClose} open={open} handleClickOpen={handleClickOpen}/>*/}
