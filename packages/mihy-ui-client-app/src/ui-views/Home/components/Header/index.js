@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
-
 const styles = {
   root: {
     flexGrow: 1,
@@ -31,7 +30,6 @@ const styles = {
 
 function SimpleAppBar(props) {
   const { classes } = props;
-
   return (
     <div className={classes.root}>
       <AppBar position="static" classes={{root:classes.appBarRoot}}>
@@ -42,6 +40,7 @@ function SimpleAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             MIHY
           </Typography>
+          <Button color="inherit"  onClick={()=>window.scrollTo(0,1870)} >Contact Us</Button>
           {/*<Button color="inherit">
             Technologies
           </Button>

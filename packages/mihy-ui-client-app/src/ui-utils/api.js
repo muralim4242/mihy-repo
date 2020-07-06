@@ -32,7 +32,7 @@ const wrapRequestBody = (requestBody, action) => {
 };
 
 export const httpRequest = async (
-  method = "get",
+  method = "Post",
   endPoint,
   action,
   queryObject = [],

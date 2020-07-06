@@ -8,6 +8,7 @@ import Div from "mihy-ui-framework/ui-atoms/HtmlElements/Div";
 import { setRoute } from "../../ui-redux/app/actions";
 import { loadCSS } from 'fg-loadcss/src/loadCSS';
 import "./index.css";
+import SnackBar from "../../ui-containers-local/SnackBar"
 
 class App extends React.Component {
   componentDidMount()
@@ -34,6 +35,7 @@ class App extends React.Component {
     return (
       <Div className="App">
         <MainRoutes childProps={childProps} />
+        <SnackBar/>
         {spinner && <LoadingIndicator/>}
       </Div>
     );

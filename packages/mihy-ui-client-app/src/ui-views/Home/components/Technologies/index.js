@@ -56,14 +56,14 @@ const styles = theme => ({
   },
   smallPaper: {
     marginTop: "-44px",
-    minHeight: "170px",
+    minHeight: "200px",
     [theme.breakpoints.down("sm")]: {
       marginTop: 16
     }
   },
   bigPaper: {
     marginTop: "-170px",
-    minHeight: "308px",
+    minHeight: "339px",
     [theme.breakpoints.down("sm")]: {
       marginTop: 0
     }
