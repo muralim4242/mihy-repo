@@ -12,7 +12,7 @@
     "fg-loadcss": "^2.1.0",
     "firebase-functions": "^3.6.2",
     "history": "^3.3.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.11",
     "marker-animate-unobtrusive": "^0.2.8",
     "mihy-ui-framework": "^0.1.42",
